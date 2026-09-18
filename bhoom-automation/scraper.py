@@ -718,23 +718,13 @@ def stream_key(url: str):
 
 
 def stream_is_usable(stream):
-    validation = stream.get("validation", {})
-    if stream["type"] == "rtmp":
-        return True
-    if validation.get("drm"):
-        return False
-    status = validation.get("httpStatus")
-    if status is None or not (200 <= int(status) < 400):
-        return False
-    if stream["type"] in {"hls", "dash", "progressive"}:
-        if validation.get("manifestValid") is not True:
-            return False
-    if validation.get("stable") is False:
-        return False
-    if stream["type"] == "hls" and validation.get("segmentChecked") and validation.get("segmentValid") is not True:
-        return False
-    return True
+    """Keep every captured stream, including DRM-detected streams.
 
+    DRM is reported for diagnostics, but this scraper does not bypass DRM
+    or extract keys. A captured stream is retained as long as it was actually
+    captured; HTTP validation details are kept in the report.
+    """
+    return bool(stream.get("url"))
 
 def stream_quality_score(stream):
     """Higher score = better candidate to keep for a duplicate channel."""
