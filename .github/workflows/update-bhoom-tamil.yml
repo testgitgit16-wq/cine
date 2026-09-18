@@ -6,7 +6,7 @@ on:
       max_channels:
         description: "Number of channels to scan (0 = all)"
         required: false
-        default: "5"
+        default: "0"
   schedule:
     - cron: "15 */6 * * *"
 
