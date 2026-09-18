@@ -24,7 +24,8 @@ on:
         required: false
         default: "1"
   schedule:
-    # Hourly refresh because BhoomTV may rotate URLs/tokens by schedule or playback.\n    - cron: "15 * * * *"
+    # Refresh hourly because BhoomTV may rotate URLs/tokens by schedule or playback.
+    - cron: "15 * * * *"
 
 permissions:
   contents: write
