@@ -51,9 +51,25 @@ def stream_url(entry):
             return line
     return ""
 
+def normalize_name(entry):
+    return re.sub(r"\s+", " ", entry[0].rsplit(",", 1)[-1].strip()).casefold()
+
 def key(url):
     p = urlparse(url)
-    return (p.scheme.lower(), p.netloc.lower(), p.path, p.query)
+    transient = {"token","sig","signature","expires","expiry","exp","session","sessionid","auth","authorization","hdnts","cookiecheck","cb"}
+    kept = []
+    for part in p.query.split("&") if p.query else []:
+        if part.split("=", 1)[0].lower() not in transient:
+            kept.append(part)
+    return (p.scheme.lower(), p.netloc.lower(), p.path.rstrip("/"), "&".join(sorted(kept)))
+
+def score(entry, result):
+    url = stream_url(entry).lower()
+    value = 100 if result["status"] == "WORKING" else 20
+    if ".m3u8" in url: value += 30
+    if "master.m3u8" in url or "/playlist.m3u8" in url: value += 10
+    if "tracks-v1a1" in url or "mono" in url: value -= 5
+    return value
 
 def validate(url):
     scheme = urlparse(url).scheme.lower()
