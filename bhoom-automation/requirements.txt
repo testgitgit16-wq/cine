@@ -1,1 +1,1 @@
-playwright>=1.55,<2\n
+playwright>=1.55,<2
