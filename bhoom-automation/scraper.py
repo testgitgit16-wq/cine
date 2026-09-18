@@ -39,6 +39,8 @@ MAX_CHANNELS = int(os.getenv("MAX_CHANNELS", "0") or "0")
 DEBUG_CHANNELS = int(os.getenv("DEBUG_CHANNELS", "3") or "3")
 VALIDATE_STREAMS = os.getenv("VALIDATE_STREAMS", "1") != "0"
 STABILITY_SECONDS = max(0, int(os.getenv("STABILITY_SECONDS", "3") or "0"))
+PLAYER_INITIAL_WAIT_SECONDS = max(1, int(os.getenv("PLAYER_INITIAL_WAIT_SECONDS", "10") or "10"))
+PLAYER_CAPTURE_WAIT_SECONDS = max(1, int(os.getenv("PLAYER_CAPTURE_WAIT_SECONDS", "5") or "5"))
 PUBLISH_SENSITIVE_HEADERS = os.getenv("PUBLISH_SENSITIVE_HEADERS", "0") != "0"
 MIN_CHANNEL_RETENTION_PERCENT = max(0, min(100, int(os.getenv("MIN_CHANNEL_RETENTION_PERCENT", "50") or "50")))
 RECAPTURE_ON_FAILURES = os.getenv("RECAPTURE_ON_FAILURES", "1") != "0"
@@ -459,7 +461,7 @@ async def get_dooplayer_sources(page, capture, channel_url):
                     player = await page.context.new_page()
                     attach_capture(player, capture)
                     await player.goto(candidate, wait_until="domcontentloaded", timeout=30000)
-                    await player.wait_for_timeout(2500)
+                    await player.wait_for_timeout(PLAYER_INITIAL_WAIT_SECONDS * 1000)
                     await trigger_playback(player)
                     await collect_embedded_urls(player, capture)
                     await collect_performance_urls(player, capture)
@@ -483,7 +485,7 @@ async def get_dooplayer_sources(page, capture, channel_url):
                     except Exception:
                         pass
 
-                    await player.wait_for_timeout(2500)
+                    await player.wait_for_timeout(PLAYER_CAPTURE_WAIT_SECONDS * 1000)
                     await trigger_playback(player)
                     await collect_performance_urls(player, capture)
                 except Exception as e:
@@ -933,7 +935,7 @@ async def scan_multi_source_group(context, channel_url, debug=False):
     try:
         print(f"Opening grouped channel page: {channel_url}")
         await page.goto(channel_url, wait_until="domcontentloaded", timeout=45000)
-        await page.wait_for_timeout(1800)
+        await page.wait_for_timeout(PLAYER_INITIAL_WAIT_SECONDS * 1000)
         try:
             logo = await page.locator('meta[property="og:image"]').get_attribute("content") or ""
         except Exception:
@@ -959,11 +961,11 @@ async def scan_multi_source_group(context, channel_url, debug=False):
                 await page.locator("li.dooplay_player_option").nth(option["index"]).click(
                     timeout=4000, force=True
                 )
-                await page.wait_for_timeout(2200)
+                await page.wait_for_timeout(PLAYER_CAPTURE_WAIT_SECONDS * 1000)
                 await collect_embedded_urls(page, capture)
                 await collect_performance_urls(page, capture)
                 await trigger_playback(page)
-                await page.wait_for_timeout(2500)
+                await page.wait_for_timeout(PLAYER_CAPTURE_WAIT_SECONDS * 1000)
                 await collect_embedded_urls(page, capture)
                 await collect_performance_urls(page)
             except Exception as exc:
@@ -1005,11 +1007,11 @@ async def scan_multi_source_group(context, channel_url, debug=False):
                                 player = await context.new_page()
                                 attach_capture(player, capture)
                                 await player.goto(candidate, wait_until="domcontentloaded", timeout=30000)
-                                await player.wait_for_timeout(2500)
+                                await player.wait_for_timeout(PLAYER_INITIAL_WAIT_SECONDS * 1000)
                                 await trigger_playback(player)
                                 await collect_embedded_urls(player, capture)
                                 await collect_performance_urls(player, capture)
-                                await player.wait_for_timeout(2200)
+                                await player.wait_for_timeout(PLAYER_CAPTURE_WAIT_SECONDS * 1000)
                                 await collect_performance_urls(player, capture)
                             except Exception as exc:
                                 print(f"    embed error for {title}: {exc}")
