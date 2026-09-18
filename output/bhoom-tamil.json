@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T12:47:25.954963+00:00",
+  "generatedAt": "2026-09-18T12:52:58.008067+00:00",
   "source": "https://bhoomtv.org",
   "category": "Tamil",
   "channels": [
@@ -8,73 +8,6 @@
       "name": "7S Music",
       "pageUrl": "https://bhoomtv.org/live/7s-music/",
       "streams": [
-        {
-          "url": "blob:https://bhoomtv.org/b1a773fd-1306-4fdf-b82f-1946cf0abc95",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/7s-music/"
-          },
-          "resourceType": "media"
-        },
-        {
-          "url": "blob:https://bhoomtv.org/b4d5b20b-9edb-4742-9739-1232158221b8",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/7s-music/"
-          },
-          "resourceType": "media"
-        },
-        {
-          "url": "blob:https://bhoomtv.org/be0f980b-77f3-411e-8ac8-5262e488d10f",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/7s-music/"
-          },
-          "resourceType": "media"
-        },
-        {
-          "url": "https://bhoomtv.org/jwplayer/?source=https%3A%2F%2Fcdn.pishow.tv%2Fott%2Flive%2F1257%2Fmaster.m3u8",
-          "type": "hls",
-          "headers": {
-            "referer": "https://bhoomtv.org/live/7s-music/",
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
-          },
-          "resourceType": "embedded"
-        },
-        {
-          "url": "https://bhoomtv.org/jwplayer/?source=https%3A%2F%2Fcdn.pishow.tv%2Fott%2Flive%2F1257%2Fmaster.m3u8&id=24238&type=mp4",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/7s-music/"
-          },
-          "resourceType": "document",
-          "status": 200,
-          "contentType": "text/html; charset=utf-8"
-        },
-        {
-          "url": "https://bhoomtv.org/jwplayer/?source=https%3A%2F%2Fmumbai-edge.smartplaytv.in%2F7SMusic%2Findex.m3u8",
-          "type": "hls",
-          "headers": {
-            "referer": "https://bhoomtv.org/live/7s-music/",
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
-          },
-          "resourceType": "embedded"
-        },
-        {
-          "url": "https://bhoomtv.org/jwplayer/?source=https%3A%2F%2Fmumbai-edge.smartplaytv.in%2F7SMusic%2Findex.m3u8&id=24238&type=mp4",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/7s-music/"
-          },
-          "resourceType": "document",
-          "status": 200,
-          "contentType": "text/html; charset=utf-8"
-        },
         {
           "url": "https://cdn.pishow.tv/ott/live/1257/1257_0.m3u8",
           "type": "hls",
@@ -101,10 +34,10 @@
           "url": "https://cdn.pishow.tv/ott/live/1257/master.m3u8",
           "type": "hls",
           "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/7s-music/"
+            "referer": "https://bhoomtv.org/live/7s-music/",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
           },
-          "resourceType": "xhr",
+          "resourceType": "embedded-source",
           "status": 200,
           "contentType": "application/vnd.apple.mpegurl"
         },
@@ -112,10 +45,10 @@
           "url": "https://mumbai-edge.smartplaytv.in/7SMusic/index.m3u8",
           "type": "hls",
           "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/7s-music/"
+            "referer": "https://bhoomtv.org/live/7s-music/",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
           },
-          "resourceType": "xhr",
+          "resourceType": "embedded-source",
           "status": 200,
           "contentType": "application/vnd.apple.mpegurl"
         },
@@ -129,46 +62,6 @@
           "resourceType": "xhr",
           "status": 200,
           "contentType": "application/vnd.apple.mpegurl"
-        },
-        {
-          "url": "https://prd.jwpltx.com/v1/jwplayer6/ping.gif?h=-1860550814&e=pa&n=1687290176918367&abc=0&aid=MlpClIyLEeKinyIACp8kUw&amp=0&ask=PLmif8oX&at=1&c=0&ccp=0&cp=1&d=1&eb=0&ed=3&emi=dnrxojn75dq7&et=classic&i=1&lid=1ynzgcvio7cv&lsa=set&mt=1&pbd=1&pbr=1&pgi=hedplrp2a8fh&ph=1&pid=MAaRkUjT&pii=0&pl=585&plc=1&pli=t8vvv6jag4gy&pp=hlsjs&prc=1&ps=4&pss=1&pt=Watch%207S%20Music%20Live%20Online%20%7C%20High%20Quality%20Streaming%20%7C%20Bhoom%20TV&pu=https%3A%2F%2Fbhoomtv.org%2Flive%2F7s-music%2F&pv=8.51.4&pyc=0&s=0&sdk=0&stc=1&stpe=0&tv=4.0.17&vb=1&vi=1&vl=90&wd=1039&ab=1&cme=0&flc=0&lng=en&mu=https%3A%2F%2Fmumbai-edge.smartplaytv.in%2F7SMusic%2Findex.m3u8&pd=3&pdr=&plng=en&pni=1&pr=2&tb=0&vd=0&sa=1789735543907",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/7s-music/"
-          },
-          "resourceType": "image",
-          "status": 204
-        },
-        {
-          "url": "https://prd.jwpltx.com/v1/jwplayer6/ping.gif?h=-644202069&e=s&n=7576856311416686&abc=0&aid=MlpClIyLEeKinyIACp8kUw&amp=0&ask=PLmif8oX&at=1&c=0&ccp=0&cp=1&d=1&eb=0&ed=3&emi=1qua22n2i0wp&et=classic&i=1&lid=1ynzgcvio7cv&lsa=read&mt=1&pbd=1&pbr=1&pgi=djlrmccq1t7n&ph=1&pid=MAaRkUjT&pii=0&pl=585&plc=1&pli=1tq81071094u&pp=hlsjs&ppm=LIVE&prc=1&ps=4&pss=1&pt=Watch%207S%20Music%20Live%20Online%20%7C%20High%20Quality%20Streaming%20%7C%20Bhoom%20TV&pu=https%3A%2F%2Fbhoomtv.org%2Flive%2F7s-music%2F&pv=8.51.4&pyc=1&s=0&sdk=0&stc=1&stpe=0&tv=4.0.17&vb=1&vi=1&vl=90&wd=1039&bwe=1150&cae=0&cct=0&ch=2&cst=6&cdid=jwTarget&drm=0&ff=1120&fsm=0&l=0&lng=en&mk=hls&mu=https%3A%2F%2Fmumbai-edge.smartplaytv.in%2F7SMusic%2Findex.m3u8&pcp=6&pd=3&pdr=&plng=en&pni=1&pr=2&q=0&sp=0&strt=1120&tb=12&tt=0&vd=0&vs=0&sa=1789735550074",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/7s-music/"
-          },
-          "resourceType": "image",
-          "status": 204
-        },
-        {
-          "url": "https://prd.jwpltx.com/v1/jwplayer6/ping.gif?h=-75921974&e=pa&n=0295761023118095&abc=0&aid=MlpClIyLEeKinyIACp8kUw&amp=0&ask=PLmif8oX&at=1&c=0&ccp=0&cp=1&d=1&eb=0&ed=3&emi=1qua22n2i0wp&et=classic&i=1&lid=1ynzgcvio7cv&lsa=read&mt=1&pbd=1&pbr=1&pgi=djlrmccq1t7n&ph=1&pid=MAaRkUjT&pii=0&pl=585&plc=1&pli=1tq81071094u&pp=hlsjs&prc=1&ps=4&pss=1&pt=Watch%207S%20Music%20Live%20Online%20%7C%20High%20Quality%20Streaming%20%7C%20Bhoom%20TV&pu=https%3A%2F%2Fbhoomtv.org%2Flive%2F7s-music%2F&pv=8.51.4&pyc=0&s=0&sdk=0&stc=1&stpe=0&tv=4.0.17&vb=1&vi=1&vl=90&wd=1039&ab=1&cme=0&flc=0&lng=en&mu=https%3A%2F%2Fmumbai-edge.smartplaytv.in%2F7SMusic%2Findex.m3u8&pd=3&pdr=&plng=en&pni=1&pr=2&tb=0&vd=0&sa=1789735548955",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/7s-music/"
-          },
-          "resourceType": "image",
-          "status": 204
-        },
-        {
-          "url": "https://prd.jwpltx.com/v1/jwplayer6/ping.gif?h=658310378&e=pa&n=8304889103466696&abc=0&aid=MlpClIyLEeKinyIACp8kUw&amp=0&ask=PLmif8oX&at=1&c=0&ccp=0&cp=1&d=1&eb=0&ed=3&emi=1wpfzmo1dnor&et=classic&i=1&lid=1ynzgcvio7cv&lsa=read&mt=1&pbd=1&pbr=1&pgi=ehl8to1quvf8&ph=1&pid=MAaRkUjT&pii=0&pl=585&plc=1&pli=eidal9asvvov&pp=hlsjs&prc=1&ps=4&pss=1&pt=Watch%207S%20Music%20Live%20Online%20%7C%20High%20Quality%20Streaming%20%7C%20Bhoom%20TV&pu=https%3A%2F%2Fbhoomtv.org%2Flive%2F7s-music%2F&pv=8.51.4&pyc=0&s=0&sdk=0&stc=1&stpe=0&tv=4.0.17&vb=1&vi=1&vl=90&wd=1039&ab=1&cme=0&flc=0&lng=en&mu=https%3A%2F%2Fcdn.pishow.tv%2Fott%2Flive%2F1257%2Fmaster.m3u8&pd=3&pdr=&plng=en&pni=1&pr=2&tb=0&vd=0&sa=1789735546390",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/7s-music/"
-          },
-          "resourceType": "image",
-          "status": 204
         }
       ]
     },
@@ -178,49 +71,13 @@
       "pageUrl": "https://bhoomtv.org/live/aaryaa-tv/",
       "streams": [
         {
-          "url": "blob:https://bhoomtv.org/7b3fb0cb-895d-466f-a893-33850e2649dd",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aaryaa-tv/"
-          },
-          "resourceType": "media"
-        },
-        {
-          "url": "blob:https://bhoomtv.org/889fb26b-5bdf-4038-8914-fa71e71c9141",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aaryaa-tv/"
-          },
-          "resourceType": "media"
-        },
-        {
-          "url": "blob:https://bhoomtv.org/95a9701d-d2fb-4203-8bcf-ef2a9bcbf198",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aaryaa-tv/"
-          },
-          "resourceType": "media"
-        },
-        {
-          "url": "blob:https://bhoomtv.org/d9bf628d-8682-4839-a9ea-264d8e27ff37",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aaryaa-tv/"
-          },
-          "resourceType": "media"
-        },
-        {
           "url": "https://app.ashokadigital.net/app/3641a4da/index.m3u8",
           "type": "hls",
           "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aaryaa-tv/"
+            "referer": "https://bhoomtv.org/live/aaryaa-tv/",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
           },
-          "resourceType": "xhr",
+          "resourceType": "embedded-source",
           "status": 200,
           "contentType": "application/vnd.apple.mpegurl"
         },
@@ -236,7 +93,7 @@
           "contentType": "application/vnd.apple.mpegurl"
         },
         {
-          "url": "https://bhoomtv.org/jwplayer/?source=https%3A%2F%2Fapp.ashokadigital.net%2Fapp%2F3641a4da%2Findex.m3u8",
+          "url": "https://ssai.aniview.com/api/v1/hls/stream.m3u8",
           "type": "hls",
           "headers": {
             "referer": "https://bhoomtv.org/live/aaryaa-tv/",
@@ -245,95 +102,13 @@
           "resourceType": "embedded"
         },
         {
-          "url": "https://bhoomtv.org/jwplayer/?source=https%3A%2F%2Fapp.ashokadigital.net%2Fapp%2F3641a4da%2Findex.m3u8&id=22286&type=mp4",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aaryaa-tv/"
-          },
-          "resourceType": "document",
-          "status": 200,
-          "contentType": "text/html; charset=utf-8"
-        },
-        {
-          "url": "https://bhoomtv.org/jwplayer/?source=https%3A%2F%2Fssai.aniview.com%2Fapi%2Fv1%2Fhls%2Fstream.m3u8",
+          "url": "https://ssai.aniview.com/api/v1/hls/stream.m3u8?cb=1786380414",
           "type": "hls",
           "headers": {
             "referer": "https://bhoomtv.org/live/aaryaa-tv/",
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
           },
-          "resourceType": "embedded"
-        },
-        {
-          "url": "https://bhoomtv.org/jwplayer/?source=https%3A%2F%2Fssai.aniview.com%2Fapi%2Fv1%2Fhls%2Fstream.m3u8%3Fcb%3D1786380414%26AVS_SSAIID%3D69b126ad393425dcdf07ad74&id=22286&type=mp4",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aaryaa-tv/"
-          },
-          "resourceType": "document",
-          "status": 200,
-          "contentType": "text/html; charset=utf-8"
-        },
-        {
-          "url": "https://bhoomtv.org/jwplayer/?source=https%3A%2F%2Fstream.ottlive.co.in%2Faryatvtamil%2Findex.m3u8",
-          "type": "hls",
-          "headers": {
-            "referer": "https://bhoomtv.org/live/aaryaa-tv/",
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
-          },
-          "resourceType": "embedded"
-        },
-        {
-          "url": "https://bhoomtv.org/jwplayer/?source=https%3A%2F%2Fstream.ottlive.co.in%2Faryatvtamil%2Findex.m3u8&id=22286&type=mp4",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aaryaa-tv/"
-          },
-          "resourceType": "document",
-          "status": 200,
-          "contentType": "text/html; charset=utf-8"
-        },
-        {
-          "url": "https://prd.jwpltx.com/v1/jwplayer6/ping.gif?h=-1083418070&e=pa&n=4225703077538695&abc=0&aid=MlpClIyLEeKinyIACp8kUw&amp=0&ask=PLmif8oX&at=1&c=0&ccp=0&cp=1&d=1&eb=0&ed=3&emi=1x0f0rctzqe9&et=classic&i=1&lid=1ynzgcvio7cv&lsa=read&mt=1&pbd=1&pbr=1&pgi=5q1h4xt8iadm&ph=1&pid=MAaRkUjT&pii=0&pl=585&plc=1&pli=7xy5pebp4mn2&pp=hlsjs&prc=1&ps=4&pss=1&pt=Watch%20Aaryaa%20TV%20Live%20Online%20%7C%20High%20Quality%20Streaming%20%7C%20Bhoom%20TV&pu=https%3A%2F%2Fbhoomtv.org%2Flive%2Faaryaa-tv%2F&pv=8.51.4&pyc=0&s=0&sdk=0&stc=1&stpe=0&tv=4.0.17&vb=1&vi=1&vl=90&wd=1039&ab=1&cme=0&flc=0&lng=en&mu=https%3A%2F%2Fapp.ashokadigital.net%2Fapp%2F3641a4da%2Findex.m3u8&pd=3&pdr=&plng=en&pni=1&pr=2&tb=0&vd=0&sa=1789735582731",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aaryaa-tv/"
-          },
-          "resourceType": "image",
-          "status": 204
-        },
-        {
-          "url": "https://prd.jwpltx.com/v1/jwplayer6/ping.gif?h=-1408207707&e=pa&n=7300704669877710&abc=0&aid=MlpClIyLEeKinyIACp8kUw&amp=0&ask=PLmif8oX&at=1&c=0&ccp=0&cp=1&d=1&eb=0&ed=3&emi=q1ahhl1akblx&et=classic&i=1&lid=1ynzgcvio7cv&lsa=read&mt=1&pbd=1&pbr=1&pgi=1pacl031i26w&ph=1&pid=MAaRkUjT&pii=0&pl=585&plc=1&pli=1ysx38n19m65&pp=hlsjs&prc=1&ps=4&pss=1&pt=Watch%20Aaryaa%20TV%20Live%20Online%20%7C%20High%20Quality%20Streaming%20%7C%20Bhoom%20TV&pu=https%3A%2F%2Fbhoomtv.org%2Flive%2Faaryaa-tv%2F&pv=8.51.4&pyc=0&s=0&sdk=0&stc=1&stpe=0&tv=4.0.17&vb=1&vi=1&vl=90&wd=1039&ab=1&cme=0&flc=0&lng=en&mu=https%3A%2F%2Fstream.ottlive.co.in%2Faryatvtamil%2Findex.m3u8&pd=3&pdr=&plng=en&pni=1&pr=2&tb=0&vd=0&sa=1789735577691",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aaryaa-tv/"
-          },
-          "resourceType": "image",
-          "status": 204
-        },
-        {
-          "url": "https://prd.jwpltx.com/v1/jwplayer6/ping.gif?h=396453625&e=pa&n=4590056781185758&abc=0&aid=MlpClIyLEeKinyIACp8kUw&amp=0&ask=PLmif8oX&at=1&c=0&ccp=0&cp=1&d=1&eb=0&ed=3&emi=3nckq25e19s1&et=classic&i=1&lid=1ynzgcvio7cv&lsa=read&mt=1&pbd=1&pbr=1&pgi=1ah9qlm1ilpv&ph=1&pid=MAaRkUjT&pii=0&pl=585&plc=1&pli=1608kug19uje&pp=hlsjs&prc=1&ps=4&pss=1&pt=Watch%20Aaryaa%20TV%20Live%20Online%20%7C%20High%20Quality%20Streaming%20%7C%20Bhoom%20TV&pu=https%3A%2F%2Fbhoomtv.org%2Flive%2Faaryaa-tv%2F&pv=8.51.4&pyc=0&s=0&sdk=0&stc=1&stpe=0&tv=4.0.17&vb=1&vi=1&vl=90&wd=1039&ab=1&cme=0&flc=0&lng=en&mu=https%3A%2F%2Fssai.aniview.com%2Fapi%2Fv1%2Fhls%2Fstream.m3u8%3Fcb%3D1786380414%26AVS_SSAIID%3D69b126ad393425dcdf07ad74&pd=3&pdr=&plng=en&pni=1&pr=2&tb=0&vd=0&sa=1789735580089",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aaryaa-tv/"
-          },
-          "resourceType": "image",
-          "status": 204
-        },
-        {
-          "url": "https://prd.jwpltx.com/v1/jwplayer6/ping.gif?h=857096921&e=pa&n=6191849515052834&abc=0&aid=MlpClIyLEeKinyIACp8kUw&amp=0&ask=PLmif8oX&at=1&c=0&ccp=0&cp=1&d=1&eb=0&ed=3&emi=31vs531xqxdo&et=classic&i=1&lid=1ynzgcvio7cv&lsa=read&mt=1&pbd=1&pbr=1&pgi=un7ci5bbgt9z&ph=1&pid=MAaRkUjT&pii=0&pl=585&plc=1&pli=e34w3r1deop6&pp=hlsjs&prc=1&ps=4&pss=1&pt=Watch%20Aaryaa%20TV%20Live%20Online%20%7C%20High%20Quality%20Streaming%20%7C%20Bhoom%20TV&pu=https%3A%2F%2Fbhoomtv.org%2Flive%2Faaryaa-tv%2F&pv=8.51.4&pyc=0&s=0&sdk=0&stc=1&stpe=0&tv=4.0.17&vb=1&vi=1&vl=90&wd=1039&ab=1&cme=0&flc=0&lng=en&mu=https%3A%2F%2Fstream.ottlive.co.in%2Faryatvtamil%2Findex.m3u8&pd=3&pdr=&plng=en&pni=1&pr=2&tb=0&vd=0&sa=1789735585327",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aaryaa-tv/"
-          },
-          "resourceType": "image",
-          "status": 204
+          "resourceType": "embedded-source"
         },
         {
           "url": "https://ssai.aniview.com/api/v1/hls/stream.m3u8?cb=1786380414&AVS_SSAIID=69b126ad393425dcdf07ad74",
@@ -347,7 +122,7 @@
           "contentType": "application/vnd.apple.mpegurl"
         },
         {
-          "url": "https://ssai.aniview.com/api/v1/hls/streams/sessions/01c71d0f0d90401599ca81e0b48a04f1/media/index.m3u8/0.m3u8",
+          "url": "https://ssai.aniview.com/api/v1/hls/streams/sessions/f3f6a38f3a9b45babda3401ebbba2e95/media/index.m3u8/0.m3u8",
           "type": "hls",
           "headers": {
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
@@ -361,10 +136,10 @@
           "url": "https://stream.ottlive.co.in/aryatvtamil/index.m3u8",
           "type": "hls",
           "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aaryaa-tv/"
+            "referer": "https://bhoomtv.org/live/aaryaa-tv/",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
           },
-          "resourceType": "xhr",
+          "resourceType": "embedded-source",
           "status": 200,
           "contentType": "application/vnd.apple.mpegurl"
         },
@@ -372,12 +147,10 @@
           "url": "https://stream.ottlive.co.in/aryatvtamil/tracks-v1a1/mono.ts.m3u8",
           "type": "hls",
           "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aaryaa-tv/"
+            "referer": "https://bhoomtv.org/",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
           },
-          "resourceType": "xhr",
-          "status": 200,
-          "contentType": "application/vnd.apple.mpegurl"
+          "resourceType": "xhr"
         }
       ]
     },
@@ -386,15 +159,6 @@
       "name": "Aastha Tamil",
       "pageUrl": "https://bhoomtv.org/live/aastha-tamil/",
       "streams": [
-        {
-          "url": "blob:https://bhoomtv.org/b6dda6cb-774d-4e63-a34a-04e45f7c55a9",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aastha-tamil/"
-          },
-          "resourceType": "media"
-        },
         {
           "url": "https://aasthaott.akamaized.net/110923/smil:aasthatamil.smil/chunklist_b1928000.m3u8",
           "type": "hls",
@@ -418,66 +182,15 @@
           "contentType": "application/x-mpegurl"
         },
         {
-          "url": "https://aasthaott.akamaized.net/110923/smil:aasthatamil.smil/chunklist_b696000.m3u8",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aastha-tamil/"
-          },
-          "resourceType": "xhr",
-          "status": 200,
-          "contentType": "application/x-mpegurl"
-        },
-        {
           "url": "https://aasthaott.akamaized.net/110923/smil:aasthatamil.smil/playlist.m3u8",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aastha-tamil/"
-          },
-          "resourceType": "xhr",
-          "status": 200,
-          "contentType": "application/x-mpegurl"
-        },
-        {
-          "url": "https://bhoomtv.org/jwplayer/?source=https%3A%2F%2Faasthaott.akamaized.net%2F110923%2Fsmil%3Aaasthatamil.smil%2Fplaylist.m3u8",
           "type": "hls",
           "headers": {
             "referer": "https://bhoomtv.org/live/aastha-tamil/",
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36"
           },
-          "resourceType": "embedded"
-        },
-        {
-          "url": "https://bhoomtv.org/jwplayer/?source=https%3A%2F%2Faasthaott.akamaized.net%2F110923%2Fsmil%3Aaasthatamil.smil%2Fplaylist.m3u8&id=16109&type=mp4",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aastha-tamil/"
-          },
-          "resourceType": "document",
+          "resourceType": "embedded-source",
           "status": 200,
-          "contentType": "text/html; charset=utf-8"
-        },
-        {
-          "url": "https://prd.jwpltx.com/v1/jwplayer6/ping.gif?h=-793764897&e=s&n=3455615016163773&abc=0&aid=MlpClIyLEeKinyIACp8kUw&amp=0&ask=PLmif8oX&at=1&c=0&ccp=0&cp=1&d=1&eb=0&ed=3&emi=1w63n5y1fqpq&et=classic&i=1&lid=1ynzgcvio7cv&lsa=read&mt=1&pbd=1&pbr=1&pgi=1rs4h1iv32t0&ph=1&pid=MAaRkUjT&pii=0&pl=585&plc=1&pli=1txvcwz16zmb&pp=hlsjs&ppm=LIVE&prc=1&ps=4&pss=1&pt=Watch%20Aastha%20Tamil%20Live%20Online%20%7C%20High%20Quality%20Streaming%20%7C%20Bhoom%20TV&pu=https%3A%2F%2Fbhoomtv.org%2Flive%2Faastha-tamil%2F&pv=8.51.4&pyc=1&s=0&sdk=0&stc=1&stpe=0&tv=4.0.17&vb=1&vi=1&vl=90&wd=1039&abm=1&bwe=500&cae=0&cct=0&ch=2&cst=16&cdid=jwTarget&drm=0&ff=2010&fsm=0&l=0&lng=en&mk=hls&mu=https%3A%2F%2Faasthaott.akamaized.net%2F110923%2Fsmil%3Aaasthatamil.smil%2Fplaylist.m3u8&pcp=17&pd=3&pdr=&plng=en&pni=1&pr=2&q=0&qcr=auto&sbr=264&sp=0&strt=2020&tb=20&tt=0&vd=0&vh=144&vs=5&vw=256&sa=1789735608023",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aastha-tamil/"
-          },
-          "resourceType": "image",
-          "status": 204
-        },
-        {
-          "url": "https://prd.jwpltx.com/v1/jwplayer6/ping.gif?h=555587904&e=pa&n=7661080953629373&abc=0&aid=MlpClIyLEeKinyIACp8kUw&amp=0&ask=PLmif8oX&at=1&c=0&ccp=0&cp=1&d=1&eb=0&ed=3&emi=1w63n5y1fqpq&et=classic&i=1&lid=1ynzgcvio7cv&lsa=read&mt=1&pbd=1&pbr=1&pgi=1rs4h1iv32t0&ph=1&pid=MAaRkUjT&pii=0&pl=585&plc=1&pli=1txvcwz16zmb&pp=hlsjs&prc=1&ps=4&pss=1&pt=Watch%20Aastha%20Tamil%20Live%20Online%20%7C%20High%20Quality%20Streaming%20%7C%20Bhoom%20TV&pu=https%3A%2F%2Fbhoomtv.org%2Flive%2Faastha-tamil%2F&pv=8.51.4&pyc=0&s=0&sdk=0&stc=1&stpe=0&tv=4.0.17&vb=1&vi=1&vl=90&wd=1039&ab=1&cme=0&flc=0&lng=en&mu=https%3A%2F%2Faasthaott.akamaized.net%2F110923%2Fsmil%3Aaasthatamil.smil%2Fplaylist.m3u8&pd=3&pdr=&plng=en&pni=1&pr=2&tb=0&vd=0&sa=1789735606005",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/aastha-tamil/"
-          },
-          "resourceType": "image",
-          "status": 204
+          "contentType": "application/x-mpegurl"
         }
       ]
     },
@@ -487,16 +200,7 @@
       "pageUrl": "https://bhoomtv.org/live/acp-isai-oli/",
       "streams": [
         {
-          "url": "blob:https://bhoomtv.org/e9bb7010-39b3-45d5-ba73-5bcb76425772",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/acp-isai-oli/"
-          },
-          "resourceType": "media"
-        },
-        {
-          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?id=57923a593be3&t=1789735620",
+          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?id=57923a593be3&t=1789735954",
           "type": "hls",
           "headers": {
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
@@ -507,7 +211,7 @@
           "contentType": "application/vnd.apple.mpegurl"
         },
         {
-          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?segment=c7c5b6c855dca7bbf8e1b0590f3a68d65ccc6062e5b81b087cc530a5ebe3b6dedd7ea82ab5bdad0beca3e06f87fdc62fadbee477ce1934507d7bb02d5417faec",
+          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?segment=c7c5b6c855dca7bbf8e1b0590f3a68d65ccc6062e5b81b087cc530a5ebe3b6dedd7ea82ab5bdad0beca3e06f87fdc62f7e59a11304e6f855f0c09929093c60b9",
           "type": "hls",
           "headers": {
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
@@ -518,7 +222,7 @@
           "contentType": "video/mp2t"
         },
         {
-          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?segment=c7c5b6c855dca7bbf8e1b0590f3a68d65ccc6062e5b81b087cc530a5ebe3b6dedd7ea82ab5bdad0beca3e06f87fdc62fc2d7616898630d8c92410a1c82e18a3d",
+          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?segment=c7c5b6c855dca7bbf8e1b0590f3a68d65ccc6062e5b81b087cc530a5ebe3b6dedd7ea82ab5bdad0beca3e06f87fdc62fee88bbe89c078374a8d53c4669e2b461",
           "type": "hls",
           "headers": {
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
@@ -529,7 +233,7 @@
           "contentType": "video/mp2t"
         },
         {
-          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?segment=c7c5b6c855dca7bbf8e1b0590f3a68d65ccc6062e5b81b087cc530a5ebe3b6dedd7ea82ab5bdad0beca3e06f87fdc62fc47bf0539134627119fc9c569fc2214c",
+          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?segment=c7c5b6c855dca7bbf8e1b0590f3a68d65ccc6062e5b81b087cc530a5ebe3b6dedd7ea82ab5bdad0beca3e06f87fdc62ff005e765a64e046735908b4f087641e6",
           "type": "hls",
           "headers": {
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
@@ -538,26 +242,6 @@
           "resourceType": "xhr",
           "status": 200,
           "contentType": "video/mp2t"
-        },
-        {
-          "url": "https://prd.jwpltx.com/v1/jwplayer6/ping.gif?h=-1896901690&e=s&n=8743294716026347&abc=0&aid=MlpClIyLEeKinyIACp8kUw&amp=0&ask=PLmif8oX&at=1&c=0&ccp=0&cp=1&d=1&eb=0&ed=3&emi=ltj74wpfb2o9&et=classic&i=1&lid=1ynzgcvio7cv&lsa=read&mt=1&pbd=1&pbr=1&pgi=1y5vtqg1ehf8&ph=1&pid=MAaRkUjT&pii=0&pl=585&plc=1&pli=l6t8z71uyjnf&pp=hlsjs&ppm=LIVE&prc=1&ps=4&pss=1&pt=Watch%20ACP%20Isai%20Oli%20Live%20Online%20%7C%20High%20Quality%20Streaming%20%7C%20Bhoom%20TV&pu=https%3A%2F%2Fbhoomtv.org%2Flive%2Facp-isai-oli%2F&pv=8.51.4&pyc=1&s=0&sdk=0&stc=1&stpe=0&tv=4.0.17&vb=1&vi=1&vl=90&wd=1039&bwe=500&cae=0&cct=0&ch=2&cdid=jwTarget&drm=0&ff=2920&fsm=0&l=0&lng=en&mk=hls&mu=https%3A%2F%2Fbhoomtv.org%2Ftv%2Frestream-tv%2Fstream.m3u8%3Fid%3D57923a593be3%26t%3D1789735620&pcp=0&pd=3&pdr=&plng=en&pni=1&pr=2&q=0&sp=0&strt=2930&tb=8&tt=0&vd=0&vs=0&sa=1789735623932",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/acp-isai-oli/"
-          },
-          "resourceType": "image",
-          "status": 204
-        },
-        {
-          "url": "https://prd.jwpltx.com/v1/jwplayer6/ping.gif?h=-528208968&e=pa&n=4972698703514962&abc=0&aid=MlpClIyLEeKinyIACp8kUw&amp=0&ask=PLmif8oX&at=1&c=0&ccp=0&cp=1&d=1&eb=0&ed=3&emi=ltj74wpfb2o9&et=classic&i=1&lid=1ynzgcvio7cv&lsa=read&mt=1&pbd=1&pbr=1&pgi=1y5vtqg1ehf8&ph=1&pid=MAaRkUjT&pii=0&pl=585&plc=1&pli=l6t8z71uyjnf&pp=hlsjs&prc=1&ps=4&pss=1&pt=Watch%20ACP%20Isai%20Oli%20Live%20Online%20%7C%20High%20Quality%20Streaming%20%7C%20Bhoom%20TV&pu=https%3A%2F%2Fbhoomtv.org%2Flive%2Facp-isai-oli%2F&pv=8.51.4&pyc=0&s=0&sdk=0&stc=1&stpe=0&tv=4.0.17&vb=1&vi=1&vl=90&wd=1039&ab=1&cme=0&flc=0&lng=en&mu=https%3A%2F%2Fbhoomtv.org%2Ftv%2Frestream-tv%2Fstream.m3u8%3Fid%3D57923a593be3%26t%3D1789735620&pd=3&pdr=&plng=en&pni=1&pr=2&tb=0&vd=0&sa=1789735621006",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/acp-isai-oli/"
-          },
-          "resourceType": "image",
-          "status": 204
         }
       ]
     },
@@ -567,16 +251,7 @@
       "pageUrl": "https://bhoomtv.org/live/acp-tv-classic-madurai/",
       "streams": [
         {
-          "url": "blob:https://bhoomtv.org/73666527-3104-44ad-86ff-b81be6900953",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/acp-tv-classic-madurai/"
-          },
-          "resourceType": "media"
-        },
-        {
-          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?id=234949c728e8&t=1789735637",
+          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?id=234949c728e8&t=1789735971",
           "type": "hls",
           "headers": {
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
@@ -587,7 +262,7 @@
           "contentType": "application/vnd.apple.mpegurl"
         },
         {
-          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?segment=c7c5b6c855dca7bbf8e1b0590f3a68d6744631ff8592a50cc8919ab6109b6e857d9030cb61a79f9dbf13191389684f033cede798027d165d652fa52bab72d0cb",
+          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?segment=c7c5b6c855dca7bbf8e1b0590f3a68d6744631ff8592a50cc8919ab6109b6e857d9030cb61a79f9dbf13191389684f03003e9bcc4aefa61d6104121bb477b3f3",
           "type": "hls",
           "headers": {
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
@@ -598,7 +273,7 @@
           "contentType": "video/mp2t"
         },
         {
-          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?segment=c7c5b6c855dca7bbf8e1b0590f3a68d6744631ff8592a50cc8919ab6109b6e857d9030cb61a79f9dbf13191389684f039bf03a4ac307f07219a5d363cf752f33",
+          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?segment=c7c5b6c855dca7bbf8e1b0590f3a68d6744631ff8592a50cc8919ab6109b6e857d9030cb61a79f9dbf13191389684f034d7b3dad66a5e73ab04b35a1e52c5396",
           "type": "hls",
           "headers": {
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
@@ -609,7 +284,7 @@
           "contentType": "video/mp2t"
         },
         {
-          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?segment=c7c5b6c855dca7bbf8e1b0590f3a68d6744631ff8592a50cc8919ab6109b6e857d9030cb61a79f9dbf13191389684f03f821e46b7c1fc2713c88c5b220c8fbf7",
+          "url": "https://bhoomtv.org/tv/restream-tv/stream.m3u8?segment=c7c5b6c855dca7bbf8e1b0590f3a68d6744631ff8592a50cc8919ab6109b6e857d9030cb61a79f9dbf13191389684f03758dcffd0f7cc581624134136ea866f7",
           "type": "hls",
           "headers": {
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
@@ -618,29 +293,10 @@
           "resourceType": "xhr",
           "status": 200,
           "contentType": "video/mp2t"
-        },
-        {
-          "url": "https://prd.jwpltx.com/v1/jwplayer6/ping.gif?h=1108175990&e=pa&n=2253666241987962&abc=0&aid=MlpClIyLEeKinyIACp8kUw&amp=0&ask=PLmif8oX&at=1&c=0&ccp=0&cp=1&d=1&eb=0&ed=3&emi=1ejo3y03qexo&et=classic&i=1&lid=1ynzgcvio7cv&lsa=read&mt=1&pbd=1&pbr=1&pgi=13p61n5zjhgz&ph=1&pid=MAaRkUjT&pii=0&pl=585&plc=1&pli=o6hml31oxjfu&pp=hlsjs&prc=1&ps=4&pss=1&pt=Watch%20ACP%20TV%20Classic%20Madurai%20Live%20Online%20%7C%20High%20Quality%20Streaming%20%7C%20Bhoom%20TV&pu=https%3A%2F%2Fbhoomtv.org%2Flive%2Facp-tv-classic-madurai%2F&pv=8.51.4&pyc=0&s=0&sdk=0&stc=1&stpe=0&tv=4.0.17&vb=1&vi=1&vl=90&wd=1039&ab=1&cme=0&flc=0&lng=en&mu=https%3A%2F%2Fbhoomtv.org%2Ftv%2Frestream-tv%2Fstream.m3u8%3Fid%3D234949c728e8%26t%3D1789735637&pd=3&pdr=&plng=en&pni=1&pr=2&tb=0&vd=0&sa=1789735638155",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/acp-tv-classic-madurai/"
-          },
-          "resourceType": "image",
-          "status": 204
-        },
-        {
-          "url": "https://prd.jwpltx.com/v1/jwplayer6/ping.gif?h=677497400&e=s&n=3807990464828543&abc=0&aid=MlpClIyLEeKinyIACp8kUw&amp=0&ask=PLmif8oX&at=1&c=0&ccp=0&cp=1&d=1&eb=0&ed=3&emi=1ejo3y03qexo&et=classic&i=1&lid=1ynzgcvio7cv&lsa=read&mt=1&pbd=1&pbr=1&pgi=13p61n5zjhgz&ph=1&pid=MAaRkUjT&pii=0&pl=585&plc=1&pli=o6hml31oxjfu&pp=hlsjs&ppm=LIVE&prc=1&ps=4&pss=1&pt=Watch%20ACP%20TV%20Classic%20Madurai%20Live%20Online%20%7C%20High%20Quality%20Streaming%20%7C%20Bhoom%20TV&pu=https%3A%2F%2Fbhoomtv.org%2Flive%2Facp-tv-classic-madurai%2F&pv=8.51.4&pyc=1&s=0&sdk=0&stc=1&stpe=0&tv=4.0.17&vb=1&vi=1&vl=90&wd=1039&abm=1&bwe=500&cae=0&cct=0&ch=2&cdid=jwTarget&drm=0&ff=2810&fsm=0&l=0&lng=en&mk=hls&mu=https%3A%2F%2Fbhoomtv.org%2Ftv%2Frestream-tv%2Fstream.m3u8%3Fid%3D234949c728e8%26t%3D1789735637&pcp=0&pd=3&pdr=&plng=en&pni=1&pr=2&q=0&qcr=initial%20choice&sbr=0&sp=0&strt=2810&tb=9&tt=0&vd=0&vh=720&vs=0&vw=1280&sa=1789735640967",
-          "type": "hls",
-          "headers": {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36",
-            "referer": "https://bhoomtv.org/live/acp-tv-classic-madurai/"
-          },
-          "resourceType": "image",
-          "status": 204
         }
       ]
     }
   ],
-  "uniqueStreams": 59
+  "uniqueStreams": 24,
+  "streamFormat": "direct-hls-dash-only"
 }
