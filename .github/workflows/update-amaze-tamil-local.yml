@@ -1,4 +1,4 @@
-name: Update Amaze Tamil Local TV playlist
+name: Update Combined Tamil TV playlist
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: amaze-tamil-local-tv
+  group: tamil-combined-playlist
   cancel-in-progress: true
 
 jobs:
@@ -22,8 +22,9 @@ jobs:
       - name: Refresh, deduplicate and validate
         env:
           SOURCE_URL: "https://tinyurl.com/amaze-tamil-local-tv"
-          OUTPUT_FILE: "output/amaze-tamil-local-tv.m3u"
-          REPORT_FILE: "output/amaze-tamil-local-tv-report.json"
+          LOCAL_PLAYLIST: "output/bhoom-tamil.m3u"
+          OUTPUT_FILE: "output/tamil-combined.m3u"
+          REPORT_FILE: "output/tamil-combined-report.json"
           TIMEOUT_SECONDS: "15"
           RETRIES: "3"
         run: python3 bhoom-automation/update_external_playlist.py
@@ -32,8 +33,8 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: amaze-tamil-local-tv-report-${{ github.run_id }}
-          path: output/amaze-tamil-local-tv-report.json
+          name: tamil-combined-playlist-report-${{ github.run_id }}
+          path: output/tamil-combined-report.json
           if-no-files-found: ignore
           retention-days: 7
 
@@ -41,7 +42,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add output/amaze-tamil-local-tv.m3u output/amaze-tamil-local-tv-report.json
+          git add output/tamil-combined.m3u output/tamil-combined-report.json
           git diff --cached --quiet && echo "No changes" && exit 0
-          git commit -m "chore: update Amaze Tamil Local TV playlist"
+          git commit -m "chore: update combined Tamil TV playlist"
           git push
