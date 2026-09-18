@@ -90,9 +90,12 @@ class Capture:
     def __init__(self, channel_url: str):
         self.channel_url = channel_url
         self.items = {}
+        self.drm_urls = set()
 
     async def request(self, req):
         url = req.url
+        if any(x in url.lower() for x in ("license", "widevine", "playready", "fairplay", "clearkey", "drm")):
+            self.drm_urls.add(url)
         if (
             MANIFEST_RE.search(url)
             or url.lower().startswith(("rtmp://", "rtmps://"))
@@ -443,9 +446,11 @@ async def get_dooplayer_sources(page, capture, channel_url):
     return sources
 
 
-async def detect_drm(page):
+async def detect_drm(page, capture=None):
     """Detect DRM/EME usage without attempting to bypass or extract keys."""
     result = {"encryptedMediaExtensions": False, "encryptedEventSeen": False, "licenseRequests": [], "drmIndicators": []}
+    if capture:
+        result["licenseRequests"].extend(sorted(capture.drm_urls))
     try:
         result["encryptedMediaExtensions"] = bool(await page.evaluate("() => typeof navigator.requestMediaKeySystemAccess === 'function'"))
     except Exception:
@@ -540,7 +545,7 @@ async def scan_channel(context, channel_url, debug=False):
         await current.wait_for_timeout(4500)
         await collect_embedded_urls(current, capture)
         await collect_performance_urls(current, capture)
-        drm = await detect_drm(current)
+        drm = await detect_drm(current, capture)
         streams = sorted(capture.items.values(), key=lambda x: x["url"])
         if VALIDATE_STREAMS and streams:
             print(f"  Validating {len(streams)} captured stream(s)")
@@ -550,6 +555,16 @@ async def scan_channel(context, channel_url, debug=False):
                 print(f'    {stream["type"]} HTTP={v.get("httpStatus")} valid={v.get("manifestValid")} drm={v.get("drm")} stable={v.get("stable")}')
 
         name = channel_name_from_url(channel_url)
+        logo = ""
+        try:
+            logo = await current.locator("meta[property=\"og:image\"]").get_attribute("content") or ""
+        except Exception:
+            pass
+        if not logo:
+            try:
+                logo = await current.locator("img.wp-post-image, .entry-thumb img, article img").first.get_attribute("src") or ""
+            except Exception:
+                pass
         try:
             h1 = await current.locator("h1").first.text_content(timeout=1500)
             if h1 and h1.strip():
@@ -663,12 +678,14 @@ async def main():
 
     for channel in results:
         safe_name = channel["name"].replace('"', "'").replace(",", " - ")
+        logo = channel.get("logo", "")
         for stream in channel["streams"]:
             url = normalize_manifest_url(stream["url"])
             if not url or url in seen:
                 continue
             seen.add(url)
-            m3u.append(f'#EXTINF:-1 tvg-name="{safe_name}" group-title="Tamil",{safe_name}')
+            logo_attr = f' tvg-logo="{logo}"' if logo else ""
+            m3u.append(f'#EXTINF:-1 tvg-name="{safe_name}"{logo_attr} group-title="Tamil",{safe_name}')
             headers = stream.get("headers", {})
             if headers.get("referer"):
                 m3u.append(f'#EXTVLCOPT:http-referrer={headers["referer"]}')
