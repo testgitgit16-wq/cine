@@ -583,7 +583,7 @@ async def scan_channel(context, channel_url, debug=False):
             except Exception:
                 pass
 
-        return {"id": slug(channel_url), "name": name, "pageUrl": channel_url,
+        return {"id": slug(channel_url), "name": name, "logo": logo, "pageUrl": channel_url,
                 "streams": streams,
                 "playback": await playback_status(current),
                 "drm": drm}
@@ -601,16 +601,79 @@ async def scan_channel(context, channel_url, debug=False):
             pass
 
 
+TRANSIENT_QUERY_KEYS = {
+    "token", "tokenid", "auth", "authorization", "signature", "sig",
+    "expires", "expire", "exp", "hdnts", "hmac", "key", "session",
+}
+
+def normalize_channel_key(name: str):
+    return re.sub(r"[^a-z0-9]+", "", name.lower())
+
+def stream_key(url: str):
+    try:
+        p = urlparse(url)
+        pairs = []
+        for key, values in parse_qs(p.query, keep_blank_values=True).items():
+            if key.lower() in TRANSIENT_QUERY_KEYS:
+                continue
+            for value in values:
+                pairs.append((key.lower(), value))
+        query = "&".join(f"{k}={v}" for k, v in sorted(pairs))
+        return f"{p.scheme.lower()}://{p.netloc.lower()}{p.path}?{query}".rstrip("?")
+    except Exception:
+        return url.lower()
+
 def stream_is_usable(stream):
     validation = stream.get("validation", {})
     if stream["type"] == "rtmp":
         return True
-    status = validation.get("httpStatus")
-    if status is not None and int(status) >= 400:
+    if validation.get("drm"):
         return False
-    if stream["type"] in {"hls", "dash"} and validation.get("manifestValid") is False:
+    status = validation.get("httpStatus")
+    if status is None or not (200 <= int(status) < 400):
+        return False
+    if stream["type"] in {"hls", "dash"}:
+        if validation.get("manifestValid") is not True:
+            return False
+    elif stream["type"] == "progressive":
+        if validation.get("manifestValid") is not True:
+            return False
+    if validation.get("stable") is False:
         return False
     return True
+
+def merge_duplicate_channels(items):
+    merged = {}
+    for item in items:
+        key = normalize_channel_key(item.get("name", "") or item.get("id", ""))
+        if not key:
+            key = item.get("id", "")
+        if key not in merged:
+            merged[key] = dict(item)
+            merged[key]["streams"] = []
+            continue
+
+        existing = merged[key]
+        if not existing.get("logo") and item.get("logo"):
+            existing["logo"] = item["logo"]
+        if len(item.get("name", "")) > len(existing.get("name", "")):
+            existing["name"] = item["name"]
+        existing["streams"].extend(item.get("streams", []))
+
+    for item in merged.values():
+        unique = {}
+        for stream in item["streams"]:
+            key = stream_key(stream["url"])
+            old = unique.get(key)
+            if old is None:
+                unique[key] = stream
+            else:
+                old_score = int(old.get("validation", {}).get("httpStatus") or 0)
+                new_score = int(stream.get("validation", {}).get("httpStatus") or 0)
+                if new_score > old_score:
+                    unique[key] = stream
+        item["streams"] = list(unique.values())
+    return list(merged.values())
 
 
 async def main():
@@ -648,7 +711,6 @@ async def main():
         print("MAX_CHANNELS=0 means ALL channels")
 
         results = []
-        total_sources = 0
         total_streams = 0
 
         for index, channel_url in enumerate(channels, 1):
@@ -657,12 +719,18 @@ async def main():
             item = await scan_channel(context, channel_url, debug=debug)
             total_streams += len(item["streams"])
             usable = [s for s in item["streams"] if stream_is_usable(s)]
+            item["capturedStreamCount"] = len(item["streams"])
+            item["usableStreamCount"] = len(usable)
             if usable:
                 item["streams"] = usable
-                print(f"  USABLE {len(usable)} stream(s)")
+                print(f"  USABLE {len(usable)} / CAPTURED {len(item['streams'])}")
                 results.append(item)
             else:
-                print("  NO USABLE STREAM")
+                print(f"  NO USABLE STREAM / CAPTURED {len(item['streams'])}")
+
+        before_merge = len(results)
+        results = merge_duplicate_channels(results)
+        print(f"Duplicate channel cleanup: {before_merge} -> {len(results)} unique channels")
 
         await context.close()
         await browser.close()
@@ -705,12 +773,17 @@ async def main():
         "source": BASE,
         "category": "Tamil",
         "channels": results,
+        "uniqueChannels": len(results),
         "uniqueStreams": len(seen),
         "capturedStreams": total_streams,
         "usableStreams": len(seen),
         "validation": {"enabled": VALIDATE_STREAMS, "stabilitySeconds": STABILITY_SECONDS},
         "streamFormat": "hls-dash-rtmp-progressive-with-browser-headers",
         "drmNote": "DRM/EME is detected and recorded, but DRM keys/licenses are not bypassed or extracted.",
+        "deduplication": {
+            "channels": "normalized channel name",
+            "streams": "normalized URL with transient token/signature/expiry query parameters removed"
+        },
     }
 
     (OUT / "bhoom-tamil.json").write_text(
