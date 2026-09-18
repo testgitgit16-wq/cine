@@ -1,0 +1,47 @@
+name: Update Amaze Tamil Local TV playlist
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: amaze-tamil-local-tv
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Refresh, deduplicate and validate
+        env:
+          SOURCE_URL: "https://tinyurl.com/amaze-tamil-local-tv"
+          OUTPUT_FILE: "output/amaze-tamil-local-tv.m3u"
+          REPORT_FILE: "output/amaze-tamil-local-tv-report.json"
+          TIMEOUT_SECONDS: "15"
+          RETRIES: "3"
+        run: python3 bhoom-automation/update_external_playlist.py
+
+      - name: Upload playlist report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amaze-tamil-local-tv-report-${{ github.run_id }}
+          path: output/amaze-tamil-local-tv-report.json
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Publish
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output/amaze-tamil-local-tv.m3u output/amaze-tamil-local-tv-report.json
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "chore: update Amaze Tamil Local TV playlist"
+          git push
