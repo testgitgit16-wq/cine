@@ -96,23 +96,43 @@ def main():
     if MAX_ENTRIES:
         entries = entries[:MAX_ENTRIES]
 
-    seen = set()
-    output = ["#EXTM3U"]
+    seen_urls = set()
+    channels = {}
     report_entries = []
     for entry in entries:
         url = stream_url(entry)
-        if not url or key(url) in seen:
+        if not url:
             continue
-        seen.add(key(url))
+        url_key = key(url)
+        if url_key in seen_urls:
+            continue
+        seen_urls.add(url_key)
         result = validate(url)
-        report_entries.append({"name": entry[0], "url": url, **result})
-        # Keep working HTTP streams and RTMP streams that cannot be HTTP-probed.
+        item = {"name": entry[0], "channel": normalize_name(entry), "url": url, **result}
+        report_entries.append(item)
         if result["status"] in {"WORKING", "UNVERIFIED_RTMP"}:
-            output.extend(entry)
-    
+            channels.setdefault(item["channel"], []).append({"entry": entry, "url": url, "result": result})
+
+    output = ["#EXTM3U"]
+    manifest = []
+    for sources in channels.values():
+        ranked = sorted(sources, key=lambda x: score(x["entry"], x["result"]), reverse=True)
+        primary = ranked[0]
+        output.extend(primary["entry"])
+        manifest.append({
+            "channel": primary["entry"][0].rsplit(",", 1)[-1].strip(),
+            "sources": [{"url": x["url"], "status": x["result"]["status"], "primary": i == 0} for i, x in enumerate(ranked)]
+        })
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text("\n".join(output) + "\n", encoding="utf-8")
+    JSON_OUT.parent.mkdir(parents=True, exist_ok=True)
+    JSON_OUT.write_text(json.dumps({
+        "generatedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "channels": manifest
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
+
     summary = {
         "source": SOURCE_URL,
         "resolvedUrl": final_url,
@@ -121,15 +141,17 @@ def main():
         "localEntries": len(local_entries),
         "externalEntries": len(external_entries),
         "sourceEntries": len(entries),
-        "uniqueEntries": len(report_entries),
-        "publishedEntries": sum(x["status"] in {"WORKING", "UNVERIFIED_RTMP"} for x in report_entries),
+        "uniqueStreamEntries": len(report_entries),
+        "workingUniqueStreams": sum(x["status"] in {"WORKING", "UNVERIFIED_RTMP"} for x in report_entries),
+        "publishedChannels": len(manifest),
         "failedEntries": sum(x["status"] == "FAILED" for x in report_entries),
         "invalidEntries": sum(x["status"] == "INVALID_M3U8" for x in report_entries),
         "unverifiedRtmp": sum(x["status"] == "UNVERIFIED_RTMP" for x in report_entries),
         "entries": report_entries,
+        "channels": manifest
     }
     REPORT.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(json.dumps({k:v for k,v in summary.items() if k != "entries"}, indent=2))
+    print(json.dumps({k:v for k,v in summary.items() if k not in {"entries", "channels"}}, indent=2))
 
 if __name__ == "__main__":
     main()
