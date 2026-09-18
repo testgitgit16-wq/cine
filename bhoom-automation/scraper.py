@@ -9,7 +9,7 @@ from urllib.parse import parse_qs, unquote, urljoin, urlparse
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeoutError
 
 BASE = "https://bhoomtv.org"
-KOLLYWOOD_PLUS_URL = f"{BASE}/live/kollywood-plus/"
+GROUP_PAGE_HINTS = ("/live/kollywood-plus/", "/live/kollywood-tv/")
 
 CATEGORY_PAGES = [
     f"{BASE}/channel/tamil-news/",
@@ -909,22 +909,14 @@ def load_previous_channel_count():
         return None
 
 
-async def scan_kollywood_plus(context, channel_url, debug=False):
-    """
-    Special handling for BhoomTV /live/kollywood-plus/:
-    each DooPlayer source is published as its own channel instead of merging
-    all sources under the single "Kollywood Plus" page title.
-    """
+async def scan_multi_source_group(context, channel_url, debug=False):
+    """Extract each DooPlayer source on a grouped live page as an individual channel."""
     page = await context.new_page()
-    capture = Capture(channel_url)
-    attach_capture(page, capture)
     results = []
-
     try:
         print(f"Opening grouped channel page: {channel_url}")
         await page.goto(channel_url, wait_until="domcontentloaded", timeout=45000)
         await page.wait_for_timeout(1800)
-
         try:
             logo = await page.locator('meta[property="og:image"]').get_attribute("content") or ""
         except Exception:
@@ -939,35 +931,28 @@ async def scan_kollywood_plus(context, channel_url, debug=False):
                 nume: el.getAttribute('data-nume') || ''
             })).filter(x => x.title)"""
         )
-        print(f"  Kollywood Plus source options: {len(options)}")
+        print(f"  Group source options: {len(options)}")
 
-        # First collect the source API/embed information so every option is
-        # represented even when clicking the player is inconsistent.
         for option_index, option in enumerate(options, 1):
             title = " ".join(option["title"].split())
-            before = set(capture.items.keys())
+            capture = Capture(channel_url)
+            attach_capture(page, capture)
 
             try:
-                loc = page.locator("li.dooplay_player_option").nth(option["index"])
-                await loc.click(timeout=4000, force=True)
-                await page.wait_for_timeout(2500)
+                await page.locator("li.dooplay_player_option").nth(option["index"]).click(
+                    timeout=4000, force=True
+                )
+                await page.wait_for_timeout(2200)
                 await collect_embedded_urls(page, capture)
                 await collect_performance_urls(page, capture)
                 await trigger_playback(page)
-                await page.wait_for_timeout(3000)
-                await collect_performance_urls(page, capture)
+                await page.wait_for_timeout(2500)
                 await collect_embedded_urls(page, capture)
+                await collect_performance_urls(page)
             except Exception as exc:
                 print(f"    [{option_index}] click error for {title}: {exc}")
 
-            new_streams = [
-                stream for url, stream in capture.items.items()
-                if url not in before
-            ]
-
-            # If the click did not expose a new URL, try the DooPlayer API
-            # for this exact source and open its embed URL.
-            if not new_streams and option.get("post") and option.get("nume"):
+            if not capture.items and option.get("post") and option.get("nume"):
                 try:
                     api_url = (
                         f"https://bhoomtv.org/wp-json/dooplayer/v2/"
@@ -983,35 +968,31 @@ async def scan_kollywood_plus(context, channel_url, debug=False):
                         timeout=30000,
                     )
                     if response.ok:
-                        data = await response.json()
+                        try:
+                            data = await response.json()
+                        except Exception:
+                            data = {}
                         embed_url = (
                             data.get("embed_url") or data.get("url") or ""
                             if isinstance(data, dict) else ""
                         )
                         iframe_srcs = re.findall(
                             r"""<iframe[^>]+src=["']([^"']+)["']""",
-                            embed_url,
-                            re.I,
+                            embed_url, re.I
                         )
-                        candidates = iframe_srcs or [embed_url]
-
-                        for candidate in candidates:
+                        for candidate in (iframe_srcs or [embed_url]):
                             if not candidate.startswith("http"):
                                 continue
                             player = None
                             try:
                                 player = await context.new_page()
                                 attach_capture(player, capture)
-                                await player.goto(
-                                    candidate,
-                                    wait_until="domcontentloaded",
-                                    timeout=30000,
-                                )
+                                await player.goto(candidate, wait_until="domcontentloaded", timeout=30000)
                                 await player.wait_for_timeout(2500)
                                 await trigger_playback(player)
                                 await collect_embedded_urls(player, capture)
                                 await collect_performance_urls(player, capture)
-                                await player.wait_for_timeout(2500)
+                                await player.wait_for_timeout(2200)
                                 await collect_performance_urls(player, capture)
                             except Exception as exc:
                                 print(f"    embed error for {title}: {exc}")
@@ -1024,69 +1005,57 @@ async def scan_kollywood_plus(context, channel_url, debug=False):
                 except Exception as exc:
                     print(f"    API fallback error for {title}: {exc}")
 
-            new_streams = [
-                stream for url, stream in capture.items.items()
-                if url not in before
-            ]
-
-            # If a URL was already captured by another source, still associate
-            # it with this individual channel option.
-            if not new_streams:
-                all_candidates = list(capture.items.values())
-            else:
-                all_candidates = new_streams
-
+            streams = list(capture.items.values())
             unique = {}
-            for stream in all_candidates:
+            for stream in streams:
                 unique[stream_key(stream["url"])] = stream
-
             streams = list(unique.values())
-            if VALIDATE_STREAMS and streams:
-                for stream in streams:
-                    if "validation" not in stream:
-                        stream["validation"] = await validate_stream(page, stream)
 
-            usable = [s for s in streams if stream_is_usable(s)]
-            if usable:
-                usable = sorted(usable, key=stream_quality_score, reverse=True)
-                item_id = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
-                results.append({
-                    "id": f"kollywood-plus-{item_id or option_index}",
-                    "name": title,
-                    "logo": logo,
-                    "pageUrl": channel_url,
-                    "sourceTitle": title,
-                    "sourceIndex": option_index,
-                    "streams": usable,
-                    "capturedStreamCount": len(streams),
-                    "usableStreamCount": len(usable),
-                })
-                print(f"    {title}: {len(usable)} usable stream(s)")
-            else:
+            if VALIDATE_STREAMS and streams:
+                print(f"    Validating {len(streams)} stream(s) for {title}")
+                for stream in streams:
+                    stream["validation"] = await validate_stream(page, stream)
+
+            usable = [stream for stream in streams if stream_is_usable(stream)]
+            if not usable:
                 print(f"    {title}: NO USABLE STREAM")
+                continue
+
+            usable.sort(key=stream_quality_score, reverse=True)
+            item_id = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+            results.append({
+                "id": f"group-{slug(channel_url)}-{item_id or option_index}",
+                "name": title,
+                "logo": logo,
+                "pageUrl": channel_url,
+                "sourceTitle": title,
+                "sourceIndex": option_index,
+                "streams": usable,
+                "capturedStreamCount": len(streams),
+                "usableStreamCount": len(usable),
+            })
+            print(f"    {title}: {len(usable)} usable stream(s)")
 
         if debug:
             DEBUG.mkdir(parents=True, exist_ok=True)
+            safe_slug = slug(channel_url)
             try:
-                await page.screenshot(
-                    path=str(DEBUG / "kollywood-plus.png"),
-                    full_page=True,
-                )
+                await page.screenshot(path=str(DEBUG / f"{safe_slug}-group.png"), full_page=True)
             except Exception:
                 pass
-
+            try:
+                (DEBUG / f"{safe_slug}-group.html").write_text(await page.content(), encoding="utf-8")
+            except Exception:
+                pass
         return results
-
     except Exception as exc:
-        print(f"  KOLLYWOOD PLUS ERROR: {exc}")
+        print(f"  GROUP PAGE ERROR: {exc}")
         return []
     finally:
         try:
             await page.close()
         except Exception:
             pass
-
-
 
 async def main():
     OUT.mkdir(parents=True, exist_ok=True)
@@ -1114,7 +1083,6 @@ async def main():
             except Exception as e:
                 print(f"  category error: {e}")
 
-        channel_pages.discard(KOLLYWOOD_PLUS_URL.rstrip("/"))
         channels = sorted(channel_pages)
         if MAX_CHANNELS > 0:
             channels = channels[:MAX_CHANNELS]
@@ -1123,23 +1091,35 @@ async def main():
         print(f"Channels to scan: {len(channels)}")
         print("MAX_CHANNELS=0 means ALL channels")
 
-        # Always scan the grouped Kollywood Plus page first.
-        scan_targets = [KOLLYWOOD_PLUS_URL] + channels
-        if MAX_CHANNELS > 0:
-            scan_targets = scan_targets[:MAX_CHANNELS]
-
         results = []
         scanned_items = []
         total_streams = 0
 
-        for index, channel_url in enumerate(scan_targets, 1):
+        for index, channel_url in enumerate(channels, 1):
             debug = index <= DEBUG_CHANNELS
-            print(f"[{index}/{len(scan_targets)}] {channel_url}")
-            if channel_url.rstrip("/") == KOLLYWOOD_PLUS_URL.rstrip("/"):
-                group_items = await scan_kollywood_plus(context, channel_url, debug=debug)
+            print(f"[{index}/{len(channels)}] {channel_url}")
+
+            # Future-proof: any BhoomTV /live/ page exposing multiple
+            # DooPlayer source options is treated as a grouped page.
+            is_group_page = False
+            option_count = 0
+            try:
+                probe = await context.new_page()
+                await probe.goto(channel_url, wait_until="domcontentloaded", timeout=30000)
+                await probe.wait_for_timeout(800)
+                option_count = await probe.locator("li.dooplay_player_option").count()
+                is_group_page = option_count >= 2
+                await probe.close()
+            except Exception as exc:
+                print(f"  group-page probe skipped: {exc}")
+
+            print(f"  source options detected: {option_count}")
+            if is_group_page:
+                group_items = await scan_multi_source_group(context, channel_url, debug=debug)
                 results.extend(group_items)
-                print(f"  KOLLYWOOD PLUS: {len(group_items)} individual channels")
+                print(f"  GROUP PAGE: {len(group_items)} individual channels")
                 continue
+
             item = await scan_channel(context, channel_url, debug=debug)
             scanned_items.append(item)
             captured_count = len(item["streams"])
@@ -1198,134 +1178,3 @@ async def main():
 
             # Keep the first/global copy of duplicate URLs, except when this
             # would remove the channel entirely; the safety pass above already
-            # guarantees one stream, so only skip true duplicates here.
-            if dedupe_key in seen:
-                continue
-
-            seen.add(dedupe_key)
-            logo_attr = f' tvg-logo="{logo}"' if logo else ""
-            m3u.append(f'#EXTINF:-1 tvg-name="{safe_name}"{logo_attr} group-title="Tamil",{safe_name}')
-
-            headers = stream.get("headers", {})
-            if headers.get("referer"):
-                m3u.append(f'#EXTVLCOPT:http-referrer={headers["referer"]}')
-            if headers.get("origin"):
-                m3u.append(f'#EXTVLCOPT:http-origin={headers["origin"]}')
-            if headers.get("user-agent"):
-                m3u.append(f'#EXTVLCOPT:http-user-agent={headers["user-agent"]}')
-            if PUBLISH_SENSITIVE_HEADERS and headers.get("authorization"):
-                m3u.append(f'#EXTVLCOPT:http-header=Authorization: {headers["authorization"]}')
-            if PUBLISH_SENSITIVE_HEADERS and headers.get("cookie"):
-                m3u.append(f'#EXTVLCOPT:http-header=Cookie: {headers["cookie"]}')
-            m3u.append(url)
-            m3u.append("")
-            channel_written = True
-
-        # Absolute final fallback: if all URLs collided globally, write the
-        # channel's best working stream so the duplicate cleanup never removes
-        # the channel completely.
-        if not channel_written and streams:
-            stream = streams[0]
-            url = normalize_manifest_url(stream["url"])
-            if url:
-                logo_attr = f' tvg-logo="{logo}"' if logo else ""
-                m3u.append(f'#EXTINF:-1 tvg-name="{safe_name}"{logo_attr} group-title="Tamil",{safe_name}')
-                headers = stream.get("headers", {})
-                if headers.get("referer"):
-                    m3u.append(f'#EXTVLCOPT:http-referrer={headers["referer"]}')
-                if headers.get("origin"):
-                    m3u.append(f'#EXTVLCOPT:http-origin={headers["origin"]}')
-                if headers.get("user-agent"):
-                    m3u.append(f'#EXTVLCOPT:http-user-agent={headers["user-agent"]}')
-                if headers.get("authorization"):
-                    m3u.append(f'#EXTVLCOPT:http-header=Authorization: {headers["authorization"]}')
-                if headers.get("cookie"):
-                    m3u.append(f'#EXTVLCOPT:http-header=Cookie: {headers["cookie"]}')
-                m3u.append(url)
-                m3u.append("")
-
-    payload = {
-        "generatedAt": datetime.now(timezone.utc).isoformat(),
-        "source": BASE,
-        "category": "Tamil",
-        "channels": results,
-        "uniqueChannels": len(results),
-        "uniqueStreams": len(seen),
-        "capturedStreams": total_streams,
-        "usableStreams": len(seen),
-        "validation": {"enabled": VALIDATE_STREAMS, "stabilitySeconds": STABILITY_SECONDS},
-        "streamFormat": "hls-dash-rtmp-progressive-with-browser-headers",
-        "drmNote": "DRM/EME is detected and recorded, but DRM keys/licenses are not bypassed or extracted.",
-        "deduplication": {
-            "channels": "normalized channel name; duplicate copies are merged and the best working stream is retained",
-            "streams": "normalized URL with transient token/signature/expiry query parameters removed",
-            "safety": "at least one working stream is retained for every unique channel"
-        },
-    }
-
-    failures = []
-    working_ids = {c.get("id") for c in results}
-    for item in scanned_items:
-        if item.get("id") in working_ids:
-            continue
-        streams = item.get("streams", [])
-        failures.append({
-            "channel": item.get("name"),
-            "pageUrl": item.get("pageUrl"),
-            "reason": ["NO_STREAM"] if not streams else sorted(set(classify_stream_failure(s) for s in streams)),
-        })
-
-    previous_channels = load_previous_channel_count()
-    retention_percent = None
-    publish_allowed = True
-    if previous_channels:
-        retention_percent = round((len(results) / previous_channels) * 100, 1)
-        minimum_channels = max(1, (previous_channels * MIN_CHANNEL_RETENTION_PERCENT + 99) // 100)
-        publish_allowed = len(results) >= minimum_channels
-
-    report = {
-        "generatedAt": datetime.now(timezone.utc).isoformat(),
-        "source": BASE,
-        "discoveredChannels": len(channel_pages),
-        "scannedChannels": len(channels),
-        "workingChannels": len(results),
-        "capturedStreams": total_streams,
-        "uniqueWorkingStreams": len(seen),
-        "previousPublishedChannels": previous_channels,
-        "retentionPercent": retention_percent,
-        "minimumRetentionPercent": MIN_CHANNEL_RETENTION_PERCENT,
-        "publishAllowed": publish_allowed,
-        "sensitiveHeadersPublished": PUBLISH_SENSITIVE_HEADERS,
-        "failureCount": len(failures),
-        "failures": failures,
-    }
-    (OUT / "bhoom-tamil-report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
-
-    if not publish_allowed:
-        raise RuntimeError(
-            f"Candidate scan rejected: {len(results)} working channels is below "
-            f"{MIN_CHANNEL_RETENTION_PERCENT}% of previous {previous_channels}. Previous output preserved."
-        )
-
-    payload["channels"] = [public_channel_copy(c) for c in results]
-    payload["refreshBehavior"] = {
-        "sourceUrlsAreReCapturedEveryRun": True,
-        "recaptureOnFailure": RECAPTURE_ON_FAILURES,
-        "recaptureRounds": RECAPTURE_ROUNDS,
-        "note": "Stream URLs are refreshed on every scheduled/manual run because BhoomTV may rotate URLs or tokens by time, schedule, or playback."
-    }
-    payload["security"] = {
-        "sensitiveHeadersPublished": PUBLISH_SENSITIVE_HEADERS,
-        "note": "Authorization/Cookie are excluded by default from public output."
-    }
-    (OUT / "bhoom-tamil.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    (OUT / "bhoom-tamil.m3u").write_text("\n".join(m3u), encoding="utf-8")
-
-    print("=" * 50)
-    print(f"FINAL: {len(results)} channels / {len(seen)} unique streams")
-    print(f"RETENTION: {retention_percent}% / publish={publish_allowed}")
-    print("=" * 50)
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
