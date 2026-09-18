@@ -15,10 +15,6 @@ on:
         description: "Seconds between manifest checks (0=off)"
         required: false
         default: "3"
-      min_channel_retention_percent:
-        description: "Reject a scan if working channels fall below this percentage of the previous output"
-        required: false
-        default: "50"
       recapture_rounds:
         description: "Fresh player/source recapture rounds after expired or invalid streams"
         required: false
@@ -59,7 +55,6 @@ jobs:
           MAX_CHANNELS: ${{ github.event.inputs.max_channels || '0' }}
           VALIDATE_STREAMS: ${{ github.event.inputs.validate_streams || '1' }}
           STABILITY_SECONDS: ${{ github.event.inputs.stability_seconds || '3' }}
-          MIN_CHANNEL_RETENTION_PERCENT: ${{ github.event.inputs.min_channel_retention_percent || '50' }}
           RECAPTURE_ROUNDS: ${{ github.event.inputs.recapture_rounds || '1' }}
           RECAPTURE_ON_FAILURES: "1"
           RETRY_COUNT: "3"
