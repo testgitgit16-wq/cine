@@ -15,6 +15,14 @@ on:
         description: "Seconds between manifest checks (0=off)"
         required: false
         default: "3"
+      min_channel_retention_percent:
+        description: "Reject a scan if working channels fall below this percentage of the previous output"
+        required: false
+        default: "50"
+      recapture_rounds:
+        description: "Fresh player/source recapture rounds after expired or invalid streams"
+        required: false
+        default: "1"
   schedule:
     - cron: "15 */6 * * *"
 
@@ -50,7 +58,11 @@ jobs:
           MAX_CHANNELS: ${{ github.event.inputs.max_channels || '0' }}
           VALIDATE_STREAMS: ${{ github.event.inputs.validate_streams || '1' }}
           STABILITY_SECONDS: ${{ github.event.inputs.stability_seconds || '3' }}
-          PUBLISH_SENSITIVE_HEADERS: "1"
+          MIN_CHANNEL_RETENTION_PERCENT: ${{ github.event.inputs.min_channel_retention_percent || '50' }}
+          RECAPTURE_ROUNDS: ${{ github.event.inputs.recapture_rounds || '1' }}
+          RECAPTURE_ON_FAILURES: "1"
+          RETRY_COUNT: "3"
+          PUBLISH_SENSITIVE_HEADERS: "0"
         run: python scraper.py
 
       - name: Upload debug files
@@ -58,7 +70,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: bhoom-debug-${{ github.run_id }}
-          path: debug/
+          path: |
+            debug/
+            output/bhoom-tamil-report.json
           if-no-files-found: ignore
           retention-days: 7
 
@@ -66,7 +80,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add output/bhoom-tamil.json output/bhoom-tamil.m3u
+          git add output/bhoom-tamil.json output/bhoom-tamil.m3u output/bhoom-tamil-report.json
           git diff --cached --quiet && echo "No changes" && exit 0
           git commit -m "chore: update Bhoom Tamil streams"
           git push
