@@ -69,7 +69,7 @@ jobs:
           RECAPTURE_ON_FAILURES: "1"
           RETRY_COUNT: "3"
           PUBLISH_SENSITIVE_HEADERS: "0"
-        run: python scraper.py
+        run: python -c "import asyncio, scraper; asyncio.run(scraper.main())"
 
       - name: Upload debug files
         if: always()
