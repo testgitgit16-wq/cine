@@ -621,7 +621,7 @@ async def scan_channel(context, channel_url, debug=False):
         name = channel_name_from_url(channel_url)
         logo = ""
         try:
-            logo = await current.locator("meta[property="og:image"]").get_attribute("content") or ""
+            logo = await current.locator('meta[property="og:image"]').get_attribute("content") or ""
         except Exception:
             pass
         if not logo:
