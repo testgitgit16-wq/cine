@@ -53,7 +53,11 @@ def normalize_manifest_url(url: str):
     if not url or not isinstance(url, str):
         return None
     url = url.strip()
-    if url.startswith("blob:") or not url.startswith(("http://", "https://")):
+    if url.startswith("blob:"):
+        return None
+    if url.startswith(("rtmp://", "rtmps://")):
+        return url
+    if not url.startswith(("http://", "https://")):
         return None
     try:
         parsed = urlparse(url)
@@ -75,7 +79,11 @@ class Capture:
 
     async def request(self, req):
         url = req.url
-        if MANIFEST_RE.search(url) or req.resource_type in {"media", "manifest"}:
+        if (
+            MANIFEST_RE.search(url)
+            or url.lower().startswith(("rtmp://", "rtmps://"))
+            or req.resource_type in {"media", "manifest"}
+        ):
             try:
                 headers = await req.all_headers()
             except Exception:
@@ -104,9 +112,15 @@ class Capture:
         clean_headers.setdefault("user-agent", UA)
         clean_headers.setdefault("referer", self.channel_url)
         current = self.items.get(url, {})
+        lower_url = url.lower()
+        stream_type = (
+            "rtmp" if lower_url.startswith(("rtmp://", "rtmps://"))
+            else "dash" if ".mpd" in lower_url
+            else "hls"
+        )
         current.update({
             "url": url,
-            "type": "dash" if ".mpd" in url.lower() else "hls",
+            "type": stream_type,
             "headers": clean_headers,
         })
         if status is not None:
@@ -297,6 +311,30 @@ async def get_dooplayer_sources(page, capture, channel_url):
     return sources
 
 
+async def detect_drm(page):
+    """Detect DRM/EME usage without attempting to bypass or extract keys."""
+    result = {"encryptedMediaExtensions": False, "encryptedEventSeen": False, "licenseRequests": [], "drmIndicators": []}
+    try:
+        result["encryptedMediaExtensions"] = bool(await page.evaluate("() => typeof navigator.requestMediaKeySystemAccess === 'function'"))
+    except Exception:
+        pass
+    try:
+        result["encryptedEventSeen"] = bool(await page.evaluate("() => !!document.querySelector('video') && !!document.querySelector('video').mediaKeys"))
+    except Exception:
+        pass
+    try:
+        entries = await page.evaluate("performance.getEntriesByType('resource').map(e=>e.name).filter(Boolean)")
+        for url in sorted(set(entries)):
+            low = url.lower()
+            if any(x in low for x in ("license", "widevine", "playready", "fairplay", "drm", "clearkey", "skd://")):
+                result["licenseRequests"].append(url)
+    except Exception:
+        pass
+    if result["licenseRequests"] or result["encryptedEventSeen"]:
+        result["drmIndicators"].append("encrypted-media/license activity")
+    return result
+
+
 async def scan_channel(context, channel_url, debug=False):
     capture = Capture(channel_url)
     current = await context.new_page()
@@ -370,6 +408,7 @@ async def scan_channel(context, channel_url, debug=False):
         await current.wait_for_timeout(4500)
         await collect_embedded_urls(current, capture)
         await collect_performance_urls(current, capture)
+        drm = await detect_drm(current)
 
         name = channel_name_from_url(channel_url)
         try:
@@ -391,7 +430,8 @@ async def scan_channel(context, channel_url, debug=False):
                 pass
 
         return {"id": slug(channel_url), "name": name, "pageUrl": channel_url,
-                "streams": sorted(capture.items.values(), key=lambda x: x["url"])}
+                "streams": sorted(capture.items.values(), key=lambda x: x["url"]),
+                "drm": drm}
 
     except PlaywrightTimeoutError:
         print(f"  TIMEOUT: {channel_url}")
@@ -495,7 +535,8 @@ async def main():
         "category": "Tamil",
         "channels": results,
         "uniqueStreams": len(seen),
-        "streamFormat": "direct-hls-dash-only",
+        "streamFormat": "direct-hls-dash-rtmp-with-browser-headers",
+        "drmNote": "DRM/EME is detected and recorded, but DRM keys/licenses are not bypassed or extracted.",
     }
 
     (OUT / "bhoom-tamil.json").write_text(
