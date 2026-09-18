@@ -585,7 +585,38 @@ async def scan_channel(context, channel_url, debug=False):
             for stream in streams:
                 stream["validation"] = await validate_stream(current, stream)
                 v = stream["validation"]
-                print(f'    {stream["type"]} HTTP={v.get("httpStatus")} valid={v.get("manifestValid")} drm={v.get("drm")} stable={v.get("stable")}')
+                print(f'    {stream["type"]} HTTP={v.get("httpStatus")} valid={v.get("manifestValid")} segment={v.get("segmentValid")} drm={v.get("drm")} stable={v.get("stable")}')
+
+            needs_refresh = any(
+                not stream_is_usable(s) or
+                int(s.get("validation", {}).get("httpStatus") or 0) in {401, 403, 408, 429}
+                for s in streams
+            )
+            if RECAPTURE_ON_FAILURES and needs_refresh and RECAPTURE_ROUNDS > 0:
+                for round_no in range(1, RECAPTURE_ROUNDS + 1):
+                    print(f"  Fresh URL recapture {round_no}/{RECAPTURE_ROUNDS}")
+                    before_urls = set(capture.items.keys())
+                    await get_dooplayer_sources(current, capture, channel_url)
+                    refreshed_options = current.locator("li.dooplay_player_option")
+                    refreshed_count = await refreshed_options.count()
+                    for i in range(refreshed_count):
+                        try:
+                            await refreshed_options.nth(i).click(timeout=3000, force=True)
+                            await current.wait_for_timeout(1800)
+                            await collect_embedded_urls(current, capture)
+                            await collect_performance_urls(current, capture)
+                        except Exception:
+                            continue
+                    await trigger_playback(current)
+                    await current.wait_for_timeout(2500)
+                    await collect_performance_urls(current, capture)
+                    new_streams = [s for url, s in capture.items.items() if url not in before_urls]
+                    for fresh_stream in new_streams:
+                        fresh_stream["validation"] = await validate_stream(current, fresh_stream)
+                    streams = sorted(capture.items.values(), key=lambda x: x["url"])
+                    if any(stream_is_usable(s) for s in streams):
+                        print("  Fresh working URL captured after rotation/expiry.")
+                        break
 
         name = channel_name_from_url(channel_url)
         logo = ""
