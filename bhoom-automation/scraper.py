@@ -14,6 +14,16 @@ CATEGORY_PAGES = [
     f"{BASE}/channel/tamil/page/2/",
     f"{BASE}/channel/tamil/page/3/",
     f"{BASE}/channel/tamil/page/4/",
+    f"{BASE}/channel/tamil-local-tv/",
+    f"{BASE}/channel/tamil-local-tv/page/1/",
+    f"{BASE}/channel/tamil-local-tv/page/2/",
+    f"{BASE}/channel/tamil-local-tv/page/3/",
+    f"{BASE}/channel/tamil-local-tv/page/4/",
+    f"{BASE}/channel/tamil-local-tv/page/5/",
+    f"{BASE}/channel/tamil-local-tv/page/6/",
+    f"{BASE}/channel/tamil-local-tv/page/7/",
+    f"{BASE}/channel/tamil-local-tv/page/8/",
+    f"{BASE}/channel/tamil-local-tv/page/9/",
 ]
 
 OUT = Path("../output")
