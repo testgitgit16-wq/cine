@@ -11,14 +11,10 @@ from playwright.async_api import async_playwright, TimeoutError as PlaywrightTim
 BASE = "https://bhoomtv.org"
 GROUP_PAGE_HINTS = ("/live/kollywood-plus/", "/live/kollywood-tv/")
 
-CATEGORY_PAGES = [
-    f"{BASE}/channel/tamil-news/",
+CATEGORY_SEEDS = [
     f"{BASE}/channel/tamil/",
-    f"{BASE}/channel/tamil/page/2/",
-    f"{BASE}/channel/tamil/page/3/",
-    f"{BASE}/channel/tamil/page/4/",
+    f"{BASE}/channel/tamil-news/",
     f"{BASE}/channel/tamil-local-tv/",
-    *[f"{BASE}/channel/tamil-local-tv/page/{i}/" for i in range(1, 10)],
 ]
 
 OUT = Path("../output")
@@ -48,6 +44,37 @@ MIN_CHANNEL_RETENTION_PERCENT = max(0, min(100, int(os.getenv("MIN_CHANNEL_RETEN
 RECAPTURE_ON_FAILURES = os.getenv("RECAPTURE_ON_FAILURES", "1") != "0"
 RECAPTURE_ROUNDS = max(0, int(os.getenv("RECAPTURE_ROUNDS", "1") or "1"))
 RETRY_COUNT = max(1, int(os.getenv("RETRY_COUNT", "3") or "3"))
+
+
+async def discover_tamil_category_pages(page):
+    """Discover all BhoomTV /channel/tamil* pagination/category pages."""
+    discovered = set(CATEGORY_SEEDS)
+    queue = list(CATEGORY_SEEDS)
+    scanned = set()
+
+    while queue and len(discovered) < 100:
+        category_url = queue.pop(0)
+        if category_url in scanned:
+            continue
+        scanned.add(category_url)
+        try:
+            print(f"Category discovery: {category_url}")
+            await page.goto(category_url, wait_until="domcontentloaded", timeout=45000)
+            await page.wait_for_timeout(1000)
+            links = await page.locator('a[href*="/channel/tamil"]').evaluate_all(
+                "els => els.map(a => a.href).filter(Boolean)"
+            )
+            for url in links:
+                clean = url.split("#")[0].split("?")[0].rstrip("/") + "/"
+                path = urlparse(clean).path.lower()
+                if path.startswith("/channel/tamil"):
+                    if clean not in discovered:
+                        discovered.add(clean)
+                        queue.append(clean)
+        except Exception as exc:
+            print(f"  category discovery error: {exc}")
+
+    return sorted(discovered)
 
 
 def slug(url: str) -> str:
@@ -1071,11 +1098,14 @@ async def main():
         page = await context.new_page()
         channel_pages = set()
 
-        for category_url in CATEGORY_PAGES:
+        category_pages = await discover_tamil_category_pages(page)
+        print(f"Tamil category pages discovered: {len(category_pages)}")
+
+        for category_url in category_pages:
             try:
                 print(f"Category: {category_url}")
                 await page.goto(category_url, wait_until="domcontentloaded", timeout=45000)
-                await page.wait_for_timeout(1500)
+                await page.wait_for_timeout(1200)
                 links = await page.locator('a[href*="/live/"]').evaluate_all("els=>els.map(a=>a.href)")
                 for url in links:
                     if "/live/" in url:
