@@ -9,6 +9,8 @@ from urllib.parse import parse_qs, unquote, urljoin, urlparse
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeoutError
 
 BASE = "https://bhoomtv.org"
+KOLLYWOOD_PLUS_URL = f"{BASE}/live/kollywood-plus/"
+
 CATEGORY_PAGES = [
     f"{BASE}/channel/tamil-news/",
     f"{BASE}/channel/tamil/",
@@ -1112,6 +1114,7 @@ async def main():
             except Exception as e:
                 print(f"  category error: {e}")
 
+        channel_pages.discard(KOLLYWOOD_PLUS_URL.rstrip("/"))
         channels = sorted(channel_pages)
         if MAX_CHANNELS > 0:
             channels = channels[:MAX_CHANNELS]
@@ -1120,13 +1123,23 @@ async def main():
         print(f"Channels to scan: {len(channels)}")
         print("MAX_CHANNELS=0 means ALL channels")
 
+        # Always scan the grouped Kollywood Plus page first.
+        scan_targets = [KOLLYWOOD_PLUS_URL] + channels
+        if MAX_CHANNELS > 0:
+            scan_targets = scan_targets[:MAX_CHANNELS]
+
         results = []
         scanned_items = []
         total_streams = 0
 
-        for index, channel_url in enumerate(channels, 1):
+        for index, channel_url in enumerate(scan_targets, 1):
             debug = index <= DEBUG_CHANNELS
-            print(f"[{index}/{len(channels)}] {channel_url}")
+            print(f"[{index}/{len(scan_targets)}] {channel_url}")
+            if channel_url.rstrip("/") == KOLLYWOOD_PLUS_URL.rstrip("/"):
+                group_items = await scan_kollywood_plus(context, channel_url, debug=debug)
+                results.extend(group_items)
+                print(f"  KOLLYWOOD PLUS: {len(group_items)} individual channels")
+                continue
             item = await scan_channel(context, channel_url, debug=debug)
             scanned_items.append(item)
             captured_count = len(item["streams"])
