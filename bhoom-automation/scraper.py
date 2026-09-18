@@ -188,7 +188,11 @@ async def get_dooplayer_sources(page, capture, channel_url):
                 print(f"  API status {response.status}: {api_url}")
                 continue
 
-            data = await response.json()
+            try:
+                data = await response.json()
+            except Exception:
+                text_body = await response.text()
+                data = {"raw": text_body}
 
             # Keep the API result in debug JSON for diagnosis.
             sources.append({
@@ -197,7 +201,14 @@ async def get_dooplayer_sources(page, capture, channel_url):
                 "response": data,
             })
 
-            embed_url = data.get("embed_url") or data.get("url") or ""
+            embed_url = ""
+            if isinstance(data, dict):
+                embed_url = data.get("embed_url") or data.get("url") or ""
+
+            if embed_url:
+                print(f"  embed_url found ({len(embed_url)} chars)")
+            else:
+                print("  API returned no embed_url/url")
 
             if not embed_url:
                 continue
@@ -290,7 +301,7 @@ async def scan_channel(context, channel_url, debug=False):
             wait_until="domcontentloaded",
             timeout=45000,
         )
-        await current.wait_for_timeout(3000)
+        await current.wait_for_timeout(1500)
 
         # Collect iframes already present. Some players host the actual player
         # on a different page, so open each iframe URL directly as a fallback.
@@ -308,7 +319,20 @@ async def scan_channel(context, channel_url, debug=False):
 
         await collect_embedded_urls(current, capture)
 
-        for iframe_url in list(dict.fromkeys(iframe_urls))[:10]:
+        filtered_iframes = [
+            u for u in dict.fromkeys(iframe_urls)
+            if not any(
+                blocked in u.lower()
+                for blocked in (
+                    "googleads.g.doubleclick.net",
+                    "googlesyndication.com",
+                    "google.com/recaptcha",
+                    "doubleclick.net",
+                )
+            )
+        ]
+
+        for iframe_url in filtered_iframes[:5]:
             p = None
             try:
                 p = await context.new_page()
