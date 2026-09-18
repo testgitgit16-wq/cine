@@ -8,7 +8,8 @@ from urllib.parse import urljoin, urlparse
 from urllib.request import Request, urlopen
 
 SOURCE_URL = os.environ.get("SOURCE_URL", "https://tinyurl.com/amaze-tamil-local-tv")
-OUT = Path(os.environ.get("OUTPUT_FILE", "output/amaze-tamil-local-tv.m3u"))
+LOCAL_PLAYLIST = Path(os.environ.get("LOCAL_PLAYLIST", "output/bhoom-tamil.m3u"))
+OUT = Path(os.environ.get("OUTPUT_FILE", "output/tamil-combined.m3u"))
 REPORT = Path(os.environ.get("REPORT_FILE", "output/amaze-tamil-local-tv-report.json"))
 TIMEOUT = int(os.environ.get("TIMEOUT_SECONDS", "15"))
 RETRIES = int(os.environ.get("RETRIES", "3"))
@@ -72,7 +73,9 @@ def validate(url):
 
 def main():
     final_url, text = fetch(SOURCE_URL)
-    entries = parse(text)
+    external_entries = parse(text)
+    local_entries = parse(LOCAL_PLAYLIST.read_text(encoding="utf-8-sig", errors="replace")) if LOCAL_PLAYLIST.exists() else []
+    entries = local_entries + external_entries
     if MAX_ENTRIES:
         entries = entries[:MAX_ENTRIES]
 
@@ -97,6 +100,9 @@ def main():
         "source": SOURCE_URL,
         "resolvedUrl": final_url,
         "generatedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "sources": [str(LOCAL_PLAYLIST), SOURCE_URL],
+        "localEntries": len(local_entries),
+        "externalEntries": len(external_entries),
         "sourceEntries": len(entries),
         "uniqueEntries": len(report_entries),
         "publishedEntries": sum(x["status"] in {"WORKING", "UNVERIFIED_RTMP"} for x in report_entries),
