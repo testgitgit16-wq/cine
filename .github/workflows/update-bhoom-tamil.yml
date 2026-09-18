@@ -7,6 +7,14 @@ on:
         description: "Number of channels to scan (0 = all)"
         required: false
         default: "0"
+      validate_streams:
+        description: "Validate HLS/DASH/HTTP streams (1=yes, 0=no)"
+        required: false
+        default: "1"
+      stability_seconds:
+        description: "Seconds between manifest checks (0=off)"
+        required: false
+        default: "3"
   schedule:
     - cron: "15 */6 * * *"
 
@@ -36,10 +44,13 @@ jobs:
           pip install -r bhoom-automation/requirements.txt
           python -m playwright install --with-deps chromium
 
-      - name: Scrape
+      - name: Scrape and validate
         working-directory: bhoom-automation
         env:
           MAX_CHANNELS: ${{ github.event.inputs.max_channels || '0' }}
+          VALIDATE_STREAMS: ${{ github.event.inputs.validate_streams || '1' }}
+          STABILITY_SECONDS: ${{ github.event.inputs.stability_seconds || '3' }}
+          PUBLISH_SENSITIVE_HEADERS: "1"
         run: python scraper.py
 
       - name: Upload debug files
@@ -49,6 +60,7 @@ jobs:
           name: bhoom-debug-${{ github.run_id }}
           path: debug/
           if-no-files-found: ignore
+          retention-days: 7
 
       - name: Publish
         run: |
