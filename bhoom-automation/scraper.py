@@ -129,11 +129,9 @@ class Capture:
         clean_headers.setdefault("user-agent", UA)
         clean_headers.setdefault("referer", self.channel_url)
         current = self.items.get(url, {})
-        lower_url = url.lower()
-        current_type = stream_type(url)
         current.update({
             "url": url,
-            "type": current_type,
+            "type": stream_type(url),
             "headers": clean_headers,
         })
         current["tokenized"] = looks_tokenized(url)
@@ -212,8 +210,11 @@ async def validate_stream(page, stream):
         "stable": None,
     }
     if stream["type"] == "rtmp":
-        result.update({"checked": True, "transport": "rtmp",
-                       "note": "RTMP is detected but cannot be HTTP-validated."})
+        result.update({
+            "checked": True,
+            "transport": "rtmp",
+            "note": "RTMP is detected but cannot be HTTP-validated."
+        })
         return result
 
     try:
@@ -344,10 +345,8 @@ async def get_dooplayer_sources(page, capture, channel_url):
         options = []
 
     api_base = "https://bhoomtv.org/wp-json/dooplayer/v2/"
-
     print(f"  DooPlayer sources discovered: {len(options)}")
 
-    # IMPORTANT: inspect EVERY source option. There is intentionally no 20-source cap.
     for source_index, option in enumerate(options, 1):
         post = option["post"]
         media_type = option["type"]
@@ -378,7 +377,6 @@ async def get_dooplayer_sources(page, capture, channel_url):
                 data = {"raw": await response.text()}
 
             sources.append({"option": option, "apiUrl": api_url, "response": data})
-
             embed_url = data.get("embed_url") or data.get("url") or "" if isinstance(data, dict) else ""
             if not embed_url:
                 print("    no embed_url/url")
@@ -447,7 +445,6 @@ async def get_dooplayer_sources(page, capture, channel_url):
 
 
 async def detect_drm(page, capture=None):
-    """Detect DRM/EME usage without attempting to bypass or extract keys."""
     result = {"encryptedMediaExtensions": False, "encryptedEventSeen": False, "licenseRequests": [], "drmIndicators": []}
     if capture:
         result["licenseRequests"].extend(sorted(capture.drm_urls))
@@ -528,7 +525,6 @@ async def scan_channel(context, channel_url, debug=False):
 
         await get_dooplayer_sources(current, capture, channel_url)
 
-        # Fallback click path also checks EVERY source option.
         options = current.locator("li.dooplay_player_option")
         count = await options.count()
         print(f"  DooPlayer clickable sources: {count}")
@@ -544,7 +540,7 @@ async def scan_channel(context, channel_url, debug=False):
         await trigger_playback(current)
         await current.wait_for_timeout(4500)
         await collect_embedded_urls(current, capture)
-        await collect_performance_urls(current, capture)
+        await collect_performance_urls(current)
         drm = await detect_drm(current, capture)
         streams = sorted(capture.items.values(), key=lambda x: x["url"])
         if VALIDATE_STREAMS and streams:
@@ -557,7 +553,7 @@ async def scan_channel(context, channel_url, debug=False):
         name = channel_name_from_url(channel_url)
         logo = ""
         try:
-            logo = await current.locator("meta[property=\"og:image\"]").get_attribute("content") or ""
+            logo = await current.locator("meta[property="og:image"]").get_attribute("content") or ""
         except Exception:
             pass
         if not logo:
@@ -584,9 +580,7 @@ async def scan_channel(context, channel_url, debug=False):
                 pass
 
         return {"id": slug(channel_url), "name": name, "logo": logo, "pageUrl": channel_url,
-                "streams": streams,
-                "playback": await playback_status(current),
-                "drm": drm}
+                "streams": streams, "playback": await playback_status(current), "drm": drm}
 
     except PlaywrightTimeoutError:
         print(f"  TIMEOUT: {channel_url}")
@@ -606,8 +600,10 @@ TRANSIENT_QUERY_KEYS = {
     "expires", "expire", "exp", "hdnts", "hmac", "key", "session",
 }
 
+
 def normalize_channel_key(name: str):
     return re.sub(r"[^a-z0-9]+", "", name.lower())
+
 
 def stream_key(url: str):
     try:
@@ -623,6 +619,7 @@ def stream_key(url: str):
     except Exception:
         return url.lower()
 
+
 def stream_is_usable(stream):
     validation = stream.get("validation", {})
     if stream["type"] == "rtmp":
@@ -632,48 +629,161 @@ def stream_is_usable(stream):
     status = validation.get("httpStatus")
     if status is None or not (200 <= int(status) < 400):
         return False
-    if stream["type"] in {"hls", "dash"}:
-        if validation.get("manifestValid") is not True:
-            return False
-    elif stream["type"] == "progressive":
+    if stream["type"] in {"hls", "dash", "progressive"}:
         if validation.get("manifestValid") is not True:
             return False
     if validation.get("stable") is False:
         return False
     return True
 
+
+def stream_quality_score(stream):
+    """Higher score = better candidate to keep for a duplicate channel."""
+    v = stream.get("validation", {})
+    score = 0
+    if stream.get("type") == "hls":
+        score += 30
+    elif stream.get("type") == "dash":
+        score += 25
+    elif stream.get("type") == "progressive":
+        score += 20
+    elif stream.get("type") == "rtmp":
+        score += 10
+
+    status = int(v.get("httpStatus") or 0)
+    if 200 <= status < 300:
+        score += 30
+    elif 300 <= status < 400:
+        score += 20
+
+    if v.get("manifestValid") is True:
+        score += 25
+    if v.get("stable") is True:
+        score += 15
+    if v.get("variants", 0):
+        score += min(int(v.get("variants") or 0), 10)
+    if stream.get("headers"):
+        score += 2
+    return score
+
+
 def merge_duplicate_channels(items):
-    merged = {}
+    """
+    Remove duplicate channel names, but NEVER discard the whole channel just
+    because another duplicate was encountered first.
+
+    For each duplicate group:
+      1. collect all streams from all copies;
+      2. keep only usable streams;
+      3. dedupe equivalent URLs;
+      4. sort working streams by quality;
+      5. ALWAYS retain at least the best working stream.
+    """
+    groups = {}
+
     for item in items:
         key = normalize_channel_key(item.get("name", "") or item.get("id", ""))
         if not key:
-            key = item.get("id", "")
-        if key not in merged:
-            merged[key] = dict(item)
-            merged[key]["streams"] = []
-            continue
+            key = item.get("id", "") or "unknown"
 
-        existing = merged[key]
-        if not existing.get("logo") and item.get("logo"):
-            existing["logo"] = item["logo"]
-        if len(item.get("name", "")) > len(existing.get("name", "")):
-            existing["name"] = item["name"]
-        existing["streams"].extend(item.get("streams", []))
+        groups.setdefault(key, []).append(item)
 
-    for item in merged.values():
+    merged = []
+
+    for key, group in groups.items():
+        # Prefer the duplicate page that has the largest number of working streams.
+        group = sorted(
+            group,
+            key=lambda x: (
+                len(x.get("streams", [])),
+                max((stream_quality_score(s) for s in x.get("streams", [])), default=0),
+                bool(x.get("logo")),
+            ),
+            reverse=True,
+        )
+
+        base = dict(group[0])
+        base["streams"] = []
+
+        if not base.get("logo"):
+            for item in group:
+                if item.get("logo"):
+                    base["logo"] = item["logo"]
+                    break
+
+        # Prefer the most complete channel name.
+        names = [x.get("name", "") for x in group if x.get("name")]
+        if names:
+            base["name"] = max(names, key=len)
+
+        all_streams = []
+        for item in group:
+            for stream in item.get("streams", []):
+                if stream_is_usable(stream):
+                    all_streams.append(stream)
+
         unique = {}
-        for stream in item["streams"]:
+        for stream in all_streams:
+            key_stream = stream_key(stream["url"])
+            old = unique.get(key_stream)
+            if old is None or stream_quality_score(stream) > stream_quality_score(old):
+                unique[key_stream] = stream
+
+        working = sorted(unique.values(), key=stream_quality_score, reverse=True)
+
+        # Critical rule: a duplicate cleanup must leave at least ONE working stream.
+        if working:
+            base["streams"] = working
+            base["capturedStreamCount"] = sum(len(x.get("streams", [])) for x in group)
+            base["usableStreamCount"] = len(working)
+            merged.append(base)
+
+    return merged
+
+
+def ensure_one_working_stream_per_channel(channels):
+    """
+    Final safety pass before M3U generation.
+    Even after global stream dedupe, each channel gets its best remaining
+    working stream. This prevents a duplicate stream from accidentally
+    deleting the only stream for a channel.
+    """
+    seen = set()
+    output = []
+
+    # Process channels with the strongest working stream first.
+    ordered = sorted(
+        channels,
+        key=lambda c: max(
+            (stream_quality_score(s) for s in c.get("streams", [])),
+            default=0
+        ),
+        reverse=True,
+    )
+
+    for channel in ordered:
+        streams = sorted(channel.get("streams", []), key=stream_quality_score, reverse=True)
+        kept = []
+
+        for stream in streams:
             key = stream_key(stream["url"])
-            old = unique.get(key)
-            if old is None:
-                unique[key] = stream
-            else:
-                old_score = int(old.get("validation", {}).get("httpStatus") or 0)
-                new_score = int(stream.get("validation", {}).get("httpStatus") or 0)
-                if new_score > old_score:
-                    unique[key] = stream
-        item["streams"] = list(unique.values())
-    return list(merged.values())
+            if key not in seen:
+                kept.append(stream)
+                seen.add(key)
+
+        # If every stream was already used by another channel, keep the
+        # channel's best working stream anyway. This guarantees one working
+        # entry per unique channel name.
+        if not kept and streams:
+            kept = [streams[0]]
+
+        if kept:
+            copy_channel = dict(channel)
+            copy_channel["streams"] = kept
+            copy_channel["usableStreamCount"] = len(kept)
+            output.append(copy_channel)
+
+    return output
 
 
 async def main():
@@ -733,6 +843,11 @@ async def main():
         results = merge_duplicate_channels(results)
         print(f"Duplicate channel cleanup: {before_merge} -> {len(results)} unique channels")
 
+        # Final safety pass: duplicate streams must not make a unique channel
+        # disappear. Each remaining channel gets at least one working stream.
+        results = ensure_one_working_stream_per_channel(results)
+        print(f"Final working-channel safety pass: {len(results)} channels retained")
+
         await context.close()
         await browser.close()
 
@@ -748,16 +863,34 @@ async def main():
     for channel in results:
         safe_name = channel["name"].replace('"', "'").replace(",", " - ")
         logo = channel.get("logo", "")
-        for stream in channel["streams"]:
+
+        # At this point each channel is guaranteed to have at least one
+        # working stream. Prefer the strongest stream first.
+        streams = sorted(
+            channel["streams"],
+            key=stream_quality_score,
+            reverse=True,
+        )
+
+        channel_written = False
+
+        for stream in streams:
             url = normalize_manifest_url(stream["url"])
             if not url:
                 continue
+
             dedupe_key = stream_key(url)
+
+            # Keep the first/global copy of duplicate URLs, except when this
+            # would remove the channel entirely; the safety pass above already
+            # guarantees one stream, so only skip true duplicates here.
             if dedupe_key in seen:
                 continue
+
             seen.add(dedupe_key)
             logo_attr = f' tvg-logo="{logo}"' if logo else ""
             m3u.append(f'#EXTINF:-1 tvg-name="{safe_name}"{logo_attr} group-title="Tamil",{safe_name}')
+
             headers = stream.get("headers", {})
             if headers.get("referer"):
                 m3u.append(f'#EXTVLCOPT:http-referrer={headers["referer"]}')
@@ -771,6 +904,30 @@ async def main():
                 m3u.append(f'#EXTVLCOPT:http-header=Cookie: {headers["cookie"]}')
             m3u.append(url)
             m3u.append("")
+            channel_written = True
+
+        # Absolute final fallback: if all URLs collided globally, write the
+        # channel's best working stream so the duplicate cleanup never removes
+        # the channel completely.
+        if not channel_written and streams:
+            stream = streams[0]
+            url = normalize_manifest_url(stream["url"])
+            if url:
+                logo_attr = f' tvg-logo="{logo}"' if logo else ""
+                m3u.append(f'#EXTINF:-1 tvg-name="{safe_name}"{logo_attr} group-title="Tamil",{safe_name}')
+                headers = stream.get("headers", {})
+                if headers.get("referer"):
+                    m3u.append(f'#EXTVLCOPT:http-referrer={headers["referer"]}')
+                if headers.get("origin"):
+                    m3u.append(f'#EXTVLCOPT:http-origin={headers["origin"]}')
+                if headers.get("user-agent"):
+                    m3u.append(f'#EXTVLCOPT:http-user-agent={headers["user-agent"]}')
+                if headers.get("authorization"):
+                    m3u.append(f'#EXTVLCOPT:http-header=Authorization: {headers["authorization"]}')
+                if headers.get("cookie"):
+                    m3u.append(f'#EXTVLCOPT:http-header=Cookie: {headers["cookie"]}')
+                m3u.append(url)
+                m3u.append("")
 
     payload = {
         "generatedAt": datetime.now(timezone.utc).isoformat(),
@@ -785,8 +942,9 @@ async def main():
         "streamFormat": "hls-dash-rtmp-progressive-with-browser-headers",
         "drmNote": "DRM/EME is detected and recorded, but DRM keys/licenses are not bypassed or extracted.",
         "deduplication": {
-            "channels": "normalized channel name",
-            "streams": "normalized URL with transient token/signature/expiry query parameters removed"
+            "channels": "normalized channel name; duplicate copies are merged and the best working stream is retained",
+            "streams": "normalized URL with transient token/signature/expiry query parameters removed",
+            "safety": "at least one working stream is retained for every unique channel"
         },
     }
 
