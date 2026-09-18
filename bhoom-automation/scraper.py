@@ -15,7 +15,7 @@ CATEGORY_PAGES = [
 ]
 OUT = Path("../output")
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/140.0 Safari/537.36"
-MANIFEST = re.compile(r"\\.(m3u8|mpd)(?:\\?|$)", re.I)
+MANIFEST = re.compile(r"\.(m3u8|mpd)(?:\?|$)", re.I)
 
 def slug(url):
     return urlparse(url).path.rstrip("/").split("/")[-1] or "channel"
