@@ -4,7 +4,7 @@ import os
 import re
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import parse_qs, unquote, urlparse
+from urllib.parse import parse_qs, unquote, urljoin, urlparse
 
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeoutError
 
@@ -41,7 +41,11 @@ MAX_CHANNELS = int(os.getenv("MAX_CHANNELS", "0") or "0")
 DEBUG_CHANNELS = int(os.getenv("DEBUG_CHANNELS", "3") or "3")
 VALIDATE_STREAMS = os.getenv("VALIDATE_STREAMS", "1") != "0"
 STABILITY_SECONDS = max(0, int(os.getenv("STABILITY_SECONDS", "3") or "0"))
-PUBLISH_SENSITIVE_HEADERS = os.getenv("PUBLISH_SENSITIVE_HEADERS", "1") != "0"
+PUBLISH_SENSITIVE_HEADERS = os.getenv("PUBLISH_SENSITIVE_HEADERS", "0") != "0"
+MIN_CHANNEL_RETENTION_PERCENT = max(0, min(100, int(os.getenv("MIN_CHANNEL_RETENTION_PERCENT", "50") or "50")))
+RECAPTURE_ON_FAILURES = os.getenv("RECAPTURE_ON_FAILURES", "1") != "0"
+RECAPTURE_ROUNDS = max(0, int(os.getenv("RECAPTURE_ROUNDS", "1") or "1"))
+RETRY_COUNT = max(1, int(os.getenv("RETRY_COUNT", "3") or "3"))
 
 
 def slug(url: str) -> str:
@@ -195,6 +199,41 @@ def parse_manifest(body: str, content_type: str, url: str):
     return result
 
 
+async def fetch_with_retries(page, url, headers, timeout=20000, retries=RETRY_COUNT):
+    last_error = None
+    for attempt in range(max(1, retries)):
+        try:
+            response = await page.request.get(url, headers=headers, timeout=timeout, fail_on_status_code=False)
+            if response.status in {401,403,408,425,429} or response.status >= 500:
+                if attempt + 1 < retries:
+                    await asyncio.sleep(min(2 * (attempt + 1), 5))
+                    continue
+            return response
+        except Exception as exc:
+            last_error = exc
+            if attempt + 1 < retries:
+                await asyncio.sleep(min(2 * (attempt + 1), 5))
+    if last_error:
+        raise last_error
+    return None
+
+
+async def validate_hls_segments(page, manifest_url, body, headers):
+    lines = [x.strip() for x in body.splitlines() if x.strip() and not x.startswith("#")]
+    if not lines:
+        return {"segmentChecked": False, "segmentStatus": None, "segmentValid": False}
+    for raw in lines[:3]:
+        candidate = urljoin(manifest_url, raw)
+        try:
+            response = await fetch_with_retries(page, candidate, headers, timeout=15000, retries=2)
+            if 200 <= response.status < 400:
+                rh = await response.all_headers()
+                return {"segmentChecked": True, "segmentStatus": response.status, "segmentValid": True, "segmentContentType": rh.get("content-type", ""), "segmentUrl": candidate}
+        except Exception:
+            pass
+    return {"segmentChecked": True, "segmentStatus": None, "segmentValid": False}
+
+
 async def validate_stream(page, stream):
     result = {
         "checked": False,
@@ -218,11 +257,9 @@ async def validate_stream(page, stream):
         return result
 
     try:
-        response = await page.request.get(
-            stream["url"],
-            headers=stream.get("headers", {}),
-            timeout=20000,
-            fail_on_status_code=False,
+        response = await fetch_with_retries(
+            page, stream["url"], stream.get("headers", {}),
+            timeout=20000, retries=RETRY_COUNT
         )
         result["checked"] = True
         result["httpStatus"] = response.status
@@ -237,15 +274,15 @@ async def validate_stream(page, stream):
         if stream["type"] in {"hls", "dash"}:
             body = await response.text()
             result.update(parse_manifest(body, result["contentType"], stream["url"]))
+            if stream["type"] == "hls" and result["manifestValid"] and not result["drm"]:
+                result.update(await validate_hls_segments(page, stream["url"], body, stream.get("headers", {})))
             if STABILITY_SECONDS > 0 and result["manifestValid"]:
                 await asyncio.sleep(STABILITY_SECONDS)
-                response2 = await page.request.get(
-                    stream["url"],
-                    headers=stream.get("headers", {}),
-                    timeout=20000,
-                    fail_on_status_code=False,
+                response2 = await fetch_with_retries(
+                    page, stream["url"], stream.get("headers", {}),
+                    timeout=20000, retries=2
                 )
-                result["stable"] = response2.status < 400
+                result["stable"] = bool(response2 and response2.status < 400)
         else:
             result["manifestValid"] = True
     except Exception as e:
@@ -634,6 +671,8 @@ def stream_is_usable(stream):
             return False
     if validation.get("stable") is False:
         return False
+    if stream["type"] == "hls" and validation.get("segmentChecked") and validation.get("segmentValid") is not True:
+        return False
     return True
 
 
@@ -786,6 +825,57 @@ def ensure_one_working_stream_per_channel(channels):
     return output
 
 
+def classify_stream_failure(stream):
+    v = stream.get("validation", {})
+    if v.get("drm"):
+        return "DRM"
+    status = v.get("httpStatus")
+    if status:
+        status = int(status)
+        if status in {401, 403}:
+            return f"HTTP {status} / EXPIRED_OR_FORBIDDEN"
+        if status == 404:
+            return "HTTP 404"
+        if status == 429:
+            return "HTTP 429"
+        if status >= 500:
+            return f"HTTP {status}"
+        if status >= 400:
+            return f"HTTP {status}"
+    if v.get("segmentChecked") and not v.get("segmentValid"):
+        return "HLS_SEGMENT_FAILED"
+    if v.get("manifestValid") is False:
+        return "INVALID_MANIFEST"
+    if v.get("error"):
+        return "TIMEOUT_OR_NETWORK"
+    return "NO_WORKING_STREAM"
+
+
+def public_channel_copy(channel):
+    item = dict(channel)
+    item["streams"] = []
+    for stream in channel.get("streams", []):
+        s = dict(stream)
+        headers = dict(s.get("headers", {}))
+        if not PUBLISH_SENSITIVE_HEADERS:
+            headers.pop("authorization", None)
+            headers.pop("cookie", None)
+        s["headers"] = headers
+        item["streams"].append(s)
+    return item
+
+
+def load_previous_channel_count():
+    previous = OUT / "bhoom-tamil.json"
+    if not previous.exists():
+        return None
+    try:
+        data = json.loads(previous.read_text(encoding="utf-8"))
+        return int(data.get("uniqueChannels") or len(data.get("channels", [])))
+    except Exception:
+        return None
+
+
 async def main():
     OUT.mkdir(parents=True, exist_ok=True)
 
@@ -839,6 +929,7 @@ async def main():
             else:
                 print(f"  NO USABLE STREAM / CAPTURED {len(item['streams'])}")
 
+        scanned_items = list(results)
         before_merge = len(results)
         results = merge_duplicate_channels(results)
         print(f"Duplicate channel cleanup: {before_merge} -> {len(results)} unique channels")
@@ -898,9 +989,9 @@ async def main():
                 m3u.append(f'#EXTVLCOPT:http-origin={headers["origin"]}')
             if headers.get("user-agent"):
                 m3u.append(f'#EXTVLCOPT:http-user-agent={headers["user-agent"]}')
-            if headers.get("authorization"):
+            if PUBLISH_SENSITIVE_HEADERS and headers.get("authorization"):
                 m3u.append(f'#EXTVLCOPT:http-header=Authorization: {headers["authorization"]}')
-            if headers.get("cookie"):
+            if PUBLISH_SENSITIVE_HEADERS and headers.get("cookie"):
                 m3u.append(f'#EXTVLCOPT:http-header=Cookie: {headers["cookie"]}')
             m3u.append(url)
             m3u.append("")
@@ -948,13 +1039,67 @@ async def main():
         },
     }
 
-    (OUT / "bhoom-tamil.json").write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
+    failures = []
+    working_ids = {c.get("id") for c in results}
+    for item in scanned_items:
+        if item.get("id") in working_ids:
+            continue
+        streams = item.get("streams", [])
+        failures.append({
+            "channel": item.get("name"),
+            "pageUrl": item.get("pageUrl"),
+            "reason": ["NO_STREAM"] if not streams else sorted(set(classify_stream_failure(s) for s in streams)),
+        })
+
+    previous_channels = load_previous_channel_count()
+    retention_percent = None
+    publish_allowed = True
+    if previous_channels:
+        retention_percent = round((len(results) / previous_channels) * 100, 1)
+        minimum_channels = max(1, (previous_channels * MIN_CHANNEL_RETENTION_PERCENT + 99) // 100)
+        publish_allowed = len(results) >= minimum_channels
+
+    report = {
+        "generatedAt": datetime.now(timezone.utc).isoformat(),
+        "source": BASE,
+        "discoveredChannels": len(channel_pages),
+        "scannedChannels": len(channels),
+        "workingChannels": len(results),
+        "capturedStreams": total_streams,
+        "uniqueWorkingStreams": len(seen),
+        "previousPublishedChannels": previous_channels,
+        "retentionPercent": retention_percent,
+        "minimumRetentionPercent": MIN_CHANNEL_RETENTION_PERCENT,
+        "publishAllowed": publish_allowed,
+        "sensitiveHeadersPublished": PUBLISH_SENSITIVE_HEADERS,
+        "failureCount": len(failures),
+        "failures": failures,
+    }
+    (OUT / "bhoom-tamil-report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    if not publish_allowed:
+        raise RuntimeError(
+            f"Candidate scan rejected: {len(results)} working channels is below "
+            f"{MIN_CHANNEL_RETENTION_PERCENT}% of previous {previous_channels}. Previous output preserved."
+        )
+
+    payload["channels"] = [public_channel_copy(c) for c in results]
+    payload["refreshBehavior"] = {
+        "sourceUrlsAreReCapturedEveryRun": True,
+        "recaptureOnFailure": RECAPTURE_ON_FAILURES,
+        "recaptureRounds": RECAPTURE_ROUNDS,
+        "note": "Stream URLs are refreshed on every scheduled/manual run because BhoomTV may rotate URLs or tokens by time, schedule, or playback."
+    }
+    payload["security"] = {
+        "sensitiveHeadersPublished": PUBLISH_SENSITIVE_HEADERS,
+        "note": "Authorization/Cookie are excluded by default from public output."
+    }
+    (OUT / "bhoom-tamil.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     (OUT / "bhoom-tamil.m3u").write_text("\n".join(m3u), encoding="utf-8")
 
     print("=" * 50)
     print(f"FINAL: {len(results)} channels / {len(seen)} unique streams")
+    print(f"RETENTION: {retention_percent}% / publish={publish_allowed}")
     print("=" * 50)
 
 
