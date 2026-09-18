@@ -119,10 +119,12 @@ class Capture:
         self.items[url] = current
 
 
-async def attach_capture(context, page, capture):
-    context.on("request", capture.request)
-    context.on("response", capture.response)
-    return page
+def attach_capture(page, capture):
+    # Page-level listeners include requests made by frames on this page,
+    # while avoiding cross-channel capture contamination.
+    page.on("request", capture.request)
+    page.on("response", capture.response)
+
 
 
 async def collect_embedded_urls(page, capture):
@@ -165,7 +167,11 @@ async def collect_candidate_links(page):
 async def scan_channel(context, channel_url, debug=False):
     capture = Capture(channel_url)
     current = await context.new_page()
-    await attach_capture(context, current, capture)
+    attach_capture(current, capture)
+
+    async def on_popup(popup):
+        attach_capture(popup, capture)
+    current.on("popup", on_popup)
 
     try:
         print(f"Opening {channel_url}")
@@ -176,12 +182,37 @@ async def scan_channel(context, channel_url, debug=False):
         )
         await current.wait_for_timeout(3000)
 
-        # Collect iframes already present.
+        # Collect iframes already present. Some players host the actual player
+        # on a different page, so open each iframe URL directly as a fallback.
+        iframe_urls = []
+        try:
+            iframe_urls = await current.locator("iframe").evaluate_all(
+                "els => els.map(x => x.src).filter(Boolean)"
+            )
+        except Exception:
+            pass
+
         for frame in current.frames:
             if frame.url.startswith("http"):
                 print(f"  frame: {frame.url}")
 
         await collect_embedded_urls(current, capture)
+
+        for iframe_url in list(dict.fromkeys(iframe_urls))[:10]:
+            p = None
+            try:
+                p = await context.new_page()
+                attach_capture(p, capture)
+                await p.goto(iframe_url, wait_until="domcontentloaded", timeout=30000)
+                await p.wait_for_timeout(3000)
+                await collect_embedded_urls(p, capture)
+                await p.close()
+            except Exception:
+                try:
+                    if p:
+                        await p.close()
+                except Exception:
+                    pass
 
         # Capture source links before clicking, because some are plain external links.
         source_links = await collect_candidate_links(current)
@@ -207,7 +238,7 @@ async def scan_channel(context, channel_url, debug=False):
                 continue
             try:
                 p = await context.new_page()
-                await attach_capture(context, p, capture)
+                attach_capture(p, capture)
                 await p.goto(link, wait_until="domcontentloaded", timeout=30000)
                 await p.wait_for_timeout(3500)
                 await collect_embedded_urls(p, capture)
