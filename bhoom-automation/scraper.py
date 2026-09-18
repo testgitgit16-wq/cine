@@ -717,13 +717,14 @@ async def main():
             debug = index <= DEBUG_CHANNELS
             print(f"[{index}/{len(channels)}] {channel_url}")
             item = await scan_channel(context, channel_url, debug=debug)
-            total_streams += len(item["streams"])
+            captured_count = len(item["streams"])
+            total_streams += captured_count
             usable = [s for s in item["streams"] if stream_is_usable(s)]
-            item["capturedStreamCount"] = len(item["streams"])
+            item["capturedStreamCount"] = captured_count
             item["usableStreamCount"] = len(usable)
             if usable:
                 item["streams"] = usable
-                print(f"  USABLE {len(usable)} / CAPTURED {len(item['streams'])}")
+                print(f"  USABLE {len(usable)} / CAPTURED {captured_count}")
                 results.append(item)
             else:
                 print(f"  NO USABLE STREAM / CAPTURED {len(item['streams'])}")
@@ -749,9 +750,12 @@ async def main():
         logo = channel.get("logo", "")
         for stream in channel["streams"]:
             url = normalize_manifest_url(stream["url"])
-            if not url or url in seen:
+            if not url:
                 continue
-            seen.add(url)
+            dedupe_key = stream_key(url)
+            if dedupe_key in seen:
+                continue
+            seen.add(dedupe_key)
             logo_attr = f' tvg-logo="{logo}"' if logo else ""
             m3u.append(f'#EXTINF:-1 tvg-name="{safe_name}"{logo_attr} group-title="Tamil",{safe_name}')
             headers = stream.get("headers", {})
