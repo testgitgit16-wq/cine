@@ -68,11 +68,22 @@ def normalize_manifest_url(url: str):
             source = parse_qs(parsed.query).get("source", [None])[0]
             return normalize_manifest_url(unquote(source)) if source else None
         path = parsed.path.lower()
-        if not (path.endswith(".m3u8") or path.endswith(".mpd")):
+        if not any(path.endswith(x) for x in (".m3u8", ".mpd", ".mp4", ".webm", ".aac", ".mp3")):
             return None
         return url
     except Exception:
         return None
+
+
+def stream_type(url: str):
+    low = url.lower()
+    if low.startswith(("rtmp://", "rtmps://")):
+        return "rtmp"
+    if ".mpd" in low:
+        return "dash"
+    if ".m3u8" in low:
+        return "hls"
+    return "progressive"
 
 
 class Capture:
@@ -116,14 +127,10 @@ class Capture:
         clean_headers.setdefault("referer", self.channel_url)
         current = self.items.get(url, {})
         lower_url = url.lower()
-        stream_type = (
-            "rtmp" if lower_url.startswith(("rtmp://", "rtmps://"))
-            else "dash" if ".mpd" in lower_url
-            else "hls"
-        )
+        current_type = stream_type(url)
         current.update({
             "url": url,
-            "type": stream_type,
+            "type": current_type,
             "headers": clean_headers,
         })
         current["tokenized"] = looks_tokenized(url)
@@ -540,7 +547,7 @@ async def scan_channel(context, channel_url, debug=False):
             for stream in streams:
                 stream["validation"] = await validate_stream(current, stream)
                 v = stream["validation"]
-                print(f"    {stream["type"]} HTTP={v.get("httpStatus")} valid={v.get("manifestValid")} drm={v.get("drm")} stable={v.get("stable")}")
+                print(f'    {stream["type"]} HTTP={v.get("httpStatus")} valid={v.get("manifestValid")} drm={v.get("drm")} stable={v.get("stable")}')
 
         name = channel_name_from_url(channel_url)
         try:
@@ -577,6 +584,18 @@ async def scan_channel(context, channel_url, debug=False):
             await current.close()
         except Exception:
             pass
+
+
+def stream_is_usable(stream):
+    validation = stream.get("validation", {})
+    if stream["type"] == "rtmp":
+        return True
+    status = validation.get("httpStatus")
+    if status is not None and int(status) >= 400:
+        return False
+    if stream["type"] in {"hls", "dash"} and validation.get("manifestValid") is False:
+        return False
+    return True
 
 
 async def main():
@@ -622,11 +641,13 @@ async def main():
             print(f"[{index}/{len(channels)}] {channel_url}")
             item = await scan_channel(context, channel_url, debug=debug)
             total_streams += len(item["streams"])
-            if item["streams"]:
-                print(f"  FOUND {len(item['streams'])} stream(s)")
+            usable = [s for s in item["streams"] if stream_is_usable(s)]
+            if usable:
+                item["streams"] = usable
+                print(f"  USABLE {len(usable)} stream(s)")
                 results.append(item)
             else:
-                print("  NO STREAM CAPTURED")
+                print("  NO USABLE STREAM")
 
         await context.close()
         await browser.close()
@@ -668,7 +689,10 @@ async def main():
         "category": "Tamil",
         "channels": results,
         "uniqueStreams": len(seen),
-        "streamFormat": "direct-hls-dash-rtmp-with-browser-headers",
+        "capturedStreams": total_streams,
+        "usableStreams": len(seen),
+        "validation": {"enabled": VALIDATE_STREAMS, "stabilitySeconds": STABILITY_SECONDS},
+        "streamFormat": "hls-dash-rtmp-progressive-with-browser-headers",
         "drmNote": "DRM/EME is detected and recorded, but DRM keys/licenses are not bypassed or extracted.",
     }
 
