@@ -478,8 +478,14 @@ async def main():
             headers = stream.get("headers", {})
             if headers.get("referer"):
                 m3u.append(f'#EXTVLCOPT:http-referrer={headers["referer"]}')
+            if headers.get("origin"):
+                m3u.append(f'#EXTVLCOPT:http-origin={headers["origin"]}')
             if headers.get("user-agent"):
                 m3u.append(f'#EXTVLCOPT:http-user-agent={headers["user-agent"]}')
+            if headers.get("authorization"):
+                m3u.append(f'#EXTVLCOPT:http-header=Authorization: {headers["authorization"]}')
+            if headers.get("cookie"):
+                m3u.append(f'#EXTVLCOPT:http-header=Cookie: {headers["cookie"]}')
             m3u.append(url)
             m3u.append("")
 
