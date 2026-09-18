@@ -907,6 +907,185 @@ def load_previous_channel_count():
         return None
 
 
+async def scan_kollywood_plus(context, channel_url, debug=False):
+    """
+    Special handling for BhoomTV /live/kollywood-plus/:
+    each DooPlayer source is published as its own channel instead of merging
+    all sources under the single "Kollywood Plus" page title.
+    """
+    page = await context.new_page()
+    capture = Capture(channel_url)
+    attach_capture(page, capture)
+    results = []
+
+    try:
+        print(f"Opening grouped channel page: {channel_url}")
+        await page.goto(channel_url, wait_until="domcontentloaded", timeout=45000)
+        await page.wait_for_timeout(1800)
+
+        try:
+            logo = await page.locator('meta[property="og:image"]').get_attribute("content") or ""
+        except Exception:
+            logo = ""
+
+        options = await page.locator("li.dooplay_player_option").evaluate_all(
+            """els => els.map((el, index) => ({
+                index,
+                title: (el.innerText || el.textContent || '').trim(),
+                post: el.getAttribute('data-post') || '',
+                type: el.getAttribute('data-type') || 'tv',
+                nume: el.getAttribute('data-nume') || ''
+            })).filter(x => x.title)"""
+        )
+        print(f"  Kollywood Plus source options: {len(options)}")
+
+        # First collect the source API/embed information so every option is
+        # represented even when clicking the player is inconsistent.
+        for option_index, option in enumerate(options, 1):
+            title = " ".join(option["title"].split())
+            before = set(capture.items.keys())
+
+            try:
+                loc = page.locator("li.dooplay_player_option").nth(option["index"])
+                await loc.click(timeout=4000, force=True)
+                await page.wait_for_timeout(2500)
+                await collect_embedded_urls(page, capture)
+                await collect_performance_urls(page, capture)
+                await trigger_playback(page)
+                await page.wait_for_timeout(3000)
+                await collect_performance_urls(page, capture)
+                await collect_embedded_urls(page, capture)
+            except Exception as exc:
+                print(f"    [{option_index}] click error for {title}: {exc}")
+
+            new_streams = [
+                stream for url, stream in capture.items.items()
+                if url not in before
+            ]
+
+            # If the click did not expose a new URL, try the DooPlayer API
+            # for this exact source and open its embed URL.
+            if not new_streams and option.get("post") and option.get("nume"):
+                try:
+                    api_url = (
+                        f"https://bhoomtv.org/wp-json/dooplayer/v2/"
+                        f"{option['post']}/{option.get('type') or 'tv'}/{option['nume']}"
+                    )
+                    response = await page.request.get(
+                        api_url,
+                        headers={
+                            "Referer": channel_url,
+                            "User-Agent": UA,
+                            "Accept": "application/json,text/plain,*/*",
+                        },
+                        timeout=30000,
+                    )
+                    if response.ok:
+                        data = await response.json()
+                        embed_url = (
+                            data.get("embed_url") or data.get("url") or ""
+                            if isinstance(data, dict) else ""
+                        )
+                        iframe_srcs = re.findall(
+                            r"""<iframe[^>]+src=["']([^"']+)["']""",
+                            embed_url,
+                            re.I,
+                        )
+                        candidates = iframe_srcs or [embed_url]
+
+                        for candidate in candidates:
+                            if not candidate.startswith("http"):
+                                continue
+                            player = None
+                            try:
+                                player = await context.new_page()
+                                attach_capture(player, capture)
+                                await player.goto(
+                                    candidate,
+                                    wait_until="domcontentloaded",
+                                    timeout=30000,
+                                )
+                                await player.wait_for_timeout(2500)
+                                await trigger_playback(player)
+                                await collect_embedded_urls(player, capture)
+                                await collect_performance_urls(player, capture)
+                                await player.wait_for_timeout(2500)
+                                await collect_performance_urls(player, capture)
+                            except Exception as exc:
+                                print(f"    embed error for {title}: {exc}")
+                            finally:
+                                if player:
+                                    try:
+                                        await player.close()
+                                    except Exception:
+                                        pass
+                except Exception as exc:
+                    print(f"    API fallback error for {title}: {exc}")
+
+            new_streams = [
+                stream for url, stream in capture.items.items()
+                if url not in before
+            ]
+
+            # If a URL was already captured by another source, still associate
+            # it with this individual channel option.
+            if not new_streams:
+                all_candidates = list(capture.items.values())
+            else:
+                all_candidates = new_streams
+
+            unique = {}
+            for stream in all_candidates:
+                unique[stream_key(stream["url"])] = stream
+
+            streams = list(unique.values())
+            if VALIDATE_STREAMS and streams:
+                for stream in streams:
+                    if "validation" not in stream:
+                        stream["validation"] = await validate_stream(page, stream)
+
+            usable = [s for s in streams if stream_is_usable(s)]
+            if usable:
+                usable = sorted(usable, key=stream_quality_score, reverse=True)
+                item_id = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+                results.append({
+                    "id": f"kollywood-plus-{item_id or option_index}",
+                    "name": title,
+                    "logo": logo,
+                    "pageUrl": channel_url,
+                    "sourceTitle": title,
+                    "sourceIndex": option_index,
+                    "streams": usable,
+                    "capturedStreamCount": len(streams),
+                    "usableStreamCount": len(usable),
+                })
+                print(f"    {title}: {len(usable)} usable stream(s)")
+            else:
+                print(f"    {title}: NO USABLE STREAM")
+
+        if debug:
+            DEBUG.mkdir(parents=True, exist_ok=True)
+            try:
+                await page.screenshot(
+                    path=str(DEBUG / "kollywood-plus.png"),
+                    full_page=True,
+                )
+            except Exception:
+                pass
+
+        return results
+
+    except Exception as exc:
+        print(f"  KOLLYWOOD PLUS ERROR: {exc}")
+        return []
+    finally:
+        try:
+            await page.close()
+        except Exception:
+            pass
+
+
+
 async def main():
     OUT.mkdir(parents=True, exist_ok=True)
 
