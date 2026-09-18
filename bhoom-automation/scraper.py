@@ -39,6 +39,9 @@ CONTENT_TYPE_HINTS = (
 
 MAX_CHANNELS = int(os.getenv("MAX_CHANNELS", "0") or "0")
 DEBUG_CHANNELS = int(os.getenv("DEBUG_CHANNELS", "3") or "3")
+VALIDATE_STREAMS = os.getenv("VALIDATE_STREAMS", "1") != "0"
+STABILITY_SECONDS = max(0, int(os.getenv("STABILITY_SECONDS", "3") or "0"))
+PUBLISH_SENSITIVE_HEADERS = os.getenv("PUBLISH_SENSITIVE_HEADERS", "1") != "0"
 
 
 def slug(url: str) -> str:
@@ -106,7 +109,7 @@ class Capture:
             return
         clean_headers = {
             k: headers.get(k)
-            for k in ("referer", "origin", "user-agent")
+            for k in ("referer", "origin", "user-agent", "authorization", "cookie")
             if headers.get(k)
         }
         clean_headers.setdefault("user-agent", UA)
@@ -123,6 +126,7 @@ class Capture:
             "type": stream_type,
             "headers": clean_headers,
         })
+        current["tokenized"] = looks_tokenized(url)
         if status is not None:
             current["status"] = status
         if content_type:
@@ -130,6 +134,112 @@ class Capture:
         if resource_type:
             current["resourceType"] = resource_type
         self.items[url] = current
+
+
+def looks_tokenized(url: str):
+    try:
+        keys = {k.lower() for k in parse_qs(urlparse(url).query)}
+        return bool(keys & {"token", "tokenid", "auth", "authorization", "signature", "sig", "expires", "exp", "hdnts", "hmac", "key"})
+    except Exception:
+        return False
+
+
+def parse_manifest(body: str, content_type: str, url: str):
+    low = body.lower()
+    result = {
+        "manifestValid": False,
+        "variants": 0,
+        "encrypted": False,
+        "drm": False,
+        "drmSystems": [],
+        "licenseUrls": [],
+    }
+    if ".m3u8" in url.lower():
+        result["manifestValid"] = "#extm3u" in low
+        result["variants"] = body.count("#EXT-X-STREAM-INF")
+        result["encrypted"] = "#ext-x-key" in low or "#ext-x-session-key" in low
+        for system, marker in (
+            ("widevine", "widevine"),
+            ("playready", "playready"),
+            ("fairplay", "fairplay"),
+            ("clearkey", "clearkey"),
+            ("skd", "skd://"),
+        ):
+            if marker in low:
+                result["drm"] = True
+                result["drmSystems"].append(system)
+    elif ".mpd" in url.lower():
+        result["manifestValid"] = "<mpd" in low
+        result["variants"] = body.count("<representation")
+        if "contentprotection" in low:
+            result["encrypted"] = True
+            result["drm"] = True
+            for system, marker in (
+                ("widevine", "edef8ba9-79d6-4ace-a3c8-27dcd51d21ed"),
+                ("playready", "9a04f079-9840-4286-ab92-e65be0885f95"),
+                ("clearkey", "e2719d58-a985-b3c9-781a-b030af78d30e"),
+            ):
+                if marker in low:
+                    result["drmSystems"].append(system)
+    else:
+        result["manifestValid"] = True
+    result["drmSystems"] = sorted(set(result["drmSystems"]))
+    return result
+
+
+async def validate_stream(page, stream):
+    result = {
+        "checked": False,
+        "httpStatus": stream.get("status"),
+        "contentType": stream.get("contentType", ""),
+        "redirects": [],
+        "manifestValid": None,
+        "variants": None,
+        "encrypted": False,
+        "drm": False,
+        "drmSystems": [],
+        "error": None,
+        "stable": None,
+    }
+    if stream["type"] == "rtmp":
+        result.update({"checked": True, "transport": "rtmp",
+                       "note": "RTMP is detected but cannot be HTTP-validated."})
+        return result
+
+    try:
+        response = await page.request.get(
+            stream["url"],
+            headers=stream.get("headers", {}),
+            timeout=20000,
+            fail_on_status_code=False,
+        )
+        result["checked"] = True
+        result["httpStatus"] = response.status
+        response_headers = await response.all_headers()
+        result["contentType"] = response_headers.get("content-type", "")
+        if response.url and response.url != stream["url"]:
+            result["redirects"].append(response.url)
+        if response.status >= 400:
+            result["error"] = f"HTTP {response.status}"
+            return result
+
+        if stream["type"] in {"hls", "dash"}:
+            body = await response.text()
+            result.update(parse_manifest(body, result["contentType"], stream["url"]))
+            if STABILITY_SECONDS > 0 and result["manifestValid"]:
+                await asyncio.sleep(STABILITY_SECONDS)
+                response2 = await page.request.get(
+                    stream["url"],
+                    headers=stream.get("headers", {}),
+                    timeout=20000,
+                    fail_on_status_code=False,
+                )
+                result["stable"] = response2.status < 400
+        else:
+            result["manifestValid"] = True
+    except Exception as e:
+        result["error"] = str(e)
+    return result
 
 
 def attach_capture(page, capture):
@@ -169,6 +279,21 @@ async def trigger_playback(page):
                 pass
     except Exception:
         pass
+
+
+async def playback_status(page):
+    try:
+        return await page.locator("video").evaluate_all(
+            """els => els.map(v => ({
+                readyState: v.readyState,
+                paused: v.paused,
+                currentTime: v.currentTime || 0,
+                duration: Number.isFinite(v.duration) ? v.duration : null,
+                error: v.error ? {code:v.error.code, message:v.error.message || ''} : null
+            }))"""
+        )
+    except Exception:
+        return []
 
 
 async def collect_performance_urls(page, capture):
@@ -409,6 +534,13 @@ async def scan_channel(context, channel_url, debug=False):
         await collect_embedded_urls(current, capture)
         await collect_performance_urls(current, capture)
         drm = await detect_drm(current)
+        streams = sorted(capture.items.values(), key=lambda x: x["url"])
+        if VALIDATE_STREAMS and streams:
+            print(f"  Validating {len(streams)} captured stream(s)")
+            for stream in streams:
+                stream["validation"] = await validate_stream(current, stream)
+                v = stream["validation"]
+                print(f"    {stream["type"]} HTTP={v.get("httpStatus")} valid={v.get("manifestValid")} drm={v.get("drm")} stable={v.get("stable")}")
 
         name = channel_name_from_url(channel_url)
         try:
@@ -430,7 +562,8 @@ async def scan_channel(context, channel_url, debug=False):
                 pass
 
         return {"id": slug(channel_url), "name": name, "pageUrl": channel_url,
-                "streams": sorted(capture.items.values(), key=lambda x: x["url"]),
+                "streams": streams,
+                "playback": await playback_status(current),
                 "drm": drm}
 
     except PlaywrightTimeoutError:
