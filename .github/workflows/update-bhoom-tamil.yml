@@ -2,6 +2,11 @@ name: Update Bhoom Tamil streams
 
 on:
   workflow_dispatch:
+    inputs:
+      max_channels:
+        description: "Number of channels to scan (0 = all)"
+        required: false
+        default: "5"
   schedule:
     - cron: "15 */6 * * *"
 
@@ -33,7 +38,17 @@ jobs:
 
       - name: Scrape
         working-directory: bhoom-automation
+        env:
+          MAX_CHANNELS: ${{ github.event.inputs.max_channels || '0' }}
         run: python scraper.py
+
+      - name: Upload debug files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bhoom-debug-${{ github.run_id }}
+          path: debug/
+          if-no-files-found: ignore
 
       - name: Publish
         run: |
