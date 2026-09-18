@@ -16,15 +16,7 @@ CATEGORY_PAGES = [
     f"{BASE}/channel/tamil/page/3/",
     f"{BASE}/channel/tamil/page/4/",
     f"{BASE}/channel/tamil-local-tv/",
-    f"{BASE}/channel/tamil-local-tv/page/1/",
-    f"{BASE}/channel/tamil-local-tv/page/2/",
-    f"{BASE}/channel/tamil-local-tv/page/3/",
-    f"{BASE}/channel/tamil-local-tv/page/4/",
-    f"{BASE}/channel/tamil-local-tv/page/5/",
-    f"{BASE}/channel/tamil-local-tv/page/6/",
-    f"{BASE}/channel/tamil-local-tv/page/7/",
-    f"{BASE}/channel/tamil-local-tv/page/8/",
-    f"{BASE}/channel/tamil-local-tv/page/9/",
+    *[f"{BASE}/channel/tamil-local-tv/page/{i}/" for i in range(1, 10)],
 ]
 
 OUT = Path("../output")
@@ -35,7 +27,6 @@ UA = (
     "Chrome/140.0 Safari/537.36"
 )
 
-# Catch both normal manifest URLs and manifests whose URL has a token/query string.
 MANIFEST_RE = re.compile(
     r"""(?i)https?://[^\s"'<>\\]+?\.(?:m3u8|mpd)(?:\?[^\s"'<>\\]*)?"""
 )
@@ -61,29 +52,17 @@ def channel_name_from_url(url: str) -> str:
 def normalize_manifest_url(url: str):
     if not url or not isinstance(url, str):
         return None
-
     url = url.strip()
-
-    if url.startswith("blob:"):
+    if url.startswith("blob:") or not url.startswith(("http://", "https://")):
         return None
-
-    if not url.startswith(("http://", "https://")):
-        return None
-
     try:
         parsed = urlparse(url)
-
-        # Bhoom /jwplayer/?source=... is only a player wrapper.
         if parsed.netloc.lower().endswith("bhoomtv.org") and parsed.path.startswith("/jwplayer"):
             source = parse_qs(parsed.query).get("source", [None])[0]
-            if source:
-                return normalize_manifest_url(unquote(source))
-            return None
-
+            return normalize_manifest_url(unquote(source)) if source else None
         path = parsed.path.lower()
         if not (path.endswith(".m3u8") or path.endswith(".mpd")):
             return None
-
         return url
     except Exception:
         return None
@@ -96,22 +75,12 @@ class Capture:
 
     async def request(self, req):
         url = req.url
-        resource_type = req.resource_type
-        if (
-            MANIFEST_RE.search(url)
-            or resource_type in {"media", "manifest"}
-        ):
+        if MANIFEST_RE.search(url) or req.resource_type in {"media", "manifest"}:
             try:
                 headers = await req.all_headers()
             except Exception:
                 headers = {}
-            self.add(
-                url=url,
-                headers=headers,
-                status=None,
-                content_type=headers.get("content-type", ""),
-                resource_type=resource_type,
-            )
+            self.add(url, headers, None, headers.get("content-type", ""), req.resource_type)
 
     async def response(self, response):
         url = response.url
@@ -120,64 +89,43 @@ class Capture:
         except Exception:
             headers = {}
         content_type = headers.get("content-type", "").lower()
-        hit = (
-            MANIFEST_RE.search(url)
-            or any(x in content_type for x in CONTENT_TYPE_HINTS)
-        )
-        if hit:
-            self.add(
-                url=url,
-                headers=headers,
-                status=response.status,
-                content_type=content_type,
-                resource_type=None,
-            )
+        if MANIFEST_RE.search(url) or any(x in content_type for x in CONTENT_TYPE_HINTS):
+            self.add(url, headers, response.status, content_type, None)
 
     def add(self, url, headers, status, content_type, resource_type):
         url = normalize_manifest_url(url)
         if not url:
             return
-
-        clean_headers = {}
-        for key in ("referer", "origin", "user-agent"):
-            value = headers.get(key)
-            if value:
-                clean_headers[key] = value
-
+        clean_headers = {
+            k: headers.get(k)
+            for k in ("referer", "origin", "user-agent")
+            if headers.get(k)
+        }
         clean_headers.setdefault("user-agent", UA)
         clean_headers.setdefault("referer", self.channel_url)
-
         current = self.items.get(url, {})
-        current.update(
-            {
-                "url": url,
-                "type": "dash" if ".mpd" in url.lower() else "hls",
-                "headers": clean_headers,
-            }
-        )
+        current.update({
+            "url": url,
+            "type": "dash" if ".mpd" in url.lower() else "hls",
+            "headers": clean_headers,
+        })
         if status is not None:
             current["status"] = status
         if content_type:
             current["contentType"] = content_type
         if resource_type:
             current["resourceType"] = resource_type
-
         self.items[url] = current
 
 
 def attach_capture(page, capture):
-    # Page-level listeners include requests made by frames on this page,
-    # while avoiding cross-channel capture contamination.
     page.on("request", capture.request)
     page.on("response", capture.response)
 
 
-
 async def trigger_playback(page):
-    # The Firefox Stream Detector observes network traffic after the player
-    # actually starts. Selecting a source alone may not start playback.
     try:
-        play_selectors = [
+        for selector in [
             "button[aria-label*='play' i]",
             "[role='button'][aria-label*='play' i]",
             ".jw-icon-playback",
@@ -186,31 +134,22 @@ async def trigger_playback(page):
             ".plyr__control--overlaid",
             ".fp-ui",
             ".player",
-        ]
-
-        for selector in play_selectors:
+        ]:
             loc = page.locator(selector)
             count = await loc.count()
-            if count:
-                for i in range(min(count, 3)):
-                    try:
-                        await loc.nth(i).click(timeout=1500, force=True)
-                        await page.wait_for_timeout(1200)
-                    except Exception:
-                        pass
+            for i in range(min(count, 3)):
+                try:
+                    await loc.nth(i).click(timeout=1500, force=True)
+                    await page.wait_for_timeout(1200)
+                except Exception:
+                    pass
 
-        # HTML5 video: explicitly request playback where available.
         videos = page.locator("video")
         count = await videos.count()
         for i in range(min(count, 5)):
             try:
                 await videos.nth(i).evaluate(
-                    """v => {
-                        try {
-                            const p = v.play();
-                            if (p && p.catch) p.catch(() => {});
-                        } catch (_) {}
-                    }"""
+                    """v => { try { const p=v.play(); if(p&&p.catch)p.catch(()=>{}); } catch(_){} }"""
                 )
             except Exception:
                 pass
@@ -221,62 +160,30 @@ async def trigger_playback(page):
 async def collect_performance_urls(page, capture):
     try:
         entries = await page.evaluate(
-            """performance.getEntriesByType('resource')
-              .map(e => e.name)
-              .filter(Boolean)"""
+            """performance.getEntriesByType('resource').map(e=>e.name).filter(Boolean)"""
         )
         for url in set(entries):
-            if re.search(r"(?i)\\.(?:m3u8|mpd)(?:\\?|$)", url):
-                capture.add(
-                    url=url,
-                    headers={
-                        "user-agent": UA,
-                        "referer": page.url,
-                    },
-                    status=None,
-                    content_type="",
-                    resource_type="performance",
-                )
+            if re.search(r"(?i)\.(?:m3u8|mpd)(?:\?|$)", url):
+                capture.add(url, {"user-agent": UA, "referer": page.url}, None, "", "performance")
     except Exception:
         pass
 
 
 async def collect_embedded_urls(page, capture):
-    # Inspect page HTML/JS for directly embedded HLS/DASH URLs.
     try:
         html = await page.content()
-
         for raw_url in set(MANIFEST_RE.findall(html)):
-            capture.add(
-                url=raw_url,
-                headers={"user-agent": UA, "referer": page.url},
-                status=None,
-                content_type="",
-                resource_type="embedded",
-            )
-
-        for raw in re.findall(
-            r"""(?i)(?:source|file|src)[=:]["']([^"']+)["']""",
-            html,
-        ):
-            capture.add(
-                url=unquote(raw),
-                headers={"user-agent": UA, "referer": page.url},
-                status=None,
-                content_type="",
-                resource_type="embedded-source",
-            )
+            capture.add(raw_url, {"user-agent": UA, "referer": page.url}, None, "", "embedded")
+        for raw in re.findall(r"""(?i)(?:source|file|src)[=:]["']([^"']+)["']""", html):
+            capture.add(unquote(raw), {"user-agent": UA, "referer": page.url}, None, "", "embedded-source")
     except Exception:
         pass
 
 
 async def get_dooplayer_sources(page, capture, channel_url):
     sources = []
-
     try:
-        options = await page.locator(
-            "li.dooplay_player_option"
-        ).evaluate_all(
+        options = await page.locator("li.dooplay_player_option").evaluate_all(
             """els => els.map(el => ({
                 post: el.getAttribute('data-post') || '',
                 type: el.getAttribute('data-type') || 'movie',
@@ -289,16 +196,18 @@ async def get_dooplayer_sources(page, capture, channel_url):
 
     api_base = "https://bhoomtv.org/wp-json/dooplayer/v2/"
 
-    for option in options:
+    print(f"  DooPlayer sources discovered: {len(options)}")
+
+    # IMPORTANT: inspect EVERY source option. There is intentionally no 20-source cap.
+    for source_index, option in enumerate(options, 1):
         post = option["post"]
         media_type = option["type"]
         nume = option["nume"]
-
         if not post or not nume:
             continue
 
         api_url = f"{api_base}{post}/{media_type}/{nume}"
-        print(f"  source API: {api_url}")
+        print(f"  source [{source_index}/{len(options)}]: {option.get('title','')}")
 
         try:
             response = await page.request.get(
@@ -310,68 +219,40 @@ async def get_dooplayer_sources(page, capture, channel_url):
                 },
                 timeout=30000,
             )
-
             if not response.ok:
-                print(f"  API status {response.status}: {api_url}")
+                print(f"    API status {response.status}")
                 continue
 
             try:
                 data = await response.json()
             except Exception:
-                text_body = await response.text()
-                data = {"raw": text_body}
+                data = {"raw": await response.text()}
 
-            # Keep the API result in debug JSON for diagnosis.
-            sources.append({
-                "option": option,
-                "apiUrl": api_url,
-                "response": data,
-            })
+            sources.append({"option": option, "apiUrl": api_url, "response": data})
 
-            embed_url = ""
-            if isinstance(data, dict):
-                embed_url = data.get("embed_url") or data.get("url") or ""
-
-            if embed_url:
-                print(f"  embed_url found ({len(embed_url)} chars)")
-            else:
-                print("  API returned no embed_url/url")
-
+            embed_url = data.get("embed_url") or data.get("url") or "" if isinstance(data, dict) else ""
             if not embed_url:
+                print("    no embed_url/url")
                 continue
 
-            # DooPlayer commonly returns an iframe HTML snippet.
-            iframe_srcs = re.findall(
-                r"""<iframe[^>]+src=["']([^"']+)["']""",
-                embed_url,
-                re.I,
-            )
-
+            iframe_srcs = re.findall(r"""<iframe[^>]+src=["']([^"']+)["']""", embed_url, re.I)
             candidates = iframe_srcs or [embed_url]
 
             for candidate in candidates:
                 if not candidate.startswith("http"):
                     continue
-
+                player = None
                 try:
                     player = await page.context.new_page()
                     attach_capture(player, capture)
-
-                    await player.goto(
-                        candidate,
-                        wait_until="domcontentloaded",
-                        timeout=30000,
-                    )
+                    await player.goto(candidate, wait_until="domcontentloaded", timeout=30000)
                     await player.wait_for_timeout(2500)
                     await trigger_playback(player)
                     await collect_embedded_urls(player, capture)
                     await collect_performance_urls(player, capture)
 
-                    # Also inspect the player DOM for video/source URLs.
                     try:
-                        media_urls = await player.locator(
-                            "video,source"
-                        ).evaluate_all(
+                        media_urls = await player.locator("video,source").evaluate_all(
                             """els => els.map(el => ({
                                 src: el.src || el.currentSrc || '',
                                 type: el.type || ''
@@ -380,14 +261,11 @@ async def get_dooplayer_sources(page, capture, channel_url):
                         for media in media_urls:
                             if media["src"]:
                                 capture.add(
-                                    url=media["src"],
-                                    headers={
-                                        "user-agent": UA,
-                                        "referer": candidate,
-                                    },
-                                    status=None,
-                                    content_type=media.get("type", ""),
-                                    resource_type="dom-media",
+                                    media["src"],
+                                    {"user-agent": UA, "referer": candidate},
+                                    None,
+                                    media.get("type", ""),
+                                    "dom-media",
                                 )
                     except Exception:
                         pass
@@ -395,13 +273,17 @@ async def get_dooplayer_sources(page, capture, channel_url):
                     await player.wait_for_timeout(2500)
                     await trigger_playback(player)
                     await collect_performance_urls(player, capture)
-                    await player.close()
-
                 except Exception as e:
-                    print(f"  embed error: {candidate} -> {e}")
+                    print(f"    embed error: {e}")
+                finally:
+                    if player:
+                        try:
+                            await player.close()
+                        except Exception:
+                            pass
 
         except Exception as e:
-            print(f"  API error: {api_url} -> {e}")
+            print(f"    API error: {e}")
 
     if sources:
         try:
@@ -412,7 +294,6 @@ async def get_dooplayer_sources(page, capture, channel_url):
             )
         except Exception:
             pass
-
     return sources
 
 
@@ -427,20 +308,12 @@ async def scan_channel(context, channel_url, debug=False):
 
     try:
         print(f"Opening {channel_url}")
-        await current.goto(
-            channel_url,
-            wait_until="domcontentloaded",
-            timeout=45000,
-        )
+        await current.goto(channel_url, wait_until="domcontentloaded", timeout=45000)
         await current.wait_for_timeout(1500)
 
-        # Collect iframes already present. Some players host the actual player
-        # on a different page, so open each iframe URL directly as a fallback.
         iframe_urls = []
         try:
-            iframe_urls = await current.locator("iframe").evaluate_all(
-                "els => els.map(x => x.src).filter(Boolean)"
-            )
+            iframe_urls = await current.locator("iframe").evaluate_all("els => els.map(x=>x.src).filter(Boolean)")
         except Exception:
             pass
 
@@ -452,18 +325,15 @@ async def scan_channel(context, channel_url, debug=False):
 
         filtered_iframes = [
             u for u in dict.fromkeys(iframe_urls)
-            if not any(
-                blocked in u.lower()
-                for blocked in (
-                    "googleads.g.doubleclick.net",
-                    "googlesyndication.com",
-                    "google.com/recaptcha",
-                    "doubleclick.net",
-                )
-            )
+            if not any(blocked in u.lower() for blocked in (
+                "googleads.g.doubleclick.net",
+                "googlesyndication.com",
+                "google.com/recaptcha",
+                "doubleclick.net",
+            ))
         ]
 
-        for iframe_url in filtered_iframes[:5]:
+        for iframe_url in filtered_iframes:
             p = None
             try:
                 p = await context.new_page()
@@ -471,36 +341,32 @@ async def scan_channel(context, channel_url, debug=False):
                 await p.goto(iframe_url, wait_until="domcontentloaded", timeout=30000)
                 await p.wait_for_timeout(3000)
                 await collect_embedded_urls(p, capture)
-                await p.close()
+                await collect_performance_urls(p, capture)
             except Exception:
-                try:
-                    if p:
+                pass
+            finally:
+                if p:
+                    try:
                         await p.close()
-                except Exception:
-                    pass
+                    except Exception:
+                        pass
 
-        # Primary path: call the DooPlayer API used by the site's own player JS.
-        await get_dooplayer_sources(
-            current,
-            capture,
-            channel_url,
-        )
+        await get_dooplayer_sources(current, capture, channel_url)
 
-        # Fallback: click the actual DooPlayer <li> source elements.
+        # Fallback click path also checks EVERY source option.
         options = current.locator("li.dooplay_player_option")
         count = await options.count()
-        for i in range(min(count, 20)):
+        print(f"  DooPlayer clickable sources: {count}")
+        for i in range(count):
             try:
                 await options.nth(i).click(timeout=3000, force=True)
                 await current.wait_for_timeout(2500)
                 await collect_embedded_urls(current, capture)
+                await collect_performance_urls(current, capture)
             except Exception:
                 continue
 
-        # Start playback on the Bhoom page itself as a final fallback.
         await trigger_playback(current)
-
-        # Final wait for delayed/lazy player requests.
         await current.wait_for_timeout(4500)
         await collect_embedded_urls(current, capture)
         await collect_performance_urls(current, capture)
@@ -516,43 +382,23 @@ async def scan_channel(context, channel_url, debug=False):
         if debug:
             DEBUG.mkdir(parents=True, exist_ok=True)
             try:
-                await current.screenshot(
-                    path=str(DEBUG / f"{slug(channel_url)}.png"),
-                    full_page=True,
-                )
+                await current.screenshot(path=str(DEBUG / f"{slug(channel_url)}.png"), full_page=True)
             except Exception:
                 pass
             try:
-                (DEBUG / f"{slug(channel_url)}.html").write_text(
-                    await current.content(),
-                    encoding="utf-8",
-                )
+                (DEBUG / f"{slug(channel_url)}.html").write_text(await current.content(), encoding="utf-8")
             except Exception:
                 pass
 
-        return {
-            "id": slug(channel_url),
-            "name": name,
-            "pageUrl": channel_url,
-            "streams": sorted(capture.items.values(), key=lambda x: x["url"]),
-        }
+        return {"id": slug(channel_url), "name": name, "pageUrl": channel_url,
+                "streams": sorted(capture.items.values(), key=lambda x: x["url"])}
 
     except PlaywrightTimeoutError:
         print(f"  TIMEOUT: {channel_url}")
-        return {
-            "id": slug(channel_url),
-            "name": channel_name_from_url(channel_url),
-            "pageUrl": channel_url,
-            "streams": [],
-        }
+        return {"id": slug(channel_url), "name": channel_name_from_url(channel_url), "pageUrl": channel_url, "streams": []}
     except Exception as e:
         print(f"  ERROR: {channel_url}: {e}")
-        return {
-            "id": slug(channel_url),
-            "name": channel_name_from_url(channel_url),
-            "pageUrl": channel_url,
-            "streams": [],
-        }
+        return {"id": slug(channel_url), "name": channel_name_from_url(channel_url), "pageUrl": channel_url, "streams": []}
     finally:
         try:
             await current.close()
@@ -572,49 +418,37 @@ async def main():
         )
 
         page = await context.new_page()
-
-        # Discover all channel pages.
         channel_pages = set()
+
         for category_url in CATEGORY_PAGES:
             try:
                 print(f"Category: {category_url}")
-                await page.goto(
-                    category_url,
-                    wait_until="domcontentloaded",
-                    timeout=45000,
-                )
+                await page.goto(category_url, wait_until="domcontentloaded", timeout=45000)
                 await page.wait_for_timeout(1500)
-
-                links = await page.locator(
-                    'a[href*="/live/"]'
-                ).evaluate_all("els => els.map(a => a.href)")
-
+                links = await page.locator('a[href*="/live/"]').evaluate_all("els=>els.map(a=>a.href)")
                 for url in links:
                     if "/live/" in url:
-                        channel_pages.add(
-                            url.split("#")[0].rstrip("/") + "/"
-                        )
+                        channel_pages.add(url.split("#")[0].rstrip("/") + "/")
             except Exception as e:
                 print(f"  category error: {e}")
 
         channels = sorted(channel_pages)
-
         if MAX_CHANNELS > 0:
             channels = channels[:MAX_CHANNELS]
 
+        print(f"Channels discovered: {len(channel_pages)}")
         print(f"Channels to scan: {len(channels)}")
+        print("MAX_CHANNELS=0 means ALL channels")
 
         results = []
+        total_sources = 0
+        total_streams = 0
+
         for index, channel_url in enumerate(channels, 1):
             debug = index <= DEBUG_CHANNELS
             print(f"[{index}/{len(channels)}] {channel_url}")
-
-            item = await scan_channel(
-                context,
-                channel_url,
-                debug=debug,
-            )
-
+            item = await scan_channel(context, channel_url, debug=debug)
+            total_streams += len(item["streams"])
             if item["streams"]:
                 print(f"  FOUND {len(item['streams'])} stream(s)")
                 results.append(item)
@@ -624,46 +458,28 @@ async def main():
         await context.close()
         await browser.close()
 
-    # Never overwrite a working playlist with an empty scrape.
     if not results:
         raise RuntimeError(
-            "No HLS/DASH manifests were captured. "
-            "The pages were reachable, but the player did not expose a stream "
-            "to the GitHub runner. This can be caused by geo-restriction or "
-            "a player/source that requires an India-based browser session."
+            "No HLS/DASH manifests were captured. Pages were reachable, but "
+            "the player did not expose a stream to the GitHub runner."
         )
 
     seen = set()
     m3u = ["#EXTM3U"]
 
     for channel in results:
-        safe_name = (
-            channel["name"]
-            .replace('"', "'")
-            .replace(",", " - ")
-        )
-
+        safe_name = channel["name"].replace('"', "'").replace(",", " - ")
         for stream in channel["streams"]:
             url = normalize_manifest_url(stream["url"])
             if not url or url in seen:
                 continue
             seen.add(url)
-
-            m3u.append(
-                f'#EXTINF:-1 tvg-name="{safe_name}" '
-                f'group-title="Tamil",{safe_name}'
-            )
-
+            m3u.append(f'#EXTINF:-1 tvg-name="{safe_name}" group-title="Tamil",{safe_name}')
             headers = stream.get("headers", {})
             if headers.get("referer"):
-                m3u.append(
-                    f'#EXTVLCOPT:http-referrer={headers["referer"]}'
-                )
+                m3u.append(f'#EXTVLCOPT:http-referrer={headers["referer"]}')
             if headers.get("user-agent"):
-                m3u.append(
-                    f'#EXTVLCOPT:http-user-agent={headers["user-agent"]}'
-                )
-
+                m3u.append(f'#EXTVLCOPT:http-user-agent={headers["user-agent"]}')
             m3u.append(url)
             m3u.append("")
 
@@ -677,17 +493,13 @@ async def main():
     }
 
     (OUT / "bhoom-tamil.json").write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2),
-        encoding="utf-8",
+        json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    (OUT / "bhoom-tamil.m3u").write_text(
-        "\n".join(m3u),
-        encoding="utf-8",
-    )
+    (OUT / "bhoom-tamil.m3u").write_text("\n".join(m3u), encoding="utf-8")
 
-    print(
-        f"Published {len(results)} channels / {len(seen)} unique streams."
-    )
+    print("=" * 50)
+    print(f"FINAL: {len(results)} channels / {len(seen)} unique streams")
+    print("=" * 50)
 
 
 if __name__ == "__main__":
