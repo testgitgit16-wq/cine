@@ -15,6 +15,14 @@ on:
         description: "Seconds between manifest checks (0=off)"
         required: false
         default: "3"
+      player_initial_wait_seconds:
+        description: "Seconds to wait for the player to expose the stream"
+        required: false
+        default: "10"
+      player_capture_wait_seconds:
+        description: "Extra seconds to wait after playback is triggered"
+        required: false
+        default: "5"
       recapture_rounds:
         description: "Fresh player/source recapture rounds after expired or invalid streams"
         required: false
@@ -55,6 +63,8 @@ jobs:
           MAX_CHANNELS: ${{ github.event.inputs.max_channels || '0' }}
           VALIDATE_STREAMS: ${{ github.event.inputs.validate_streams || '1' }}
           STABILITY_SECONDS: ${{ github.event.inputs.stability_seconds || '3' }}
+          PLAYER_INITIAL_WAIT_SECONDS: ${{ github.event.inputs.player_initial_wait_seconds || '10' }}
+          PLAYER_CAPTURE_WAIT_SECONDS: ${{ github.event.inputs.player_capture_wait_seconds || '5' }}
           RECAPTURE_ROUNDS: ${{ github.event.inputs.recapture_rounds || '1' }}
           RECAPTURE_ON_FAILURES: "1"
           RETRY_COUNT: "3"
