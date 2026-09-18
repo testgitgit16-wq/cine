@@ -10,6 +10,7 @@ from playwright.async_api import async_playwright, TimeoutError as PlaywrightTim
 
 BASE = "https://bhoomtv.org"
 CATEGORY_PAGES = [
+    f"{BASE}/channel/tamil-news/",
     f"{BASE}/channel/tamil/",
     f"{BASE}/channel/tamil/page/2/",
     f"{BASE}/channel/tamil/page/3/",
