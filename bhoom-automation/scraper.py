@@ -127,6 +127,74 @@ def attach_capture(page, capture):
 
 
 
+async def trigger_playback(page):
+    # The Firefox Stream Detector observes network traffic after the player
+    # actually starts. Selecting a source alone may not start playback.
+    try:
+        play_selectors = [
+            "button[aria-label*='play' i]",
+            "[role='button'][aria-label*='play' i]",
+            ".jw-icon-playback",
+            ".jw-display-icon-container",
+            ".vjs-big-play-button",
+            ".plyr__control--overlaid",
+            ".fp-ui",
+            ".player",
+        ]
+
+        for selector in play_selectors:
+            loc = page.locator(selector)
+            count = await loc.count()
+            if count:
+                for i in range(min(count, 3)):
+                    try:
+                        await loc.nth(i).click(timeout=1500, force=True)
+                        await page.wait_for_timeout(1200)
+                    except Exception:
+                        pass
+
+        # HTML5 video: explicitly request playback where available.
+        videos = page.locator("video")
+        count = await videos.count()
+        for i in range(min(count, 5)):
+            try:
+                await videos.nth(i).evaluate(
+                    """v => {
+                        try {
+                            const p = v.play();
+                            if (p && p.catch) p.catch(() => {});
+                        } catch (_) {}
+                    }"""
+                )
+            except Exception:
+                pass
+    except Exception:
+        pass
+
+
+async def collect_performance_urls(page, capture):
+    try:
+        entries = await page.evaluate(
+            """performance.getEntriesByType('resource')
+              .map(e => e.name)
+              .filter(Boolean)"""
+        )
+        for url in set(entries):
+            if re.search(r"(?i)\\.(?:m3u8|mpd)(?:\\?|$)", url):
+                capture.add(
+                    url=url,
+                    headers={
+                        "user-agent": UA,
+                        "referer": page.url,
+                    },
+                    status=None,
+                    content_type="",
+                    resource_type="performance",
+                )
+    except Exception:
+        pass
+
+
 async def collect_embedded_urls(page, capture):
     # Inspect page HTML/JS for directly embedded HLS/DASH URLs.
     try:
@@ -235,8 +303,10 @@ async def get_dooplayer_sources(page, capture, channel_url):
                         wait_until="domcontentloaded",
                         timeout=30000,
                     )
-                    await player.wait_for_timeout(4000)
+                    await player.wait_for_timeout(2500)
+                    await trigger_playback(player)
                     await collect_embedded_urls(player, capture)
+                    await collect_performance_urls(player, capture)
 
                     # Also inspect the player DOM for video/source URLs.
                     try:
@@ -264,6 +334,8 @@ async def get_dooplayer_sources(page, capture, channel_url):
                         pass
 
                     await player.wait_for_timeout(2500)
+                    await trigger_playback(player)
+                    await collect_performance_urls(player, capture)
                     await player.close()
 
                 except Exception as e:
@@ -366,9 +438,13 @@ async def scan_channel(context, channel_url, debug=False):
             except Exception:
                 continue
 
+        # Start playback on the Bhoom page itself as a final fallback.
+        await trigger_playback(current)
+
         # Final wait for delayed/lazy player requests.
-        await current.wait_for_timeout(3500)
+        await current.wait_for_timeout(4500)
         await collect_embedded_urls(current, capture)
+        await collect_performance_urls(current, capture)
 
         name = channel_name_from_url(channel_url)
         try:
@@ -434,7 +510,6 @@ async def main():
             user_agent=UA,
             locale="en-IN",
             viewport={"width": 1440, "height": 1000},
-            service_workers="block",
         )
 
         page = await context.new_page()
