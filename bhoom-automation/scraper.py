@@ -143,25 +143,135 @@ async def collect_embedded_urls(page, capture):
         pass
 
 
-async def collect_candidate_links(page):
-    candidates = []
+async def get_dooplayer_sources(page, capture, channel_url):
+    sources = []
+
     try:
-        data = await page.locator("a,button,[role='button']").evaluate_all(
-            """els => els.map((el, i) => ({
-                i,
-                text: (el.innerText || el.textContent || '').trim(),
-                href: el.href || ''
+        options = await page.locator(
+            "li.dooplay_player_option"
+        ).evaluate_all(
+            """els => els.map(el => ({
+                post: el.getAttribute('data-post') || '',
+                type: el.getAttribute('data-type') || 'movie',
+                nume: el.getAttribute('data-nume') || '',
+                title: (el.innerText || el.textContent || '').trim()
             }))"""
         )
-        for item in data:
-            text = (item.get("text") or "").lower()
-            href = item.get("href") or ""
-            if ("stream" in text or "source" in text) and href:
-                if href.startswith("http"):
-                    candidates.append(href)
     except Exception:
-        pass
-    return list(dict.fromkeys(candidates))
+        options = []
+
+    api_base = "https://bhoomtv.org/wp-json/dooplayer/v2/"
+
+    for option in options:
+        post = option["post"]
+        media_type = option["type"]
+        nume = option["nume"]
+
+        if not post or not nume:
+            continue
+
+        api_url = f"{api_base}{post}/{media_type}/{nume}"
+        print(f"  source API: {api_url}")
+
+        try:
+            response = await page.request.get(
+                api_url,
+                headers={
+                    "Referer": channel_url,
+                    "User-Agent": UA,
+                    "Accept": "application/json,text/plain,*/*",
+                },
+                timeout=30000,
+            )
+
+            if not response.ok:
+                print(f"  API status {response.status}: {api_url}")
+                continue
+
+            data = await response.json()
+
+            # Keep the API result in debug JSON for diagnosis.
+            sources.append({
+                "option": option,
+                "apiUrl": api_url,
+                "response": data,
+            })
+
+            embed_url = data.get("embed_url") or data.get("url") or ""
+
+            if not embed_url:
+                continue
+
+            # DooPlayer commonly returns an iframe HTML snippet.
+            iframe_srcs = re.findall(
+                r"""<iframe[^>]+src=["']([^"']+)["']""",
+                embed_url,
+                re.I,
+            )
+
+            candidates = iframe_srcs or [embed_url]
+
+            for candidate in candidates:
+                if not candidate.startswith("http"):
+                    continue
+
+                try:
+                    player = await page.context.new_page()
+                    attach_capture(player, capture)
+
+                    await player.goto(
+                        candidate,
+                        wait_until="domcontentloaded",
+                        timeout=30000,
+                    )
+                    await player.wait_for_timeout(4000)
+                    await collect_embedded_urls(player, capture)
+
+                    # Also inspect the player DOM for video/source URLs.
+                    try:
+                        media_urls = await player.locator(
+                            "video,source"
+                        ).evaluate_all(
+                            """els => els.map(el => ({
+                                src: el.src || el.currentSrc || '',
+                                type: el.type || ''
+                            })).filter(x => x.src)"""
+                        )
+                        for media in media_urls:
+                            if media["src"]:
+                                capture.add(
+                                    url=media["src"],
+                                    headers={
+                                        "user-agent": UA,
+                                        "referer": candidate,
+                                    },
+                                    status=None,
+                                    content_type=media.get("type", ""),
+                                    resource_type="dom-media",
+                                )
+                    except Exception:
+                        pass
+
+                    await player.wait_for_timeout(2500)
+                    await player.close()
+
+                except Exception as e:
+                    print(f"  embed error: {candidate} -> {e}")
+
+        except Exception as e:
+            print(f"  API error: {api_url} -> {e}")
+
+    if sources:
+        try:
+            DEBUG.mkdir(parents=True, exist_ok=True)
+            (DEBUG / f"{slug(channel_url)}-sources.json").write_text(
+                json.dumps(sources, ensure_ascii=False, indent=2),
+                encoding="utf-8",
+            )
+        except Exception:
+            pass
+
+    return sources
 
 
 async def scan_channel(context, channel_url, debug=False):
@@ -214,40 +324,23 @@ async def scan_channel(context, channel_url, debug=False):
                 except Exception:
                     pass
 
-        # Capture source links before clicking, because some are plain external links.
-        source_links = await collect_candidate_links(current)
+        # Primary path: call the DooPlayer API used by the site's own player JS.
+        await get_dooplayer_sources(
+            current,
+            capture,
+            channel_url,
+        )
 
-        # Click source/stream controls. External targets/popups remain inside the same
-        # browser context, so context-level request/response listeners capture them too.
-        buttons = current.locator("a,button,[role='button']")
-        count = await buttons.count()
-        for i in range(min(count, 60)):
+        # Fallback: click the actual DooPlayer <li> source elements.
+        options = current.locator("li.dooplay_player_option")
+        count = await options.count()
+        for i in range(min(count, 20)):
             try:
-                label = (await buttons.nth(i).inner_text(timeout=500)).strip().lower()
-                if "stream" in label or "source" in label:
-                    await buttons.nth(i).click(timeout=2500, force=True)
-                    await current.wait_for_timeout(1800)
-                    await collect_embedded_urls(current, capture)
+                await options.nth(i).click(timeout=3000, force=True)
+                await current.wait_for_timeout(2500)
+                await collect_embedded_urls(current, capture)
             except Exception:
                 continue
-
-        # Open explicit source URLs in new tabs. This catches players hosted in a
-        # different page rather than an iframe.
-        for link in source_links[:10]:
-            if link.rstrip("/") == channel_url.rstrip("/"):
-                continue
-            try:
-                p = await context.new_page()
-                attach_capture(p, capture)
-                await p.goto(link, wait_until="domcontentloaded", timeout=30000)
-                await p.wait_for_timeout(3500)
-                await collect_embedded_urls(p, capture)
-                await p.close()
-            except Exception:
-                try:
-                    await p.close()
-                except Exception:
-                    pass
 
         # Final wait for delayed/lazy player requests.
         await current.wait_for_timeout(3500)
