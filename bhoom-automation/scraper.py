@@ -4,7 +4,7 @@ import os
 import re
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, unquote, urlparse
 
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeoutError
 
@@ -45,6 +45,37 @@ def slug(url: str) -> str:
 
 def channel_name_from_url(url: str) -> str:
     return slug(url).replace("-", " ").title()
+
+
+def normalize_manifest_url(url: str):
+    if not url or not isinstance(url, str):
+        return None
+
+    url = url.strip()
+
+    if url.startswith("blob:"):
+        return None
+
+    if not url.startswith(("http://", "https://")):
+        return None
+
+    try:
+        parsed = urlparse(url)
+
+        # Bhoom /jwplayer/?source=... is only a player wrapper.
+        if parsed.netloc.lower().endswith("bhoomtv.org") and parsed.path.startswith("/jwplayer"):
+            source = parse_qs(parsed.query).get("source", [None])[0]
+            if source:
+                return normalize_manifest_url(unquote(source))
+            return None
+
+        path = parsed.path.lower()
+        if not (path.endswith(".m3u8") or path.endswith(".mpd")):
+            return None
+
+        return url
+    except Exception:
+        return None
 
 
 class Capture:
@@ -92,6 +123,10 @@ class Capture:
             )
 
     def add(self, url, headers, status, content_type, resource_type):
+        url = normalize_manifest_url(url)
+        if not url:
+            return
+
         clean_headers = {}
         for key in ("referer", "origin", "user-agent"):
             value = headers.get(key)
@@ -199,13 +234,26 @@ async def collect_embedded_urls(page, capture):
     # Inspect page HTML/JS for directly embedded HLS/DASH URLs.
     try:
         html = await page.content()
-        for url in set(MANIFEST_RE.findall(html)):
+
+        for raw_url in set(MANIFEST_RE.findall(html)):
             capture.add(
-                url=url,
+                url=raw_url,
                 headers={"user-agent": UA, "referer": page.url},
                 status=None,
                 content_type="",
                 resource_type="embedded",
+            )
+
+        for raw in re.findall(
+            r"""(?i)(?:source|file|src)[=:]["']([^"']+)["']""",
+            html,
+        ):
+            capture.add(
+                url=unquote(raw),
+                headers={"user-agent": UA, "referer": page.url},
+                status=None,
+                content_type="",
+                resource_type="embedded-source",
             )
     except Exception:
         pass
@@ -585,8 +633,8 @@ async def main():
         )
 
         for stream in channel["streams"]:
-            url = stream["url"]
-            if url in seen:
+            url = normalize_manifest_url(stream["url"])
+            if not url or url in seen:
                 continue
             seen.add(url)
 
@@ -614,6 +662,7 @@ async def main():
         "category": "Tamil",
         "channels": results,
         "uniqueStreams": len(seen),
+        "streamFormat": "direct-hls-dash-only",
     }
 
     (OUT / "bhoom-tamil.json").write_text(
