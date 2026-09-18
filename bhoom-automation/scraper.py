@@ -942,12 +942,14 @@ async def main():
         print("MAX_CHANNELS=0 means ALL channels")
 
         results = []
+        scanned_items = []
         total_streams = 0
 
         for index, channel_url in enumerate(channels, 1):
             debug = index <= DEBUG_CHANNELS
             print(f"[{index}/{len(channels)}] {channel_url}")
             item = await scan_channel(context, channel_url, debug=debug)
+            scanned_items.append(item)
             captured_count = len(item["streams"])
             total_streams += captured_count
             usable = [s for s in item["streams"] if stream_is_usable(s)]
@@ -960,7 +962,6 @@ async def main():
             else:
                 print(f"  NO USABLE STREAM / CAPTURED {len(item['streams'])}")
 
-        scanned_items = list(results)
         before_merge = len(results)
         results = merge_duplicate_channels(results)
         print(f"Duplicate channel cleanup: {before_merge} -> {len(results)} unique channels")
