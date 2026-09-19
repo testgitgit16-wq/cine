@@ -156,13 +156,13 @@ class Capture:
         url = normalize_manifest_url(url)
         if not url:
             return
+        # Preserve only headers actually observed on the media request.
+        # Direct channels must not receive invented Referer/User-Agent headers.
         clean_headers = {
             k: headers.get(k)
             for k in ("referer", "origin", "user-agent", "authorization", "cookie")
             if headers.get(k)
         }
-        clean_headers.setdefault("user-agent", UA)
-        clean_headers.setdefault("referer", self.channel_url)
         current = self.items.get(url, {})
         current.update({
             "url": url,
@@ -278,6 +278,7 @@ async def validate_stream(page, stream):
         "drmSystems": [],
         "error": None,
         "stable": None,
+        "validationMode": None,
     }
     if stream["type"] == "rtmp":
         result.update({
@@ -287,37 +288,58 @@ async def validate_stream(page, stream):
         })
         return result
 
-    try:
-        response = await fetch_with_retries(
-            page, stream["url"], stream.get("headers", {}),
-            timeout=20000, retries=RETRY_COUNT
-        )
-        result["checked"] = True
-        result["httpStatus"] = response.status
-        response_headers = await response.all_headers()
-        result["contentType"] = response_headers.get("content-type", "")
-        if response.url and response.url != stream["url"]:
-            result["redirects"].append(response.url)
-        if response.status >= 400:
-            result["error"] = f"HTTP {response.status}"
-            return result
+    # BhoomTV has mixed stream requirements. Try the headers actually observed
+    # first, then progressively simpler requests so direct streams are not
+    # rejected just because another channel needs Referer/User-Agent.
+    captured_headers = dict(stream.get("headers") or {})
+    header_attempts = []
+    for label, headers in (
+        ("captured", captured_headers),
+        ("direct", {}),
+        ("user-agent", {"user-agent": UA}),
+        ("browser-referer", {"user-agent": UA, "referer": page.url}),
+    ):
+        if headers not in [x[1] for x in header_attempts]:
+            header_attempts.append((label, headers))
 
-        if stream["type"] in {"hls", "dash"}:
-            body = await response.text()
-            result.update(parse_manifest(body, result["contentType"], stream["url"]))
-            if stream["type"] == "hls" and result["manifestValid"] and not result["drm"]:
-                result.update(await validate_hls_segments(page, stream["url"], body, stream.get("headers", {})))
-            if STABILITY_SECONDS > 0 and result["manifestValid"]:
-                await asyncio.sleep(STABILITY_SECONDS)
-                response2 = await fetch_with_retries(
-                    page, stream["url"], stream.get("headers", {}),
-                    timeout=20000, retries=2
-                )
-                result["stable"] = bool(response2 and response2.status < 400)
-        else:
-            result["manifestValid"] = True
-    except Exception as e:
-        result["error"] = str(e)
+    last_error = None
+    for mode, headers in header_attempts:
+        try:
+            response = await fetch_with_retries(
+                page, stream["url"], headers,
+                timeout=20000, retries=RETRY_COUNT
+            )
+            result["checked"] = True
+            result["httpStatus"] = response.status
+            response_headers = await response.all_headers()
+            result["contentType"] = response_headers.get("content-type", "")
+            if response.url and response.url != stream["url"]:
+                result["redirects"] = [response.url]
+            if response.status >= 400:
+                last_error = f"HTTP {response.status}"
+                continue
+
+            result["validationMode"] = mode
+
+            if stream["type"] in {"hls", "dash"}:
+                body = await response.text()
+                result.update(parse_manifest(body, result["contentType"], stream["url"]))
+                if stream["type"] == "hls" and result["manifestValid"] and not result["drm"]:
+                    result.update(await validate_hls_segments(page, stream["url"], body, headers))
+                if STABILITY_SECONDS > 0 and result["manifestValid"]:
+                    await asyncio.sleep(STABILITY_SECONDS)
+                    response2 = await fetch_with_retries(
+                        page, stream["url"], headers,
+                        timeout=20000, retries=2
+                    )
+                    result["stable"] = bool(response2 and response2.status < 400)
+            else:
+                result["manifestValid"] = True
+            return result
+        except Exception as exc:
+            last_error = str(exc)
+
+    result["error"] = last_error or "validation failed"
     return result
 
 
@@ -390,7 +412,9 @@ async def collect_performance_urls(page, capture=None):
         )
         for url in set(entries):
             if re.search(r"(?i)\.(?:m3u8|mpd)(?:\?|$)", url):
-                capture.add(url, {"user-agent": UA, "referer": page.url}, None, "", "performance")
+                # URL discovered from performance timing; no header requirement
+                # is assumed unless the actual request captured one.
+                capture.add(url, {}, None, "", "performance")
     except Exception:
         pass
 
@@ -399,9 +423,9 @@ async def collect_embedded_urls(page, capture):
     try:
         html = await page.content()
         for raw_url in set(MANIFEST_RE.findall(html)):
-            capture.add(raw_url, {"user-agent": UA, "referer": page.url}, None, "", "embedded")
+            capture.add(raw_url, {}, None, "", "embedded")
         for raw in re.findall(r"""(?i)(?:source|file|src)[=:]["']([^"']+)["']""", html):
-            capture.add(unquote(raw), {"user-agent": UA, "referer": page.url}, None, "", "embedded-source")
+            capture.add(unquote(raw), {}, None, "", "embedded-source")
     except Exception:
         pass
 
@@ -485,7 +509,7 @@ async def get_dooplayer_sources(page, capture, channel_url):
                             if media["src"]:
                                 capture.add(
                                     media["src"],
-                                    {"user-agent": UA, "referer": candidate},
+                                    {},
                                     None,
                                     media.get("type", ""),
                                     "dom-media",
