@@ -86,9 +86,16 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add output/bhoom-tamil.json output/bhoom-tamil.m3u output/bhoom-tamil-report.json
-          git diff --cached --quiet && echo "No changes" || git commit -m "chore: update Bhoom Tamil streams"
-          git push || true
+          git add output/bhoom-tamil.json output/bhoom-tamil.m3u
+          if [ -f output/bhoom-tamil-report.json ]; then
+            git add output/bhoom-tamil-report.json
+          fi
+          if git diff --cached --quiet; then
+            echo "No playlist changes"
+          else
+            git commit -m "chore: update Bhoom Tamil streams"
+            git push
+          fi
 
       - name: Wait 1 hour before Combined
         run: sleep 3600
