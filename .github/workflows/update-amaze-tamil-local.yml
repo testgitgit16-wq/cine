@@ -2,20 +2,17 @@ name: Update Combined Tamil TV playlist
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: ["Update Bhoom Tamil streams"]
-    types: [completed]
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
-  group: tamil-combined-playlist
-  cancel-in-progress: true
+  group: tamil-chain
+  cancel-in-progress: false
 
 jobs:
   refresh:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout latest main
@@ -43,11 +40,18 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
-      - name: Publish
+      - name: Publish Combined playlist
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add output/tamil-combined.m3u output/tamil-combined-report.json output/tamil-combined.json
-          git diff --cached --quiet && echo "No changes" && exit 0
-          git commit -m "chore: update combined Tamil TV playlist"
-          git push
+          git diff --cached --quiet && echo "No changes" || git commit -m "chore: update combined Tamil TV playlist"
+          git push || true
+
+      - name: Wait 1 hour before next Bhoom cycle
+        run: sleep 3600
+
+      - name: Start Bhoom workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run update-bhoom-tamil.yml --ref main
