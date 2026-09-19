@@ -76,8 +76,8 @@ jobs:
         with:
           name: bhoom-debug-${{ github.run_id }}
           path: |
-            bhoom-automation/debug/
-            bhoom-automation/output/bhoom-tamil-report.json
+            debug/
+            output/bhoom-tamil-report.json
           if-no-files-found: ignore
           retention-days: 7
 
