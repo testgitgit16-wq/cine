@@ -97,9 +97,6 @@ jobs:
             git push
           fi
 
-      - name: Wait 1 hour before Combined
-        run: sleep 3600
-
       - name: Start Combined workflow
         env:
           GH_TOKEN: ${{ github.token }}
