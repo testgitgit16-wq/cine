@@ -375,7 +375,15 @@ async def playback_status(page):
         return []
 
 
-async def collect_performance_urls(page, capture):
+async def collect_performance_urls(page, capture=None):
+    """Collect manifest URLs from browser performance resources.
+
+    capture is optional as a defensive compatibility guard. All normal callers
+    pass the shared Capture instance; if an unexpected one-argument call ever
+    occurs, create a local capture instead of aborting the whole channel scan.
+    """
+    if capture is None:
+        capture = Capture(page.url)
     try:
         entries = await page.evaluate(
             """performance.getEntriesByType('resource').map(e=>e.name).filter(Boolean)"""
