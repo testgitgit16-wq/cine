@@ -28,14 +28,15 @@ on:
         required: false
         default: "1"
   schedule:
-    - cron: "15 * * * *"
+    - cron: "15 0 * * *"
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
-  group: bhoom-tamil
-  cancel-in-progress: true
+  group: tamil-chain
+  cancel-in-progress: false
 
 jobs:
   scrape:
@@ -81,11 +82,18 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
-      - name: Publish
+      - name: Publish Bhoom playlist
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add output/bhoom-tamil.json output/bhoom-tamil.m3u output/bhoom-tamil-report.json
-          git diff --cached --quiet && echo "No changes" && exit 0
-          git commit -m "chore: update Bhoom Tamil streams"
-          git push
+          git diff --cached --quiet && echo "No changes" || git commit -m "chore: update Bhoom Tamil streams"
+          git push || true
+
+      - name: Wait 1 hour before Combined
+        run: sleep 3600
+
+      - name: Start Combined workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run update-amaze-tamil-local.yml --ref main
