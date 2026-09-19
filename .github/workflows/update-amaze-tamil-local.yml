@@ -2,8 +2,9 @@ name: Update Combined Tamil TV playlist
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 */6 * * *"
+  workflow_run:
+    workflows: ["Update Bhoom Tamil streams"]
+    types: [completed]
 
 permissions:
   contents: write
@@ -14,10 +15,13 @@ concurrency:
 
 jobs:
   refresh:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-24.04
     steps:
-      - name: Checkout
+      - name: Checkout latest main
         uses: actions/checkout@v7
+        with:
+          ref: main
 
       - name: Refresh, deduplicate and validate
         env:
