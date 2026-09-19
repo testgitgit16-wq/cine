@@ -28,7 +28,6 @@ on:
         required: false
         default: "1"
   schedule:
-    # Refresh hourly because BhoomTV may rotate URLs/tokens by schedule or playback.
     - cron: "15 * * * *"
 
 permissions:
@@ -77,8 +76,8 @@ jobs:
         with:
           name: bhoom-debug-${{ github.run_id }}
           path: |
-            debug/
-            output/bhoom-tamil-report.json
+            bhoom-automation/debug/
+            bhoom-automation/output/bhoom-tamil-report.json
           if-no-files-found: ignore
           retention-days: 7
 
