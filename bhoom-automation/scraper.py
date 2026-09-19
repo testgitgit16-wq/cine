@@ -87,7 +87,7 @@ def channel_name_from_url(url: str) -> str:
     return slug(url).replace("-", " ").title()
 
 
-def normalize_manifest_url(url: str):
+def normalize_manifest_url(url: str, content_type: str = ""):
     if not url or not isinstance(url, str):
         return None
     url = url.strip()
@@ -101,22 +101,36 @@ def normalize_manifest_url(url: str):
         parsed = urlparse(url)
         if parsed.netloc.lower().endswith("bhoomtv.org") and parsed.path.startswith("/jwplayer"):
             source = parse_qs(parsed.query).get("source", [None])[0]
-            return normalize_manifest_url(unquote(source)) if source else None
+            return normalize_manifest_url(unquote(source), content_type) if source else None
+
         path = parsed.path.lower()
-        if not any(path.endswith(x) for x in (".m3u8", ".mpd", ".mp4", ".webm", ".aac", ".mp3")):
+        ct = (content_type or "").lower()
+
+        # Some IPTV providers use extensionless stream URLs. Accept them when
+        # the browser response explicitly identifies HLS/DASH content.
+        known_by_url = any(
+            path.endswith(x)
+            for x in (".m3u8", ".mpd", ".mp4", ".webm", ".aac", ".mp3")
+        )
+        known_by_type = any(x in ct for x in CONTENT_TYPE_HINTS) or any(
+            x in ct for x in ("video/mp4", "video/webm", "audio/aac", "audio/mpeg")
+        )
+
+        if not known_by_url and not known_by_type:
             return None
         return url
     except Exception:
         return None
 
 
-def stream_type(url: str):
+def stream_type(url: str, content_type: str = ""):
     low = url.lower()
+    ct = (content_type or "").lower()
     if low.startswith(("rtmp://", "rtmps://")):
         return "rtmp"
-    if ".mpd" in low:
+    if ".mpd" in low or "dash+xml" in ct:
         return "dash"
-    if ".m3u8" in low:
+    if ".m3u8" in low or "mpegurl" in ct:
         return "hls"
     return "progressive"
 
@@ -153,7 +167,7 @@ class Capture:
             self.add(url, headers, response.status, content_type, None)
 
     def add(self, url, headers, status, content_type, resource_type):
-        url = normalize_manifest_url(url)
+        url = normalize_manifest_url(url, content_type)
         if not url:
             return
         # Preserve only headers actually observed on the media request.
@@ -166,7 +180,7 @@ class Capture:
         current = self.items.get(url, {})
         current.update({
             "url": url,
-            "type": stream_type(url),
+            "type": stream_type(url, content_type),
             "headers": clean_headers,
         })
         current["tokenized"] = looks_tokenized(url)
