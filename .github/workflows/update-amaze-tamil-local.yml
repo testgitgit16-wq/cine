@@ -29,6 +29,7 @@ jobs:
           JSON_OUTPUT_FILE: "output/tamil-combined.json"
           TIMEOUT_SECONDS: "15"
           RETRIES: "3"
+          MAX_ENTRIES: "5"
         run: python3 bhoom-automation/update_external_playlist.py
 
       - name: Upload playlist report
