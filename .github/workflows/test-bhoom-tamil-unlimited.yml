@@ -46,7 +46,6 @@ jobs:
         run: python -c "import asyncio, scraper; asyncio.run(scraper.main())"
 
       - name: Show results
-        working-directory: bhoom-automation
         run: |
           python - <<'PY'
           import json
@@ -67,8 +66,8 @@ jobs:
         with:
           name: bhoom-tamil-unlimited-test
           path: |
-            bhoom-automation/output/bhoom-tamil.json
-            bhoom-automation/output/bhoom-tamil-report.json
-            bhoom-automation/debug/
+            output/bhoom-tamil.json
+            output/bhoom-tamil-report.json
+            debug/
           if-no-files-found: ignore
           retention-days: 3
