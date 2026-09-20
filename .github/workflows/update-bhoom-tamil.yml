@@ -3,10 +3,6 @@ name: Update Bhoom Tamil streams
 on:
   workflow_dispatch:
     inputs:
-      max_channels:
-        description: "Number of channels to scan (0 = all)"
-        required: false
-        default: "0"
       validate_streams:
         description: "Validate HLS/DASH/HTTP streams (1=yes, 0=no)"
         required: false
@@ -60,7 +56,8 @@ jobs:
       - name: Scrape and validate
         working-directory: bhoom-automation
         env:
-          MAX_CHANNELS: ${{ github.event.inputs.max_channels || '0' }}
+          # Production scrape: always scan every discovered BhoomTV channel page.
+          MAX_CHANNELS: "0"
           VALIDATE_STREAMS: ${{ github.event.inputs.validate_streams || '1' }}
           STABILITY_SECONDS: ${{ github.event.inputs.stability_seconds || '3' }}
           PLAYER_INITIAL_WAIT_SECONDS: ${{ github.event.inputs.player_initial_wait_seconds || '10' }}
