@@ -84,6 +84,13 @@ jobs:
           RECAPTURE_ROUNDS: ${{ github.event.inputs.recapture_rounds || '1' }}
           RECAPTURE_ON_FAILURES: "1"
           RETRY_COUNT: "3"
+          # GitHub-hosted runners are currently receiving Cloudflare
+          # Turnstile/Managed Challenge pages from BhoomTV. Detect that
+          # deterministically and stop instead of spending the run probing
+          # the challenge page and validating stale fallbacks.
+          CLOUDFLARE_FAIL_FAST: "1"
+          CLOUDFLARE_WAIT_SECONDS: "1"
+          PAGE_NAV_TIMEOUT_SECONDS: "20"
           PUBLISH_SENSITIVE_HEADERS: "0"
           # Do not publish a dramatically reduced playlist after a partial
           # discovery failure (for example, Cloudflare blocking BhoomTV).
