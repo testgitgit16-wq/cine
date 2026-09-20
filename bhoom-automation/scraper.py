@@ -11,6 +11,7 @@ from playwright.async_api import async_playwright, TimeoutError as PlaywrightTim
 BASE = "https://bhoomtv.org"
 GROUP_PAGE_HINTS = ("/live/kollywood-plus/", "/live/kollywood-tv/")
 
+CATEGORY_SECTION = os.getenv("CATEGORY_SECTION", "all").strip().lower()
 CATEGORY_SEEDS = [
     # These are the two BhoomTV sections we want to scan completely.
     f"{BASE}/channel/tamil/",
@@ -41,7 +42,6 @@ CONTENT_TYPE_HINTS = (
 
 MAX_CHANNELS = int(os.getenv("MAX_CHANNELS", "0") or "0")
 CATEGORY_PAGE_LIMIT = max(0, int(os.getenv("CATEGORY_PAGE_LIMIT", "0") or "0"))
-CATEGORY_SECTION = os.getenv("CATEGORY_SECTION", "all").strip().lower()
 DEBUG_CHANNELS = int(os.getenv("DEBUG_CHANNELS", "3") or "3")
 VALIDATE_STREAMS = os.getenv("VALIDATE_STREAMS", "1") != "0"
 STABILITY_SECONDS = max(0, int(os.getenv("STABILITY_SECONDS", "3") or "0"))
