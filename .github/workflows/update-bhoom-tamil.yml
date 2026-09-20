@@ -88,6 +88,7 @@ jobs:
           # Do not publish a dramatically reduced playlist after a partial
           # discovery failure (for example, Cloudflare blocking BhoomTV).
           MIN_CHANNEL_RETENTION_PERCENT: "50"
+          MIN_REQUIRED_CHANNELS: "300"
         run: python -c "import asyncio, scraper; asyncio.run(scraper.main())"
 
       - name: Build IPTV-compatible M3U with primary and secondary streams
