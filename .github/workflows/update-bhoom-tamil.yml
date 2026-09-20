@@ -7,6 +7,14 @@ on:
         description: "Category pages per section (1 = first page only, 0 = all)"
         required: false
         default: "0"
+      category_section:
+        description: "Section to scan: tamil, local, or all"
+        required: false
+        default: "all"
+      start_combined:
+        description: "Start Combined workflow after publish (1=yes, 0=no)"
+        required: false
+        default: "1"
       validate_streams:
         description: "Validate HLS/DASH/HTTP streams (1=yes, 0=no)"
         required: false
@@ -62,6 +70,7 @@ jobs:
         env:
           # 0 = all category pages. For a quick test, use 1.
           CATEGORY_PAGE_LIMIT: ${{ github.event.inputs.category_page_limit || '0' }}
+          CATEGORY_SECTION: ${{ github.event.inputs.category_section || 'all' }}
           # Production scrape: always scan every discovered channel page within the selected category pages.
           MAX_CHANNELS: "0"
           VALIDATE_STREAMS: ${{ github.event.inputs.validate_streams || '1' }}
@@ -101,6 +110,7 @@ jobs:
           fi
 
       - name: Start Combined workflow
+        if: ${{ github.event.inputs.start_combined != '0' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run update-amaze-tamil-local.yml --ref main
