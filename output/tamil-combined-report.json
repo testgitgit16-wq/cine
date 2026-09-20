@@ -1,7 +1,7 @@
 {
   "source": "https://tinyurl.com/amaze-tamil-local-tv",
   "resolvedUrl": "https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/channels.m3u",
-  "generatedAt": "2026-09-19T18:38:39Z",
+  "generatedAt": "2026-09-20T06:14:11Z",
   "sources": [
     "output/bhoom-tamil.m3u",
     "https://tinyurl.com/amaze-tamil-local-tv"
@@ -10,9 +10,9 @@
   "externalEntries": 797,
   "sourceEntries": 1291,
   "uniqueStreamEntries": 1176,
-  "workingUniqueStreams": 623,
-  "publishedChannels": 490,
-  "failedEntries": 553,
+  "workingUniqueStreams": 631,
+  "publishedChannels": 495,
+  "failedEntries": 545,
   "invalidEntries": 0,
   "unverifiedRtmp": 6,
   "entries": [
@@ -60,17 +60,17 @@
       "name": "#EXTINF:-1 tvg-name=\"Aaryaa TV\" group-title=\"Tamil\",Aaryaa TV",
       "channel": "aaryaa tv",
       "url": "https://app.ashokadigital.net/app/3641a4da/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-name=\"Aaryaa TV\" group-title=\"Tamil\",Aaryaa TV",
       "channel": "aaryaa tv",
       "url": "https://app.ashokadigital.net/app/3641a4da/tracks-v1a1/mono.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-name=\"Aaryaa TV\" group-title=\"Tamil\",Aaryaa TV",
@@ -3068,9 +3068,9 @@
       "name": "#EXTINF:-1 tvg-name=\"Sooriyan TV Cinema\" group-title=\"Tamil\",Sooriyan TV Cinema",
       "channel": "sooriyan tv cinema",
       "url": "https://live20.bozztv.com/giatv/giatv-Sooriyantv/Sooriyantv/playlist.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 502: Bad Gateway"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-name=\"Sri Sankara Tamil\" group-title=\"Tamil\",Sri Sankara Tamil",
@@ -3302,7 +3302,7 @@
       "url": "https://ok.ru/video/13232709770869&quot;,&quot;link&quot;:&quot;/live/13232709770869&quot;,&quot;status&quot;:&quot;ONLINE&quot;,&quot;statusText&quot;:&quot;ONLINE&quot;,&quot;isLive&quot;:true,&quot;notPublished&quot;:false,&quot;isClip&quot;:false,&quot;width&quot;:1280,&quot;height&quot;:720},&quot;hlsMasterPlaylistUrl&quot;:&quot;https://vsd278.okcdn.ru/hls/13471991204469.m3u8",
       "status": "FAILED",
       "httpStatus": null,
-      "error": "HTTP Error 400: "
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-name=\"TET HD\" group-title=\"Tamil\",TET HD",
@@ -3948,9 +3948,9 @@
       "name": "#EXTINF:-1 tvg-id=\"AaryaaTV@Cloud7\" tvg-name-ta=\"ஆர்யா டிவி (Cloud7)\" tvg-logo=\"https://jiotvimages.cdn.jio.com/dare_images/images/aryatvtamil.png\" tvg-region=\"Erode\" group-title=\"Music\",Aaryaa TV (Cloud7)",
       "channel": "aaryaa tv (cloud7)",
       "url": "https://live.sscloud7.in/live/aaryaatv/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"BhagyamTV\" tvg-name-ta=\"பாகியம் டிவி HD\" tvg-logo=\"https://jiotvimages.cdn.jio.com/dare_images/images/aanadhamtvtamil.png\" tvg-region=\"Puducherry\" group-title=\"Hindu Devotional\",Bhagyam TV HD",
@@ -4004,9 +4004,9 @@
       "name": "#EXTINF:-1 tvg-id=\"KCMusic\" tvg-name-ta=\"KC மியூசிக்\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1784854592_WhatsApp%20Image%202026-07-23%20at%201.38.19%20PM.jpeg\" tvg-region=\"Coimbatore\" group-title=\"Music\",KC Music",
       "channel": "kc music",
       "url": "https://rtmp.bmlive.net/bms/kcmusic/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"RagaTV\" tvg-name-ta=\"ராகா டிவி\" tvg-logo=\"https://i.ibb.co/KzSwyBN4/1000146992.jpg\" tvg-region=\"Unknown\" group-title=\"PLC\",Raga TV",
@@ -4260,9 +4260,9 @@
       "name": "#EXTINF:-1 tvg-id=\"HarinTV\" tvg-name-ta=\"ஹரின் டிவி\" tvg-logo=\"https://play-lh.googleusercontent.com/-iWhUlatkv3AL80Z6gNlG692UfuqdfAYBWcLQzzapbDs5NtceyHYSXx6mW-_Fc_7P3Sm\" tvg-region=\"Kanyakumari\" group-title=\"PLC\",Harin TV",
       "channel": "harin tv",
       "url": "https://ipcloud.live/harintv/harintvhd/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 403: Forbidden"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"PhoenixTVTirupattur\" tvg-name-ta=\"பீனிக்ஸ் டிவி (திருப்பத்தூர்)\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/PhoenixTirupattur.png\" tvg-region=\"Tirupattur\" group-title=\"PLC\",Phoenix TV",
@@ -4292,9 +4292,9 @@
       "name": "#EXTINF:-1 tvg-id=\"DeavathaiTV\" tvg-name-ta=\"தேவதை டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1784822125_LOGO%20New%20(1).png\" tvg-region=\"Unknown\" group-title=\"PLC\",Deavathai TV",
       "channel": "deavathai tv",
       "url": "https://ipcloud.live/devadhaitv/devadhaitv/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"SMCVTV\" tvg-name-ta=\"SMCV டிவி\" tvg-logo=\"https://yettelevision.com/assets/images/logo/channel_11867.png\" tvg-region=\"Unknown\" group-title=\"PLC\",SMCV TV",
@@ -4380,17 +4380,17 @@
       "name": "#EXTINF:-1 tvg-id=\"IsaiTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/IsaiTV.png\" tvg-region=\"Ramanathapuram\" group-title=\"Music\",Isai TV",
       "channel": "isai tv",
       "url": "https://server.sscloud7.in/isaihd/isaihd/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"TamilOliTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://api.nellaiiptv.com/public/uploads/channel/logos/1771246267.webp\" tvg-region=\"Theni\" group-title=\"PLC\",Tamil Oli TV",
       "channel": "tamil oli tv",
       "url": "https://view.rcserver.in/tmp_hls7/tamilolitv/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"SenthamilTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/SenthamilTV.png\" tvg-region=\"Theni\" group-title=\"PLC\",Senthamil TV",
@@ -4428,17 +4428,17 @@
       "name": "#EXTINF:-1 tvg-id=\"MullaiTV\" tvg-name-ta=\"முல்லை டிவி\" tvg-logo=\"https://phoenixcreations.online/ott/jayamott/uploads/1775660766_WhatsApp%20Image%202026-04-08%20at%207.00.55%20PM.jpeg\" tvg-region=\"Erode\" group-title=\"PLC\",Mullai TV",
       "channel": "mullai tv",
       "url": "https://ipcloud.live/mullaitv/mullaitv/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"MullaiTV\" tvg-name-ta=\"முல்லை டிவி\" tvg-logo=\"https://phoenixcreations.online/ott/jayamott/uploads/1775660766_WhatsApp%20Image%202026-04-08%20at%207.00.55%20PM.jpeg\" tvg-region=\"Erode\" group-title=\"PLC\",Mullai TV [APCloud]",
       "channel": "mullai tv [apcloud]",
       "url": "https://live.apcloud.in/mullaitv/live/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"SachinTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1736158345_sachin_00000%20(1).png\" tvg-region=\"Sambavarvadakarai\" group-title=\"PLC\",Sachin TV",
@@ -4482,9 +4482,9 @@
       "name": "#EXTINF:-1 tvg-id=\"AadvikTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1736158234_Aadvik%20logo%201_00000.png\" tvg-region=\"Sambavarvadakarai\" group-title=\"Music\",Aadvik TV",
       "channel": "aadvik tv",
       "url": "https://ipcloud.live/sachintv/aadviktv/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"StrawberryTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1756798791_Logo_00341.png\" tvg-region=\"Sambavarvadakarai\" group-title=\"PLC\",Strawberry TV",
@@ -4514,9 +4514,9 @@
       "name": "#EXTINF:-1 tvg-id=\"DevasenaTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/DevasenaTV.png\" tvg-region=\"Sambavarvadakarai\" group-title=\"PLC\",Devasena TV",
       "channel": "devasena tv",
       "url": "http://stream.onecloudlive.in/sachintv/devasenatvhd/index.mpd",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/dash+xml"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"SakthiTVNellai\" tvg-name-ta=\"சக்தி டிவி (நெல்லை)\" tvg-logo=\"https://api.nellaiiptv.com/public/uploads/channel/logos/shakthi_tv_1770713832.webp\" tvg-region=\"Tirunelveli\" group-title=\"PLC\",Sakthi TV Nellai",
@@ -4612,7 +4612,7 @@
       "url": "https://ipcloud.live/aadhavantv/aadhavanhd/index.m3u8?token=aadhavantv",
       "status": "FAILED",
       "httpStatus": null,
-      "error": "HTTP Error 503: Service Unavailable"
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"AadhavanColours\" tvg-name-ta=\"ஆதவன் கலர்ஸ்\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/AadhavanColours.png\" tvg-region=\"Sholavandan;Madurai\" group-title=\"PLC\",Aadhavan Colours",
@@ -4634,9 +4634,9 @@
       "name": "#EXTINF:-1 tvg-id=\"AadhavanColours\" tvg-name-ta=\"ஆதவன் கலர்ஸ்\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/AadhavanColours.png\" tvg-region=\"Sholavandan;Madurai\" group-title=\"PLC\",Aadhavan Colours [MKPCloud]",
       "channel": "aadhavan colours [mkpcloud]",
       "url": "http://mkpcloud.playit.plus:1024/AadhavanColours/AadhavanColours.stream/playlist.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"MaruthiTV\" tvg-name-ta=\"மாருதி டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1768917435_MARUTHI%20TV.png\" tvg-region=\"Vazhapadi;Salem\" group-title=\"PLC\",Maruthi TV",
@@ -4681,9 +4681,9 @@
       "name": "#EXTINF:-1 tvg-id=\"MTVKodai\" tvg-name-ta=\"M டிவி (கொடைக்கானல்)\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1743837928_TELEVESION.png\" tvg-region=\"Kodaikanal\" group-title=\"PLC\",MTV Kodaikanal",
       "channel": "mtv kodaikanal",
       "url": "https://ipcloud.live/mtv/menhd/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"MSNTV\" tvg-name-ta=\"MSN டிவி\" tvg-logo=\"https://api.nellaiiptv.com/public/uploads/channel/logos/1771899839.webp\" tvg-region=\"Cuddalore\" group-title=\"PLC\",MSN TV",
@@ -4713,9 +4713,9 @@
       "name": "#EXTINF:-1 tvg-id=\"RioTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1785590479_WhatsApp%20Image%202026-08-01%20at%206.41.03%20PM.jpeg\" tvg-region=\"Alangulam;Tenkasi\" group-title=\"PLC\",Rio TV",
       "channel": "rio tv",
       "url": "http://ipcloud.live/riotv/riotvhd/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"EzraBibleNetwork\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://yettelevision.com/assets/images/logo/channel_11830.png\" tvg-region=\"Alangulam;Tenkasi\" group-title=\"Christian Devotional\",Ezra Bible Network",
@@ -4793,33 +4793,33 @@
       "name": "#EXTINF:-1 tvg-id=\"JJNewsTamil\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://yettelevision.com/assets/images/logo/channel_11866.png\" tvg-region=\"Australia\" group-title=\"International;News\",JJ News Tamil",
       "channel": "jj news tamil",
       "url": "https://hlsstream.olidigital.in/jjtvnewstamil/jjtvnewstamil/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"ChannelSpice\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/ChannelSpice.png\" tvg-region=\"Theni\" group-title=\"PLC\",Channel Spice",
       "channel": "channel spice",
       "url": "https://stream.onecloudlive.in/spicetv/spicetv/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 503: Service Unavailable"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"ChannelSpice\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/ChannelSpice.png\" tvg-region=\"Theni\" group-title=\"PLC\",Channel Spice [MPD]",
       "channel": "channel spice [mpd]",
       "url": "https://stream.onecloudlive.in/spicetv/spicetv/index.mpd",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/dash+xml"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 503: Service Unavailable"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"UrchagamTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1754484180_UTV%20Still%20Back.png\" tvg-region=\"Unknown\" group-title=\"Hindu Devotional\",Urchagam TV",
       "channel": "urchagam tv",
       "url": "https://rtmp.bmlive.net/bms/urchagamtv/stream.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"JeevaTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1782563544_WhatsApp%20Image%202026-06-27%20at%205.52.02%20PM.jpeg\" tvg-region=\"Gobichettipalayam;Erode\" group-title=\"PLC\",Jeeva TV",
@@ -4841,9 +4841,9 @@
       "name": "#EXTINF:-1 tvg-id=\"GaneshTV\" tvg-name-ta=\"கணேஷ் டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1734974165_IMG-20241223-WA0162-removebg-preview.png\" tvg-region=\"Srivilliputhur;Virudhunagar\" group-title=\"PLC\",Ganesh TV",
       "channel": "ganesh tv",
       "url": "https://hls.thendraltv.in/ganeshtv_ade49abb/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"EagleTVNamakkal\" tvg-name-ta=\"ஈகல் டிவி (நாமக்கல்)\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1746463528_WhatsApp_Image_2025-05-05_at_8.17.32_PM-removebg-preview.png\" tvg-region=\"Namakkal\" group-title=\"PLC\",Eagle TV Namakkal",
@@ -4993,9 +4993,9 @@
       "name": "#EXTINF:-1 tvg-id=\"AppleTVNagercoil\" tvg-name-ta=\"ஆப்பிள் டிவி (நாகர்கோவில்)\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1788595193_Apple%20TV%20copy.png\" tvg-region=\"Nagercoil;Kanyakumari\" group-title=\"PLC\",Apple TV Nagercoil",
       "channel": "apple tv nagercoil",
       "url": "https://live.applelive.in/appletv/appletv/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"AppleTVNagercoil\" tvg-name-ta=\"ஆப்பிள் டிவி (நாகர்கோவில்)\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1788595193_Apple%20TV%20copy.png\" tvg-region=\"Nagercoil;Kanyakumari\" group-title=\"PLC\",Apple TV Nagercoil",
@@ -5217,9 +5217,9 @@
       "name": "#EXTINF:-1 tvg-id=\"RainbowTVGandarvakottai\" tvg-name-ta=\"டிவி\" tvg-logo=\"\" tvg-region=\"Gandarvakottai;Thanjavur\" group-title=\"PLC\",Rainbow TV Gandarvakottai",
       "channel": "rainbow tv gandarvakottai",
       "url": "https://notvstream.in/rainbowtv/rainbowtv/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"AalayaMagimaiTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1731768528_AALYA%20MAGAMAI%20TV%20LOGO%20BAKTHI%20TV.png\" tvg-region=\"Unknown\" group-title=\"Hindu Devotional\",Aalaya Magimai TV",
@@ -5327,9 +5327,9 @@
       "name": "#EXTINF:-1 tvg-id=\"JeiyanTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1741017559_Jeiyan%20Tv%20Trichy.png\" tvg-region=\"Trichy\" group-title=\"PLC\",Jeiyan TV",
       "channel": "jeiyan tv",
       "url": "https://stream.onecloudlive.in/jeyantv/jeyantv/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 403: Forbidden"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"VidiyalTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1743757301_IMG-20250404-WA0100.jpg\" tvg-region=\"Chennai;Kelambakkam;Chengalpattu\" group-title=\"PLC\",Vidiyal TV",
@@ -5455,9 +5455,9 @@
       "name": "#EXTINF:-1 tvg-id=\"SanthiyaTV\" tvg-name-ta=\"சந்தியா டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1746533803_saN.png\" tvg-region=\"Kumbakonam\" group-title=\"PLC\",Santhiya TV",
       "channel": "santhiya tv",
       "url": "https://stream.onecloudlive.in/santhiyatv/santhiyatvhd/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"AnandamTVMadurai\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1746452472_lo.png\" tvg-region=\"Madurai\" group-title=\"PLC;SCV Platform;TCCL Platform;VK Digital Platform\",Anandam TV Madurai",
@@ -5551,9 +5551,9 @@
       "name": "#EXTINF:-1 tvg-id=\"VaaniVisuals\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1749032751_vaani%20bbb.png\" tvg-region=\"Chekkanurani;Madurai\" group-title=\"PLC\",Vaani Visuals",
       "channel": "vaani visuals",
       "url": "https://vaanivisualsin.proxy.nellaiiptv.com/vaanitv/vaanitv/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "The read operation timed out"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"KCTNTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1738325933_k%20ctn%20logo%20png.png\" tvg-region=\"Kallakurichi\" group-title=\"PLC\",KCTN TV",
@@ -5607,17 +5607,17 @@
       "name": "#EXTINF:-1 tvg-id=\"NamathuSangamamTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1747992529_namathu%20%20SANGAMAM%20TV.png\" tvg-region=\"Bhavani;Erode\" group-title=\"PLC\",Namathu Sangamam TV",
       "channel": "namathu sangamam tv",
       "url": "http://yours.7starcloud.com:1935/live/nmtv/playlist.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"YoursTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1748079240_YOURS%20TV.png\" tvg-region=\"Bhavani;Erode\" group-title=\"PLC\",Yours TV",
       "channel": "yours tv",
       "url": "http://yours.7starcloud.com:1935/live/yourstv/playlist.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"VisakaTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1748146464_TV%20(1)%20(1).png\" tvg-region=\"Namakkal\" group-title=\"PLC\",Visaka TV",
@@ -5791,9 +5791,9 @@
       "name": "#EXTINF:-1 tvg-id=\"ManiwayTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://singamcloud.com/public/upload/logo/channel%20logo/mani.png\" tvg-region=\"Unknown\" group-title=\"PLC\",Maniway TV",
       "channel": "maniway tv",
       "url": "https://live.singamcloud.in/bsctv/bsctv/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"KingTVAlangulam\" tvg-name-ta=\"கிங் டிவி (ஆலங்குளம்)\" tvg-logo=\"https://sscloud7.in/app/sscloud7/assets/tvchannels/phoenixtv-tvchannelavathar-phoenixtv1721812585.PNG\" tvg-region=\"Alangulam;Tenkasi\" group-title=\"PLC\",King TV Alangulam",
@@ -5903,17 +5903,17 @@
       "name": "#EXTINF:-1 tvg-id=\"AmmaVision\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/AmmaVision.png\" tvg-region=\"Karur\" group-title=\"PLC\",Amma Vision",
       "channel": "amma vision",
       "url": "https://view.rcserver.in/tmp_hls19/ammavision/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"JayamTVKarur2\" tvg-name-ta=\"ஜெயம் டிவி HD (கரூர்)\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/JayamTVHDkarur.png\" tvg-region=\"Karur\" group-title=\"PLC\",Jayam TV",
       "channel": "jayam tv",
       "url": "https://view.rcserver.in/tmp_hls20/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"QMaxPlus\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/QMaxPlus.png\" tvg-region=\"Unknown\" group-title=\"PLC\",QMax Plus",
@@ -6031,9 +6031,9 @@
       "name": "#EXTINF:-1 tvg-id=\"AyyaVaikuntarTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/AyyaVaikundarTV.png\" tvg-region=\"Kalakkad;Tirunelveli\" group-title=\"Hindu Devotional\",Ayya Vaikuntar TV [1Cloud]",
       "channel": "ayya vaikuntar tv [1cloud]",
       "url": "https://stream.onecloudlive.in/samuthirapandi/ayyavaikundartv/index.mpd",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 503: Service Unavailable"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/dash+xml"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"AyyaVaikuntarTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/AyyaVaikundarTV.png\" tvg-region=\"Kalakkad;Tirunelveli\" group-title=\"Hindu Devotional\",Ayya Vaikuntar TV [RojaTV]",
@@ -6079,9 +6079,9 @@
       "name": "#EXTINF:-1 tvg-id=\"SriVelavanTV\" tvg-name-ta=\"ஸ்ரீ வேலவன் டிவி\" tvg-logo=\"https://api.nellaiiptv.com/public/uploads/channel/logos/1776182515.webp\" tvg-region=\"Unknown\" group-title=\"PLC\",Sri Velavan TV",
       "channel": "sri velavan tv",
       "url": "https://rtmp.applelive.in/srivelavantv/srivelavantv4k/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"SriVelavanTV2\" tvg-name-ta=\"ஸ்ரீ வேலவன் டிவி\" tvg-logo=\"https://api.nellaiiptv.com/public/uploads/channel/logos/1776182515.webp\" tvg-region=\"Unknown\" group-title=\"PLC\",Sri Velavan TV (Alt)",
@@ -6137,7 +6137,7 @@
       "url": "https://ipcloud.live/jayamtv/jayamtvhd/index.m3u8?token=jayamtv",
       "status": "FAILED",
       "httpStatus": null,
-      "error": "HTTP Error 503: Service Unavailable"
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"JayamTVNamakkal\" tvg-name-ta=\"ஜெயம் டிவி (நாமக்கல்)\" tvg-logo=\"https://i.ibb.co/MxXLfHMg/1000145099.png\" tvg-region=\"Namakkal\" group-title=\"PLC\",Jayam TV Namakkal",
@@ -6255,9 +6255,9 @@
       "name": "#EXTINF:-1 tvg-id=\"ChenTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"\" tvg-region=\"Unknown\" group-title=\"PLC\",Chen TV",
       "channel": "chen tv",
       "url": "https://stream.apcloud.in/chentv/chentvhd/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 503: Service Unavailable"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"JaiTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://play-lh.googleusercontent.com/APcXUrNRsMykUbsTpJd32uF6VMRqvhVV_davBoS_pUR-HT55AXcJm8TDe1RFfx8X0w\" tvg-region=\"Nagercoil;Kanyakumari\" group-title=\"PLC\",Jai TV",
@@ -6271,9 +6271,9 @@
       "name": "#EXTINF:-1 tvg-id=\"CTNChannel\" tvg-name-ta=\"CTN சேனல்\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1762496906_ctn%20channel%20log%20copy.png\" tvg-region=\"Unknown\" group-title=\"PLC\",CTN Channel",
       "channel": "ctn channel",
       "url": "http://217.216.79.247/ctn/channel/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"KingTVRanipet\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1740572567_1740209948_IMG-20250220-WA0130.jpg\" tvg-region=\"Ranipet\" group-title=\"PLC\",King TV Ranipet",
@@ -6535,9 +6535,9 @@
       "name": "#EXTINF:-1 tvg-id=\"AzhagiTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/AzhagiTV.png\" tvg-region=\"Unknown\" group-title=\"PLC\",Azhagi TV",
       "channel": "azhagi tv",
       "url": "https://view.rcserver.in/tmp_hls17/azhagitv/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"PolimerChannel\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://play-lh.googleusercontent.com/DiZsLeRIoky2i4qkkR36SF7R5MR_fwb0Hl41U3wAlVZsi1wKMBxbK3fzvln8YUQrmbkV\" tvg-region=\"Salem\" group-title=\"PLC\",Polimer Channel",
@@ -6583,9 +6583,9 @@
       "name": "#EXTINF:-1 tvg-id=\"ManishaTV\" tvg-name-ta=\"மனிஷா டிவி\" tvg-logo=\"https://i.ibb.co/5Xk8YC8k/1000137316.webp\" tvg-region=\"Unknown\" group-title=\"PLC\",Manisha TV",
       "channel": "manisha tv",
       "url": "https://stream.sscloud7.in/live/maishatv/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"JeyamTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/JeyamTVTKC.png\" tvg-region=\"Unknown\" group-title=\"PLC\",Jeyam TV",
@@ -6815,9 +6815,9 @@
       "name": "#EXTINF:-1 tvg-id=\"SalaamTV\" tvg-logo=\"\" tvg-region=\"Unknown\" group-title=\"Islamic Devotional\",Salaam TV",
       "channel": "salaam tv",
       "url": "https://stream.onecloudlive.in/salamtv/salamtvhd/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"AthithootharTV\" tvg-name-ta=\"அதிதூதர் டிவி\" tvg-logo=\"https://api.nellaiiptv.com/public/uploads/channel/logos/1771244683.webp\" tvg-region=\"Chennai\" group-title=\"Christian Devotional\",Athithoothar TV",
@@ -6999,9 +6999,9 @@
       "name": "#EXTINF:-1 tvg-id=\"LoveJoyTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://tamiltvchannels.com/img/devotional/love joy tv.png\" tvg-region=\"Tirunelveli\" group-title=\"Christian Devotional\",Love Joy TV",
       "channel": "love joy tv",
       "url": "https://ipcloud.live/novamani/lovejoytv/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"DivineMusic\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://i.ibb.co/1GnTjyGf/DIVINE-TV.png\" tvg-region=\"Unknown\" group-title=\"Christian Devotional;Music\",Divine Music",
@@ -7207,9 +7207,9 @@
       "name": "#EXTINF:-1 tvg-id=\"PunnagaiDesamTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://play-lh.googleusercontent.com/I2CvtQTy83lEsk85LtnzJhIsDNEyTZxbnOXXILNw6cH2WFw2h-aqUnEJlillThhC3Gc\" tvg-region=\"Unknown\" group-title=\"PLC\",Punnagai Desam TV",
       "channel": "punnagai desam tv",
       "url": "http://punnagaidesamtv.phoenixcreations.online/punnagaidesamtv/punnagaidesamtv/playlist.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"AyyaAgilathirattuTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://i.ibb.co/v6FzN61r/1000144432.png\" tvg-region=\"Alangulam;Tenkasi\" group-title=\"Hindu Devotional\",Ayya Agilathirattu TV",
@@ -7303,9 +7303,9 @@
       "name": "#EXTINF:-1 tvg-id=\"RoyalTV\" tvg-name-ta=\"ராயல் டிவி (நாகர்கோவில்)\" tvg-logo=\"https://play-lh.googleusercontent.com/H-oW2dh-fG7d1Rt7G_xLTaYJv_xGtn_bysg65zX-EBQhxavXMmRrbGUofbjSGTlENGPVxBIJ7Mi-dzTb7EEkng\" tvg-region=\"Nagercoil;Kanyakumari\" group-title=\"PLC\",Royal TV",
       "channel": "royal tv",
       "url": "https://play.applelive.in/royaltv/royaltv.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"HolyLandTV\" tvg-name-ta=\"ஹோலி லேண்ட் டிவி\" tvg-logo=\"https://play-lh.googleusercontent.com/I97s9-OI4FrchrXOcR9CdW4EQD5mVZsbbihRkSy6F1M9bs5FXwHM5uMosIGX69CUjWU\" tvg-region=\"Nagercoil;Kanyakumari\" group-title=\"Christian Devotional\",Holy Land TV",
@@ -7343,9 +7343,9 @@
       "name": "#EXTINF:-1 tvg-id=\"SubashTV\" tvg-name-ta=\"சுபாஷ் டிவி\" tvg-logo=\"https://sscloud7.in/rasinetwork/subashtv.png\" tvg-region=\"Tenkasi\" group-title=\"PLC\",Subash TV Tenkasi [Cloud7]",
       "channel": "subash tv tenkasi [cloud7]",
       "url": "https://server.sscloud7.in/live/subashhd/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"SuryaTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/SuryaTV.png\" tvg-region=\"Valliyur;Tirunelveli\" group-title=\"PLC\",Surya TV",
@@ -7439,9 +7439,9 @@
       "name": "#EXTINF:-1 tvg-id=\"PasamalarTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://play-lh.googleusercontent.com/5ZzLBuMhc1abMJ8KnaTw0Jg3ydqRKNLJrY31DSYD2iR9wCOpuN-XXNxdfI7uqKlXFJEmHFO9ffvh56JS7LbI9g\" tvg-region=\"Unknown\" group-title=\"PLC\",Pasamalar TV",
       "channel": "pasamalar tv",
       "url": "https://stream.sscloud7.in/live/paasamalartv/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"KarthickTV\" tvg-name-ta=\"கார்த்திக் டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1739547181_WhatsApp_Image_2025-02-14_at_8.50.29_PM__2_-removebg-preview.png\" tvg-region=\"Tirunelveli\" group-title=\"PLC\",Karthick TV",
@@ -7487,9 +7487,9 @@
       "name": "#EXTINF:-1 tvg-id=\"SelvaTamilTV\" tvg-name-ta=\"டிவி\" tvg-logo=\"https://play-lh.googleusercontent.com/DzEobB1q02UpgqXpng4DebsPDTQ1bH_jpLfhEr_plkPrDBBPpR5_jvJDq15VAPAanVIwnh5MYLuH8wgc5mUt\" tvg-region=\"Alangulam;Tenkasi\" group-title=\"PLC\",Selva Tamil TV",
       "channel": "selva tamil tv",
       "url": "https://stream.sscloud7.in/live/selvatamiltv/index.mpd",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/dash+xml"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "The read operation timed out"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"SuperTVDindigul\" tvg-name-ta=\"சூப்பர் டிவி (திண்டுக்கல்)\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1769694007_super%20tv%20logo%20png.png\" tvg-region=\"Dindigul\" group-title=\"PLC\",Super TV Dindigul",
@@ -7719,9 +7719,9 @@
       "name": "#EXTINF:-1 tvg-id=\"CTNTV\" tvg-name-ta=\"CTN டிவி\" tvg-logo=\"https://api.nellaiiptv.com/public/uploads/channel/logos/1771645061.webp\" tvg-region=\"Unknown\" group-title=\"PLC\",CTN TV",
       "channel": "ctn tv",
       "url": "https://ipcloud.live/ctn/ctntvhd/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"ArasuTV\" tvg-name-ta=\"அரசு டிவி\" tvg-logo=\"https://tataprime.wordpress.com/wp-content/uploads/2024/02/ctn-arasu-tv204274256292633484.png\" tvg-region=\"Unknown\" group-title=\"PLC\",Arasu TV",
@@ -7791,17 +7791,17 @@
       "name": "#EXTINF:-1 tvg-id=\"LifeTV\" tvg-name-ta=\"லைஃப் டிவி\" tvg-logo=\"https://i.ibb.co/v1C0bdR/logo-1.png\" tvg-region=\"Unknown\" group-title=\"Christian Devotional\",Life TV",
       "channel": "life tv",
       "url": "https://lifetv.livebox.co.in/lifetvhls/lifetv.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"News80Tamil\" tvg-name-ta=\"நியூஸ் 80 தமிழ்\" tvg-logo=\"https://play-lh.googleusercontent.com/vUleh6XgoF2Ouabo6ImWZFg1wZY0xiFZDgp8d2fl2wvx2gejgt7eavWhn9DxTVEtw4I\" tvg-region=\"Unknown\" group-title=\"News\",News 80 Tamil",
       "channel": "news 80 tamil",
       "url": "https://3.proxy.nellaiiptv.com/NOTV/NEWS80/index.m3u8?token=GTR",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"CTV\" tvg-name-ta=\"C டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/CTV.png\" tvg-region=\"Unknown\" group-title=\"PLC\",C TV",
@@ -7927,9 +7927,9 @@
       "name": "#EXTINF:-1 tvg-id=\"MathanTV\" tvg-name-ta=\"மதன் டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/MathanTV.png\" tvg-region=\"Unknown\" group-title=\"PLC\",Mathan TV",
       "channel": "mathan tv",
       "url": "https://ipcloud.live/mathantv/mathantv/index.mpd",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/dash+xml"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"RPlusTV\" tvg-name-ta=\"R பிளஸ் டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/RPlusTV.png\" tvg-region=\"Namakkal\" group-title=\"PLC\",R Plus TV",
@@ -8231,9 +8231,9 @@
       "name": "#EXTINF:-1 tvg-id=\"SooriyanTV\" tvg-name-ta=\"சூரியன் டிவி (கனடா)\" tvg-logo=\"https://yettelevision.com/assets/images/logo/channel_11842.png\" tvg-region=\"Canada\" group-title=\"International\",Sooriyan TV",
       "channel": "sooriyan tv",
       "url": "https://live20.bozztv.com/giatv/giatv-Infinittyott/Infinittyott/playlist.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 502: Bad Gateway"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"ThaaiTV\" tvg-name-ta=\"தாய் டிவி\" tvg-logo=\"https://thaaitv.com/wp-content/uploads/2024/10/THAAITV-LOGOO.png\" tvg-region=\"United Kingdom\" group-title=\"International\",Thaai TV",
@@ -8375,17 +8375,17 @@
       "name": "#EXTINF:-1 tvg-id=\"MTVVirudhunagar\" tvg-name-ta=\"M டிவி (விருதுநகர்)\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1777712105_MTV%201.png\" tvg-region=\"Virudhunagar\" group-title=\"PLC\",MTV Virudhunagar",
       "channel": "mtv virudhunagar",
       "url": "https://stream.ashokadigital.net/mtvlive/mtvlive/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"ThuthiTV\" tvg-name-ta=\"துதி டிவி\" tvg-logo=\"https://play-lh.googleusercontent.com/6dgm4tj8ppUdoK1ra5UTh5YihmtJZ85XtqVnyr34KRJ-6PnlJCEzZt4BkBn3xuBufqc\" tvg-region=\"Unknown\" group-title=\"Christian Devotional\",Thuthi TV",
       "channel": "thuthi tv",
       "url": "http://indiamatrix.in/thuthitv/thuthitv.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"SirustigarTV\" tvg-name-ta=\"சிருஷ்டிகர் டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/SirustigarTV.png\" tvg-region=\"Unknown\" group-title=\"Christian Devotional\",Sirustigar TV",
@@ -8447,9 +8447,9 @@
       "name": "#EXTINF:-1 tvg-id=\"KathirTV\" tvg-name-ta=\"கதிர் டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1776329455_KATHIR%20TV.png\" tvg-region=\"Unknown\" group-title=\"PLC\",Kathir TV",
       "channel": "kathir tv",
       "url": "https://stream.ipcloud.live/kathirtvhd/livestream/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 503: Service Unavailable"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"DharaniTV\" tvg-name-ta=\"தரணி டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/DharaniTV2.png\" tvg-region=\"Unknown\" group-title=\"PLC\",Dharani TV",
@@ -8527,9 +8527,9 @@
       "name": "#EXTINF:-1 tvg-id=\"BoobshTV\" tvg-name-ta=\"பூபேஷ் டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1743337212_1000035047-removebg-preview.png\" tvg-region=\"Kanyakumari\" group-title=\"PLC\",Boobsh TV",
       "channel": "boobsh tv",
       "url": "https://live.applelive.in/boobsh/boobsh/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"MRTV\" tvg-name-ta=\"MR டிவி\" tvg-logo=\"https://raw.githubusercontent.com/amazeyourself/tamil-local-iptv/refs/heads/main/logos/MRTV.png\" tvg-region=\"Unknown\" group-title=\"PLC\",MR TV",
@@ -8695,9 +8695,9 @@
       "name": "#EXTINF:-1 tvg-id=\"CholaTV\" tvg-name-ta=\"சோழா டிவி\" tvg-logo=\"https://livetv.ashokadigital.net/upload/logo/1779616206_chala%20tv.png\" tvg-region=\"Unknown\" group-title=\"PLC\",Chola TV",
       "channel": "chola tv",
       "url": "https://hlsstream.olidigital.in/cholatv/cholatv/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 503: Service Unavailable"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"ThamilTV\" tvg-name-ta=\"தமிழ் டிவி\" tvg-logo=\"https://tamilradios.org/wp-content/uploads/2026/04/thamil-tv.png\" tvg-region=\"Canada\" group-title=\"International\",Thamil TV",
@@ -8841,7 +8841,7 @@
       "url": "https://view.apserver.in/tmp_hls6/srisakthitv/index.m3u8",
       "status": "FAILED",
       "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "error": "The read operation timed out"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"DureshTV\" tvg-name-ta=\"துரேஷ் டிவி\" tvg-logo=\"https://api.nellaiiptv.com/public/uploads/channel/logos/1787301696.webp\" tvg-region=\"\" group-title=\"PLC;VK Digital Platform\",Duresh TV",
@@ -9127,9 +9127,9 @@
       "name": "#EXTINF:-1 tvg-id=\"PugalTV\" tvg-name-ta=\"புகழ் டிவி\" tvg-logo=\"https://play-lh.googleusercontent.com/Vozg_3T-Dq-Zf0NsrP7BA7RTZKt2Ep4B5KqjQ-T-Lw2YLp2YIZLg_4WxXqNwgKG3qsPTwBWWwaA0Vf7M9GVb-Q\" tvg-region=\"Unknown\" group-title=\"PLC\",Pugal TV",
       "channel": "pugal tv",
       "url": "http://pugal.phoenixcreations.online/pugaltv/pugal/playlist.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"MayilTV\" tvg-name-ta=\"மயில் டிவி\" tvg-logo=\"https://phoenixcreations.online/ott/vinayagaott/uploads/1782824649_mayil%20tv%20logo%20ip%20tv%20copy.jpg\" tvg-region=\"Mayiladuthurai\" group-title=\"PLC\",Mayil TV",
@@ -9151,9 +9151,9 @@
       "name": "#EXTINF:-1 tvg-id=\"MTNTV\" tvg-name-ta=\"MTN டிவி\" tvg-logo=\"https://phoenixcreations.online/ott/jayamott/uploads/1785126728_LOGO.png\" tvg-region=\"Kanyakumari\" group-title=\"PLC\",MTN TV",
       "channel": "mtn tv",
       "url": "https://rtmp.applelive.in/mtntv/mtntv/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"SwastikTV\" tvg-name-ta=\"சுவஸ்திக் டிவி\" tvg-logo=\"https://api.nellaiiptv.com/public/uploads/channel/logos/1784549154.webp\" tvg-region=\"Unknown\" group-title=\"PLC\",Swastik TV",
@@ -9199,9 +9199,9 @@
       "name": "#EXTINF:-1 tvg-id=\"SGBTV\" tvg-name-ta=\"SGB டிவி\" tvg-logo=\"https://cdn.neotvapp.com/file/quickfox/top-tv/channels/1000159114-1781435419226.jpg\" tvg-region=\"Unknown\" group-title=\"PLC\",SGB TV",
       "channel": "sgb tv",
       "url": "https://hlsstream.olidigital.in/sgbtv/sgbtv/index.m3u8",
-      "status": "WORKING",
-      "httpStatus": 200,
-      "contentType": "application/vnd.apple.mpegurl"
+      "status": "FAILED",
+      "httpStatus": null,
+      "error": "HTTP Error 404: Not Found"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"SarahTV\" tvg-name-ta=\"சாரா டிவி\" tvg-logo=\"https://phoenixcreations.online/ott/jayamott/uploads/1785900010_WhatsApp%20Image%202026-08-04%20at%209.34.30%20PM.jpeg\" tvg-region=\"Unknown\" group-title=\"PLC\",Sarah TV",
@@ -9281,7 +9281,7 @@
       "url": "https://stream.onecloudlive.in/cctv/cctvhd/index.m3u8",
       "status": "FAILED",
       "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "error": "HTTP Error 403: Forbidden"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"AgamTV\" tvg-name-ta=\"அகம் டிவி\" tvg-logo=\"https://i.ibb.co/GfRY4XgL/agamtv.jpg\" tvg-region=\"Unknown\" group-title=\"International\",Agam TV",
@@ -9406,9 +9406,9 @@
       "name": "#EXTINF:-1 tvg-id=\"AdhiralaiTV\" tvg-name-ta=\"அதிரலை டிவி\" tvg-logo=\"https://play-lh.googleusercontent.com/c9Qa1KDUJvV8VLPIzWWo_xR7ojV-r5KixK9KTmM4N_J30HxZHAMxg70ti08YCLEnKxDtpiZ7rULHicQB368V\" tvg-region=\"Unknown\" group-title=\"PLC\",Adhiralai TV",
       "channel": "adhiralai tv",
       "url": "https://hlsstream.olidigital.in/adhiralaitv/adhiralaitv/index.m3u8",
-      "status": "FAILED",
-      "httpStatus": null,
-      "error": "HTTP Error 404: Not Found"
+      "status": "WORKING",
+      "httpStatus": 200,
+      "contentType": "application/vnd.apple.mpegurl"
     },
     {
       "name": "#EXTINF:-1 tvg-id=\"SMadanTV\" tvg-name-ta=\"S மதன் டிவி\" tvg-logo=\"\" tvg-region=\"Unknown\" group-title=\"TCCL Platform\",S Madan TV",
@@ -9454,12 +9454,22 @@
       "channel": "Aaryaa TV",
       "sources": [
         {
-          "url": "https://ssai.aniview.com/api/v1/hls/stream.m3u8?cb=1786380414&AVS_SSAIID=69b126ad393425dcdf07ad74",
+          "url": "https://app.ashokadigital.net/app/3641a4da/index.m3u8",
           "status": "WORKING",
           "primary": true
         },
         {
+          "url": "https://ssai.aniview.com/api/v1/hls/stream.m3u8?cb=1786380414&AVS_SSAIID=69b126ad393425dcdf07ad74",
+          "status": "WORKING",
+          "primary": false
+        },
+        {
           "url": "https://stream.ottlive.co.in/aryatvtamil/index.m3u8",
+          "status": "WORKING",
+          "primary": false
+        },
+        {
+          "url": "https://app.ashokadigital.net/app/3641a4da/tracks-v1a1/mono.m3u8",
           "status": "WORKING",
           "primary": false
         },
@@ -9802,6 +9812,11 @@
           "url": "https://rtmp.bmlive.net/bms/kcmusic/stream.m3u8",
           "status": "WORKING",
           "primary": true
+        },
+        {
+          "url": "https://rtmp.bmlive.net/bms/kcmusic/index.m3u8",
+          "status": "WORKING",
+          "primary": false
         }
       ]
     },
@@ -10341,6 +10356,16 @@
       ]
     },
     {
+      "channel": "Sooriyan TV Cinema",
+      "sources": [
+        {
+          "url": "https://live20.bozztv.com/giatv/giatv-Sooriyantv/Sooriyantv/playlist.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Sri Sankara Tamil",
       "sources": [
         {
@@ -10781,6 +10806,16 @@
       ]
     },
     {
+      "channel": "Aaryaa TV (Cloud7)",
+      "sources": [
+        {
+          "url": "https://live.sscloud7.in/live/aaryaatv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Bhagyam TV HD",
       "sources": [
         {
@@ -11071,6 +11106,16 @@
       ]
     },
     {
+      "channel": "Harin TV",
+      "sources": [
+        {
+          "url": "https://ipcloud.live/harintv/harintvhd/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Nila TV Pannur",
       "sources": [
         {
@@ -11085,6 +11130,16 @@
       "sources": [
         {
           "url": "https://ipcloud.live/skytv/skytv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Deavathai TV",
+      "sources": [
+        {
+          "url": "https://ipcloud.live/devadhaitv/devadhaitv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -11121,6 +11176,26 @@
       ]
     },
     {
+      "channel": "Isai TV",
+      "sources": [
+        {
+          "url": "https://server.sscloud7.in/isaihd/isaihd/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Tamil Oli TV",
+      "sources": [
+        {
+          "url": "https://view.rcserver.in/tmp_hls7/tamilolitv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Sailam TV",
       "sources": [
         {
@@ -11135,26 +11210,6 @@
       "sources": [
         {
           "url": "https://play.applelive.in/shatv/shatv.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Mullai TV",
-      "sources": [
-        {
-          "url": "https://ipcloud.live/mullaitv/mullaitv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Mullai TV [APCloud]",
-      "sources": [
-        {
-          "url": "https://live.apcloud.in/mullaitv/live/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -11191,20 +11246,20 @@
       ]
     },
     {
-      "channel": "Aadvik TV",
+      "channel": "JP Music TV",
       "sources": [
         {
-          "url": "https://ipcloud.live/sachintv/aadviktv/index.m3u8",
+          "url": "http://jptv.sscloud7.in/live/jptv/video.m3u8",
           "status": "WORKING",
           "primary": true
         }
       ]
     },
     {
-      "channel": "JP Music TV",
+      "channel": "Devasena TV",
       "sources": [
         {
-          "url": "http://jptv.sscloud7.in/live/jptv/video.m3u8",
+          "url": "http://stream.onecloudlive.in/sachintv/devasenatvhd/index.mpd",
           "status": "WORKING",
           "primary": true
         }
@@ -11281,16 +11336,6 @@
       ]
     },
     {
-      "channel": "Aadhavan Colours [MKPCloud]",
-      "sources": [
-        {
-          "url": "http://mkpcloud.playit.plus:1024/AadhavanColours/AadhavanColours.stream/playlist.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
       "channel": "Jayam TV Sivakasi [RTMP]",
       "sources": [
         {
@@ -11315,6 +11360,26 @@
       "sources": [
         {
           "url": "http://jayamtv.phoenixcreations.online/jayamtv/sivakasi/playlist.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "MTV Kodaikanal",
+      "sources": [
+        {
+          "url": "https://ipcloud.live/mtv/menhd/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Rio TV",
+      "sources": [
+        {
+          "url": "http://ipcloud.live/riotv/riotvhd/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -11406,50 +11471,20 @@
       ]
     },
     {
-      "channel": "JJ News Tamil",
-      "sources": [
-        {
-          "url": "https://hlsstream.olidigital.in/jjtvnewstamil/jjtvnewstamil/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Channel Spice",
-      "sources": [
-        {
-          "url": "https://stream.onecloudlive.in/spicetv/spicetv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Channel Spice [MPD]",
-      "sources": [
-        {
-          "url": "https://stream.onecloudlive.in/spicetv/spicetv/index.mpd",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Urchagam TV",
-      "sources": [
-        {
-          "url": "https://rtmp.bmlive.net/bms/urchagamtv/stream.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
       "channel": "Thendral TV",
       "sources": [
         {
           "url": "https://hls.thendraltv.in/thendraltv_1210b43d/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Ganesh TV",
+      "sources": [
+        {
+          "url": "https://hls.thendraltv.in/ganeshtv_ade49abb/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -11550,16 +11585,6 @@
       "sources": [
         {
           "url": "https://stream.onecloudlive.in/duraitv/classic/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Apple TV Nagercoil",
-      "sources": [
-        {
-          "url": "https://live.applelive.in/appletv/appletv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -11761,6 +11786,16 @@
       ]
     },
     {
+      "channel": "Rainbow TV Gandarvakottai",
+      "sources": [
+        {
+          "url": "https://notvstream.in/rainbowtv/rainbowtv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Dheiveegam TV",
       "sources": [
         {
@@ -11825,16 +11860,6 @@
       "sources": [
         {
           "url": "https://notvstream.in/brightsimrosetv/brightsimrosetv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Jeiyan TV",
-      "sources": [
-        {
-          "url": "https://stream.onecloudlive.in/jeyantv/jeyantv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -11956,16 +11981,6 @@
       ]
     },
     {
-      "channel": "Santhiya TV",
-      "sources": [
-        {
-          "url": "https://stream.onecloudlive.in/santhiyatv/santhiyatvhd/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
       "channel": "Anandam TV Madurai",
       "sources": [
         {
@@ -12056,6 +12071,16 @@
       ]
     },
     {
+      "channel": "Vaani Visuals",
+      "sources": [
+        {
+          "url": "https://vaanivisualsin.proxy.nellaiiptv.com/vaanitv/vaanitv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "CTN Kallakurichi",
       "sources": [
         {
@@ -12100,6 +12125,26 @@
       "sources": [
         {
           "url": "http://120.138.14.16:8080/hls/tamilmagantv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Namathu Sangamam TV",
+      "sources": [
+        {
+          "url": "http://yours.7starcloud.com:1935/live/nmtv/playlist.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Yours TV",
+      "sources": [
+        {
+          "url": "http://yours.7starcloud.com:1935/live/yourstv/playlist.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -12206,16 +12251,6 @@
       ]
     },
     {
-      "channel": "Maniway TV",
-      "sources": [
-        {
-          "url": "https://live.singamcloud.in/bsctv/bsctv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
       "channel": "King TV Alangulam",
       "sources": [
         {
@@ -12250,26 +12285,6 @@
       "sources": [
         {
           "url": "https://view.rcserver.in/tmp_hls10/jayamtvkarur/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Amma Vision",
-      "sources": [
-        {
-          "url": "https://view.rcserver.in/tmp_hls19/ammavision/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Jayam TV",
-      "sources": [
-        {
-          "url": "https://view.rcserver.in/tmp_hls20/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -12366,6 +12381,16 @@
       ]
     },
     {
+      "channel": "Ayya Vaikuntar TV [1Cloud]",
+      "sources": [
+        {
+          "url": "https://stream.onecloudlive.in/samuthirapandi/ayyavaikundartv/index.mpd",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Thendral TV Theni",
       "sources": [
         {
@@ -12380,16 +12405,6 @@
       "sources": [
         {
           "url": "https://rtmp.bmlive.net/ctn/ctntn/stream.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Sri Velavan TV",
-      "sources": [
-        {
-          "url": "https://rtmp.applelive.in/srivelavantv/srivelavantv4k/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -12526,20 +12541,20 @@
       ]
     },
     {
-      "channel": "Chen TV",
+      "channel": "Jai TV",
       "sources": [
         {
-          "url": "https://stream.apcloud.in/chentv/chentvhd/index.m3u8",
+          "url": "https://play.applelive.in/jaitv/jaitv.m3u8",
           "status": "WORKING",
           "primary": true
         }
       ]
     },
     {
-      "channel": "Jai TV",
+      "channel": "CTN Channel",
       "sources": [
         {
-          "url": "https://play.applelive.in/jaitv/jaitv.m3u8",
+          "url": "http://217.216.79.247/ctn/channel/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -12716,16 +12731,6 @@
       ]
     },
     {
-      "channel": "Azhagi TV",
-      "sources": [
-        {
-          "url": "https://view.rcserver.in/tmp_hls17/azhagitv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
       "channel": "Polimer Channel",
       "sources": [
         {
@@ -12750,6 +12755,16 @@
       "sources": [
         {
           "url": "https://live.applelive.in/rowthiramtv/rowthiramtv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Manisha TV",
+      "sources": [
+        {
+          "url": "https://stream.sscloud7.in/live/maishatv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -12900,6 +12915,16 @@
       "sources": [
         {
           "url": "https://ipcloud.live/mmtv/mmtvhd/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Salaam TV",
+      "sources": [
+        {
+          "url": "https://stream.onecloudlive.in/salamtv/salamtvhd/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -13060,6 +13085,16 @@
       "sources": [
         {
           "url": "https://ipcloud.live/novamani/kingofglorytv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Love Joy TV",
+      "sources": [
+        {
+          "url": "https://ipcloud.live/novamani/lovejoytv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -13266,6 +13301,16 @@
       ]
     },
     {
+      "channel": "Punnagai Desam TV",
+      "sources": [
+        {
+          "url": "http://punnagaidesamtv.phoenixcreations.online/punnagaidesamtv/punnagaidesamtv/playlist.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "MonTamil",
       "sources": [
         {
@@ -13366,6 +13411,16 @@
       ]
     },
     {
+      "channel": "Royal TV",
+      "sources": [
+        {
+          "url": "https://play.applelive.in/royaltv/royaltv.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Holy Land TV",
       "sources": [
         {
@@ -13390,6 +13445,16 @@
       "sources": [
         {
           "url": "http://nagatv.phoenixcreations.online/nagatv/nagatv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Subash TV Tenkasi [Cloud7]",
+      "sources": [
+        {
+          "url": "https://server.sscloud7.in/live/subashhd/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -13446,6 +13511,16 @@
       ]
     },
     {
+      "channel": "Pasamalar TV",
+      "sources": [
+        {
+          "url": "https://stream.sscloud7.in/live/paasamalartv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Karthick TV",
       "sources": [
         {
@@ -13460,16 +13535,6 @@
       "sources": [
         {
           "url": "https://stream.onecloudlive.in/karthick/deivegaolitv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Selva Tamil TV",
-      "sources": [
-        {
-          "url": "https://stream.sscloud7.in/live/selvatamiltv/index.mpd",
           "status": "WORKING",
           "primary": true
         }
@@ -13606,16 +13671,6 @@
       ]
     },
     {
-      "channel": "CTN TV",
-      "sources": [
-        {
-          "url": "https://ipcloud.live/ctn/ctntvhd/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
       "channel": "Arasu TV",
       "sources": [
         {
@@ -13666,10 +13721,10 @@
       ]
     },
     {
-      "channel": "Life TV",
+      "channel": "News 80 Tamil",
       "sources": [
         {
-          "url": "https://lifetv.livebox.co.in/lifetvhls/lifetv.m3u8",
+          "url": "https://3.proxy.nellaiiptv.com/NOTV/NEWS80/index.m3u8?token=GTR",
           "status": "WORKING",
           "primary": true
         }
@@ -13770,6 +13825,16 @@
       "sources": [
         {
           "url": "http://148.113.170.17:8091/ithal/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Mathan TV",
+      "sources": [
+        {
+          "url": "https://ipcloud.live/mathantv/mathantv/index.mpd",
           "status": "WORKING",
           "primary": true
         }
@@ -14086,6 +14151,16 @@
       ]
     },
     {
+      "channel": "Sooriyan TV",
+      "sources": [
+        {
+          "url": "https://live20.bozztv.com/giatv/giatv-Infinittyott/Infinittyott/playlist.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Uthamiyae TV",
       "sources": [
         {
@@ -14196,10 +14271,10 @@
       ]
     },
     {
-      "channel": "MTV Virudhunagar",
+      "channel": "Thuthi TV",
       "sources": [
         {
-          "url": "https://stream.ashokadigital.net/mtvlive/mtvlive/index.m3u8",
+          "url": "http://indiamatrix.in/thuthitv/thuthitv.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -14266,16 +14341,6 @@
       ]
     },
     {
-      "channel": "Kathir TV",
-      "sources": [
-        {
-          "url": "https://stream.ipcloud.live/kathirtvhd/livestream/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
       "channel": "PG TV",
       "sources": [
         {
@@ -14320,6 +14385,16 @@
       "sources": [
         {
           "url": "http://saitv.sscloud7.in/live/livesaitv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Boobsh TV",
+      "sources": [
+        {
+          "url": "https://live.applelive.in/boobsh/boobsh/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -14460,16 +14535,6 @@
       "sources": [
         {
           "url": "https://5790d294af2dc.streamlock.net/aathitv/aathitv/playlist.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Chola TV",
-      "sources": [
-        {
-          "url": "https://hlsstream.olidigital.in/cholatv/cholatv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -14736,20 +14801,20 @@
       ]
     },
     {
-      "channel": "Mayil TV",
+      "channel": "Pugal TV",
       "sources": [
         {
-          "url": "http://103.186.231.25:8080/hls/mayiltv/index.m3u8",
+          "url": "http://pugal.phoenixcreations.online/pugaltv/pugal/playlist.m3u8",
           "status": "WORKING",
           "primary": true
         }
       ]
     },
     {
-      "channel": "MTN TV",
+      "channel": "Mayil TV",
       "sources": [
         {
-          "url": "https://rtmp.applelive.in/mtntv/mtntv/index.m3u8",
+          "url": "http://103.186.231.25:8080/hls/mayiltv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -14780,16 +14845,6 @@
       "sources": [
         {
           "url": "https://thogaitv.stream.onecloudlive.in/thogaitv/12345678/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "SGB TV",
-      "sources": [
-        {
-          "url": "https://hlsstream.olidigital.in/sgbtv/sgbtv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -14980,6 +15035,16 @@
       "sources": [
         {
           "url": "https://rtmp.applelive.in/aalayatv/aalayatv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Adhiralai TV",
+      "sources": [
+        {
+          "url": "https://hlsstream.olidigital.in/adhiralaitv/adhiralaitv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }

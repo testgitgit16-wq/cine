@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19T18:38:39Z",
+  "generatedAt": "2026-09-20T06:14:11Z",
   "channels": [
     {
       "channel": "7S Music",
@@ -35,12 +35,22 @@
       "channel": "Aaryaa TV",
       "sources": [
         {
-          "url": "https://ssai.aniview.com/api/v1/hls/stream.m3u8?cb=1786380414&AVS_SSAIID=69b126ad393425dcdf07ad74",
+          "url": "https://app.ashokadigital.net/app/3641a4da/index.m3u8",
           "status": "WORKING",
           "primary": true
         },
         {
+          "url": "https://ssai.aniview.com/api/v1/hls/stream.m3u8?cb=1786380414&AVS_SSAIID=69b126ad393425dcdf07ad74",
+          "status": "WORKING",
+          "primary": false
+        },
+        {
           "url": "https://stream.ottlive.co.in/aryatvtamil/index.m3u8",
+          "status": "WORKING",
+          "primary": false
+        },
+        {
+          "url": "https://app.ashokadigital.net/app/3641a4da/tracks-v1a1/mono.m3u8",
           "status": "WORKING",
           "primary": false
         },
@@ -383,6 +393,11 @@
           "url": "https://rtmp.bmlive.net/bms/kcmusic/stream.m3u8",
           "status": "WORKING",
           "primary": true
+        },
+        {
+          "url": "https://rtmp.bmlive.net/bms/kcmusic/index.m3u8",
+          "status": "WORKING",
+          "primary": false
         }
       ]
     },
@@ -922,6 +937,16 @@
       ]
     },
     {
+      "channel": "Sooriyan TV Cinema",
+      "sources": [
+        {
+          "url": "https://live20.bozztv.com/giatv/giatv-Sooriyantv/Sooriyantv/playlist.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Sri Sankara Tamil",
       "sources": [
         {
@@ -1362,6 +1387,16 @@
       ]
     },
     {
+      "channel": "Aaryaa TV (Cloud7)",
+      "sources": [
+        {
+          "url": "https://live.sscloud7.in/live/aaryaatv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Bhagyam TV HD",
       "sources": [
         {
@@ -1652,6 +1687,16 @@
       ]
     },
     {
+      "channel": "Harin TV",
+      "sources": [
+        {
+          "url": "https://ipcloud.live/harintv/harintvhd/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Nila TV Pannur",
       "sources": [
         {
@@ -1666,6 +1711,16 @@
       "sources": [
         {
           "url": "https://ipcloud.live/skytv/skytv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Deavathai TV",
+      "sources": [
+        {
+          "url": "https://ipcloud.live/devadhaitv/devadhaitv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -1702,6 +1757,26 @@
       ]
     },
     {
+      "channel": "Isai TV",
+      "sources": [
+        {
+          "url": "https://server.sscloud7.in/isaihd/isaihd/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Tamil Oli TV",
+      "sources": [
+        {
+          "url": "https://view.rcserver.in/tmp_hls7/tamilolitv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Sailam TV",
       "sources": [
         {
@@ -1716,26 +1791,6 @@
       "sources": [
         {
           "url": "https://play.applelive.in/shatv/shatv.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Mullai TV",
-      "sources": [
-        {
-          "url": "https://ipcloud.live/mullaitv/mullaitv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Mullai TV [APCloud]",
-      "sources": [
-        {
-          "url": "https://live.apcloud.in/mullaitv/live/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -1772,20 +1827,20 @@
       ]
     },
     {
-      "channel": "Aadvik TV",
+      "channel": "JP Music TV",
       "sources": [
         {
-          "url": "https://ipcloud.live/sachintv/aadviktv/index.m3u8",
+          "url": "http://jptv.sscloud7.in/live/jptv/video.m3u8",
           "status": "WORKING",
           "primary": true
         }
       ]
     },
     {
-      "channel": "JP Music TV",
+      "channel": "Devasena TV",
       "sources": [
         {
-          "url": "http://jptv.sscloud7.in/live/jptv/video.m3u8",
+          "url": "http://stream.onecloudlive.in/sachintv/devasenatvhd/index.mpd",
           "status": "WORKING",
           "primary": true
         }
@@ -1862,16 +1917,6 @@
       ]
     },
     {
-      "channel": "Aadhavan Colours [MKPCloud]",
-      "sources": [
-        {
-          "url": "http://mkpcloud.playit.plus:1024/AadhavanColours/AadhavanColours.stream/playlist.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
       "channel": "Jayam TV Sivakasi [RTMP]",
       "sources": [
         {
@@ -1896,6 +1941,26 @@
       "sources": [
         {
           "url": "http://jayamtv.phoenixcreations.online/jayamtv/sivakasi/playlist.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "MTV Kodaikanal",
+      "sources": [
+        {
+          "url": "https://ipcloud.live/mtv/menhd/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Rio TV",
+      "sources": [
+        {
+          "url": "http://ipcloud.live/riotv/riotvhd/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -1987,50 +2052,20 @@
       ]
     },
     {
-      "channel": "JJ News Tamil",
-      "sources": [
-        {
-          "url": "https://hlsstream.olidigital.in/jjtvnewstamil/jjtvnewstamil/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Channel Spice",
-      "sources": [
-        {
-          "url": "https://stream.onecloudlive.in/spicetv/spicetv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Channel Spice [MPD]",
-      "sources": [
-        {
-          "url": "https://stream.onecloudlive.in/spicetv/spicetv/index.mpd",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Urchagam TV",
-      "sources": [
-        {
-          "url": "https://rtmp.bmlive.net/bms/urchagamtv/stream.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
       "channel": "Thendral TV",
       "sources": [
         {
           "url": "https://hls.thendraltv.in/thendraltv_1210b43d/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Ganesh TV",
+      "sources": [
+        {
+          "url": "https://hls.thendraltv.in/ganeshtv_ade49abb/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -2131,16 +2166,6 @@
       "sources": [
         {
           "url": "https://stream.onecloudlive.in/duraitv/classic/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Apple TV Nagercoil",
-      "sources": [
-        {
-          "url": "https://live.applelive.in/appletv/appletv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -2342,6 +2367,16 @@
       ]
     },
     {
+      "channel": "Rainbow TV Gandarvakottai",
+      "sources": [
+        {
+          "url": "https://notvstream.in/rainbowtv/rainbowtv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Dheiveegam TV",
       "sources": [
         {
@@ -2406,16 +2441,6 @@
       "sources": [
         {
           "url": "https://notvstream.in/brightsimrosetv/brightsimrosetv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Jeiyan TV",
-      "sources": [
-        {
-          "url": "https://stream.onecloudlive.in/jeyantv/jeyantv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -2537,16 +2562,6 @@
       ]
     },
     {
-      "channel": "Santhiya TV",
-      "sources": [
-        {
-          "url": "https://stream.onecloudlive.in/santhiyatv/santhiyatvhd/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
       "channel": "Anandam TV Madurai",
       "sources": [
         {
@@ -2637,6 +2652,16 @@
       ]
     },
     {
+      "channel": "Vaani Visuals",
+      "sources": [
+        {
+          "url": "https://vaanivisualsin.proxy.nellaiiptv.com/vaanitv/vaanitv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "CTN Kallakurichi",
       "sources": [
         {
@@ -2681,6 +2706,26 @@
       "sources": [
         {
           "url": "http://120.138.14.16:8080/hls/tamilmagantv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Namathu Sangamam TV",
+      "sources": [
+        {
+          "url": "http://yours.7starcloud.com:1935/live/nmtv/playlist.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Yours TV",
+      "sources": [
+        {
+          "url": "http://yours.7starcloud.com:1935/live/yourstv/playlist.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -2787,16 +2832,6 @@
       ]
     },
     {
-      "channel": "Maniway TV",
-      "sources": [
-        {
-          "url": "https://live.singamcloud.in/bsctv/bsctv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
       "channel": "King TV Alangulam",
       "sources": [
         {
@@ -2831,26 +2866,6 @@
       "sources": [
         {
           "url": "https://view.rcserver.in/tmp_hls10/jayamtvkarur/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Amma Vision",
-      "sources": [
-        {
-          "url": "https://view.rcserver.in/tmp_hls19/ammavision/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Jayam TV",
-      "sources": [
-        {
-          "url": "https://view.rcserver.in/tmp_hls20/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -2947,6 +2962,16 @@
       ]
     },
     {
+      "channel": "Ayya Vaikuntar TV [1Cloud]",
+      "sources": [
+        {
+          "url": "https://stream.onecloudlive.in/samuthirapandi/ayyavaikundartv/index.mpd",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Thendral TV Theni",
       "sources": [
         {
@@ -2961,16 +2986,6 @@
       "sources": [
         {
           "url": "https://rtmp.bmlive.net/ctn/ctntn/stream.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Sri Velavan TV",
-      "sources": [
-        {
-          "url": "https://rtmp.applelive.in/srivelavantv/srivelavantv4k/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -3107,20 +3122,20 @@
       ]
     },
     {
-      "channel": "Chen TV",
+      "channel": "Jai TV",
       "sources": [
         {
-          "url": "https://stream.apcloud.in/chentv/chentvhd/index.m3u8",
+          "url": "https://play.applelive.in/jaitv/jaitv.m3u8",
           "status": "WORKING",
           "primary": true
         }
       ]
     },
     {
-      "channel": "Jai TV",
+      "channel": "CTN Channel",
       "sources": [
         {
-          "url": "https://play.applelive.in/jaitv/jaitv.m3u8",
+          "url": "http://217.216.79.247/ctn/channel/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -3297,16 +3312,6 @@
       ]
     },
     {
-      "channel": "Azhagi TV",
-      "sources": [
-        {
-          "url": "https://view.rcserver.in/tmp_hls17/azhagitv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
       "channel": "Polimer Channel",
       "sources": [
         {
@@ -3331,6 +3336,16 @@
       "sources": [
         {
           "url": "https://live.applelive.in/rowthiramtv/rowthiramtv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Manisha TV",
+      "sources": [
+        {
+          "url": "https://stream.sscloud7.in/live/maishatv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -3481,6 +3496,16 @@
       "sources": [
         {
           "url": "https://ipcloud.live/mmtv/mmtvhd/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Salaam TV",
+      "sources": [
+        {
+          "url": "https://stream.onecloudlive.in/salamtv/salamtvhd/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -3641,6 +3666,16 @@
       "sources": [
         {
           "url": "https://ipcloud.live/novamani/kingofglorytv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Love Joy TV",
+      "sources": [
+        {
+          "url": "https://ipcloud.live/novamani/lovejoytv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -3847,6 +3882,16 @@
       ]
     },
     {
+      "channel": "Punnagai Desam TV",
+      "sources": [
+        {
+          "url": "http://punnagaidesamtv.phoenixcreations.online/punnagaidesamtv/punnagaidesamtv/playlist.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "MonTamil",
       "sources": [
         {
@@ -3947,6 +3992,16 @@
       ]
     },
     {
+      "channel": "Royal TV",
+      "sources": [
+        {
+          "url": "https://play.applelive.in/royaltv/royaltv.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Holy Land TV",
       "sources": [
         {
@@ -3971,6 +4026,16 @@
       "sources": [
         {
           "url": "http://nagatv.phoenixcreations.online/nagatv/nagatv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Subash TV Tenkasi [Cloud7]",
+      "sources": [
+        {
+          "url": "https://server.sscloud7.in/live/subashhd/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -4027,6 +4092,16 @@
       ]
     },
     {
+      "channel": "Pasamalar TV",
+      "sources": [
+        {
+          "url": "https://stream.sscloud7.in/live/paasamalartv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Karthick TV",
       "sources": [
         {
@@ -4041,16 +4116,6 @@
       "sources": [
         {
           "url": "https://stream.onecloudlive.in/karthick/deivegaolitv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Selva Tamil TV",
-      "sources": [
-        {
-          "url": "https://stream.sscloud7.in/live/selvatamiltv/index.mpd",
           "status": "WORKING",
           "primary": true
         }
@@ -4187,16 +4252,6 @@
       ]
     },
     {
-      "channel": "CTN TV",
-      "sources": [
-        {
-          "url": "https://ipcloud.live/ctn/ctntvhd/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
       "channel": "Arasu TV",
       "sources": [
         {
@@ -4247,10 +4302,10 @@
       ]
     },
     {
-      "channel": "Life TV",
+      "channel": "News 80 Tamil",
       "sources": [
         {
-          "url": "https://lifetv.livebox.co.in/lifetvhls/lifetv.m3u8",
+          "url": "https://3.proxy.nellaiiptv.com/NOTV/NEWS80/index.m3u8?token=GTR",
           "status": "WORKING",
           "primary": true
         }
@@ -4351,6 +4406,16 @@
       "sources": [
         {
           "url": "http://148.113.170.17:8091/ithal/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Mathan TV",
+      "sources": [
+        {
+          "url": "https://ipcloud.live/mathantv/mathantv/index.mpd",
           "status": "WORKING",
           "primary": true
         }
@@ -4667,6 +4732,16 @@
       ]
     },
     {
+      "channel": "Sooriyan TV",
+      "sources": [
+        {
+          "url": "https://live20.bozztv.com/giatv/giatv-Infinittyott/Infinittyott/playlist.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
       "channel": "Uthamiyae TV",
       "sources": [
         {
@@ -4777,10 +4852,10 @@
       ]
     },
     {
-      "channel": "MTV Virudhunagar",
+      "channel": "Thuthi TV",
       "sources": [
         {
-          "url": "https://stream.ashokadigital.net/mtvlive/mtvlive/index.m3u8",
+          "url": "http://indiamatrix.in/thuthitv/thuthitv.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -4847,16 +4922,6 @@
       ]
     },
     {
-      "channel": "Kathir TV",
-      "sources": [
-        {
-          "url": "https://stream.ipcloud.live/kathirtvhd/livestream/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
       "channel": "PG TV",
       "sources": [
         {
@@ -4901,6 +4966,16 @@
       "sources": [
         {
           "url": "http://saitv.sscloud7.in/live/livesaitv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Boobsh TV",
+      "sources": [
+        {
+          "url": "https://live.applelive.in/boobsh/boobsh/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -5041,16 +5116,6 @@
       "sources": [
         {
           "url": "https://5790d294af2dc.streamlock.net/aathitv/aathitv/playlist.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Chola TV",
-      "sources": [
-        {
-          "url": "https://hlsstream.olidigital.in/cholatv/cholatv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -5317,20 +5382,20 @@
       ]
     },
     {
-      "channel": "Mayil TV",
+      "channel": "Pugal TV",
       "sources": [
         {
-          "url": "http://103.186.231.25:8080/hls/mayiltv/index.m3u8",
+          "url": "http://pugal.phoenixcreations.online/pugaltv/pugal/playlist.m3u8",
           "status": "WORKING",
           "primary": true
         }
       ]
     },
     {
-      "channel": "MTN TV",
+      "channel": "Mayil TV",
       "sources": [
         {
-          "url": "https://rtmp.applelive.in/mtntv/mtntv/index.m3u8",
+          "url": "http://103.186.231.25:8080/hls/mayiltv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -5361,16 +5426,6 @@
       "sources": [
         {
           "url": "https://thogaitv.stream.onecloudlive.in/thogaitv/12345678/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "SGB TV",
-      "sources": [
-        {
-          "url": "https://hlsstream.olidigital.in/sgbtv/sgbtv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
@@ -5561,6 +5616,16 @@
       "sources": [
         {
           "url": "https://rtmp.applelive.in/aalayatv/aalayatv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ]
+    },
+    {
+      "channel": "Adhiralai TV",
+      "sources": [
+        {
+          "url": "https://hlsstream.olidigital.in/adhiralaitv/adhiralaitv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
