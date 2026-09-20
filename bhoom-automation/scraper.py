@@ -1144,10 +1144,55 @@ async def main():
                 print(f"Category: {category_url}")
                 await page.goto(category_url, wait_until="domcontentloaded", timeout=45000)
                 await page.wait_for_timeout(1200)
-                links = await page.locator('a[href*="/live/"]').evaluate_all("els=>els.map(a=>a.href)")
-                for url in links:
-                    if "/live/" in url:
-                        channel_pages.add(url.split("#")[0].rstrip("/") + "/")
+                # BhoomTV may render live links outside the normal anchor DOM.
+                # Collect regular anchors, data attributes, and rendered HTML so
+                # channel discovery survives site/theme changes.
+                found = set()
+
+                try:
+                    hrefs = await page.locator("a").evaluate_all(
+                        """els => els.map(a => ({
+                            href: a.href || a.getAttribute('href') || '',
+                            dataHref: a.getAttribute('data-href') || '',
+                            dataUrl: a.getAttribute('data-url') || ''
+                        }))"""
+                    )
+                    for item in hrefs:
+                        for raw in (item.get("href", ""), item.get("dataHref", ""), item.get("dataUrl", "")):
+                            if raw and "/live/" in raw:
+                                found.add(urljoin(BASE, raw))
+                except Exception:
+                    pass
+
+                try:
+                    html = await page.content()
+                    for raw in re.findall(
+                        r'''(?i)(?:https?:)?//[^"'<>\\s]+/live/[a-z0-9-]+/?''',
+                        html
+                    ):
+                        found.add(urljoin(BASE, raw))
+
+                    for raw in re.findall(
+                        r'''(?i)(?:href|data-href|data-url)\\s*=\\s*["']([^"']*?/live/[^"']*)["']''',
+                        html
+                    ):
+                        found.add(urljoin(BASE, raw))
+                except Exception:
+                    pass
+
+                for raw in found:
+                    try:
+                        parsed = urlparse(raw)
+                        if (
+                            parsed.netloc.lower() == urlparse(BASE).netloc.lower()
+                            and parsed.path.lower().startswith("/live/")
+                        ):
+                            clean = f"{BASE}{parsed.path.rstrip()}/"
+                            channel_pages.add(clean)
+                    except Exception:
+                        pass
+
+                print(f"  live links discovered on page: {len(found)}")
             except Exception as e:
                 print(f"  category error: {e}")
 
