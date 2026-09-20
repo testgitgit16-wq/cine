@@ -2,6 +2,8 @@ name: Update Combined Tamil TV playlist
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "45 0 * * *"
 
 permissions:
   contents: write
