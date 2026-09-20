@@ -198,7 +198,7 @@ jobs:
           git push
 
       - name: Start Combined workflow
-        if: ${{ always() && github.event.inputs.start_combined != '0' }}
+        if: ${{ success() && github.event.inputs.start_combined != '0' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run update-amaze-tamil-local.yml --ref main
