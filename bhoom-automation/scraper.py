@@ -105,9 +105,24 @@ async def goto_bhoom(page, url, timeout_seconds=PAGE_NAV_TIMEOUT_SECONDS):
             wait_until="domcontentloaded",
             timeout=max(5, timeout_seconds) * 1000,
         )
+
+        # Cloudflare explicitly marks Managed Challenges with this header.
+        # Treat that as a deterministic block rather than trying player
+        # extraction against the challenge document.
+        try:
+            response_headers = await response.all_headers() if response else {}
+        except Exception:
+            response_headers = {}
+        cf_mitigated = (response_headers.get("cf-mitigated") or "").lower()
+        server = (response_headers.get("server") or "").lower()
+        header_blocked = (
+            cf_mitigated == "challenge"
+            or ("cloudflare" in server and response and response.status in {403,429})
+        )
+
         if CLOUDFLARE_WAIT_SECONDS:
             await page.wait_for_timeout(CLOUDFLARE_WAIT_SECONDS * 1000)
-        blocked = await is_cloudflare_challenge(page)
+        blocked = header_blocked or await is_cloudflare_challenge(page)
         return response, blocked
     except PlaywrightTimeoutError:
         blocked = await is_cloudflare_challenge(page)
