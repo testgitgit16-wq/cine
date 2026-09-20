@@ -31,7 +31,58 @@ jobs:
           RETRIES: "3"
           MAX_ENTRIES: "0"
           MAX_CHANNELS: "0"
+          MIN_PUBLISHED_CHANNELS: "300"
         run: python3 bhoom-automation/update_external_playlist.py
+
+      - name: Validate combined M3U
+        env:
+          MIN_PUBLISHED_CHANNELS: "300"
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import re
+          from pathlib import Path
+
+          m3u = Path("output/tamil-combined.m3u")
+          data_file = Path("output/tamil-combined.json")
+
+          text = m3u.read_text(encoding="utf-8", errors="replace")
+          data = json.loads(data_file.read_text(encoding="utf-8"))
+
+          entries = [line for line in text.splitlines() if line.startswith("#EXTINF:")]
+          urls = [
+              line.strip()
+              for line in text.splitlines()
+              if re.match(r"^(https?|rtmp|rtmps)://", line.strip())
+          ]
+
+          if not text.startswith("#EXTM3U"):
+              raise SystemExit("Combined M3U is missing #EXTM3U header")
+
+          if any("# X-ALT-STREAM:" in line for line in text.splitlines()):
+              raise SystemExit("Combined M3U still contains non-standard X-ALT-STREAM comments")
+
+          if len(entries) != len(urls):
+              raise SystemExit(
+                  f"Malformed M3U: EXTINF entries={len(entries)} but playable URLs={len(urls)}"
+              )
+
+          published_channels = len(data.get("channels", []))
+          minimum = int(os.environ.get("MIN_PUBLISHED_CHANNELS", "300"))
+
+          print(f"COMBINED UNIQUE CHANNELS: {published_channels}")
+          print(f"COMBINED PLAYABLE ENTRIES: {len(urls)}")
+          print(f"MINIMUM REQUIRED CHANNELS: {minimum}")
+
+          if published_channels < minimum:
+              raise SystemExit(
+                  f"Combined channel safety stop: {published_channels} < {minimum}"
+              )
+
+          print("COMBINED M3U FORMAT: PASS")
+          print("COMBINED CHANNEL COUNT: PASS")
+          PY
 
       - name: Upload playlist report
         if: always()
