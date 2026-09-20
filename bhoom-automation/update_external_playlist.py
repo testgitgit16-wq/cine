@@ -30,20 +30,22 @@ def fetch(url):
     raise RuntimeError(last or "download failed")
 
 def parse(text):
+    """Parse EXTINF records without treating the M3U header as an entry."""
     lines = [x.strip() for x in text.splitlines() if x.strip()]
     entries = []
-    current = []
+    current = None
+
     for line in lines:
         if line.startswith("#EXTINF:"):
             if current:
                 entries.append(current)
             current = [line]
-        elif current:
+        elif current is not None:
             current.append(line)
-        elif line.startswith("#EXTM3U"):
-            current = [line]
-    if current and current[0].startswith("#EXTINF:"):
+
+    if current:
         entries.append(current)
+
     return entries
 
 def stream_urls(entry):
