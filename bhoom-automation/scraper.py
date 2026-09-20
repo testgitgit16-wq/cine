@@ -1494,11 +1494,24 @@ async def main():
         # a single hard-coded channel.
         previous_inventory = load_previous_inventory()
         discovered_from_categories = set(channel_pages)
+        previous_count_for_recovery = len(previous_inventory)
 
-        if not discovered_from_categories and previous_inventory:
+        # Recover from the previous published inventory when category
+        # discovery is clearly incomplete (for example, Cloudflare blocks one
+        # or both sections). This keeps both Tamil TV and Tamil Local channels
+        # available instead of publishing a tiny partial list.
+        discovery_threshold = max(
+            1,
+            int(previous_count_for_recovery * 0.80),
+        )
+        if (
+            previous_inventory
+            and len(discovered_from_categories) < discovery_threshold
+        ):
             channel_pages.update(previous_inventory.keys())
             print(
-                f"Category discovery returned no live links; "
+                f"Category discovery returned only "
+                f"{len(discovered_from_categories)} live links; "
                 f"recovered {len(previous_inventory)} channels from previous output."
             )
 
