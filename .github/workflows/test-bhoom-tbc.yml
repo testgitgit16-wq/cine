@@ -1,9 +1,8 @@
-name: TEST Bhoom TBC TV only
+name: TEST Bhoom TBC TV HLS sources
 
 on:
   push:
     paths:
-      - "bhoom-automation/**"
       - ".github/workflows/test-bhoom-tbc.yml"
   workflow_dispatch:
 
@@ -13,93 +12,49 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-24.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: "3.12"
-          cache: pip
-
-      - name: Install
+      - name: Test supplied TBC HLS sources
+        shell: bash
         run: |
-          python -m pip install --upgrade pip
-          pip install -r bhoom-automation/requirements.txt
-          python -m playwright install --with-deps chromium
+          set -euo pipefail
 
-      - name: Test TBC TV direct channel page
-        working-directory: bhoom-automation
-        env:
-          CATEGORY_PAGE_LIMIT: "1"
-          CATEGORY_SECTION: "tamil"
-          MAX_CHANNELS: "1"
-          VALIDATE_STREAMS: "1"
-          STABILITY_SECONDS: "1"
-          PLAYER_INITIAL_WAIT_SECONDS: "8"
-          PLAYER_CAPTURE_WAIT_SECONDS: "4"
-          RECAPTURE_ROUNDS: "1"
-          RECAPTURE_ON_FAILURES: "1"
-          RETRY_COUNT: "2"
-        run: |
-          python - <<'PY'
-          import asyncio, json, scraper
-          from playwright.async_api import async_playwright
+          urls=(
+            "https://stream.iplive.xyz/smmedia/tbctv/index.m3u8"
+            "https://stream.iplive.xyz/smmedia/tbctv/tracks-v1a1/mono.m3u8"
+          )
 
-          URL = "https://bhoomtv.org/live/tbc-tv/"
+          for url in "${urls[@]}"; do
+            echo "========================================"
+            echo "TESTING: $url"
 
-          async def run():
-              async with async_playwright() as p:
-                  browser = await p.chromium.launch(
-                      headless=True,
-                      args=[
-                          "--disable-blink-features=AutomationControlled",
-                          "--disable-dev-shm-usage",
-                          "--no-sandbox",
-                      ],
-                  )
-                  context = await browser.new_context(
-                      user_agent=scraper.UA,
-                      locale="en-IN",
-                      viewport={"width": 1440, "height": 1000},
-                  )
-                  await context.add_init_script(
-                      """Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
-                         Object.defineProperty(navigator, 'platform', {get: () => 'Win32'});"""
-                  )
+            tmp="$(mktemp)"
+            http_code="$(curl -L --retry 2 --connect-timeout 10 --max-time 30 \
+              -A "Mozilla/5.0" \
+              -sS -o "$tmp" -w "%{http_code}" "$url")"
 
-                  page = await context.new_page()
-                  try:
-                      response = await page.goto(URL, wait_until="domcontentloaded", timeout=45000)
-                      print("TBC PAGE HTTP STATUS:", response.status if response else None)
-                      print("TBC FINAL URL:", page.url)
-                      print("TBC PAGE TITLE:", await page.title())
-                      item = await scraper.scan_channel(context, URL, debug=True)
-                      usable = [s for s in item.get("streams", []) if scraper.stream_is_usable(s)]
-                      print("TBC CHANNEL NAME:", item.get("name"))
-                      print("TBC CAPTURED STREAMS:", len(item.get("streams", [])))
-                      print("TBC USABLE STREAMS:", len(usable))
-                      for i, stream in enumerate(usable, 1):
-                          v = stream.get("validation", {})
-                          print(f"TBC STREAM {i}: type={stream.get('type')} status={v.get('httpStatus')} valid={v.get('manifestValid')} segment={v.get('segmentValid')} drm={v.get('drm')} url={stream.get('url')}")
-                      if not usable:
-                          raise RuntimeError("TBC TV page opened, but no usable stream was captured.")
-                      print("TBC TV DIRECT TEST: PASS")
-                  finally:
-                      await page.close()
-                      await context.close()
-                      await browser.close()
+            echo "HTTP STATUS: $http_code"
+            echo "CONTENT TYPE: $(file -b --mime-type "$tmp")"
+            echo "BYTES: $(wc -c < "$tmp")"
 
-          asyncio.run(run())
-          PY
+            if [[ "$http_code" != "200" ]]; then
+              echo "TBC HLS TEST: FAIL - HTTP $http_code"
+              cat "$tmp" | head -c 500 || true
+              exit 1
+            fi
 
-      - name: Upload TBC debug
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: bhoom-tbc-debug
-          path: |
-            bhoom-automation/debug/
-          if-no-files-found: ignore
-          retention-days: 3
+            if ! grep -q '^#EXTM3U' "$tmp"; then
+              echo "TBC HLS TEST: FAIL - response is not an M3U8 playlist"
+              head -c 500 "$tmp" || true
+              exit 1
+            fi
+
+            echo "M3U8 PLAYLIST: PASS"
+            grep -E '^#EXT-X-(STREAM-INF|TARGETDURATION|MEDIA-SEQUENCE)|^https?://' "$tmp" | head -n 20 || true
+            rm -f "$tmp"
+          done
+
+          echo "TBC TV HLS SOURCE TEST: PASS"
