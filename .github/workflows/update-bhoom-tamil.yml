@@ -8,9 +8,9 @@ on:
         required: false
         default: "0"
       max_channels:
-        description: "Maximum channels to scan (10 for quick test, 0 = all)"
+        description: "Maximum channels to scan (5 for test, 0 = all)"
         required: false
-        default: "0"
+        default: "5"
       category_section:
         description: "Section to scan: tamil, local, or all"
         required: false
