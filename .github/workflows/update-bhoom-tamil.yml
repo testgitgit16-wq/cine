@@ -7,6 +7,10 @@ on:
         description: "Category pages per section (1 = first page only, 0 = all)"
         required: false
         default: "0"
+      max_channels:
+        description: "Maximum channels to scan (10 for quick test, 0 = all)"
+        required: false
+        default: "0"
       category_section:
         description: "Section to scan: tamil, local, or all"
         required: false
@@ -71,8 +75,7 @@ jobs:
           # 0 = all category pages. For a quick test, use 1.
           CATEGORY_PAGE_LIMIT: ${{ github.event.inputs.category_page_limit || '0' }}
           CATEGORY_SECTION: ${{ github.event.inputs.category_section || 'all' }}
-          # Production scrape: always scan every discovered channel page within the selected category pages.
-          MAX_CHANNELS: "0"
+          MAX_CHANNELS: ${{ github.event.inputs.max_channels || '0' }}
           VALIDATE_STREAMS: ${{ github.event.inputs.validate_streams || '1' }}
           STABILITY_SECONDS: ${{ github.event.inputs.stability_seconds || '3' }}
           PLAYER_INITIAL_WAIT_SECONDS: ${{ github.event.inputs.player_initial_wait_seconds || '10' }}
