@@ -75,8 +75,8 @@ jobs:
           # 0 = all category pages. For a quick test, use 1.
           CATEGORY_PAGE_LIMIT: ${{ github.event.inputs.category_page_limit || '0' }}
           CATEGORY_SECTION: ${{ github.event.inputs.category_section || 'all' }}
-          # Temporary test mode: scan only 5 channels.
-          MAX_CHANNELS: "5"
+          # Production mode: scan all discovered channels.
+          MAX_CHANNELS: "0"
           VALIDATE_STREAMS: ${{ github.event.inputs.validate_streams || '1' }}
           STABILITY_SECONDS: ${{ github.event.inputs.stability_seconds || '3' }}
           PLAYER_INITIAL_WAIT_SECONDS: ${{ github.event.inputs.player_initial_wait_seconds || '10' }}
