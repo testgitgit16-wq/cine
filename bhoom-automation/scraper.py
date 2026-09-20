@@ -27,7 +27,7 @@ DEBUG = Path("../debug")
 UA = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/140.0 Safari/537.36"
+    "Chrome/153.0.0.0 Safari/537.36"
 )
 
 MANIFEST_RE = re.compile(
@@ -55,28 +55,23 @@ RETRY_COUNT = max(1, int(os.getenv("RETRY_COUNT", "3") or "3"))
 
 
 async def discover_tamil_category_pages(page):
-    """Discover EVERY pagination page for Tamil TV and Tamil Local TV.
+    """Discover every available pagination page for the selected Tamil section.
 
-    BhoomTV currently has multiple pages in both sections. Do not rely only
-    on the pagination links being present in the rendered DOM: explicitly
-    probe /page/N/ so a theme/JS change cannot silently make us scan page 1
-    only.
+    CATEGORY_PAGE_LIMIT=0 is genuinely unlimited. When BhoomTV exposes a
+    rendered "Page X of N" value, N is used as the current end marker. There
+    is intentionally no hard 50/500-page ceiling.
     """
     discovered = set()
 
     for seed in CATEGORY_SEEDS:
         base = seed.rstrip("/")
-        section = urlparse(base).path.rstrip("/")
         print(f"Discovering complete section: {base}")
 
-        # Page 1 is the normal category URL; later pages use WordPress
-        # /page/N/ pagination. CATEGORY_PAGE_LIMIT=1 is useful for a
-        # quick test without changing the production default.
-        # 0 means UNLIMITED: keep following pagination until the section
-        # has actually ended. There is intentionally NO hard 50/500-page cap.
         page_limit = CATEGORY_PAGE_LIMIT if CATEGORY_PAGE_LIMIT > 0 else None
-        consecutive_empty = 0
         page_number = 1
+        consecutive_empty = 0
+        known_last_page = None
+
         while page_limit is None or page_number <= page_limit:
             category_url = (
                 f"{base}/" if page_number == 1
@@ -89,50 +84,113 @@ async def discover_tamil_category_pages(page):
                     timeout=45000,
                 )
                 status = response.status if response else 0
+                print(f"  page {page_number}: HTTP {status}")
 
                 if status == 404:
                     print(f"  {category_url} -> 404, stopping this section")
                     break
 
-                await page.wait_for_timeout(900)
-
-                links = await page.locator(
-                    'a[href*="/live/"]'
-                ).evaluate_all(
-                    "els => els.map(a => a.href || a.getAttribute('href') || '').filter(Boolean)"
-                )
+                await page.wait_for_timeout(1800)
 
                 found = set()
-                for raw in links:
-                    clean = raw.split("#")[0].split("?")[0].rstrip("/") + "/"
-                    parsed = urlparse(clean)
-                    if (
-                        parsed.netloc.lower() == urlparse(BASE).netloc.lower()
-                        and parsed.path.lower().startswith("/live/")
-                    ):
-                        found.add(clean)
+                try:
+                    hrefs = await page.locator("a").evaluate_all(
+                        """els => els.map(a => ({
+                            href: a.href || a.getAttribute('href') || '',
+                            dataHref: a.getAttribute('data-href') || '',
+                            dataUrl: a.getAttribute('data-url') || ''
+                        }))"""
+                    )
+                    for item in hrefs:
+                        for raw in (
+                            item.get("href", ""),
+                            item.get("dataHref", ""),
+                            item.get("dataUrl", ""),
+                        ):
+                            if raw and "/live/" in raw:
+                                found.add(urljoin(BASE, raw))
+                except Exception:
+                    pass
 
-                # A category page itself is useful even when its live links
-                # are rendered late or hidden behind JS. Keep the page and use
-                # the broader discovery pass below.
+                try:
+                    html = await page.content()
+                    for raw in re.findall(
+                        r'''(?i)(?:https?:)?//[^"'<>\\s]+/live/[a-z0-9-]+/?''',
+                        html,
+                    ):
+                        found.add(urljoin(BASE, raw))
+                    for raw in re.findall(
+                        r'''(?i)(?:href|data-href|data-url)\\s*=\\s*["']([^"']*?/live/[^"']*)["']''',
+                        html,
+                    ):
+                        found.add(urljoin(BASE, raw))
+                except Exception:
+                    html = ""
+
+                try:
+                    body_text = await page.locator("body").inner_text()
+                except Exception:
+                    body_text = ""
+
+                for match in re.findall(
+                    r"(?i)Page\\s+(\\d+)\\s+of\\s+(\\d+)",
+                    body_text,
+                ):
+                    current_page, total_pages = map(int, match)
+                    if current_page == page_number:
+                        known_last_page = max(known_last_page or 0, total_pages)
+
+                pagination_candidates = set(
+                    int(x)
+                    for x in re.findall(
+                        rf'''(?i){re.escape(base)}/page/(\\d+)/?''',
+                        html or "",
+                    )
+                )
+                if pagination_candidates:
+                    known_last_page = max(
+                        known_last_page or 0,
+                        max(pagination_candidates),
+                    )
+
+                clean_found = set()
+                for raw in found:
+                    try:
+                        parsed = urlparse(raw)
+                        if (
+                            parsed.netloc.lower() == urlparse(BASE).netloc.lower()
+                            and parsed.path.lower().startswith("/live/")
+                        ):
+                            clean_found.add(f"{BASE}{parsed.path.rstrip('/')}/")
+                    except Exception:
+                        pass
+
                 discovered.add(category_url.rstrip("/") + "/")
-                if found:
+
+                if clean_found:
                     consecutive_empty = 0
-                    print(f"  page {page_number}: {len(found)} live channel links")
+                    print(
+                        f"  page {page_number}: {len(clean_found)} live channel links"
+                        + (f" / last page {known_last_page}" if known_last_page else "")
+                    )
                 else:
                     consecutive_empty += 1
-                    print(f"  page {page_number}: no live channel links")
-                    # Stop only after two consecutive empty pages. This avoids
-                    # losing later pages because of one transient/theme issue.
-                    if consecutive_empty >= 2:
-                        break
+                    print(
+                        f"  page {page_number}: no live channel links"
+                        + (f" / last page {known_last_page}" if known_last_page else "")
+                    )
+
+                if known_last_page is not None and page_number >= known_last_page:
+                    print(f"  reached detected final page {known_last_page}")
+                    break
+
+                if known_last_page is None and consecutive_empty >= 2:
+                    print("  no pagination metadata after two empty pages; stopping")
+                    break
 
             except Exception as exc:
                 print(f"  page {page_number} discovery error: {exc}")
-                # Try the next page rather than silently abandoning the
-                # remaining pagination after a transient request error.
                 continue
-
             finally:
                 page_number += 1
 
@@ -1188,11 +1246,22 @@ async def main():
     OUT.mkdir(parents=True, exist_ok=True)
 
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
+        browser = await p.chromium.launch(
+            headless=True,
+            args=[
+                "--disable-blink-features=AutomationControlled",
+                "--disable-dev-shm-usage",
+                "--no-sandbox",
+            ],
+        )
         context = await browser.new_context(
             user_agent=UA,
             locale="en-IN",
             viewport={"width": 1440, "height": 1000},
+        )
+        await context.add_init_script(
+            """Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+               Object.defineProperty(navigator, 'platform', {get: () => 'Win32'});"""
         )
 
         page = await context.new_page()
