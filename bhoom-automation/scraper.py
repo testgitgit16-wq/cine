@@ -713,7 +713,6 @@ async def scan_channel(context, channel_url, debug=False):
         await current.wait_for_timeout(4500)
         await collect_embedded_urls(current, capture)
         await collect_performance_urls(current, capture)
-        await collect_performance_urls(current, capture)
         drm = await detect_drm(current, capture)
         streams = sorted(capture.items.values(), key=lambda x: x["url"])
         if VALIDATE_STREAMS and streams:
