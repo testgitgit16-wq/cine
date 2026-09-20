@@ -52,4 +52,7 @@ jobs:
           sed -i "2i# Combined scrape: $(date -u +'%Y-%m-%dT%H:%M:%SZ')" output/tamil-combined.m3u
           git add output/tamil-combined.m3u output/tamil-combined-report.json output/tamil-combined.json
           git commit -m "chore: refresh combined Tamil TV playlist"
+          # Rebase onto the newest main to avoid a push race with the Bhoom job.
+          git fetch origin main
+          git rebase origin/main
           git push
