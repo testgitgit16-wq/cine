@@ -16,6 +16,10 @@ CATEGORY_SEEDS = [
     f"{BASE}/channel/tamil/",
     f"{BASE}/channel/tamil-local-tv/",
 ]
+if CATEGORY_SECTION == "tamil":
+    CATEGORY_SEEDS = [f"{BASE}/channel/tamil/"]
+elif CATEGORY_SECTION == "local":
+    CATEGORY_SEEDS = [f"{BASE}/channel/tamil-local-tv/"]
 
 OUT = Path("../output")
 DEBUG = Path("../debug")
@@ -37,6 +41,7 @@ CONTENT_TYPE_HINTS = (
 
 MAX_CHANNELS = int(os.getenv("MAX_CHANNELS", "0") or "0")
 CATEGORY_PAGE_LIMIT = max(0, int(os.getenv("CATEGORY_PAGE_LIMIT", "0") or "0"))
+CATEGORY_SECTION = os.getenv("CATEGORY_SECTION", "all").strip().lower()
 DEBUG_CHANNELS = int(os.getenv("DEBUG_CHANNELS", "3") or "3")
 VALIDATE_STREAMS = os.getenv("VALIDATE_STREAMS", "1") != "0"
 STABILITY_SECONDS = max(0, int(os.getenv("STABILITY_SECONDS", "3") or "0"))
