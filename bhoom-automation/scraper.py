@@ -54,6 +54,65 @@ RECAPTURE_ON_FAILURES = os.getenv("RECAPTURE_ON_FAILURES", "1") != "0"
 RECAPTURE_ROUNDS = max(0, int(os.getenv("RECAPTURE_ROUNDS", "1") or "1"))
 RETRY_COUNT = max(1, int(os.getenv("RETRY_COUNT", "3") or "3"))
 
+CLOUDFLARE_FAIL_FAST = os.getenv("CLOUDFLARE_FAIL_FAST", "1") != "0"
+CLOUDFLARE_WAIT_SECONDS = max(0, int(os.getenv("CLOUDFLARE_WAIT_SECONDS", "1") or "1"))
+PAGE_NAV_TIMEOUT_SECONDS = max(5, int(os.getenv("PAGE_NAV_TIMEOUT_SECONDS", "30") or "30"))
+
+CLOUDFLARE_MARKERS = (
+    "challenges.cloudflare.com",
+    "challenge-platform",
+    "turnstile",
+    "cf-chl-",
+    "/cdn-cgi/challenge",
+    "just a moment",
+    "verify you are human",
+    "checking your browser",
+)
+
+async def is_cloudflare_challenge(page):
+    """Return True when the page is a Cloudflare/Turnstile challenge rather than the requested page."""
+    try:
+        current_url = (page.url or "").lower()
+        if any(marker in current_url for marker in CLOUDFLARE_MARKERS):
+            return True
+
+        frames = [(frame.url or "").lower() for frame in page.frames]
+        if any(any(marker in frame for marker in CLOUDFLARE_MARKERS) for frame in frames):
+            return True
+
+        title = ""
+        try:
+            title = (await page.title()).lower()
+        except Exception:
+            pass
+        if any(marker in title for marker in CLOUDFLARE_MARKERS):
+            return True
+
+        body = ""
+        try:
+            body = (await page.locator("body").inner_text(timeout=1500)).lower()
+        except Exception:
+            pass
+        return any(marker in body for marker in CLOUDFLARE_MARKERS)
+    except Exception:
+        return False
+
+async def goto_bhoom(page, url, timeout_seconds=PAGE_NAV_TIMEOUT_SECONDS):
+    """Navigate once and classify Cloudflare challenges without attempting to defeat them."""
+    try:
+        response = await page.goto(
+            url,
+            wait_until="domcontentloaded",
+            timeout=max(5, timeout_seconds) * 1000,
+        )
+        if CLOUDFLARE_WAIT_SECONDS:
+            await page.wait_for_timeout(CLOUDFLARE_WAIT_SECONDS * 1000)
+        blocked = await is_cloudflare_challenge(page)
+        return response, blocked
+    except PlaywrightTimeoutError:
+        blocked = await is_cloudflare_challenge(page)
+        return None, blocked
+
 # Verified direct HLS sources supplied for TBC TV. These are used only as a
 # fallback when the BhoomTV channel page is inaccessible or does not expose
 # the player stream to the runner. Both sources are retained as candidates.
@@ -95,19 +154,17 @@ async def discover_tamil_category_pages(page):
                 else f"{base}/page/{page_number}/"
             )
             try:
-                response = await page.goto(
-                    category_url,
-                    wait_until="domcontentloaded",
-                    timeout=45000,
-                )
+                response, cf_blocked = await goto_bhoom(page, category_url)
                 status = response.status if response else 0
                 print(f"  page {page_number}: HTTP {status}")
+
+                if cf_blocked and CLOUDFLARE_FAIL_FAST:
+                    print("  CLOUDFLARE BLOCKED: category page returned a Cloudflare challenge")
+                    break
 
                 if status == 404:
                     print(f"  {category_url} -> 404, stopping this section")
                     break
-
-                await page.wait_for_timeout(1800)
 
                 found = set()
                 try:
@@ -731,8 +788,17 @@ async def scan_channel(context, channel_url, debug=False):
 
     try:
         print(f"Opening {channel_url}")
-        await current.goto(channel_url, wait_until="domcontentloaded", timeout=45000)
-        await current.wait_for_timeout(1500)
+        response, cf_blocked = await goto_bhoom(current, channel_url, timeout_seconds=PAGE_NAV_TIMEOUT_SECONDS)
+        if cf_blocked and CLOUDFLARE_FAIL_FAST:
+            print("  CLOUDFLARE BLOCKED: live page is a challenge page; player sources cannot be discovered")
+            return {
+                "id": slug(channel_url),
+                "name": channel_name_from_url(channel_url),
+                "logo": "",
+                "pageUrl": channel_url,
+                "streams": [],
+                "blockedReason": "CLOUDFLARE_CHALLENGE",
+            }
 
         iframe_urls = []
         try:
@@ -1432,11 +1498,20 @@ async def main():
         category_pages = await discover_tamil_category_pages(page)
         print(f"Tamil category pages discovered: {len(category_pages)}")
 
+        if CLOUDFLARE_FAIL_FAST and not category_pages:
+            raise RuntimeError(
+                "BhoomTV category preflight failed: no category page could be read. "
+                "The GitHub Actions runner is receiving a Cloudflare/Turnstile challenge. "
+                "Provide an authorized machine-readable feed/API or allowlist the runner before production scraping."
+            )
+
         for category_url in category_pages:
             try:
                 print(f"Category: {category_url}")
-                await page.goto(category_url, wait_until="domcontentloaded", timeout=45000)
-                await page.wait_for_timeout(1200)
+                response, cf_blocked = await goto_bhoom(page, category_url)
+                if cf_blocked and CLOUDFLARE_FAIL_FAST:
+                    print("  CLOUDFLARE BLOCKED: skipping category extraction")
+                    continue
                 # BhoomTV may render live links outside the normal anchor DOM.
                 # Collect regular anchors, data attributes, and rendered HTML so
                 # channel discovery survives site/theme changes.
@@ -1544,13 +1619,30 @@ async def main():
             option_count = 0
             try:
                 probe = await context.new_page()
-                await probe.goto(channel_url, wait_until="domcontentloaded", timeout=30000)
-                await probe.wait_for_timeout(800)
-                option_count = await probe.locator("li.dooplay_player_option").count()
-                is_group_page = option_count >= 2
+                _, probe_cf_blocked = await goto_bhoom(
+                    probe, channel_url,
+                    timeout_seconds=min(PAGE_NAV_TIMEOUT_SECONDS, 20),
+                )
+                if probe_cf_blocked and CLOUDFLARE_FAIL_FAST:
+                    option_count = -1
+                    is_group_page = False
+                else:
+                    option_count = await probe.locator("li.dooplay_player_option").count()
+                    is_group_page = option_count >= 2
                 await probe.close()
             except Exception as exc:
                 print(f"  group-page probe skipped: {exc}")
+
+            if option_count == -1:
+                print("  CLOUDFLARE BLOCKED: source-options probe hit Turnstile; skipping player extraction")
+                scanned_items.append({
+                    "id": slug(channel_url),
+                    "name": channel_name_from_url(channel_url),
+                    "pageUrl": channel_url,
+                    "streams": [],
+                    "blockedReason": "CLOUDFLARE_CHALLENGE",
+                })
+                continue
 
             print(f"  source options detected: {option_count}")
             if is_group_page:
@@ -1575,11 +1667,16 @@ async def main():
                     reverse=True,
                 )
 
-            # If the current BhoomTV page produced nothing, recover and
-            # validate the previously published streams for this exact channel.
-            # This lets production survive Cloudflare blocks without bypassing
-            # the challenge.
-            if not item.get("streams") and channel_url in previous_inventory:
+            # Do not repeatedly validate the old stream inventory after a
+            # Cloudflare challenge. That validation is independent of the page,
+            # but it can consume most of the run when the same protected page
+            # blocks every channel. Only use the previous-stream validation path
+            # when the live page itself was actually reached.
+            if (
+                not item.get("streams")
+                and item.get("blockedReason") != "CLOUDFLARE_CHALLENGE"
+                and channel_url in previous_inventory
+            ):
                 previous_fallback = await validate_previous_stream_fallback(
                     context,
                     channel_url,
