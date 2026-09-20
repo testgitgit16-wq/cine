@@ -116,6 +116,10 @@ jobs:
             git add output/bhoom-tamil-report.json
           fi
           git commit -m "chore: refresh Bhoom Tamil streams"
+          # Rebase onto the newest main because other workflow/config commits
+          # can arrive after this job checks out the repository.
+          git fetch origin main
+          git rebase origin/main
           git push
 
       - name: Start Combined workflow
