@@ -87,51 +87,69 @@ jobs:
           PUBLISH_SENSITIVE_HEADERS: "0"
         run: python -c "import asyncio, scraper; asyncio.run(scraper.main())"
 
-      - name: Build one-entry-per-channel M3U
+      - name: Build IPTV-compatible M3U with primary and secondary streams
         run: |
           python - <<'PY'
           import json
+          import re
           from pathlib import Path
-          
+
           data = json.loads(Path("output/bhoom-tamil.json").read_text(encoding="utf-8"))
           out = ["#EXTM3U"]
-          
+
+          def safe_attr(value):
+              return str(value or "").replace('"', "'").strip()
+
+          written = 0
+          stream_written = 0
+
           for channel in data.get("channels", []):
-              name = str(channel.get("name") or "").strip()
+              name = safe_attr(channel.get("name"))
               streams = [s for s in channel.get("streams", []) if s.get("url")]
               if not name or not streams:
                   continue
-          
-              primary = streams[0]
-              safe_name = name.replace('"', "'").replace(",", " - ")
-              logo = str(channel.get("logo") or "").strip()
-              attrs = f'tvg-name="{safe_name}" group-title="Tamil"'
-              if logo:
-                  attrs += f' tvg-logo="{logo.replace(chr(34), chr(39))}"'
-          
-              out.append(f"#EXTINF:-1 {attrs},{safe_name}")
-              headers = primary.get("headers") or {}
-              if headers.get("referer"):
-                  out.append(f"#EXTVLCOPT:http-referrer={headers['referer']}")
-              if headers.get("user-agent"):
-                  out.append(f"#EXTVLCOPT:http-user-agent={headers['user-agent']}")
-              out.append(primary["url"])
-          
-              # Keep alternate working URLs under this same channel as
-              # comments. Standard M3U clients ignore these comments, while
-              # our app can read them for automatic stream fallback.
-              for alt in streams[1:]:
-                  out.append(f"# X-ALT-STREAM: {alt['url']}")
-                  alt_headers = alt.get("headers") or {}
-                  if alt_headers.get("referer"):
-                      out.append(f"# X-ALT-REFERRER: {alt_headers['referer']}")
-                  if alt_headers.get("user-agent"):
-                      out.append(f"# X-ALT-USER-AGENT: {alt_headers['user-agent']}")
-          
-              out.append("")
-          
-          Path("output/bhoom-tamil.m3u").write_text("\\n".join(out).rstrip() + "\\n", encoding="utf-8")
-          print(f"Wrote {sum(1 for x in data.get('channels', []) if x.get('name') and x.get('streams'))} unique channel blocks")
+
+              tvg_id = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+              logo = safe_attr(channel.get("logo"))
+
+              # Every working source is emitted as a real EXTINF entry.
+              # The first stream is primary; later entries are secondary
+              # fallbacks. This keeps them visible to standard IPTV players.
+              for stream_index, stream in enumerate(streams):
+                  url = str(stream.get("url") or "").strip()
+                  if not url:
+                      continue
+
+                  attrs = (
+                      f'tvg-id="{tvg_id}" '
+                      f'tvg-name="{name}" '
+                      f'group-title="BHOOM TV"'
+                  )
+                  if logo:
+                      attrs += f' tvg-logo="{logo}"'
+
+                  label = name if stream_index == 0 else f"{name} (Backup {stream_index})"
+                  out.append(f"#EXTINF:-1 {attrs},{label}")
+
+                  headers = stream.get("headers") or {}
+                  if headers.get("referer"):
+                      out.append(f"#EXTVLCOPT:http-referrer={headers['referer']}")
+                  if headers.get("user-agent"):
+                      out.append(f"#EXTVLCOPT:http-user-agent={headers['user-agent']}")
+
+                  out.append(url)
+                  out.append("")
+                  stream_written += 1
+
+              written += 1
+
+          Path("output/bhoom-tamil.m3u").write_text(
+              "\n".join(out).rstrip() + "\n",
+              encoding="utf-8",
+          )
+          print(f"CHANNELS WRITTEN: {written}")
+          print(f"STREAM ENTRIES WRITTEN: {stream_written}")
+          print("FORMAT: standard #EXTINF + optional VLC headers + URL")
           PY
 
       - name: Upload debug files
