@@ -12,8 +12,8 @@ BASE = "https://bhoomtv.org"
 GROUP_PAGE_HINTS = ("/live/kollywood-plus/", "/live/kollywood-tv/")
 
 CATEGORY_SEEDS = [
+    # These are the two BhoomTV sections we want to scan completely.
     f"{BASE}/channel/tamil/",
-    f"{BASE}/channel/tamil-news/",
     f"{BASE}/channel/tamil-local-tv/",
 ]
 
@@ -49,32 +49,72 @@ RETRY_COUNT = max(1, int(os.getenv("RETRY_COUNT", "3") or "3"))
 
 
 async def discover_tamil_category_pages(page):
-    """Discover all BhoomTV /channel/tamil* pagination/category pages."""
-    discovered = set(CATEGORY_SEEDS)
-    queue = list(CATEGORY_SEEDS)
-    scanned = set()
+    """Discover EVERY pagination page for Tamil TV and Tamil Local TV.
 
-    while queue and len(discovered) < 100:
-        category_url = queue.pop(0)
-        if category_url in scanned:
-            continue
-        scanned.add(category_url)
-        try:
-            print(f"Category discovery: {category_url}")
-            await page.goto(category_url, wait_until="domcontentloaded", timeout=45000)
-            await page.wait_for_timeout(1000)
-            links = await page.locator('a[href*="/channel/tamil"]').evaluate_all(
-                "els => els.map(a => a.href).filter(Boolean)"
+    BhoomTV currently has multiple pages in both sections. Do not rely only
+    on the pagination links being present in the rendered DOM: explicitly
+    probe /page/N/ so a theme/JS change cannot silently make us scan page 1
+    only.
+    """
+    discovered = set()
+
+    for seed in CATEGORY_SEEDS:
+        base = seed.rstrip("/")
+        section = urlparse(base).path.rstrip("/")
+        print(f"Discovering complete section: {base}")
+
+        # Page 1 is the normal category URL; later pages use WordPress
+        # /page/N/ pagination.
+        for page_number in range(1, 51):
+            category_url = (
+                f"{base}/" if page_number == 1
+                else f"{base}/page/{page_number}/"
             )
-            for url in links:
-                clean = url.split("#")[0].split("?")[0].rstrip("/") + "/"
-                path = urlparse(clean).path.lower()
-                if path.startswith("/channel/tamil"):
-                    if clean not in discovered:
-                        discovered.add(clean)
-                        queue.append(clean)
-        except Exception as exc:
-            print(f"  category discovery error: {exc}")
+            try:
+                response = await page.goto(
+                    category_url,
+                    wait_until="domcontentloaded",
+                    timeout=45000,
+                )
+                status = response.status if response else 0
+
+                if status == 404:
+                    print(f"  {category_url} -> 404, stopping this section")
+                    break
+
+                await page.wait_for_timeout(900)
+
+                links = await page.locator(
+                    'a[href*="/live/"]'
+                ).evaluate_all(
+                    "els => els.map(a => a.href || a.getAttribute('href') || '').filter(Boolean)"
+                )
+
+                found = set()
+                for raw in links:
+                    clean = raw.split("#")[0].split("?")[0].rstrip("/") + "/"
+                    parsed = urlparse(clean)
+                    if (
+                        parsed.netloc.lower() == urlparse(BASE).netloc.lower()
+                        and parsed.path.lower().startswith("/live/")
+                    ):
+                        found.add(clean)
+
+                if found:
+                    discovered.add(category_url.rstrip("/") + "/")
+                    print(
+                        f"  page {page_number}: {len(found)} live channel links"
+                    )
+                else:
+                    print(f"  page {page_number}: no live channel links")
+                    # Once pagination has moved past the real section, stop.
+                    break
+
+            except Exception as exc:
+                print(f"  page {page_number} discovery error: {exc}")
+                # Try the next page rather than silently abandoning the
+                # remaining pagination after a transient request error.
+                continue
 
     return sorted(discovered)
 
