@@ -254,9 +254,11 @@ async def discover_tamil_category_pages(page):
                     except Exception:
                         pass
 
-                discovered.add(category_url.rstrip("/") + "/")
-
                 if clean_found:
+                    # Only retain category pages that actually exposed live
+                    # channel links. A challenge/error page must never count
+                    # as successful pagination discovery.
+                    discovered.add(category_url.rstrip("/") + "/")
                     consecutive_empty = 0
                     print(
                         f"  page {page_number}: {len(clean_found)} live channel links"
