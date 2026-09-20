@@ -3,6 +3,10 @@ name: Update Bhoom Tamil streams
 on:
   workflow_dispatch:
     inputs:
+      category_page_limit:
+        description: "Category pages per section (1 = first page only, 0 = all)"
+        required: false
+        default: "0"
       validate_streams:
         description: "Validate HLS/DASH/HTTP streams (1=yes, 0=no)"
         required: false
@@ -56,7 +60,9 @@ jobs:
       - name: Scrape and validate
         working-directory: bhoom-automation
         env:
-          # Production scrape: always scan every discovered BhoomTV channel page.
+          # 0 = all category pages. For a quick test, use 1.
+          CATEGORY_PAGE_LIMIT: ${{ github.event.inputs.category_page_limit || '0' }}
+          # Production scrape: always scan every discovered channel page within the selected category pages.
           MAX_CHANNELS: "0"
           VALIDATE_STREAMS: ${{ github.event.inputs.validate_streams || '1' }}
           STABILITY_SECONDS: ${{ github.event.inputs.stability_seconds || '3' }}
