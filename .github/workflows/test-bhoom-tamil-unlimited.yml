@@ -1,0 +1,74 @@
+name: TEST Bhoom Tamil Unlimited Pagination
+
+on:
+  push:
+    paths:
+      - "bhoom-automation/**"
+      - ".github/workflows/test-bhoom-tamil-unlimited.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r bhoom-automation/requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Test Tamil only - unlimited pages
+        working-directory: bhoom-automation
+        env:
+          CATEGORY_PAGE_LIMIT: "0"
+          CATEGORY_SECTION: "tamil"
+          MAX_CHANNELS: "0"
+          VALIDATE_STREAMS: "1"
+          STABILITY_SECONDS: "1"
+          PLAYER_INITIAL_WAIT_SECONDS: "5"
+          PLAYER_CAPTURE_WAIT_SECONDS: "3"
+          RECAPTURE_ROUNDS: "0"
+          RECAPTURE_ON_FAILURES: "1"
+          RETRY_COUNT: "2"
+          PUBLISH_SENSITIVE_HEADERS: "0"
+        run: python -c "import asyncio, scraper; asyncio.run(scraper.main())"
+
+      - name: Show results
+        working-directory: bhoom-automation
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("output/bhoom-tamil.json")
+          data = json.loads(p.read_text(encoding="utf-8"))
+          print("SECTION: Tamil only")
+          print("CATEGORY_PAGE_LIMIT: 0 (UNLIMITED)")
+          print("CATEGORY_SEEDS: Tamil TV only")
+          print("UNIQUE CHANNELS:", data.get("uniqueChannels"))
+          print("TOTAL STREAMS:", data.get("totalStreams"))
+          print("PAGES SCANNED:", data.get("categoryPages"))
+          PY
+
+      - name: Upload test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bhoom-tamil-unlimited-test
+          path: |
+            bhoom-automation/output/bhoom-tamil.json
+            bhoom-automation/output/bhoom-tamil-report.json
+            bhoom-automation/debug/
+          if-no-files-found: ignore
+          retention-days: 3
