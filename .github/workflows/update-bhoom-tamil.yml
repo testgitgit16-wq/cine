@@ -87,6 +87,53 @@ jobs:
           PUBLISH_SENSITIVE_HEADERS: "0"
         run: python -c "import asyncio, scraper; asyncio.run(scraper.main())"
 
+      - name: Build one-entry-per-channel M3U
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          
+          data = json.loads(Path("output/bhoom-tamil.json").read_text(encoding="utf-8"))
+          out = ["#EXTM3U"]
+          
+          for channel in data.get("channels", []):
+              name = str(channel.get("name") or "").strip()
+              streams = [s for s in channel.get("streams", []) if s.get("url")]
+              if not name or not streams:
+                  continue
+          
+              primary = streams[0]
+              safe_name = name.replace('"', "'").replace(",", " - ")
+              logo = str(channel.get("logo") or "").strip()
+              attrs = f'tvg-name="{safe_name}" group-title="Tamil"'
+              if logo:
+                  attrs += f' tvg-logo="{logo.replace(chr(34), chr(39))}"'
+          
+              out.append(f"#EXTINF:-1 {attrs},{safe_name}")
+              headers = primary.get("headers") or {}
+              if headers.get("referer"):
+                  out.append(f"#EXTVLCOPT:http-referrer={headers['referer']}")
+              if headers.get("user-agent"):
+                  out.append(f"#EXTVLCOPT:http-user-agent={headers['user-agent']}")
+              out.append(primary["url"])
+          
+              # Keep alternate working URLs under this same channel as
+              # comments. Standard M3U clients ignore these comments, while
+              # our app can read them for automatic stream fallback.
+              for alt in streams[1:]:
+                  out.append(f"# X-ALT-STREAM: {alt['url']}")
+                  alt_headers = alt.get("headers") or {}
+                  if alt_headers.get("referer"):
+                      out.append(f"# X-ALT-REFERRER: {alt_headers['referer']}")
+                  if alt_headers.get("user-agent"):
+                      out.append(f"# X-ALT-USER-AGENT: {alt_headers['user-agent']}")
+          
+              out.append("")
+          
+          Path("output/bhoom-tamil.m3u").write_text("\\n".join(out).rstrip() + "\\n", encoding="utf-8")
+          print(f"Wrote {sum(1 for x in data.get('channels', []) if x.get('name') and x.get('streams'))} unique channel blocks")
+          PY
+
       - name: Upload debug files
         if: always()
         uses: actions/upload-artifact@v4
