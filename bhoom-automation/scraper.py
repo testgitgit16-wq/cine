@@ -153,6 +153,7 @@ async def discover_tamil_category_pages(page):
     is intentionally no hard 50/500-page ceiling.
     """
     discovered = set()
+    live_channels = set()
 
     for seed in CATEGORY_SEEDS:
         base = seed.rstrip("/")
@@ -259,6 +260,7 @@ async def discover_tamil_category_pages(page):
                     # channel links. A challenge/error page must never count
                     # as successful pagination discovery.
                     discovered.add(category_url.rstrip("/") + "/")
+                    live_channels.update(clean_found)
                     consecutive_empty = 0
                     print(
                         f"  page {page_number}: {len(clean_found)} live channel links"
@@ -1512,8 +1514,10 @@ async def main():
         page = await context.new_page()
         channel_pages = set()
 
-        category_pages = await discover_tamil_category_pages(page)
+        category_pages, discovered_live_channels = await discover_tamil_category_pages(page)
+        channel_pages.update(discovered_live_channels)
         print(f"Tamil category pages discovered: {len(category_pages)}")
+        print(f"Tamil live channels discovered during pagination: {len(discovered_live_channels)}")
 
         if CLOUDFLARE_FAIL_FAST and not category_pages:
             raise RuntimeError(
