@@ -97,6 +97,22 @@ def main():
     if MAX_ENTRIES:
         entries = entries[:MAX_ENTRIES]
 
+    # Apply MAX_CHANNELS BEFORE validation. This keeps the 5-channel test fast
+    # while still validating every unique stream URL belonging to those channels.
+    if MAX_CHANNELS > 0:
+        selected_channels = []
+        selected_keys = set()
+        for entry in entries:
+            channel_key = normalize_name(entry)
+            if not channel_key or channel_key in selected_keys:
+                continue
+            selected_keys.add(channel_key)
+            selected_channels.append(channel_key)
+            if len(selected_channels) >= MAX_CHANNELS:
+                break
+        entries = [entry for entry in entries if normalize_name(entry) in selected_keys]
+        print(f"Selected {len(selected_channels)} channel(s) before validation: {selected_channels}")
+
     seen_urls = set()
     channels = {}
     report_entries = []
