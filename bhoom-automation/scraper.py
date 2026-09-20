@@ -36,6 +36,7 @@ CONTENT_TYPE_HINTS = (
 )
 
 MAX_CHANNELS = int(os.getenv("MAX_CHANNELS", "0") or "0")
+CATEGORY_PAGE_LIMIT = max(0, int(os.getenv("CATEGORY_PAGE_LIMIT", "0") or "0"))
 DEBUG_CHANNELS = int(os.getenv("DEBUG_CHANNELS", "3") or "3")
 VALIDATE_STREAMS = os.getenv("VALIDATE_STREAMS", "1") != "0"
 STABILITY_SECONDS = max(0, int(os.getenv("STABILITY_SECONDS", "3") or "0"))
@@ -64,8 +65,10 @@ async def discover_tamil_category_pages(page):
         print(f"Discovering complete section: {base}")
 
         # Page 1 is the normal category URL; later pages use WordPress
-        # /page/N/ pagination.
-        for page_number in range(1, 51):
+        # /page/N/ pagination. CATEGORY_PAGE_LIMIT=1 is useful for a
+        # quick test without changing the production default.
+        page_limit = CATEGORY_PAGE_LIMIT if CATEGORY_PAGE_LIMIT > 0 else 50
+        for page_number in range(1, page_limit + 1):
             category_url = (
                 f"{base}/" if page_number == 1
                 else f"{base}/page/{page_number}/"
