@@ -72,11 +72,12 @@ async def discover_tamil_category_pages(page):
         # Page 1 is the normal category URL; later pages use WordPress
         # /page/N/ pagination. CATEGORY_PAGE_LIMIT=1 is useful for a
         # quick test without changing the production default.
-        # 0 means discover pagination dynamically. The previous hard-coded
-        # 50-page ceiling silently dropped large sections.
-        page_limit = CATEGORY_PAGE_LIMIT if CATEGORY_PAGE_LIMIT > 0 else 500
+        # 0 means UNLIMITED: keep following pagination until the section
+        # has actually ended. There is intentionally NO hard 50/500-page cap.
+        page_limit = CATEGORY_PAGE_LIMIT if CATEGORY_PAGE_LIMIT > 0 else None
         consecutive_empty = 0
-        for page_number in range(1, page_limit + 1):
+        page_number = 1
+        while page_limit is None or page_number <= page_limit:
             category_url = (
                 f"{base}/" if page_number == 1
                 else f"{base}/page/{page_number}/"
@@ -131,6 +132,9 @@ async def discover_tamil_category_pages(page):
                 # Try the next page rather than silently abandoning the
                 # remaining pagination after a transient request error.
                 continue
+
+            finally:
+                page_number += 1
 
     return sorted(discovered)
 
