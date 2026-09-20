@@ -108,7 +108,8 @@ jobs:
           # BhoomTV stream URLs can rotate/expire. Always publish a fresh
           # scrape snapshot and force a commit marker even when the textual
           # channel list happens to be identical.
-          printf '\n# BhoomTV scrape: %s\n' "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> output/bhoom-tamil.m3u
+          sed -i '/^# BhoomTV scrape:/d' output/bhoom-tamil.m3u
+          sed -i "2i# BhoomTV scrape: $(date -u +'%Y-%m-%dT%H:%M:%SZ')" output/bhoom-tamil.m3u
           git add output/bhoom-tamil.m3u output/bhoom-tamil.json
           if [ -f output/bhoom-tamil-report.json ]; then
             git add output/bhoom-tamil-report.json
