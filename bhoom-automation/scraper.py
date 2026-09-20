@@ -287,7 +287,7 @@ async def discover_tamil_category_pages(page):
             finally:
                 page_number += 1
 
-    return sorted(discovered)
+    return sorted(discovered), sorted(live_channels)
 
 
 def slug(url: str) -> str:
