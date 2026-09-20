@@ -72,7 +72,10 @@ async def discover_tamil_category_pages(page):
         # Page 1 is the normal category URL; later pages use WordPress
         # /page/N/ pagination. CATEGORY_PAGE_LIMIT=1 is useful for a
         # quick test without changing the production default.
-        page_limit = CATEGORY_PAGE_LIMIT if CATEGORY_PAGE_LIMIT > 0 else 50
+        # 0 means discover pagination dynamically. The previous hard-coded
+        # 50-page ceiling silently dropped large sections.
+        page_limit = CATEGORY_PAGE_LIMIT if CATEGORY_PAGE_LIMIT > 0 else 500
+        consecutive_empty = 0
         for page_number in range(1, page_limit + 1):
             category_url = (
                 f"{base}/" if page_number == 1
@@ -108,15 +111,20 @@ async def discover_tamil_category_pages(page):
                     ):
                         found.add(clean)
 
+                # A category page itself is useful even when its live links
+                # are rendered late or hidden behind JS. Keep the page and use
+                # the broader discovery pass below.
+                discovered.add(category_url.rstrip("/") + "/")
                 if found:
-                    discovered.add(category_url.rstrip("/") + "/")
-                    print(
-                        f"  page {page_number}: {len(found)} live channel links"
-                    )
+                    consecutive_empty = 0
+                    print(f"  page {page_number}: {len(found)} live channel links")
                 else:
+                    consecutive_empty += 1
                     print(f"  page {page_number}: no live channel links")
-                    # Once pagination has moved past the real section, stop.
-                    break
+                    # Stop only after two consecutive empty pages. This avoids
+                    # losing later pages because of one transient/theme issue.
+                    if consecutive_empty >= 2:
+                        break
 
             except Exception as exc:
                 print(f"  page {page_number} discovery error: {exc}")
@@ -180,6 +188,8 @@ def stream_type(url: str, content_type: str = ""):
         return "dash"
     if ".m3u8" in low or "mpegurl" in ct:
         return "hls"
+    # Keep extensionless HTTP media URLs when the browser identified them as
+    # media. They are valid IPTV inputs even without a .m3u8/.mpd suffix.
     return "progressive"
 
 
@@ -702,7 +712,8 @@ async def scan_channel(context, channel_url, debug=False):
         await trigger_playback(current)
         await current.wait_for_timeout(4500)
         await collect_embedded_urls(current, capture)
-        await collect_performance_urls(current)
+        await collect_performance_urls(current, capture)
+        await collect_performance_urls(current, capture)
         drm = await detect_drm(current, capture)
         streams = sorted(capture.items.values(), key=lambda x: x["url"])
         if VALIDATE_STREAMS and streams:
