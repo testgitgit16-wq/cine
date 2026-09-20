@@ -15,6 +15,7 @@ JSON_OUT = Path(os.environ.get("JSON_OUTPUT_FILE", "output/tamil-combined.json")
 TIMEOUT = int(os.environ.get("TIMEOUT_SECONDS", "15"))
 RETRIES = int(os.environ.get("RETRIES", "3"))
 MAX_ENTRIES = int(os.environ.get("MAX_ENTRIES", "0"))
+MAX_CHANNELS = max(0, int(os.environ.get("MAX_CHANNELS", "0") or "0"))
 
 def fetch(url):
     last = None
@@ -115,7 +116,11 @@ def main():
 
     output = ["#EXTM3U"]
     manifest = []
-    for sources in channels.values():
+    channel_items = list(channels.values())
+    if MAX_CHANNELS > 0:
+        channel_items = channel_items[:MAX_CHANNELS]
+
+    for sources in channel_items:
         ranked = sorted(sources, key=lambda x: score(x["entry"], x["result"]), reverse=True)
         primary = ranked[0]
         output.extend(primary["entry"])
