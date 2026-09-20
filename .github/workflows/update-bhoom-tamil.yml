@@ -105,12 +105,16 @@ jobs:
           if [ -f output/bhoom-tamil-report.json ]; then
             git add output/bhoom-tamil-report.json
           fi
-          if git diff --cached --quiet; then
-            echo "No playlist changes"
-          else
-            git commit -m "chore: update Bhoom Tamil streams"
-            git push
+          # BhoomTV stream URLs can rotate/expire. Always publish a fresh
+          # scrape snapshot and force a commit marker even when the textual
+          # channel list happens to be identical.
+          printf '\n# BhoomTV scrape: %s\n' "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> output/bhoom-tamil.m3u
+          git add output/bhoom-tamil.m3u output/bhoom-tamil.json
+          if [ -f output/bhoom-tamil-report.json ]; then
+            git add output/bhoom-tamil-report.json
           fi
+          git commit -m "chore: refresh Bhoom Tamil streams"
+          git push
 
       - name: Start Combined workflow
         if: ${{ github.event.inputs.start_combined != '0' }}
