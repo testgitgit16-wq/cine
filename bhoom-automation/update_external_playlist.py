@@ -158,20 +158,29 @@ def main():
 
     for sources in channel_items:
         ranked = sorted(sources, key=lambda x: score(x["url"], x["result"]), reverse=True)
+
+        # Standard IPTV/M3U compatibility: exactly one playable URL per
+        # EXTINF record. Alternate working URLs are emitted as additional
+        # EXTINF records with the same channel metadata, so normal IPTV
+        # players can see them without proprietary X-ALT comments.
+        for stream_index, source in enumerate(ranked, 1):
+            entry_header = next(
+                (line for line in source["entry"] if line.startswith("#EXTINF:")),
+                source["entry"][0],
+            )
+            output.append(entry_header)
+
+            for directive in source["entry"][1:]:
+                if (
+                    directive.startswith("#EXTVLCOPT:")
+                    and directive not in output[-3:]
+                ):
+                    output.append(directive)
+
+            output.append(source["url"])
+            output.append("")
+
         primary = ranked[0]
-
-        # Publish one clean EXTINF entry per channel. The strongest working
-        # URL is primary; additional working URLs are retained as alternate
-        # stream comments for clients/apps that support fallback.
-        entry_header = next(
-            (line for line in primary["entry"] if line.startswith("#EXTINF:")),
-            primary["entry"][0],
-        )
-        output.append(entry_header)
-        output.append(primary["url"])
-        for alt in ranked[1:]:
-            output.append(f"# X-ALT-STREAM: {alt['url']}")
-
         manifest.append({
             "channel": primary["entry"][0].rsplit(",", 1)[-1].strip(),
             "sources": [
