@@ -128,8 +128,7 @@ jobs:
                   if logo:
                       attrs += f' tvg-logo="{logo}"'
 
-                  label = name if stream_index == 0 else f"{name} (Backup {stream_index})"
-                  out.append(f"#EXTINF:-1 {attrs},{label}")
+                  out.append(f"#EXTINF:-1 {attrs},{name}")
 
                   headers = stream.get("headers") or {}
                   if headers.get("referer"):
