@@ -1,4 +1,4 @@
-name: TEST Bhoom Tamil Unlimited Pagination
+name: TEST Bhoom Tamil + Local Unlimited Pagination
 
 on:
   push:
@@ -29,11 +29,11 @@ jobs:
           pip install -r bhoom-automation/requirements.txt
           python -m playwright install --with-deps chromium
 
-      - name: Test Tamil only - unlimited pages
+      - name: Test Tamil + Tamil Local - unlimited pages
         working-directory: bhoom-automation
         env:
           CATEGORY_PAGE_LIMIT: "0"
-          CATEGORY_SECTION: "tamil"
+          CATEGORY_SECTION: "all"
           MAX_CHANNELS: "0"
           VALIDATE_STREAMS: "1"
           STABILITY_SECONDS: "1"
@@ -52,9 +52,9 @@ jobs:
           from pathlib import Path
           p = Path("output/bhoom-tamil.json")
           data = json.loads(p.read_text(encoding="utf-8"))
-          print("SECTION: Tamil only")
+          print("SECTION: Tamil TV + Tamil Local TV")
           print("CATEGORY_PAGE_LIMIT: 0 (UNLIMITED)")
-          print("CATEGORY_SEEDS: Tamil TV only")
+          print("CATEGORY_SEEDS: Tamil TV + Tamil Local TV")
           print("UNIQUE CHANNELS:", data.get("uniqueChannels"))
           print("TOTAL STREAMS:", data.get("totalStreams"))
           print("PAGES SCANNED:", data.get("categoryPages"))
