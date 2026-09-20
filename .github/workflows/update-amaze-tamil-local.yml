@@ -46,13 +46,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add output/tamil-combined.m3u output/tamil-combined-report.json output/tamil-combined.json
-          git diff --cached --quiet && echo "No changes" || git commit -m "chore: update combined Tamil TV playlist"
-          git push || true
-
-      - name: Wait 5 minutes before next Bhoom cycle
-        run: sleep 300
-
-      - name: Start Bhoom workflow
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh workflow run update-bhoom-tamil.yml --ref main
+          if git diff --cached --quiet; then
+            echo "No combined playlist changes"
+          else
+            git commit -m "chore: update combined Tamil TV playlist"
+            git push
+          fi
