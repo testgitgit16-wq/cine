@@ -46,11 +46,20 @@ def parse(text):
         entries.append(current)
     return entries
 
+def stream_urls(entry):
+    """Return every URL attached to one #EXTINF entry, preserving order."""
+    urls = []
+    for line in entry:
+        if line.startswith("#"):
+            continue
+        if re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*://", line):
+            urls.append(line)
+    return urls
+
 def stream_url(entry):
-    for line in reversed(entry):
-        if not line.startswith("#") and re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*://", line):
-            return line
-    return ""
+    """Backward-compatible helper: return the last URL in the entry."""
+    urls = stream_urls(entry)
+    return urls[-1] if urls else ""
 
 def normalize_name(entry):
     return re.sub(r"\s+", " ", entry[0].rsplit(",", 1)[-1].strip()).casefold()
@@ -64,8 +73,8 @@ def key(url):
             kept.append(part)
     return (p.scheme.lower(), p.netloc.lower(), p.path.rstrip("/"), "&".join(sorted(kept)))
 
-def score(entry, result):
-    url = stream_url(entry).lower()
+def score(url, result):
+    url = url.lower()
     value = 100 if result["status"] == "WORKING" else 20
     if ".m3u8" in url: value += 30
     if "master.m3u8" in url or "/playlist.m3u8" in url: value += 10
@@ -117,18 +126,27 @@ def main():
     channels = {}
     report_entries = []
     for entry in entries:
-        url = stream_url(entry)
-        if not url:
+        urls = stream_urls(entry)
+        if not urls:
             continue
-        url_key = key(url)
-        if url_key in seen_urls:
-            continue
-        seen_urls.add(url_key)
-        result = validate(url)
-        item = {"name": entry[0], "channel": normalize_name(entry), "url": url, **result}
-        report_entries.append(item)
-        if result["status"] in {"WORKING", "UNVERIFIED_RTMP"}:
-            channels.setdefault(item["channel"], []).append({"entry": entry, "url": url, "result": result})
+
+        # Some playlist generators attach multiple candidate URLs to one
+        # EXTINF block. Validate every URL instead of only the last one.
+        for url in urls:
+            url_key = key(url)
+            if url_key in seen_urls:
+                continue
+            seen_urls.add(url_key)
+
+            result = validate(url)
+            item = {"name": entry[0], "channel": normalize_name(entry), "url": url, **result}
+            report_entries.append(item)
+            if result["status"] in {"WORKING", "UNVERIFIED_RTMP"}:
+                channels.setdefault(item["channel"], []).append({
+                    "entry": entry,
+                    "url": url,
+                    "result": result,
+                })
 
     output = ["#EXTM3U"]
     manifest = []
@@ -137,12 +155,32 @@ def main():
         channel_items = channel_items[:MAX_CHANNELS]
 
     for sources in channel_items:
-        ranked = sorted(sources, key=lambda x: score(x["entry"], x["result"]), reverse=True)
+        ranked = sorted(sources, key=lambda x: score(x["url"], x["result"]), reverse=True)
         primary = ranked[0]
-        output.extend(primary["entry"])
+
+        # Publish one clean EXTINF entry per channel. The strongest working
+        # URL is primary; additional working URLs are retained as alternate
+        # stream comments for clients/apps that support fallback.
+        entry_header = next(
+            (line for line in primary["entry"] if line.startswith("#EXTINF:")),
+            primary["entry"][0],
+        )
+        output.append(entry_header)
+        output.append(primary["url"])
+        for alt in ranked[1:]:
+            output.append(f"# X-ALT-STREAM: {alt['url']}")
+
         manifest.append({
             "channel": primary["entry"][0].rsplit(",", 1)[-1].strip(),
-            "sources": [{"url": x["url"], "status": x["result"]["status"], "primary": i == 0} for i, x in enumerate(ranked)]
+            "sources": [
+                {
+                    "url": x["url"],
+                    "status": x["result"]["status"],
+                    "primary": i == 0,
+                }
+                for i, x in enumerate(ranked)
+            ],
+            "sourceCount": len(ranked)
         })
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
