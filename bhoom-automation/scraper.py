@@ -53,6 +53,22 @@ RECAPTURE_ON_FAILURES = os.getenv("RECAPTURE_ON_FAILURES", "1") != "0"
 RECAPTURE_ROUNDS = max(0, int(os.getenv("RECAPTURE_ROUNDS", "1") or "1"))
 RETRY_COUNT = max(1, int(os.getenv("RETRY_COUNT", "3") or "3"))
 
+# Verified direct HLS sources supplied for TBC TV. These are used only as a
+# fallback when the BhoomTV channel page is inaccessible or does not expose
+# the player stream to the runner. Both sources are retained as candidates.
+KNOWN_TAMIL_STREAMS = {
+    "tbc-tv": [
+        {
+            "url": "https://stream.iplive.xyz/smmedia/tbctv/index.m3u8",
+            "type": "hls",
+        },
+        {
+            "url": "https://stream.iplive.xyz/smmedia/tbctv/tracks-v1a1/mono.m3u8",
+            "type": "hls",
+        },
+    ],
+}
+
 
 async def discover_tamil_category_pages(page):
     """Discover every available pagination page for the selected Tamil section.
@@ -1043,6 +1059,52 @@ def ensure_one_working_stream_per_channel(channels):
     return output
 
 
+async def known_stream_fallback(context, channel_url):
+    """
+    Validate verified direct sources for a known channel.
+
+    This fallback does not bypass BhoomTV/Cloudflare. It only uses direct HLS
+    URLs that are already known and supplied independently of the page.
+    """
+    key = slug(channel_url).lower()
+    specs = KNOWN_TAMIL_STREAMS.get(key, [])
+    if not specs:
+        return []
+
+    page = None
+    results = []
+    try:
+        page = await context.new_page()
+        for spec in specs:
+            stream = {
+                "url": spec["url"],
+                "type": spec["type"],
+                "headers": {},
+                "tokenized": looks_tokenized(spec["url"]),
+            }
+            if VALIDATE_STREAMS:
+                stream["validation"] = await validate_stream(page, stream)
+                v = stream["validation"]
+                print(
+                    f"  KNOWN FALLBACK {key}: "
+                    f"{stream['type']} HTTP={v.get('httpStatus')} "
+                    f"valid={v.get('manifestValid')} "
+                    f"segment={v.get('segmentValid')} "
+                    f"stable={v.get('stable')}"
+                )
+            results.append(stream)
+    except Exception as exc:
+        print(f"  KNOWN FALLBACK ERROR {key}: {exc}")
+    finally:
+        if page:
+            try:
+                await page.close()
+            except Exception:
+                pass
+
+    return [s for s in results if stream_is_usable(s)]
+
+
 def classify_stream_failure(stream):
     v = stream.get("validation", {})
     if v.get("drm"):
@@ -1327,6 +1389,12 @@ async def main():
             except Exception as e:
                 print(f"  category error: {e}")
 
+        # Keep verified direct-source channels available even when the
+        # BhoomTV category page is blocked by Cloudflare.
+        if CATEGORY_SECTION in {"all", "tamil"}:
+            for known_slug in KNOWN_TAMIL_STREAMS:
+                channel_pages.add(f"{BASE}/live/{known_slug}/")
+
         channels = sorted(channel_pages)
         if MAX_CHANNELS > 0:
             channels = channels[:MAX_CHANNELS]
@@ -1365,6 +1433,21 @@ async def main():
                 continue
 
             item = await scan_channel(context, channel_url, debug=debug)
+
+            # For known channels, add independently supplied direct HLS
+            # sources as verified fallbacks/alternates. This is especially
+            # useful when the BhoomTV page itself is blocked by Cloudflare.
+            fallback_streams = await known_stream_fallback(context, channel_url)
+            if fallback_streams:
+                existing = {stream_key(s["url"]): s for s in item.get("streams", [])}
+                for stream in fallback_streams:
+                    existing.setdefault(stream_key(stream["url"]), stream)
+                item["streams"] = sorted(
+                    existing.values(),
+                    key=stream_quality_score,
+                    reverse=True,
+                )
+
             scanned_items.append(item)
             captured_count = len(item["streams"])
             total_streams += captured_count
