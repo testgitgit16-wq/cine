@@ -1155,6 +1155,105 @@ def load_previous_channel_count():
     except Exception:
         return None
 
+def load_previous_inventory():
+    """Load the last published channel inventory for recovery when category pages are blocked."""
+    previous = OUT / "bhoom-tamil.json"
+    if not previous.exists():
+        return {}
+
+    try:
+        data = json.loads(previous.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+    inventory = {}
+    for channel in data.get("channels", []) or []:
+        page_url = str(channel.get("pageUrl") or "").strip()
+        if not page_url:
+            continue
+        if not page_url.startswith(BASE + "/live/"):
+            continue
+
+        clean = page_url.rstrip("/") + "/"
+        streams = channel.get("streams") or []
+        if not streams:
+            continue
+
+        inventory[clean] = channel
+
+    return inventory
+
+
+async def validate_previous_stream_fallback(context, channel_url, previous_channel):
+    """
+    Re-use previously published direct streams only when the live BhoomTV
+    channel page cannot expose a stream. This is a recovery path, not a
+    Cloudflare bypass.
+    """
+    page = None
+    recovered = []
+
+    try:
+        page = await context.new_page()
+
+        for old in previous_channel.get("streams", []) or []:
+            url = str(old.get("url") or "").strip()
+            if not url:
+                continue
+
+            stream = {
+                "url": url,
+                "type": old.get("type") or stream_type(url, old.get("contentType", "")),
+                "headers": dict(old.get("headers") or {}),
+                "tokenized": looks_tokenized(url),
+            }
+
+            if VALIDATE_STREAMS:
+                stream["validation"] = await validate_stream(page, stream)
+                v = stream["validation"]
+                http_status = int(v.get("httpStatus") or 0)
+                manifest_ok = v.get("manifestValid") is True
+                segment_ok = not v.get("segmentChecked") or v.get("segmentValid") is True
+                stream_ok = (
+                    stream["type"] == "rtmp"
+                    or (
+                        200 <= http_status < 400
+                        and manifest_ok
+                        and segment_ok
+                    )
+                )
+
+                print(
+                    f"  PREVIOUS FALLBACK {slug(channel_url)}: "
+                    f"{stream['type']} HTTP={v.get('httpStatus')} "
+                    f"valid={v.get('manifestValid')} "
+                    f"segment={v.get('segmentValid')} "
+                    f"stable={v.get('stable')} "
+                    f"keep={stream_ok}"
+                )
+
+                if not stream_ok:
+                    continue
+
+            recovered.append(stream)
+
+        unique = {}
+        for stream in recovered:
+            unique[stream_key(stream["url"])] = stream
+
+        return sorted(unique.values(), key=stream_quality_score, reverse=True)
+
+    except Exception as exc:
+        print(f"  PREVIOUS FALLBACK ERROR {slug(channel_url)}: {exc}")
+        return []
+    finally:
+        if page:
+            try:
+                await page.close()
+            except Exception:
+                pass
+
+
 
 async def scan_multi_source_group(context, channel_url, debug=False):
     """Extract each DooPlayer source on a grouped live page as an individual channel."""
@@ -1389,6 +1488,20 @@ async def main():
             except Exception as e:
                 print(f"  category error: {e}")
 
+        # If BhoomTV category pages are blocked and yield no live links,
+        # recover the previous published channel inventory. This prevents a
+        # transient Cloudflare block from reducing the production playlist to
+        # a single hard-coded channel.
+        previous_inventory = load_previous_inventory()
+        discovered_from_categories = set(channel_pages)
+
+        if not discovered_from_categories and previous_inventory:
+            channel_pages.update(previous_inventory.keys())
+            print(
+                f"Category discovery returned no live links; "
+                f"recovered {len(previous_inventory)} channels from previous output."
+            )
+
         # Keep verified direct-source channels available even when the
         # BhoomTV category page is blocked by Cloudflare.
         if CATEGORY_SECTION in {"all", "tamil"}:
@@ -1448,6 +1561,29 @@ async def main():
                     reverse=True,
                 )
 
+            # If the current BhoomTV page produced nothing, recover and
+            # validate the previously published streams for this exact channel.
+            # This lets production survive Cloudflare blocks without bypassing
+            # the challenge.
+            if not item.get("streams") and channel_url in previous_inventory:
+                previous_fallback = await validate_previous_stream_fallback(
+                    context,
+                    channel_url,
+                    previous_inventory[channel_url],
+                )
+                if previous_fallback:
+                    item["streams"] = previous_fallback
+                    if not item.get("name"):
+                        item["name"] = previous_inventory[channel_url].get(
+                            "name", channel_name_from_url(channel_url)
+                        )
+                    if not item.get("logo"):
+                        item["logo"] = previous_inventory[channel_url].get("logo", "")
+                    print(
+                        f"  RECOVERED {channel_url}: "
+                        f"{len(previous_fallback)} validated previous stream(s)"
+                    )
+
             scanned_items.append(item)
             captured_count = len(item["streams"])
             total_streams += captured_count
@@ -1469,6 +1605,24 @@ async def main():
         # disappear. Each remaining channel gets at least one working stream.
         results = ensure_one_working_stream_per_channel(results)
         print(f"Final working-channel safety pass: {len(results)} channels retained")
+
+        # Never publish a dramatically smaller playlist just because a source
+        # category was temporarily blocked. The existing output remains intact
+        # when this threshold is not met, because the workflow fails before its
+        # publish step.
+        previous_count = load_previous_channel_count()
+        if (
+            previous_count
+            and MIN_CHANNEL_RETENTION_PERCENT > 0
+            and len(results) * 100 < previous_count * MIN_CHANNEL_RETENTION_PERCENT
+        ):
+            raise RuntimeError(
+                "Production safety stop: only "
+                f"{len(results)} of {previous_count} previously published "
+                f"channels were recovered, below the configured "
+                f"{MIN_CHANNEL_RETENTION_PERCENT}% retention threshold. "
+                "No new playlist will be published."
+            )
 
         await context.close()
         await browser.close()
