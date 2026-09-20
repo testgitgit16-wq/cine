@@ -1,0 +1,51 @@
+name: TEST Multi-stream M3U Entry
+
+on:
+  push:
+    paths:
+      - "bhoom-automation/update_external_playlist.py"
+      - ".github/workflows/test-multi-stream-m3u.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Test four URLs under one EXTINF
+        run: |
+          python - <<'PY'
+          import sys
+          sys.path.insert(0, "bhoom-automation")
+          import update_external_playlist as p
+
+          sample = """#EXTM3U
+          #EXTINF:-1 group-title="BHOOM TV",Watch 00s Replay Live Online | High Quality Streaming
+          https://bx-tv.com/proxy.php?url=https://jmp2.uk/plu-62ba60f059624e000781c436.m3u8
+          https://bx-tv.com/proxy.php?url=https://jmp2.uk/plu-62b60f059624e000781c436.m3u8
+          https://bx-tv.com/proxy.php?url=https://jmp2.uk/plu-62ba60f059624e000781c46.m3u8
+          https://bx-tv.com/proxy.php?url=https://jmp2.uk/plu-62b60f059624e000781c36.m3u8
+          """
+
+          entries = p.parse(sample)
+          assert len(entries) == 1, f"expected 1 EXTINF entry, got {len(entries)}"
+
+          urls = p.stream_urls(entries[0])
+          assert len(urls) == 4, f"expected 4 URLs, got {len(urls)}"
+
+          for i, url in enumerate(urls, 1):
+              print(f"URL {i}: {url}")
+
+          print("MULTI-STREAM EXTINF PARSE: PASS")
+          print("STREAM COUNT:", len(urls))
+          PY
