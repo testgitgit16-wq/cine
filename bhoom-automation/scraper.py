@@ -49,6 +49,7 @@ PLAYER_INITIAL_WAIT_SECONDS = max(1, int(os.getenv("PLAYER_INITIAL_WAIT_SECONDS"
 PLAYER_CAPTURE_WAIT_SECONDS = max(1, int(os.getenv("PLAYER_CAPTURE_WAIT_SECONDS", "5") or "5"))
 PUBLISH_SENSITIVE_HEADERS = os.getenv("PUBLISH_SENSITIVE_HEADERS", "0") != "0"
 MIN_CHANNEL_RETENTION_PERCENT = max(0, min(100, int(os.getenv("MIN_CHANNEL_RETENTION_PERCENT", "50") or "50")))
+MIN_REQUIRED_CHANNELS = max(0, int(os.getenv("MIN_REQUIRED_CHANNELS", "0") or "0"))
 RECAPTURE_ON_FAILURES = os.getenv("RECAPTURE_ON_FAILURES", "1") != "0"
 RECAPTURE_ROUNDS = max(0, int(os.getenv("RECAPTURE_ROUNDS", "1") or "1"))
 RETRY_COUNT = max(1, int(os.getenv("RETRY_COUNT", "3") or "3"))
@@ -1624,6 +1625,13 @@ async def main():
         # when this threshold is not met, because the workflow fails before its
         # publish step.
         previous_count = load_previous_channel_count()
+
+        if MIN_REQUIRED_CHANNELS > 0 and len(results) < MIN_REQUIRED_CHANNELS:
+            raise RuntimeError(
+                "Production minimum-channel safety stop: "
+                f"{len(results)} channels recovered, but at least "
+                f"{MIN_REQUIRED_CHANNELS} are required."
+            )
         if (
             previous_count
             and MIN_CHANNEL_RETENTION_PERCENT > 0
