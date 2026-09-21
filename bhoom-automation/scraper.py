@@ -59,6 +59,10 @@ CLOUDFLARE_FAIL_FAST = os.getenv("CLOUDFLARE_FAIL_FAST", "1") != "0"
 CLOUDFLARE_WAIT_SECONDS = max(0, int(os.getenv("CLOUDFLARE_WAIT_SECONDS", "1") or "1"))
 PAGE_NAV_TIMEOUT_SECONDS = max(5, int(os.getenv("PAGE_NAV_TIMEOUT_SECONDS", "30") or "30"))
 
+# Run-level state: once the origin is definitively challenged, avoid repeating
+# the same Cloudflare challenge on every /live/ page.
+BHOOM_ORIGIN_BLOCKED = False
+
 CLOUDFLARE_MARKERS = (
     "challenges.cloudflare.com",
     "challenge-platform",
@@ -124,6 +128,9 @@ async def goto_bhoom(page, url, timeout_seconds=PAGE_NAV_TIMEOUT_SECONDS):
         if CLOUDFLARE_WAIT_SECONDS:
             await page.wait_for_timeout(CLOUDFLARE_WAIT_SECONDS * 1000)
         blocked = header_blocked or await is_cloudflare_challenge(page)
+        if blocked:
+            global BHOOM_ORIGIN_BLOCKED
+            BHOOM_ORIGIN_BLOCKED = True
         return response, blocked
     except PlaywrightTimeoutError:
         blocked = await is_cloudflare_challenge(page)
@@ -1581,10 +1588,10 @@ async def main():
         print(f"Tamil live channels discovered during pagination: {len(discovered_live_channels)}")
 
         if CLOUDFLARE_FAIL_FAST and not category_pages:
-            raise RuntimeError(
-                "BhoomTV category preflight failed: no category page could be read. "
-                "The GitHub Actions runner is receiving a Cloudflare/Turnstile challenge. "
-                "Provide an authorized machine-readable feed/API or allowlist the runner before production scraping."
+            print(
+                "CATEGORY PREFLIGHT: Cloudflare blocked the category pages. "
+                "Continuing with previous published inventory and direct stream validation.",
+                flush=True,
             )
 
         for category_url in category_pages:
@@ -1690,6 +1697,9 @@ async def main():
         results = []
         scanned_items = []
         total_streams = 0
+        total_usable_streams = 0
+        total_failed_streams = 0
+        total_blocked_pages = 0
 
         for index, channel_url in enumerate(channels, 1):
             debug = index <= DEBUG_CHANNELS
@@ -1697,26 +1707,19 @@ async def main():
 
             # Future-proof: any BhoomTV /live/ page exposing multiple
             # DooPlayer source options is treated as a grouped page.
+            # Once the origin is blocked, do not repeat the challenge for every
+            # channel; validate previously published stream URLs directly.
             is_group_page = False
             option_count = 0
-            try:
-                probe = await context.new_page()
-                _, probe_cf_blocked = await goto_bhoom(
-                    probe, channel_url,
-                    timeout_seconds=min(PAGE_NAV_TIMEOUT_SECONDS, 20),
-                )
-                if probe_cf_blocked and CLOUDFLARE_FAIL_FAST:
-                    option_count = -1
-                    is_group_page = False
-                else:
-                    option_count = await probe.locator("li.dooplay_player_option").count()
-                    is_group_page = option_count >= 2
-                await probe.close()
-            except Exception as exc:
-                print(f"  group-page probe skipped: {exc}")
+            item = None
 
-            if option_count == -1:
-                print("  CLOUDFLARE BLOCKED: live page unavailable; switching to validated previous-stream recovery")
+            if BHOOM_ORIGIN_BLOCKED and CLOUDFLARE_FAIL_FAST:
+                total_blocked_pages += 1
+                print(
+                    "  CLOUDFLARE ORIGIN BLOCKED: skipping live-page navigation; "
+                    "using direct previous-stream validation",
+                    flush=True,
+                )
                 item = {
                     "id": slug(channel_url),
                     "name": channel_name_from_url(channel_url),
@@ -1725,7 +1728,32 @@ async def main():
                     "blockedReason": "CLOUDFLARE_CHALLENGE",
                 }
             else:
-                item = None
+                try:
+                    probe = await context.new_page()
+                    _, probe_cf_blocked = await goto_bhoom(
+                        probe, channel_url,
+                        timeout_seconds=min(PAGE_NAV_TIMEOUT_SECONDS, 20),
+                    )
+                    if probe_cf_blocked and CLOUDFLARE_FAIL_FAST:
+                        option_count = -1
+                        total_blocked_pages += 1
+                        is_group_page = False
+                    else:
+                        option_count = await probe.locator("li.dooplay_player_option").count()
+                        is_group_page = option_count >= 2
+                    await probe.close()
+                except Exception as exc:
+                    print(f"  group-page probe skipped: {exc}")
+
+                if option_count == -1:
+                    print("  CLOUDFLARE BLOCKED: live page unavailable; switching to validated previous-stream recovery")
+                    item = {
+                        "id": slug(channel_url),
+                        "name": channel_name_from_url(channel_url),
+                        "pageUrl": channel_url,
+                        "streams": [],
+                        "blockedReason": "CLOUDFLARE_CHALLENGE",
+                    }
 
             if item is None:
                 print(f"  source options detected: {option_count}")
@@ -1790,6 +1818,12 @@ async def main():
             item["usableStreamCount"] = len(usable)
             if usable:
                 item["streams"] = usable
+                total_usable_streams += len(usable)
+                print(
+                    f"  [STREAM CHECK] captured={captured_count} usable={len(usable)} "
+                    f"failed={max(0, captured_count - len(usable))}",
+                    flush=True,
+                )
                 print(
                     f"  [CHANNEL RESULT] {item.get('name','?')} -> "
                     f"USABLE={len(usable)} CAPTURED={captured_count}",
@@ -1797,12 +1831,27 @@ async def main():
                 )
                 results.append(item)
             else:
+                total_failed_streams += captured_count
+                print(
+                    f"  [STREAM CHECK] captured={captured_count} usable=0 "
+                    f"failed={captured_count}",
+                    flush=True,
+                )
                 print(
                     f"  [CHANNEL RESULT] {item.get('name','?')} -> "
                     f"USABLE=0 CAPTURED={captured_count} "
                     f"BLOCKED_REASON={item.get('blockedReason','VALIDATION_FAILED')}",
                     flush=True,
                 )
+
+            print(
+                f"  [REALTIME] channels={index}/{len(channels)} "
+                f"working={len(results)} captured={total_streams} "
+                f"usable_streams={total_usable_streams} "
+                f"failed_streams={total_failed_streams} "
+                f"cloudflare_blocked={total_blocked_pages}",
+                flush=True,
+            )
 
         before_merge = len(results)
         results = merge_duplicate_channels(results)
@@ -1837,6 +1886,18 @@ async def main():
                 f"{MIN_CHANNEL_RETENTION_PERCENT}% retention threshold. "
                 "No new playlist will be published."
             )
+
+        print("", flush=True)
+        print("BHOOMTV SCRAPER FINAL SUMMARY", flush=True)
+        print(f"  Category pages read: {len(category_pages)}", flush=True)
+        print(f"  Channels discovered: {len(channel_pages)}", flush=True)
+        print(f"  Channels scanned: {len(channels)}", flush=True)
+        print(f"  Working channels: {len(results)}", flush=True)
+        print(f"  Captured streams: {total_streams}", flush=True)
+        print(f"  Usable streams: {total_usable_streams}", flush=True)
+        print(f"  Failed streams: {total_failed_streams}", flush=True)
+        print(f"  Cloudflare-blocked live pages: {total_blocked_pages}", flush=True)
+        print(f"  Origin Cloudflare blocked: {'YES' if BHOOM_ORIGIN_BLOCKED else 'NO'}", flush=True)
 
         await context.close()
         await browser.close()
