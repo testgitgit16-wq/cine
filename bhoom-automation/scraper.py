@@ -53,6 +53,7 @@ MIN_REQUIRED_CHANNELS = max(0, int(os.getenv("MIN_REQUIRED_CHANNELS", "0") or "0
 RECAPTURE_ON_FAILURES = os.getenv("RECAPTURE_ON_FAILURES", "1") != "0"
 RECAPTURE_ROUNDS = max(0, int(os.getenv("RECAPTURE_ROUNDS", "1") or "1"))
 RETRY_COUNT = max(1, int(os.getenv("RETRY_COUNT", "3") or "3"))
+RECOVER_PREVIOUS_ON_CLOUDFLARE = os.getenv("RECOVER_PREVIOUS_ON_CLOUDFLARE", "1") != "0"
 
 CLOUDFLARE_FAIL_FAST = os.getenv("CLOUDFLARE_FAIL_FAST", "1") != "0"
 CLOUDFLARE_WAIT_SECONDS = max(0, int(os.getenv("CLOUDFLARE_WAIT_SECONDS", "1") or "1"))
@@ -988,13 +989,33 @@ def stream_key(url: str):
 
 
 def stream_is_usable(stream):
-    """Keep every captured stream, including DRM-detected streams.
+    """Return True only for a usable stream after validation.
 
-    DRM is reported for diagnostics, but this scraper does not bypass DRM
-    or extract keys. A captured stream is retained as long as it was actually
-    captured; HTTP validation details are kept in the report.
+    When validation is enabled, a captured URL is not considered publishable
+    merely because the browser saw a request. HLS/DASH must return a valid
+    manifest and, when checked, at least one valid segment. This prevents
+    challenge pages, expired tokens, HTML responses, and dead URLs from
+    entering the IPTV playlist.
     """
-    return bool(stream.get("url"))
+    if not stream.get("url"):
+        return False
+    if not VALIDATE_STREAMS:
+        return True
+    if stream.get("type") == "rtmp":
+        return True
+    v = stream.get("validation") or {}
+    status = int(v.get("httpStatus") or 0)
+    if not (200 <= status < 400):
+        return False
+    if v.get("drm"):
+        return False
+    if v.get("manifestValid") is False:
+        return False
+    if stream.get("type") in {"hls", "dash"} and v.get("manifestValid") is not True:
+        return False
+    if v.get("segmentChecked") and v.get("segmentValid") is not True:
+        return False
+    return True
 
 def stream_quality_score(stream):
     """Higher score = better candidate to keep for a duplicate channel."""
@@ -1655,24 +1676,26 @@ async def main():
                 print(f"  group-page probe skipped: {exc}")
 
             if option_count == -1:
-                print("  CLOUDFLARE BLOCKED: source-options probe hit Turnstile; skipping player extraction")
-                scanned_items.append({
+                print("  CLOUDFLARE BLOCKED: live page unavailable; switching to validated previous-stream recovery")
+                item = {
                     "id": slug(channel_url),
                     "name": channel_name_from_url(channel_url),
                     "pageUrl": channel_url,
                     "streams": [],
                     "blockedReason": "CLOUDFLARE_CHALLENGE",
-                })
-                continue
+                }
+            else:
+                item = None
 
-            print(f"  source options detected: {option_count}")
-            if is_group_page:
-                group_items = await scan_multi_source_group(context, channel_url, debug=debug)
-                results.extend(group_items)
-                print(f"  GROUP PAGE: {len(group_items)} individual channels")
-                continue
+            if item is None:
+                print(f"  source options detected: {option_count}")
+                if is_group_page:
+                    group_items = await scan_multi_source_group(context, channel_url, debug=debug)
+                    results.extend(group_items)
+                    print(f"  GROUP PAGE: {len(group_items)} individual channels")
+                    continue
 
-            item = await scan_channel(context, channel_url, debug=debug)
+                item = await scan_channel(context, channel_url, debug=debug)
 
             # For known channels, add independently supplied direct HLS
             # sources as verified fallbacks/alternates. This is especially
@@ -1695,8 +1718,11 @@ async def main():
             # when the live page itself was actually reached.
             if (
                 not item.get("streams")
-                and item.get("blockedReason") != "CLOUDFLARE_CHALLENGE"
                 and channel_url in previous_inventory
+                and (
+                    item.get("blockedReason") != "CLOUDFLARE_CHALLENGE"
+                    or RECOVER_PREVIOUS_ON_CLOUDFLARE
+                )
             ):
                 previous_fallback = await validate_previous_stream_fallback(
                     context,
@@ -1705,6 +1731,7 @@ async def main():
                 )
                 if previous_fallback:
                     item["streams"] = previous_fallback
+                    item["recoveryMode"] = "validated-previous-stream"
                     if not item.get("name"):
                         item["name"] = previous_inventory[channel_url].get(
                             "name", channel_name_from_url(channel_url)
