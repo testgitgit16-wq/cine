@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       category_page_limit:
-        description: "Category pages per section (1 = first page only, 0 = all)"
+        description: "Category pages per section (TEST: 1, PRODUCTION: 0 = all pages)"
         required: false
-        default: "0"
+        default: "1"
       max_channels:
-        description: "Maximum channels to scan (20 for test, 0 = all)"
+        description: "Maximum channels to scan (TEST: 20, PRODUCTION: 0 = all channels)"
         required: false
-        default: "0"
+        default: "20"
       category_section:
         description: "Section to scan: tamil, local, or all"
         required: false
