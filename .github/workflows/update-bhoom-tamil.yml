@@ -79,6 +79,7 @@ jobs:
         env:
           CATEGORY_SECTION: ${{ github.event.inputs.category_section || 'all' }}
           BHOOM_PROXY_BASE_URL: "https://bhoom-tamil-api.testtamil.workers.dev"
+          # Worker is the authorized BhoomTV source bridge
           CATEGORY_PAGE_LIMIT: ${{ github.event.inputs.category_page_limit || '0' }}
           MAX_CHANNELS: ${{ github.event.inputs.max_channels || '0' }}
           VALIDATE_STREAMS: ${{ github.event.inputs.validate_streams || '1' }}
