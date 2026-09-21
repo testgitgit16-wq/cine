@@ -282,7 +282,7 @@ def merge_inventory(category_channels, rest_channels):
     for url, ch in existing.items():
         if not ch.get("streams"):
             ch["streams"] = [{
-                "url": "https://invalid.local/bhoom-discovery-sentinel.m3u8",
+                "url": "http://127.0.0.1:9/bhoom-discovery-sentinel.m3u8",
                 "type": "hls",
                 "headers": {},
                 "discoveryOnly": True,
