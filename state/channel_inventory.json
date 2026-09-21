@@ -1,5 +1,2470 @@
 {
-  "generated_at": "2026-09-21T08:10:16.941098Z",
-  "channel_count": 0,
-  "channels": []
+  "generated_at": "2026-09-21T09:28:00.312160Z",
+  "channel_count": 308,
+  "channels": [
+    {
+      "name": "7 Green 4k",
+      "slug": "7-green-4k",
+      "url": "https://bhoomtv.org/live/7-green-4k/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.306929Z"
+    },
+    {
+      "name": "7star Television",
+      "slug": "7star-television",
+      "url": "https://bhoomtv.org/live/7star-television/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.306950Z"
+    },
+    {
+      "name": "A1 Media News",
+      "slug": "a1-media-news",
+      "url": "https://bhoomtv.org/live/a1-media-news/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.306971Z"
+    },
+    {
+      "name": "A1 Tv Ariyalur",
+      "slug": "a1-tv-ariyalur",
+      "url": "https://bhoomtv.org/live/a1-tv-ariyalur/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.306992Z"
+    },
+    {
+      "name": "Aadhavan Colours",
+      "slug": "aadhavan-colours",
+      "url": "https://bhoomtv.org/live/aadhavan-colours/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307014Z"
+    },
+    {
+      "name": "Aadhavan Tamil Tv",
+      "slug": "aadhavan-tamil-tv",
+      "url": "https://bhoomtv.org/live/aadhavan-tamil-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307035Z"
+    },
+    {
+      "name": "Aadhavan Tv",
+      "slug": "aadhavan-tv",
+      "url": "https://bhoomtv.org/live/aadhavan-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307055Z"
+    },
+    {
+      "name": "Aadvik Tv",
+      "slug": "aadvik-tv",
+      "url": "https://bhoomtv.org/live/aadvik-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307076Z"
+    },
+    {
+      "name": "Aalayam Tv",
+      "slug": "aalayam-tv",
+      "url": "https://bhoomtv.org/live/aalayam-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307097Z"
+    },
+    {
+      "name": "Aaron Tv",
+      "slug": "aaron-tv",
+      "url": "https://bhoomtv.org/live/aaron-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307118Z"
+    },
+    {
+      "name": "Aarthi Tv",
+      "slug": "aarthi-tv",
+      "url": "https://bhoomtv.org/live/aarthi-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307139Z"
+    },
+    {
+      "name": "Aaryaa Tv",
+      "slug": "aaryaa-tv",
+      "url": "https://bhoomtv.org/live/aaryaa-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307159Z"
+    },
+    {
+      "name": "Aathi Tv",
+      "slug": "aathi-tv",
+      "url": "https://bhoomtv.org/live/aathi-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307179Z"
+    },
+    {
+      "name": "Abnaz Tv",
+      "slug": "abnaz-tv",
+      "url": "https://bhoomtv.org/live/abnaz-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307199Z"
+    },
+    {
+      "name": "Acp Isai Oli",
+      "slug": "acp-isai-oli",
+      "url": "https://bhoomtv.org/live/acp-isai-oli/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307219Z"
+    },
+    {
+      "name": "Acp Tv Classic Madurai",
+      "slug": "acp-tv-classic-madurai",
+      "url": "https://bhoomtv.org/live/acp-tv-classic-madurai/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307240Z"
+    },
+    {
+      "name": "Acp Tv Madurai",
+      "slug": "acp-tv-madurai",
+      "url": "https://bhoomtv.org/live/acp-tv-madurai/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307260Z"
+    },
+    {
+      "name": "Adhir Alai Tv",
+      "slug": "adhir-alai-tv",
+      "url": "https://bhoomtv.org/live/adhir-alai-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307280Z"
+    },
+    {
+      "name": "Adhiyaman Tv",
+      "slug": "adhiyaman-tv",
+      "url": "https://bhoomtv.org/live/adhiyaman-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307302Z"
+    },
+    {
+      "name": "Agam Tv",
+      "slug": "agam-tv",
+      "url": "https://bhoomtv.org/live/agam-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307322Z"
+    },
+    {
+      "name": "Agaram Tv",
+      "slug": "agaram-tv",
+      "url": "https://bhoomtv.org/live/agaram-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307343Z"
+    },
+    {
+      "name": "Agasham Tv",
+      "slug": "agasham-tv",
+      "url": "https://bhoomtv.org/live/agasham-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307363Z"
+    },
+    {
+      "name": "Akilam Tv",
+      "slug": "akilam-tv",
+      "url": "https://bhoomtv.org/live/akilam-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307383Z"
+    },
+    {
+      "name": "Alpha Tv",
+      "slug": "alpha-tv",
+      "url": "https://bhoomtv.org/live/alpha-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307403Z"
+    },
+    {
+      "name": "Amma Tv",
+      "slug": "amma-tv",
+      "url": "https://bhoomtv.org/live/amma-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307423Z"
+    },
+    {
+      "name": "Amma Vision",
+      "slug": "amma-vision",
+      "url": "https://bhoomtv.org/live/amma-vision/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307443Z"
+    },
+    {
+      "name": "Amman Tv",
+      "slug": "amman-tv",
+      "url": "https://bhoomtv.org/live/amman-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307464Z"
+    },
+    {
+      "name": "Analai Express Cinema",
+      "slug": "analai-express-cinema",
+      "url": "https://bhoomtv.org/live/analai-express-cinema/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307485Z"
+    },
+    {
+      "name": "Analai Express Tv",
+      "slug": "analai-express-tv",
+      "url": "https://bhoomtv.org/live/analai-express-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307507Z"
+    },
+    {
+      "name": "Anandam Abi Tv",
+      "slug": "anandam-abi-tv",
+      "url": "https://bhoomtv.org/live/anandam-abi-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307529Z"
+    },
+    {
+      "name": "Anandam Tv Madurai",
+      "slug": "anandam-tv-madurai",
+      "url": "https://bhoomtv.org/live/anandam-tv-madurai/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307551Z"
+    },
+    {
+      "name": "Anandam Utv",
+      "slug": "anandam-utv",
+      "url": "https://bhoomtv.org/live/anandam-utv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307573Z"
+    },
+    {
+      "name": "Annai Tamil",
+      "slug": "annai-tamil",
+      "url": "https://bhoomtv.org/live/annai-tamil/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307595Z"
+    },
+    {
+      "name": "Annai Tv",
+      "slug": "annai-tv",
+      "url": "https://bhoomtv.org/live/annai-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307616Z"
+    },
+    {
+      "name": "Annai Tv Thoothukudi",
+      "slug": "annai-tv-thoothukudi",
+      "url": "https://bhoomtv.org/live/annai-tv-thoothukudi/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307638Z"
+    },
+    {
+      "name": "Anu Tv",
+      "slug": "anu-tv",
+      "url": "https://bhoomtv.org/live/anu-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307660Z"
+    },
+    {
+      "name": "Apple Tv Marthandam",
+      "slug": "apple-tv-marthandam",
+      "url": "https://bhoomtv.org/live/apple-tv-marthandam/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307695Z"
+    },
+    {
+      "name": "Appu Tv",
+      "slug": "appu-tv",
+      "url": "https://bhoomtv.org/live/appu-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307719Z"
+    },
+    {
+      "name": "Aps Gold Tv",
+      "slug": "aps-gold-tv",
+      "url": "https://bhoomtv.org/live/aps-gold-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307741Z"
+    },
+    {
+      "name": "Aps Tv",
+      "slug": "aps-tv",
+      "url": "https://bhoomtv.org/live/aps-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307763Z"
+    },
+    {
+      "name": "Arighni Tv",
+      "slug": "arighni-tv",
+      "url": "https://bhoomtv.org/live/arighni-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307784Z"
+    },
+    {
+      "name": "Ashoka Tv",
+      "slug": "ashoka-tv",
+      "url": "https://bhoomtv.org/live/ashoka-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307807Z"
+    },
+    {
+      "name": "Asoka Tv",
+      "slug": "asoka-tv",
+      "url": "https://bhoomtv.org/live/asoka-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307828Z"
+    },
+    {
+      "name": "Atn Media",
+      "slug": "atn-media",
+      "url": "https://bhoomtv.org/live/atn-media/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307848Z"
+    },
+    {
+      "name": "Atn Tv",
+      "slug": "atn-tv",
+      "url": "https://bhoomtv.org/live/atn-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307869Z"
+    },
+    {
+      "name": "Avs Tv",
+      "slug": "avs-tv",
+      "url": "https://bhoomtv.org/live/avs-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307890Z"
+    },
+    {
+      "name": "Bhagyam Tv",
+      "slug": "bhagyam-tv",
+      "url": "https://bhoomtv.org/live/bhagyam-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307910Z"
+    },
+    {
+      "name": "Bigil Tv",
+      "slug": "bigil-tv",
+      "url": "https://bhoomtv.org/live/bigil-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307931Z"
+    },
+    {
+      "name": "Blue Moon Tv",
+      "slug": "blue-moon-tv",
+      "url": "https://bhoomtv.org/live/blue-moon-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307952Z"
+    },
+    {
+      "name": "Bright Simrose Tv",
+      "slug": "bright-simrose-tv",
+      "url": "https://bhoomtv.org/live/bright-simrose-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307974Z"
+    },
+    {
+      "name": "Btv Hd",
+      "slug": "btv-hd",
+      "url": "https://bhoomtv.org/live/btv-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.307996Z"
+    },
+    {
+      "name": "Chola Tv",
+      "slug": "chola-tv",
+      "url": "https://bhoomtv.org/live/chola-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308017Z"
+    },
+    {
+      "name": "Citi Channel 2",
+      "slug": "citi-channel-2",
+      "url": "https://bhoomtv.org/live/citi-channel-2/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308038Z"
+    },
+    {
+      "name": "Ctn",
+      "slug": "ctn",
+      "url": "https://bhoomtv.org/live/ctn/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308060Z"
+    },
+    {
+      "name": "Dark Television",
+      "slug": "dark-television",
+      "url": "https://bhoomtv.org/live/dark-television/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308081Z"
+    },
+    {
+      "name": "Dark Tv",
+      "slug": "dark-tv",
+      "url": "https://bhoomtv.org/live/dark-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308102Z"
+    },
+    {
+      "name": "Darshan Tv",
+      "slug": "darshan-tv",
+      "url": "https://bhoomtv.org/live/darshan-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308124Z"
+    },
+    {
+      "name": "Devathai Tv",
+      "slug": "devathai-tv",
+      "url": "https://bhoomtv.org/live/devathai-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308146Z"
+    },
+    {
+      "name": "Devi Tv",
+      "slug": "devi-tv",
+      "url": "https://bhoomtv.org/live/devi-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308167Z"
+    },
+    {
+      "name": "Dharani Tv",
+      "slug": "dharani-tv",
+      "url": "https://bhoomtv.org/live/dharani-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308216Z"
+    },
+    {
+      "name": "Diamond Music",
+      "slug": "diamond-music",
+      "url": "https://bhoomtv.org/live/diamond-music/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308243Z"
+    },
+    {
+      "name": "Diamond Talkies Hd",
+      "slug": "diamond-talkies-hd",
+      "url": "https://bhoomtv.org/live/diamond-talkies-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308265Z"
+    },
+    {
+      "name": "Diamond Tv",
+      "slug": "diamond-tv",
+      "url": "https://bhoomtv.org/live/diamond-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308287Z"
+    },
+    {
+      "name": "Durai Melodies",
+      "slug": "durai-melodies",
+      "url": "https://bhoomtv.org/live/durai-melodies/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308308Z"
+    },
+    {
+      "name": "Eagle Tv",
+      "slug": "eagle-tv",
+      "url": "https://bhoomtv.org/live/eagle-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308328Z"
+    },
+    {
+      "name": "Eet Tv",
+      "slug": "eet-tv",
+      "url": "https://bhoomtv.org/live/eet-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308348Z"
+    },
+    {
+      "name": "Emperor Tv",
+      "slug": "emperor-tv",
+      "url": "https://bhoomtv.org/live/emperor-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308369Z"
+    },
+    {
+      "name": "Enthiran Tv",
+      "slug": "enthiran-tv",
+      "url": "https://bhoomtv.org/live/enthiran-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308389Z"
+    },
+    {
+      "name": "Euro Tamil",
+      "slug": "euro-tamil",
+      "url": "https://bhoomtv.org/live/euro-tamil/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308410Z"
+    },
+    {
+      "name": "Eye Tamil",
+      "slug": "eye-tamil",
+      "url": "https://bhoomtv.org/live/eye-tamil/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308430Z"
+    },
+    {
+      "name": "Eye Tamil Comedy",
+      "slug": "eye-tamil-comedy",
+      "url": "https://bhoomtv.org/live/eye-tamil-comedy/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308451Z"
+    },
+    {
+      "name": "Eye Tamil Music",
+      "slug": "eye-tamil-music",
+      "url": "https://bhoomtv.org/live/eye-tamil-music/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308471Z"
+    },
+    {
+      "name": "Fort Channels",
+      "slug": "fort-channels",
+      "url": "https://bhoomtv.org/live/fort-channels/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308492Z"
+    },
+    {
+      "name": "G Max Tv",
+      "slug": "g-max-tv",
+      "url": "https://bhoomtv.org/live/g-max-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308513Z"
+    },
+    {
+      "name": "Garudan Tv",
+      "slug": "garudan-tv",
+      "url": "https://bhoomtv.org/live/garudan-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308533Z"
+    },
+    {
+      "name": "Gcv",
+      "slug": "gcv",
+      "url": "https://bhoomtv.org/live/gcv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308554Z"
+    },
+    {
+      "name": "Gem Tv",
+      "slug": "gem-tv",
+      "url": "https://bhoomtv.org/live/gem-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308576Z"
+    },
+    {
+      "name": "Global Tv",
+      "slug": "global-tv",
+      "url": "https://bhoomtv.org/live/global-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308596Z"
+    },
+    {
+      "name": "Gopuram Tv",
+      "slug": "gopuram-tv",
+      "url": "https://bhoomtv.org/live/gopuram-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308616Z"
+    },
+    {
+      "name": "Hai Tv",
+      "slug": "hai-tv",
+      "url": "https://bhoomtv.org/live/hai-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308637Z"
+    },
+    {
+      "name": "Harin Tv",
+      "slug": "harin-tv",
+      "url": "https://bhoomtv.org/live/harin-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308657Z"
+    },
+    {
+      "name": "Hitech Tv",
+      "slug": "hitech-tv",
+      "url": "https://bhoomtv.org/live/hitech-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308677Z"
+    },
+    {
+      "name": "Idhayam Kids",
+      "slug": "idhayam-kids",
+      "url": "https://bhoomtv.org/live/idhayam-kids/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308712Z"
+    },
+    {
+      "name": "Idhayam Tv",
+      "slug": "idhayam-tv",
+      "url": "https://bhoomtv.org/live/idhayam-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308733Z"
+    },
+    {
+      "name": "Imai Tv",
+      "slug": "imai-tv",
+      "url": "https://bhoomtv.org/live/imai-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308755Z"
+    },
+    {
+      "name": "Irattaipaathai Tv",
+      "slug": "irattaipaathai-tv",
+      "url": "https://bhoomtv.org/live/irattaipaathai-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308776Z"
+    },
+    {
+      "name": "Isai Saral",
+      "slug": "isai-saral",
+      "url": "https://bhoomtv.org/live/isai-saral/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308796Z"
+    },
+    {
+      "name": "Jayam Tv Karur",
+      "slug": "jayam-tv-karur",
+      "url": "https://bhoomtv.org/live/jayam-tv-karur/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308817Z"
+    },
+    {
+      "name": "Jayam Tv Namakkal",
+      "slug": "jayam-tv-namakkal",
+      "url": "https://bhoomtv.org/live/jayam-tv-namakkal/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308838Z"
+    },
+    {
+      "name": "Jayam Tv Sivakasi",
+      "slug": "jayam-tv-sivakasi",
+      "url": "https://bhoomtv.org/live/jayam-tv-sivakasi/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308858Z"
+    },
+    {
+      "name": "Jayam Tv Trichy",
+      "slug": "jayam-tv-trichy",
+      "url": "https://bhoomtv.org/live/jayam-tv-trichy/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308879Z"
+    },
+    {
+      "name": "Jc Tv",
+      "slug": "jc-tv",
+      "url": "https://bhoomtv.org/live/jc-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308900Z"
+    },
+    {
+      "name": "Jcv",
+      "slug": "jcv",
+      "url": "https://bhoomtv.org/live/jcv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308921Z"
+    },
+    {
+      "name": "Jcv Musix",
+      "slug": "jcv-musix",
+      "url": "https://bhoomtv.org/live/jcv-musix/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308943Z"
+    },
+    {
+      "name": "Jith Tv",
+      "slug": "jith-tv",
+      "url": "https://bhoomtv.org/live/jith-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308965Z"
+    },
+    {
+      "name": "Jos Tv Tirunelveli",
+      "slug": "jos-tv-tirunelveli",
+      "url": "https://bhoomtv.org/live/jos-tv-tirunelveli/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.308987Z"
+    },
+    {
+      "name": "Jose Tv",
+      "slug": "jose-tv",
+      "url": "https://bhoomtv.org/live/jose-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309010Z"
+    },
+    {
+      "name": "Jrp Tv Hd",
+      "slug": "jrp-tv-hd",
+      "url": "https://bhoomtv.org/live/jrp-tv-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309032Z"
+    },
+    {
+      "name": "Kanna Tv",
+      "slug": "kanna-tv",
+      "url": "https://bhoomtv.org/live/kanna-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309054Z"
+    },
+    {
+      "name": "Kc Music",
+      "slug": "kc-music",
+      "url": "https://bhoomtv.org/live/kc-music/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309076Z"
+    },
+    {
+      "name": "Kc Tv Coimbatore",
+      "slug": "kc-tv-coimbatore",
+      "url": "https://bhoomtv.org/live/kc-tv-coimbatore/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309097Z"
+    },
+    {
+      "name": "Khila Tv",
+      "slug": "khila-tv",
+      "url": "https://bhoomtv.org/live/khila-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309118Z"
+    },
+    {
+      "name": "King Tv",
+      "slug": "king-tv",
+      "url": "https://bhoomtv.org/live/king-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309139Z"
+    },
+    {
+      "name": "Kings Tv",
+      "slug": "kings-tv",
+      "url": "https://bhoomtv.org/live/kings-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309161Z"
+    },
+    {
+      "name": "Km Music",
+      "slug": "km-music",
+      "url": "https://bhoomtv.org/live/km-music/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309183Z"
+    },
+    {
+      "name": "Km Television",
+      "slug": "km-television",
+      "url": "https://bhoomtv.org/live/km-television/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309204Z"
+    },
+    {
+      "name": "Kumari Kathir",
+      "slug": "kumari-kathir",
+      "url": "https://bhoomtv.org/live/kumari-kathir/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309225Z"
+    },
+    {
+      "name": "Kumari Tv",
+      "slug": "kumari-tv",
+      "url": "https://bhoomtv.org/live/kumari-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309246Z"
+    },
+    {
+      "name": "Lime Tv Tenkasi",
+      "slug": "lime-tv-tenkasi",
+      "url": "https://bhoomtv.org/live/lime-tv-tenkasi/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309266Z"
+    },
+    {
+      "name": "Lion Tv",
+      "slug": "lion-tv",
+      "url": "https://bhoomtv.org/live/lion-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309287Z"
+    },
+    {
+      "name": "Maa Tv Tirunelveli",
+      "slug": "maa-tv-tirunelveli",
+      "url": "https://bhoomtv.org/live/maa-tv-tirunelveli/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309308Z"
+    },
+    {
+      "name": "Madurai Arasi Tv",
+      "slug": "madurai-arasi-tv",
+      "url": "https://bhoomtv.org/live/madurai-arasi-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309328Z"
+    },
+    {
+      "name": "Malar Tv Tamil",
+      "slug": "malar-tv-tamil",
+      "url": "https://bhoomtv.org/live/malar-tv-tamil/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309349Z"
+    },
+    {
+      "name": "Manasu Tv",
+      "slug": "manasu-tv",
+      "url": "https://bhoomtv.org/live/manasu-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309370Z"
+    },
+    {
+      "name": "Mangalam Tv",
+      "slug": "mangalam-tv",
+      "url": "https://bhoomtv.org/live/mangalam-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309390Z"
+    },
+    {
+      "name": "Maniway Tv",
+      "slug": "maniway-tv",
+      "url": "https://bhoomtv.org/live/maniway-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309410Z"
+    },
+    {
+      "name": "Matha Tv",
+      "slug": "matha-tv",
+      "url": "https://bhoomtv.org/live/matha-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309431Z"
+    },
+    {
+      "name": "Mathan Tv",
+      "slug": "mathan-tv",
+      "url": "https://bhoomtv.org/live/mathan-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309450Z"
+    },
+    {
+      "name": "Mathi Tv",
+      "slug": "mathi-tv",
+      "url": "https://bhoomtv.org/live/mathi-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309471Z"
+    },
+    {
+      "name": "Mcn Hd",
+      "slug": "mcn-hd",
+      "url": "https://bhoomtv.org/live/mcn-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309492Z"
+    },
+    {
+      "name": "Mdn Tv",
+      "slug": "mdn-tv",
+      "url": "https://bhoomtv.org/live/mdn-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309513Z"
+    },
+    {
+      "name": "Me 24 Tamil",
+      "slug": "me-24-tamil",
+      "url": "https://bhoomtv.org/live/me-24-tamil/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309534Z"
+    },
+    {
+      "name": "Mei Alai Tv",
+      "slug": "mei-alai-tv",
+      "url": "https://bhoomtv.org/live/mei-alai-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309554Z"
+    },
+    {
+      "name": "Mm Tv Valliyur",
+      "slug": "mm-tv-valliyur",
+      "url": "https://bhoomtv.org/live/mm-tv-valliyur/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309575Z"
+    },
+    {
+      "name": "Mn Music",
+      "slug": "mn-music",
+      "url": "https://bhoomtv.org/live/mn-music/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309598Z"
+    },
+    {
+      "name": "Mn Tv",
+      "slug": "mn-tv",
+      "url": "https://bhoomtv.org/live/mn-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309619Z"
+    },
+    {
+      "name": "Moon Tv Hd",
+      "slug": "moon-tv-hd",
+      "url": "https://bhoomtv.org/live/moon-tv-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309640Z"
+    },
+    {
+      "name": "Ms Mathan Tv",
+      "slug": "ms-mathan-tv",
+      "url": "https://bhoomtv.org/live/ms-mathan-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309661Z"
+    },
+    {
+      "name": "Mtv Chennai",
+      "slug": "mtv-chennai",
+      "url": "https://bhoomtv.org/live/mtv-chennai/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309694Z"
+    },
+    {
+      "name": "Mullai Tv",
+      "slug": "mullai-tv",
+      "url": "https://bhoomtv.org/live/mullai-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309717Z"
+    },
+    {
+      "name": "Naga Tv",
+      "slug": "naga-tv",
+      "url": "https://bhoomtv.org/live/naga-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309739Z"
+    },
+    {
+      "name": "Nila Tv",
+      "slug": "nila-tv",
+      "url": "https://bhoomtv.org/live/nila-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309760Z"
+    },
+    {
+      "name": "Ntc Tv Hd",
+      "slug": "ntc-tv-hd",
+      "url": "https://bhoomtv.org/live/ntc-tv-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309781Z"
+    },
+    {
+      "name": "Ntn Tv",
+      "slug": "ntn-tv",
+      "url": "https://bhoomtv.org/live/ntn-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309801Z"
+    },
+    {
+      "name": "Ntv Nellai",
+      "slug": "ntv-nellai",
+      "url": "https://bhoomtv.org/live/ntv-nellai/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309822Z"
+    },
+    {
+      "name": "Oli Tv Hd",
+      "slug": "oli-tv-hd",
+      "url": "https://bhoomtv.org/live/oli-tv-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309842Z"
+    },
+    {
+      "name": "Oscar Tv",
+      "slug": "oscar-tv",
+      "url": "https://bhoomtv.org/live/oscar-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309863Z"
+    },
+    {
+      "name": "Pasamalar Tv",
+      "slug": "pasamalar-tv",
+      "url": "https://bhoomtv.org/live/pasamalar-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309883Z"
+    },
+    {
+      "name": "Pcn Channel Hd",
+      "slug": "pcn-channel-hd",
+      "url": "https://bhoomtv.org/live/pcn-channel-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309904Z"
+    },
+    {
+      "name": "Penguin Tv",
+      "slug": "penguin-tv",
+      "url": "https://bhoomtv.org/live/penguin-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309925Z"
+    },
+    {
+      "name": "Phoenix Tv",
+      "slug": "phoenix-tv",
+      "url": "https://bhoomtv.org/live/phoenix-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309946Z"
+    },
+    {
+      "name": "Pj Tv",
+      "slug": "pj-tv",
+      "url": "https://bhoomtv.org/live/pj-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309967Z"
+    },
+    {
+      "name": "Pr Tv",
+      "slug": "pr-tv",
+      "url": "https://bhoomtv.org/live/pr-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.309987Z"
+    },
+    {
+      "name": "Prime Tv",
+      "slug": "prime-tv",
+      "url": "https://bhoomtv.org/live/prime-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310008Z"
+    },
+    {
+      "name": "Prince Tv",
+      "slug": "prince-tv",
+      "url": "https://bhoomtv.org/live/prince-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310028Z"
+    },
+    {
+      "name": "Pugal Tv",
+      "slug": "pugal-tv",
+      "url": "https://bhoomtv.org/live/pugal-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310049Z"
+    },
+    {
+      "name": "Punnagai Desam Tv",
+      "slug": "punnagai-desam-tv",
+      "url": "https://bhoomtv.org/live/punnagai-desam-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310070Z"
+    },
+    {
+      "name": "Raagam Tv",
+      "slug": "raagam-tv",
+      "url": "https://bhoomtv.org/live/raagam-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310091Z"
+    },
+    {
+      "name": "Raga Tv",
+      "slug": "raga-tv",
+      "url": "https://bhoomtv.org/live/raga-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310113Z"
+    },
+    {
+      "name": "Ragam Tv",
+      "slug": "ragam-tv",
+      "url": "https://bhoomtv.org/live/ragam-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310134Z"
+    },
+    {
+      "name": "Raja Tv Valliyur",
+      "slug": "raja-tv-valliyur",
+      "url": "https://bhoomtv.org/live/raja-tv-valliyur/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310155Z"
+    },
+    {
+      "name": "Retro Music",
+      "slug": "retro-music",
+      "url": "https://bhoomtv.org/live/retro-music/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310176Z"
+    },
+    {
+      "name": "Right Tv",
+      "slug": "right-tv",
+      "url": "https://bhoomtv.org/live/right-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310197Z"
+    },
+    {
+      "name": "Riya Tv",
+      "slug": "riya-tv",
+      "url": "https://bhoomtv.org/live/riya-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310218Z"
+    },
+    {
+      "name": "Rj Tamil Tv",
+      "slug": "rj-tamil-tv",
+      "url": "https://bhoomtv.org/live/rj-tamil-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310238Z"
+    },
+    {
+      "name": "Rk Tv",
+      "slug": "rk-tv",
+      "url": "https://bhoomtv.org/live/rk-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310258Z"
+    },
+    {
+      "name": "Rock Tv",
+      "slug": "rock-tv",
+      "url": "https://bhoomtv.org/live/rock-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310279Z"
+    },
+    {
+      "name": "Roja Movies",
+      "slug": "roja-movies",
+      "url": "https://bhoomtv.org/live/roja-movies/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310300Z"
+    },
+    {
+      "name": "Roja Tv",
+      "slug": "roja-tv",
+      "url": "https://bhoomtv.org/live/roja-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310322Z"
+    },
+    {
+      "name": "Roja Tv Coimbatore",
+      "slug": "roja-tv-coimbatore",
+      "url": "https://bhoomtv.org/live/roja-tv-coimbatore/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310344Z"
+    },
+    {
+      "name": "Ruby Digital Tv",
+      "slug": "ruby-digital-tv",
+      "url": "https://bhoomtv.org/live/ruby-digital-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310366Z"
+    },
+    {
+      "name": "Ruhasha Tv",
+      "slug": "ruhasha-tv",
+      "url": "https://bhoomtv.org/live/ruhasha-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310387Z"
+    },
+    {
+      "name": "S Max Tamil",
+      "slug": "s-max-tamil",
+      "url": "https://bhoomtv.org/live/s-max-tamil/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310409Z"
+    },
+    {
+      "name": "S Media Puducherry",
+      "slug": "s-media-puducherry",
+      "url": "https://bhoomtv.org/live/s-media-puducherry/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310432Z"
+    },
+    {
+      "name": "Sachin Tv",
+      "slug": "sachin-tv",
+      "url": "https://bhoomtv.org/live/sachin-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310452Z"
+    },
+    {
+      "name": "Sachin Tv Music",
+      "slug": "sachin-tv-music",
+      "url": "https://bhoomtv.org/live/sachin-tv-music/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310473Z"
+    },
+    {
+      "name": "Sailam Tv",
+      "slug": "sailam-tv",
+      "url": "https://bhoomtv.org/live/sailam-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310495Z"
+    },
+    {
+      "name": "Sakthi Tv Hd",
+      "slug": "sakthi-tv-hd",
+      "url": "https://bhoomtv.org/live/sakthi-tv-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310516Z"
+    },
+    {
+      "name": "Sana Plus Hd",
+      "slug": "sana-plus-hd",
+      "url": "https://bhoomtv.org/live/sana-plus-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310536Z"
+    },
+    {
+      "name": "Sana Tv Hd",
+      "slug": "sana-tv-hd",
+      "url": "https://bhoomtv.org/live/sana-tv-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310557Z"
+    },
+    {
+      "name": "Santhiya Tv Kumbakonam",
+      "slug": "santhiya-tv-kumbakonam",
+      "url": "https://bhoomtv.org/live/santhiya-tv-kumbakonam/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310578Z"
+    },
+    {
+      "name": "Sarvik Tv",
+      "slug": "sarvik-tv",
+      "url": "https://bhoomtv.org/live/sarvik-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310599Z"
+    },
+    {
+      "name": "Sasi Tv",
+      "slug": "sasi-tv",
+      "url": "https://bhoomtv.org/live/sasi-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310619Z"
+    },
+    {
+      "name": "Selva Tamil Tv",
+      "slug": "selva-tamil-tv",
+      "url": "https://bhoomtv.org/live/selva-tamil-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310639Z"
+    },
+    {
+      "name": "Sgb Tv",
+      "slug": "sgb-tv",
+      "url": "https://bhoomtv.org/live/sgb-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310660Z"
+    },
+    {
+      "name": "Sha Tv",
+      "slug": "sha-tv",
+      "url": "https://bhoomtv.org/live/sha-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310681Z"
+    },
+    {
+      "name": "Shakthi Channel",
+      "slug": "shakthi-channel",
+      "url": "https://bhoomtv.org/live/shakthi-channel/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310716Z"
+    },
+    {
+      "name": "Shalini Tv",
+      "slug": "shalini-tv",
+      "url": "https://bhoomtv.org/live/shalini-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310738Z"
+    },
+    {
+      "name": "Shalini Tv 2",
+      "slug": "shalini-tv-2",
+      "url": "https://bhoomtv.org/live/shalini-tv-2/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310760Z"
+    },
+    {
+      "name": "Shalwin Tv Hd",
+      "slug": "shalwin-tv-hd",
+      "url": "https://bhoomtv.org/live/shalwin-tv-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310786Z"
+    },
+    {
+      "name": "Siddhar Isai",
+      "slug": "siddhar-isai",
+      "url": "https://bhoomtv.org/live/siddhar-isai/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310807Z"
+    },
+    {
+      "name": "Siddhar Tv",
+      "slug": "siddhar-tv",
+      "url": "https://bhoomtv.org/live/siddhar-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310827Z"
+    },
+    {
+      "name": "Silver Sat Media",
+      "slug": "silver-sat-media",
+      "url": "https://bhoomtv.org/live/silver-sat-media/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310848Z"
+    },
+    {
+      "name": "Sj Surya Tv",
+      "slug": "sj-surya-tv",
+      "url": "https://bhoomtv.org/live/sj-surya-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310869Z"
+    },
+    {
+      "name": "Sky Media Tenkasi",
+      "slug": "sky-media-tenkasi",
+      "url": "https://bhoomtv.org/live/sky-media-tenkasi/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310892Z"
+    },
+    {
+      "name": "Sky Plus Tv",
+      "slug": "sky-plus-tv",
+      "url": "https://bhoomtv.org/live/sky-plus-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310913Z"
+    },
+    {
+      "name": "Smart Sri Tv",
+      "slug": "smart-sri-tv",
+      "url": "https://bhoomtv.org/live/smart-sri-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310934Z"
+    },
+    {
+      "name": "Snr Tv Hd",
+      "slug": "snr-tv-hd",
+      "url": "https://bhoomtv.org/live/snr-tv-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310955Z"
+    },
+    {
+      "name": "Sooriyan Tv",
+      "slug": "sooriyan-tv",
+      "url": "https://bhoomtv.org/live/sooriyan-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310975Z"
+    },
+    {
+      "name": "Sooriyan Tv Cinema",
+      "slug": "sooriyan-tv-cinema",
+      "url": "https://bhoomtv.org/live/sooriyan-tv-cinema/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.310996Z"
+    },
+    {
+      "name": "Spice Tv",
+      "slug": "spice-tv",
+      "url": "https://bhoomtv.org/live/spice-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311017Z"
+    },
+    {
+      "name": "Sr Musix Hd",
+      "slug": "sr-musix-hd",
+      "url": "https://bhoomtv.org/live/sr-musix-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311037Z"
+    },
+    {
+      "name": "Sri Sai Tv",
+      "slug": "sri-sai-tv",
+      "url": "https://bhoomtv.org/live/sri-sai-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311057Z"
+    },
+    {
+      "name": "Sri Tv",
+      "slug": "sri-tv",
+      "url": "https://bhoomtv.org/live/sri-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311077Z"
+    },
+    {
+      "name": "Sri Vinayaga Hollywood",
+      "slug": "sri-vinayaga-hollywood",
+      "url": "https://bhoomtv.org/live/sri-vinayaga-hollywood/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311098Z"
+    },
+    {
+      "name": "Sri Vinayaga Movies",
+      "slug": "sri-vinayaga-movies",
+      "url": "https://bhoomtv.org/live/sri-vinayaga-movies/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311119Z"
+    },
+    {
+      "name": "Sri Vinayaga Tv",
+      "slug": "sri-vinayaga-tv",
+      "url": "https://bhoomtv.org/live/sri-vinayaga-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311139Z"
+    },
+    {
+      "name": "Ss Tv Tamil",
+      "slug": "ss-tv-tamil",
+      "url": "https://bhoomtv.org/live/ss-tv-tamil/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311159Z"
+    },
+    {
+      "name": "Sss Hd",
+      "slug": "sss-hd",
+      "url": "https://bhoomtv.org/live/sss-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311179Z"
+    },
+    {
+      "name": "Star Media",
+      "slug": "star-media",
+      "url": "https://bhoomtv.org/live/star-media/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311199Z"
+    },
+    {
+      "name": "Stn Tv",
+      "slug": "stn-tv",
+      "url": "https://bhoomtv.org/live/stn-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311219Z"
+    },
+    {
+      "name": "Subash Tv Tenkasi",
+      "slug": "subash-tv-tenkasi",
+      "url": "https://bhoomtv.org/live/subash-tv-tenkasi/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311239Z"
+    },
+    {
+      "name": "Subin Tv",
+      "slug": "subin-tv",
+      "url": "https://bhoomtv.org/live/subin-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311260Z"
+    },
+    {
+      "name": "Succes Tv Tamil",
+      "slug": "succes-tv-tamil",
+      "url": "https://bhoomtv.org/live/succes-tv-tamil/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311281Z"
+    },
+    {
+      "name": "Suriyan Tv 2",
+      "slug": "suriyan-tv-2",
+      "url": "https://bhoomtv.org/live/suriyan-tv-2/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311302Z"
+    },
+    {
+      "name": "Surya Tamil",
+      "slug": "surya-tamil",
+      "url": "https://bhoomtv.org/live/surya-tamil/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311323Z"
+    },
+    {
+      "name": "Tamil Oli Tv",
+      "slug": "tamil-oli-tv",
+      "url": "https://bhoomtv.org/live/tamil-oli-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311344Z"
+    },
+    {
+      "name": "Tamil View Tv",
+      "slug": "tamil-view-tv",
+      "url": "https://bhoomtv.org/live/tamil-view-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311369Z"
+    },
+    {
+      "name": "Tbc Tv",
+      "slug": "tbc-tv",
+      "url": "https://bhoomtv.org/live/tbc-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311391Z"
+    },
+    {
+      "name": "Thaai Tv",
+      "slug": "thaai-tv",
+      "url": "https://bhoomtv.org/live/thaai-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311412Z"
+    },
+    {
+      "name": "Thalapathy Tv",
+      "slug": "thalapathy-tv",
+      "url": "https://bhoomtv.org/live/thalapathy-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311433Z"
+    },
+    {
+      "name": "Tharun Movies Hd",
+      "slug": "tharun-movies-hd",
+      "url": "https://bhoomtv.org/live/tharun-movies-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311454Z"
+    },
+    {
+      "name": "Thendral Tv Alangulam",
+      "slug": "thendral-tv-alangulam",
+      "url": "https://bhoomtv.org/live/thendral-tv-alangulam/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311475Z"
+    },
+    {
+      "name": "Thendral Tv Madurai",
+      "slug": "thendral-tv-madurai",
+      "url": "https://bhoomtv.org/live/thendral-tv-madurai/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311495Z"
+    },
+    {
+      "name": "Thirai Isai",
+      "slug": "thirai-isai",
+      "url": "https://bhoomtv.org/live/thirai-isai/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311516Z"
+    },
+    {
+      "name": "Thirai Tv",
+      "slug": "thirai-tv",
+      "url": "https://bhoomtv.org/live/thirai-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311537Z"
+    },
+    {
+      "name": "Time Tv",
+      "slug": "time-tv",
+      "url": "https://bhoomtv.org/live/time-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311557Z"
+    },
+    {
+      "name": "Tnse Tamil",
+      "slug": "tnse-tamil",
+      "url": "https://bhoomtv.org/live/tnse-tamil/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311578Z"
+    },
+    {
+      "name": "Top Tv",
+      "slug": "top-tv",
+      "url": "https://bhoomtv.org/live/top-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311599Z"
+    },
+    {
+      "name": "Urchagam Tv",
+      "slug": "urchagam-tv",
+      "url": "https://bhoomtv.org/live/urchagam-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311620Z"
+    },
+    {
+      "name": "Utv Hd",
+      "slug": "utv-hd",
+      "url": "https://bhoomtv.org/live/utv-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311641Z"
+    },
+    {
+      "name": "V Tamil",
+      "slug": "v-tamil",
+      "url": "https://bhoomtv.org/live/v-tamil/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311662Z"
+    },
+    {
+      "name": "V Tamil Hd",
+      "slug": "v-tamil-hd",
+      "url": "https://bhoomtv.org/live/v-tamil-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311697Z"
+    },
+    {
+      "name": "Vaagai Tv",
+      "slug": "vaagai-tv",
+      "url": "https://bhoomtv.org/live/vaagai-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311722Z"
+    },
+    {
+      "name": "Vaanam Tv Hd",
+      "slug": "vaanam-tv-hd",
+      "url": "https://bhoomtv.org/live/vaanam-tv-hd/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311744Z"
+    },
+    {
+      "name": "Vaanavil Tv",
+      "slug": "vaanavil-tv",
+      "url": "https://bhoomtv.org/live/vaanavil-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311767Z"
+    },
+    {
+      "name": "Vajra Tv",
+      "slug": "vajra-tv",
+      "url": "https://bhoomtv.org/live/vajra-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311792Z"
+    },
+    {
+      "name": "Vajram Tv",
+      "slug": "vajram-tv",
+      "url": "https://bhoomtv.org/live/vajram-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311813Z"
+    },
+    {
+      "name": "Vds Tv",
+      "slug": "vds-tv",
+      "url": "https://bhoomtv.org/live/vds-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311834Z"
+    },
+    {
+      "name": "Veerali Tv",
+      "slug": "veerali-tv",
+      "url": "https://bhoomtv.org/live/veerali-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311855Z"
+    },
+    {
+      "name": "Vel Tv",
+      "slug": "vel-tv",
+      "url": "https://bhoomtv.org/live/vel-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311877Z"
+    },
+    {
+      "name": "Velicham Tv",
+      "slug": "velicham-tv",
+      "url": "https://bhoomtv.org/live/velicham-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311899Z"
+    },
+    {
+      "name": "Vetri Tv",
+      "slug": "vetri-tv",
+      "url": "https://bhoomtv.org/live/vetri-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311920Z"
+    },
+    {
+      "name": "Vidiyal Tv",
+      "slug": "vidiyal-tv",
+      "url": "https://bhoomtv.org/live/vidiyal-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311941Z"
+    },
+    {
+      "name": "Vinayaga Tv",
+      "slug": "vinayaga-tv",
+      "url": "https://bhoomtv.org/live/vinayaga-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311962Z"
+    },
+    {
+      "name": "Vtv Entertainment",
+      "slug": "vtv-entertainment",
+      "url": "https://bhoomtv.org/live/vtv-entertainment/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.311983Z"
+    },
+    {
+      "name": "We Baduga Tv",
+      "slug": "we-baduga-tv",
+      "url": "https://bhoomtv.org/live/we-baduga-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.312003Z"
+    },
+    {
+      "name": "Yet Max",
+      "slug": "yet-max",
+      "url": "https://bhoomtv.org/live/yet-max/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.312024Z"
+    },
+    {
+      "name": "Yet Tv",
+      "slug": "yet-tv",
+      "url": "https://bhoomtv.org/live/yet-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.312045Z"
+    },
+    {
+      "name": "Yugam Tv",
+      "slug": "yugam-tv",
+      "url": "https://bhoomtv.org/live/yugam-tv/",
+      "logo": null,
+      "section": "local",
+      "last_discovered_at": "2026-09-21T09:28:00.312066Z"
+    },
+    {
+      "name": "7s Music",
+      "slug": "7s-music",
+      "url": "https://bhoomtv.org/live/7s-music/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305395Z"
+    },
+    {
+      "name": "Aastha Tamil",
+      "slug": "aastha-tamil",
+      "url": "https://bhoomtv.org/live/aastha-tamil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305452Z"
+    },
+    {
+      "name": "Animal Planet Hd",
+      "slug": "animal-planet-hd",
+      "url": "https://bhoomtv.org/live/animal-planet-hd/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305484Z"
+    },
+    {
+      "name": "Astro Vaanavil",
+      "slug": "astro-vaanavil",
+      "url": "https://bhoomtv.org/live/astro-vaanavil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305508Z"
+    },
+    {
+      "name": "Athavan Tv Hd",
+      "slug": "athavan-tv-hd",
+      "url": "https://bhoomtv.org/live/athavan-tv-hd/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305531Z"
+    },
+    {
+      "name": "Brio Tv",
+      "slug": "brio-tv",
+      "url": "https://bhoomtv.org/live/brio-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305553Z"
+    },
+    {
+      "name": "Cartoon Network Tamil",
+      "slug": "cartoon-network-tamil",
+      "url": "https://bhoomtv.org/live/cartoon-network-tamil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305576Z"
+    },
+    {
+      "name": "Chithiram Tv",
+      "slug": "chithiram-tv",
+      "url": "https://bhoomtv.org/live/chithiram-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305598Z"
+    },
+    {
+      "name": "Colors Tamil Hd",
+      "slug": "colors-tamil-hd",
+      "url": "https://bhoomtv.org/live/colors-tamil-hd/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305619Z"
+    },
+    {
+      "name": "Dd Podhigai",
+      "slug": "dd-podhigai",
+      "url": "https://bhoomtv.org/live/dd-podhigai/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305639Z"
+    },
+    {
+      "name": "Dheeran Tv",
+      "slug": "dheeran-tv",
+      "url": "https://bhoomtv.org/live/dheeran-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305660Z"
+    },
+    {
+      "name": "Dhool Tv",
+      "slug": "dhool-tv",
+      "url": "https://bhoomtv.org/live/dhool-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305696Z"
+    },
+    {
+      "name": "Discovery Kids Tamil",
+      "slug": "discovery-kids-tamil",
+      "url": "https://bhoomtv.org/live/discovery-kids-tamil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305722Z"
+    },
+    {
+      "name": "Discovery Tamil",
+      "slug": "discovery-tamil",
+      "url": "https://bhoomtv.org/live/discovery-tamil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305745Z"
+    },
+    {
+      "name": "Discovery Tamil 2",
+      "slug": "discovery-tamil-2",
+      "url": "https://bhoomtv.org/live/discovery-tamil-2/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305766Z"
+    },
+    {
+      "name": "History Tv18 Hd Tamil",
+      "slug": "history-tv18-hd-tamil",
+      "url": "https://bhoomtv.org/live/history-tv18-hd-tamil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305788Z"
+    },
+    {
+      "name": "Ibc Bakthi",
+      "slug": "ibc-bakthi",
+      "url": "https://bhoomtv.org/live/ibc-bakthi/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305808Z"
+    },
+    {
+      "name": "Ibc Tamil",
+      "slug": "ibc-tamil",
+      "url": "https://bhoomtv.org/live/ibc-tamil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305829Z"
+    },
+    {
+      "name": "Imayam",
+      "slug": "imayam",
+      "url": "https://bhoomtv.org/live/imayam/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305850Z"
+    },
+    {
+      "name": "Isai Aruvi",
+      "slug": "isai-aruvi",
+      "url": "https://bhoomtv.org/live/isai-aruvi/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305870Z"
+    },
+    {
+      "name": "Jaya Max",
+      "slug": "jaya-max",
+      "url": "https://bhoomtv.org/live/jaya-max/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305891Z"
+    },
+    {
+      "name": "Jaya Movie",
+      "slug": "jaya-movie",
+      "url": "https://bhoomtv.org/live/jaya-movie/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305912Z"
+    },
+    {
+      "name": "Jaya Tv Hd",
+      "slug": "jaya-tv-hd",
+      "url": "https://bhoomtv.org/live/jaya-tv-hd/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305932Z"
+    },
+    {
+      "name": "Kalaignar Tv",
+      "slug": "kalaignar-tv",
+      "url": "https://bhoomtv.org/live/kalaignar-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305952Z"
+    },
+    {
+      "name": "Kollywood Plus",
+      "slug": "kollywood-plus",
+      "url": "https://bhoomtv.org/live/kollywood-plus/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305972Z"
+    },
+    {
+      "name": "Kollywood Tv",
+      "slug": "kollywood-tv",
+      "url": "https://bhoomtv.org/live/kollywood-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.305993Z"
+    },
+    {
+      "name": "Loop Tamil",
+      "slug": "loop-tamil",
+      "url": "https://bhoomtv.org/live/loop-tamil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306012Z"
+    },
+    {
+      "name": "Madhimugam Tv",
+      "slug": "madhimugam-tv",
+      "url": "https://bhoomtv.org/live/madhimugam-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306032Z"
+    },
+    {
+      "name": "Makkal Tv",
+      "slug": "makkal-tv",
+      "url": "https://bhoomtv.org/live/makkal-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306052Z"
+    },
+    {
+      "name": "Malar Tv",
+      "slug": "malar-tv",
+      "url": "https://bhoomtv.org/live/malar-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306073Z"
+    },
+    {
+      "name": "Mediacorp Entertainment Tamil",
+      "slug": "mediacorp-entertainment-tamil",
+      "url": "https://bhoomtv.org/live/mediacorp-entertainment-tamil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306095Z"
+    },
+    {
+      "name": "Mk Six",
+      "slug": "mk-six",
+      "url": "https://bhoomtv.org/live/mk-six/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306116Z"
+    },
+    {
+      "name": "Mk Tunes",
+      "slug": "mk-tunes",
+      "url": "https://bhoomtv.org/live/mk-tunes/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306138Z"
+    },
+    {
+      "name": "Mk Tv",
+      "slug": "mk-tv",
+      "url": "https://bhoomtv.org/live/mk-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306159Z"
+    },
+    {
+      "name": "Moon Tv",
+      "slug": "moon-tv",
+      "url": "https://bhoomtv.org/live/moon-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306181Z"
+    },
+    {
+      "name": "Movies Hd Tamil",
+      "slug": "movies-hd-tamil",
+      "url": "https://bhoomtv.org/live/movies-hd-tamil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306203Z"
+    },
+    {
+      "name": "Murasu",
+      "slug": "murasu",
+      "url": "https://bhoomtv.org/live/murasu/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306225Z"
+    },
+    {
+      "name": "Nh Tamil Gold",
+      "slug": "nh-tamil-gold",
+      "url": "https://bhoomtv.org/live/nh-tamil-gold/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306246Z"
+    },
+    {
+      "name": "Om Tv",
+      "slug": "om-tv",
+      "url": "https://bhoomtv.org/live/om-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306273Z"
+    },
+    {
+      "name": "Peppers Tv",
+      "slug": "peppers-tv",
+      "url": "https://bhoomtv.org/live/peppers-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306295Z"
+    },
+    {
+      "name": "Pogo Tamil",
+      "slug": "pogo-tamil",
+      "url": "https://bhoomtv.org/live/pogo-tamil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306316Z"
+    },
+    {
+      "name": "Polimer Tv",
+      "slug": "polimer-tv",
+      "url": "https://bhoomtv.org/live/polimer-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306336Z"
+    },
+    {
+      "name": "Prime Music Hd",
+      "slug": "prime-music-hd",
+      "url": "https://bhoomtv.org/live/prime-music-hd/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306358Z"
+    },
+    {
+      "name": "Puthuyugam Tv",
+      "slug": "puthuyugam-tv",
+      "url": "https://bhoomtv.org/live/puthuyugam-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306379Z"
+    },
+    {
+      "name": "Raj Digital Plus",
+      "slug": "raj-digital-plus",
+      "url": "https://bhoomtv.org/live/raj-digital-plus/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306401Z"
+    },
+    {
+      "name": "Raj Musix",
+      "slug": "raj-musix",
+      "url": "https://bhoomtv.org/live/raj-musix/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306422Z"
+    },
+    {
+      "name": "Raj Tv",
+      "slug": "raj-tv",
+      "url": "https://bhoomtv.org/live/raj-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306443Z"
+    },
+    {
+      "name": "Sai Tv Tamil",
+      "slug": "sai-tv-tamil",
+      "url": "https://bhoomtv.org/live/sai-tv-tamil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306464Z"
+    },
+    {
+      "name": "Sairam Tv",
+      "slug": "sairam-tv",
+      "url": "https://bhoomtv.org/live/sairam-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306485Z"
+    },
+    {
+      "name": "Salvation Tv",
+      "slug": "salvation-tv",
+      "url": "https://bhoomtv.org/live/salvation-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306505Z"
+    },
+    {
+      "name": "Sirippoli Tv",
+      "slug": "sirippoli-tv",
+      "url": "https://bhoomtv.org/live/sirippoli-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306525Z"
+    },
+    {
+      "name": "Sony Yay Tamil",
+      "slug": "sony-yay-tamil",
+      "url": "https://bhoomtv.org/live/sony-yay-tamil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306546Z"
+    },
+    {
+      "name": "Sri Sankara Tamil",
+      "slug": "sri-sankara-tamil",
+      "url": "https://bhoomtv.org/live/sri-sankara-tamil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306566Z"
+    },
+    {
+      "name": "Superfine Films Tamil",
+      "slug": "superfine-films-tamil",
+      "url": "https://bhoomtv.org/live/superfine-films-tamil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306588Z"
+    },
+    {
+      "name": "Tamil Ratna",
+      "slug": "tamil-ratna",
+      "url": "https://bhoomtv.org/live/tamil-ratna/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306609Z"
+    },
+    {
+      "name": "Tamil Thirai",
+      "slug": "tamil-thirai",
+      "url": "https://bhoomtv.org/live/tamil-thirai/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306630Z"
+    },
+    {
+      "name": "Tamilan Tv",
+      "slug": "tamilan-tv",
+      "url": "https://bhoomtv.org/live/tamilan-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306651Z"
+    },
+    {
+      "name": "Tet Hd",
+      "slug": "tet-hd",
+      "url": "https://bhoomtv.org/live/tet-hd/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306672Z"
+    },
+    {
+      "name": "Thalaa Tv",
+      "slug": "thalaa-tv",
+      "url": "https://bhoomtv.org/live/thalaa-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306711Z"
+    },
+    {
+      "name": "Thalaivar Hits",
+      "slug": "thalaivar-hits",
+      "url": "https://bhoomtv.org/live/thalaivar-hits/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306740Z"
+    },
+    {
+      "name": "Thamilaaram Tv",
+      "slug": "thamilaaram-tv",
+      "url": "https://bhoomtv.org/live/thamilaaram-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306763Z"
+    },
+    {
+      "name": "Thanthi One",
+      "slug": "thanthi-one",
+      "url": "https://bhoomtv.org/live/thanthi-one/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306784Z"
+    },
+    {
+      "name": "Tunes 6",
+      "slug": "tunes-6",
+      "url": "https://bhoomtv.org/live/tunes-6/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306806Z"
+    },
+    {
+      "name": "Tvi Hd",
+      "slug": "tvi-hd",
+      "url": "https://bhoomtv.org/live/tvi-hd/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306828Z"
+    },
+    {
+      "name": "Vasanth Tv",
+      "slug": "vasanth-tv",
+      "url": "https://bhoomtv.org/live/vasanth-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306848Z"
+    },
+    {
+      "name": "Vasantham Tv Sgp",
+      "slug": "vasantham-tv-sgp",
+      "url": "https://bhoomtv.org/live/vasantham-tv-sgp/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306869Z"
+    },
+    {
+      "name": "Vendhar Tv",
+      "slug": "vendhar-tv",
+      "url": "https://bhoomtv.org/live/vendhar-tv/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306889Z"
+    },
+    {
+      "name": "Wow Kidz Tamil",
+      "slug": "wow-kidz-tamil",
+      "url": "https://bhoomtv.org/live/wow-kidz-tamil/",
+      "logo": null,
+      "section": "tamil",
+      "last_discovered_at": "2026-09-21T09:28:00.306909Z"
+    }
+  ]
 }
