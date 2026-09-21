@@ -565,10 +565,22 @@ async def validate_stream(page, stream):
             result["validationMode"] = mode
 
             if stream["type"] in {"hls", "dash"}:
-                body = await response.text()
+                # Some CDN endpoints return a correct HLS body with a generic
+                # or missing Content-Type. Prefer bytes->text decoding over
+                # response.text(), which can fail on inconsistent encodings.
+                try:
+                    raw_body = await response.body()
+                    body = raw_body.decode("utf-8", errors="replace")
+                except Exception:
+                    body = await response.text()
+
                 result.update(parse_manifest(body, result["contentType"], stream["url"]))
+
+                # A valid HLS response must contain #EXTM3U. If the server
+                # returned HTML/JSON with HTTP 200, it must not be published.
                 if stream["type"] == "hls" and result["manifestValid"] and not result["drm"]:
                     result.update(await validate_hls_segments(page, stream["url"], body, headers))
+
                 if STABILITY_SECONDS > 0 and result["manifestValid"]:
                     await asyncio.sleep(STABILITY_SECONDS)
                     response2 = await fetch_with_retries(
@@ -576,6 +588,16 @@ async def validate_stream(page, stream):
                         timeout=20000, retries=2
                     )
                     result["stable"] = bool(response2 and response2.status < 400)
+
+                # Record a compact diagnostic when a 2xx response was not a
+                # real manifest. This makes direct-recovery failures visible
+                # instead of reporting only "valid=None".
+                if not result["manifestValid"]:
+                    preview = re.sub(r"\s+", " ", body[:120]).strip()
+                    result["error"] = (
+                        f"INVALID_{stream['type'].upper()}_BODY"
+                        + (f": {preview}" if preview else "")
+                    )
             else:
                 result["manifestValid"] = True
             return result
