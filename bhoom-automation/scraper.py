@@ -384,6 +384,14 @@ class Capture:
         url = normalize_manifest_url(url, content_type)
         if not url:
             return
+        # Real-time discovery log. Query strings are intentionally omitted.
+        if url not in self.items:
+            safe_url = url.split("?")[0] if "?" in url else url
+            print(
+                f"    [STREAM FOUND] type={stream_type(url, content_type)} "
+                f"status={status or '-'} source={resource_type or '-'} url={safe_url}",
+                flush=True,
+            )
         # Preserve only headers actually observed on the media request.
         # Direct channels must not receive invented Referer/User-Agent headers.
         clean_headers = {
@@ -807,7 +815,10 @@ async def scan_channel(context, channel_url, debug=False):
     current.on("popup", on_popup)
 
     try:
-        print(f"Opening {channel_url}")
+        print("\n" + "=" * 72, flush=True)
+        print(f"[CHANNEL] {channel_url}", flush=True)
+        print("=" * 72, flush=True)
+        print(f"Opening {channel_url}", flush=True)
         response, cf_blocked = await goto_bhoom(current, channel_url, timeout_seconds=PAGE_NAV_TIMEOUT_SECONDS)
         if cf_blocked and CLOUDFLARE_FAIL_FAST:
             print("  CLOUDFLARE BLOCKED: live page is a challenge page; player sources cannot be discovered")
@@ -880,12 +891,41 @@ async def scan_channel(context, channel_url, debug=False):
         await collect_performance_urls(current, capture)
         drm = await detect_drm(current, capture)
         streams = sorted(capture.items.values(), key=lambda x: x["url"])
+        print(
+            f"  [DISCOVERY SUMMARY] candidates={len(streams)} "
+            f"drm_requests={len(capture.drm_urls)}",
+            flush=True,
+        )
         if VALIDATE_STREAMS and streams:
-            print(f"  Validating {len(streams)} captured stream(s)")
-            for stream in streams:
+            print(f"  [VALIDATION START] {len(streams)} captured stream(s)", flush=True)
+            for stream_index, stream in enumerate(streams, 1):
+                safe_url = stream["url"].split("?")[0] if "?" in stream["url"] else stream["url"]
+                print(
+                    f"    [CHECK {stream_index}/{len(streams)}] "
+                    f"{stream['type']} {safe_url}",
+                    flush=True,
+                )
                 stream["validation"] = await validate_stream(current, stream)
                 v = stream["validation"]
-                print(f'    {stream["type"]} HTTP={v.get("httpStatus")} valid={v.get("manifestValid")} segment={v.get("segmentValid")} drm={v.get("drm")} stable={v.get("stable")}')
+                usable = stream_is_usable(stream)
+                reason = "USABLE" if usable else (
+                    v.get("error")
+                    or (
+                        f"HTTP_{v.get('httpStatus')}"
+                        if int(v.get("httpStatus") or 0) >= 400
+                        else "INVALID_MANIFEST_OR_SEGMENT"
+                    )
+                )
+                print(
+                    f"      -> HTTP={v.get('httpStatus')} "
+                    f"content={v.get('contentType') or '-'} "
+                    f"manifest={v.get('manifestValid')} "
+                    f"segment={v.get('segmentValid')} "
+                    f"variants={v.get('variants')} "
+                    f"drm={v.get('drm')} "
+                    f"stable={v.get('stable')} RESULT={reason}",
+                    flush=True,
+                )
 
             needs_refresh = any(
                 not stream_is_usable(s) or
@@ -1750,10 +1790,19 @@ async def main():
             item["usableStreamCount"] = len(usable)
             if usable:
                 item["streams"] = usable
-                print(f"  USABLE {len(usable)} / CAPTURED {captured_count}")
+                print(
+                    f"  [CHANNEL RESULT] {item.get('name','?')} -> "
+                    f"USABLE={len(usable)} CAPTURED={captured_count}",
+                    flush=True,
+                )
                 results.append(item)
             else:
-                print(f"  NO USABLE STREAM / CAPTURED {len(item['streams'])}")
+                print(
+                    f"  [CHANNEL RESULT] {item.get('name','?')} -> "
+                    f"USABLE=0 CAPTURED={captured_count} "
+                    f"BLOCKED_REASON={item.get('blockedReason','VALIDATION_FAILED')}",
+                    flush=True,
+                )
 
         before_merge = len(results)
         results = merge_duplicate_channels(results)
