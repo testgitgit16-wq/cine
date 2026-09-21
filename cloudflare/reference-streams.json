@@ -1,0 +1,55 @@
+{
+  "source_file": "BhoomTV full(2).m3u",
+  "entry_count": 2561,
+  "channel_keys": 8,
+  "channels": {
+    "devitv": {
+      "name": "Devi TV",
+      "urls": [
+        "https://app.ashokadigital.net/app/7086d917/index.m3u8"
+      ]
+    },
+    "dharanitv": {
+      "name": "Dharani TV",
+      "urls": [
+        "https://phoenixcreations.keralive.workers.dev/dharnitv/dharnitv/dharni/index.m3u8"
+      ]
+    },
+    "dheerantv": {
+      "name": "Dheeran TV",
+      "urls": [
+        "https://live.we2live.in/dheerantv/dheerantv/playlist.m3u8"
+      ]
+    },
+    "dhooltv": {
+      "name": "Dhool TV",
+      "urls": [
+        "https://d1msejlow1t3l4.cloudfront.net/fta/subhartitv/playlist.m3u8"
+      ]
+    },
+    "mathitv": {
+      "name": "Mathi TV",
+      "urls": [
+        "https://notvstream.in/mathitv/mathitv/index.m3u8"
+      ]
+    },
+    "mcnhd": {
+      "name": "MCN HD",
+      "urls": [
+        "https://play.applelive.in/mcntv/mcntv.m3u8"
+      ]
+    },
+    "mdntv": {
+      "name": "MDN TV",
+      "urls": [
+        "https://account18.livebox.co.in/IMAGESEQUENCEhls/live.m3u8"
+      ]
+    },
+    "me24tamil": {
+      "name": "Me 24 Tamil",
+      "urls": [
+        "https://stream.onecloudlive.in/orange/ME24TAMIL/index.m3u8"
+      ]
+    }
+  }
+}
