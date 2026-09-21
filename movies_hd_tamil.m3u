@@ -1,0 +1,5 @@
+#EXTM3U
+#EXTINF:-1 group-title="Tamil", Movies HD Tamil
+#EXTVLCOPT:http-referrer=https://techandeat.online/xaivox/Play.php?c=1303
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36
+https://techandeat.online/xaivox/stream.m3u8?id=1303|Referer=https://techandeat.online/xaivox/Play.php?c=1303&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36
