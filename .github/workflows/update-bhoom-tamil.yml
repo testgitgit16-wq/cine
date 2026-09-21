@@ -6,6 +6,10 @@ on:
       - main
   workflow_dispatch:
     inputs:
+      runner:
+        description: "Runner: github or windows-self-hosted"
+        required: false
+        default: "github"
       category_page_limit:
         description: "Category pages (0 = unlimited)"
         required: false
@@ -42,23 +46,29 @@ concurrency:
 
 jobs:
   scrape:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event.inputs.runner == 'windows-self-hosted' && 'self-hosted' || 'ubuntu-latest' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@v5
 
       - name: Setup Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v6
         with:
           python-version: "3.13"
           cache: pip
           cache-dependency-path: bhoom-automation/requirements.txt
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r bhoom-automation/requirements.txt
-          python -m playwright install --with-deps chromium
+      - name: Install Python dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r bhoom-automation/requirements.txt
+
+      - name: Install Playwright browser (Linux)
+        if: runner.os == 'Linux'
+        run: python -m playwright install --with-deps chromium
+
+      - name: Install Playwright browser (Windows)
+        if: runner.os == 'Windows'
+        run: python -m playwright install chromium
+        shell: pwsh
 
       - name: Run unit tests
         working-directory: bhoom-automation
