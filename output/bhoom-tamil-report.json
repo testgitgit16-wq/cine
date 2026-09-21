@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T07:11:05.256782Z",
+  "generated_at": "2026-09-21T07:37:40.154676Z",
   "source": "https://bhoomtv.org",
   "stats": {
     "inventory_total": 0,
@@ -8,8 +8,8 @@
     "streams_written": 0,
     "failed_channels": 0,
     "section_blocked": {
-      "tamil": true,
-      "local": true
+      "tamil": false,
+      "local": false
     }
   },
   "failures": []
