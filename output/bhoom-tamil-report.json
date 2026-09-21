@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T10:27:03.432843Z",
+  "generated_at": "2026-09-21T14:15:49.180697Z",
   "source": "https://bhoomtv.org",
   "stats": {
     "inventory_total": 308,
@@ -35,43 +35,43 @@
       "name": "A1 Media News",
       "url": "https://bhoomtv.org/live/a1-media-news/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Fa1-media-news%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "A1 Tv Ariyalur",
       "url": "https://bhoomtv.org/live/a1-tv-ariyalur/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Fa1-tv-ariyalur%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Aadhavan Colours",
       "url": "https://bhoomtv.org/live/aadhavan-colours/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Faadhavan-colours%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Aadhavan Tamil Tv",
       "url": "https://bhoomtv.org/live/aadhavan-tamil-tv/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Faadhavan-tamil-tv%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Aadhavan Tv",
       "url": "https://bhoomtv.org/live/aadhavan-tv/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Faadhavan-tv%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Aadvik Tv",
       "url": "https://bhoomtv.org/live/aadvik-tv/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Faadvik-tv%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Aalayam Tv",
       "url": "https://bhoomtv.org/live/aalayam-tv/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Faalayam-tv%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Aaron Tv",
@@ -101,7 +101,7 @@
       "name": "Aathi Tv",
       "url": "https://bhoomtv.org/live/aathi-tv/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Faathi-tv%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Abnaz Tv",
@@ -173,61 +173,61 @@
       "name": "Amma Tv",
       "url": "https://bhoomtv.org/live/amma-tv/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Famma-tv%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Amma Vision",
       "url": "https://bhoomtv.org/live/amma-vision/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Famma-vision%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Amman Tv",
       "url": "https://bhoomtv.org/live/amman-tv/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Famman-tv%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Analai Express Cinema",
       "url": "https://bhoomtv.org/live/analai-express-cinema/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Fanalai-express-cinema%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Analai Express Tv",
       "url": "https://bhoomtv.org/live/analai-express-tv/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Fanalai-express-tv%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Anandam Abi Tv",
       "url": "https://bhoomtv.org/live/anandam-abi-tv/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Fanandam-abi-tv%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Anandam Tv Madurai",
       "url": "https://bhoomtv.org/live/anandam-tv-madurai/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Fanandam-tv-madurai%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Anandam Utv",
       "url": "https://bhoomtv.org/live/anandam-utv/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Fanandam-utv%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Animal Planet Hd",
       "url": "https://bhoomtv.org/live/animal-planet-hd/",
       "section": "tamil",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Fanimal-planet-hd%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Annai Tamil",
       "url": "https://bhoomtv.org/live/annai-tamil/",
       "section": "local",
-      "reason": "PLAYWRIGHT_ERROR:Page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Fannai-tamil%2F\", waiting until \"domcontentloaded\"\n"
+      "reason": "CLOUDFLARE_CHALLENGE"
     },
     {
       "name": "Annai Tv",
