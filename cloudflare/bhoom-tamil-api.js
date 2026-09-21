@@ -11,6 +11,9 @@ const INVENTORY_KEYS = {
   all: "inventory:all",
 };
 
+const REFERENCE_INDEX_URL =
+  "https://raw.githubusercontent.com/testgitgit16-wq/cine/main/cloudflare/reference-streams.json";
+
 function cors() {
   return {
     "Access-Control-Allow-Origin": "*",
@@ -487,7 +490,72 @@ function extractScriptTargets(html, pageUrl) {
   return found;
 }
 
-async function validateStream(candidate, referer) {
+
+function referenceKey(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/^watch\s+/i, "")
+    .replace(/\blive(?:\s+online)?\b/gi, "")
+    .replace(/\s*\|.*$/g, "")
+    .replace(/[^a-z0-9]+/g, "");
+}
+
+async function getReferenceIndex() {
+  try {
+    const response = await fetch(
+      REFERENCE_INDEX_URL,
+      {
+        redirect: "follow",
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153 Safari/537.36",
+          "Accept":
+            "application/json,text/plain,*/*",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      return {
+        ok: false,
+        error: "HTTP_" + response.status,
+        channels: {},
+      };
+    }
+
+    const data = await response.json();
+
+    if (!data || typeof data !== "object") {
+      return {
+        ok: false,
+        error: "INVALID_REFERENCE_JSON",
+        channels: {},
+      };
+    }
+
+    return {
+      ok: true,
+      error: null,
+      channels:
+        data.channels &&
+        typeof data.channels === "object"
+          ? data.channels
+          : {},
+      entry_count:
+        Number(data.entry_count || 0),
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      error:
+        "REFERENCE_FETCH_ERROR:" +
+        String(error),
+      channels: {},
+    };
+  }
+}
+
+async function validateStream(candidate, referer, includeReferer = true) {
   try {
     const headers = {
       "User-Agent":
@@ -498,7 +566,7 @@ async function validateStream(candidate, referer) {
           : "application/vnd.apple.mpegurl,application/x-mpegURL,text/plain,*/*"
     };
 
-    if (referer) {
+    if (referer && includeReferer) {
       headers["Referer"] = referer;
     }
 
@@ -552,10 +620,148 @@ async function validateStream(candidate, referer) {
   }
 }
 
-async function scanOneChannel(channel) {
+async function scanOneChannel(channel, referenceIndex = null) {
   const scannedAt = new Date().toISOString();
 
   try {
+    const referenceRows = [];
+    const refKey = referenceKey(channel.name);
+
+    if (
+      referenceIndex &&
+      referenceIndex.channels &&
+      refKey &&
+      referenceIndex.channels[refKey]
+    ) {
+      const row = referenceIndex.channels[refKey];
+      const urls = Array.isArray(row.urls)
+        ? row.urls
+        : [];
+
+      for (const url of urls.slice(0, 6)) {
+        if (!url) continue;
+
+        referenceRows.push({
+          url,
+          type:
+            String(url)
+              .toLowerCase()
+              .includes(".mpd")
+              ? "DASH"
+              : "HLS",
+          captured_from:
+            "reference-m3u",
+        });
+      }
+    }
+
+    if (referenceRows.length) {
+      console.log(
+        JSON.stringify({
+          channel: channel.name,
+          stage: "REFERENCE",
+          matches: referenceRows.length,
+          key: refKey,
+        })
+      );
+
+      for (const candidate of referenceRows) {
+        let validation =
+          await validateStream(
+            candidate,
+            null,
+            false
+          );
+
+        let capturedVia =
+          "reference-m3u";
+
+        console.log(
+          JSON.stringify({
+            channel: channel.name,
+            stage: "REFERENCE_VALIDATE",
+            type: candidate.type,
+            url: candidate.url,
+            referer: "NONE",
+            usable: validation.usable,
+            status: validation.status,
+            reason: validation.reason,
+          })
+        );
+
+        if (!validation.usable) {
+          const retry =
+            await validateStream(
+              candidate,
+              channel.url,
+              true
+            );
+
+          console.log(
+            JSON.stringify({
+              channel: channel.name,
+              stage: "REFERENCE_RETRY",
+              type: candidate.type,
+              url: candidate.url,
+              referer: channel.url,
+              usable: retry.usable,
+              status: retry.status,
+              reason: retry.reason,
+            })
+          );
+
+          if (retry.usable) {
+            validation = retry;
+            capturedVia =
+              "reference-m3u+channel-referer";
+          }
+        }
+
+        if (validation.usable) {
+          return {
+            ...channel,
+            streams: [
+              {
+                url: candidate.url,
+                type: candidate.type,
+                headers: {
+                  "user-agent":
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153 Safari/537.36",
+                  ...(capturedVia.includes("channel-referer")
+                    ? { referer: channel.url }
+                    : {}),
+                },
+                validation,
+                captured_from:
+                  capturedVia,
+              },
+            ],
+            last_scan_at:
+              scannedAt,
+            scan: {
+              captured: 1,
+              usable: 1,
+              pages_fetched: 0,
+              captured_via:
+                capturedVia,
+              reason: null,
+              validations: [
+                {
+                  ...validation,
+                  url: candidate.url,
+                  type: candidate.type,
+                  captured_from:
+                    capturedVia,
+                },
+              ],
+              scanned_at:
+                scannedAt,
+            },
+          };
+        }
+      }
+    }
+
     const queue = [
       {
         url: channel.url,
@@ -1009,6 +1215,19 @@ export default {
     }
 
 
+    if (url.pathname === "/reference-status") {
+      const reference = await getReferenceIndex();
+
+      return json({
+        ok: reference.ok,
+        reference_url:
+          REFERENCE_INDEX_URL,
+        entry_count:
+          reference.entry_count || 0,
+        error: reference.error,
+      });
+    }
+
     if (url.pathname === "/scan-status") {
       const inventory =
         await getAllInventory(env);
@@ -1072,7 +1291,23 @@ export default {
         );
 
       const inventory =
-        await getAllInventory(env);
+        await getAllInventory(
+          env
+        );
+
+      const referenceIndex =
+        await getReferenceIndex();
+
+      console.log(
+        JSON.stringify({
+          stage: "REFERENCE_INDEX",
+          ok: referenceIndex.ok,
+          entry_count:
+            referenceIndex.entry_count || 0,
+          error:
+            referenceIndex.error,
+        })
+      );
 
       const start =
         inventory.findIndex(
@@ -1108,7 +1343,8 @@ export default {
       ) {
         const result =
           await scanOneChannel(
-            channel
+            channel,
+            referenceIndex
           );
 
         scanned.push(result);
