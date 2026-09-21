@@ -69,22 +69,6 @@ jobs:
           pip install -r bhoom-automation/requirements.txt
           python -m playwright install --with-deps chromium
 
-      - name: API/index-first discovery
-        working-directory: bhoom-automation
-        env:
-          CATEGORY_PAGE_LIMIT: ${{ github.event.inputs.category_page_limit || '0' }}
-          CATEGORY_SECTION: ${{ github.event.inputs.category_section || 'all' }}
-          DISCOVERY_TIMEOUT_SECONDS: "12"
-          DISCOVERY_RETRIES: "2"
-          PYTHONUNBUFFERED: "1"
-        continue-on-error: true
-        run: |
-          echo "=== PUBLIC DISCOVERY START ==="
-          echo "Method: category pagination + WordPress REST API"
-          echo "No Cloudflare/CAPTCHA bypass is attempted."
-          python -u discover_inventory.py
-          echo "=== PUBLIC DISCOVERY END ==="
-
       - name: Scrape and validate
         working-directory: bhoom-automation
         env:
@@ -97,15 +81,16 @@ jobs:
           PLAYER_CAPTURE_WAIT_SECONDS: ${{ github.event.inputs.player_capture_wait_seconds || '5' }}
           RECAPTURE_ROUNDS: ${{ github.event.inputs.recapture_rounds || '1' }}
           RECAPTURE_ON_FAILURES: "1"
-          RETRY_COUNT: "2"
+          RETRY_COUNT: "3"
           RECOVER_PREVIOUS_ON_CLOUDFLARE: "1"
           CLOUDFLARE_FAIL_FAST: "1"
           CLOUDFLARE_WAIT_SECONDS: "1"
           PAGE_NAV_TIMEOUT_SECONDS: "20"
           PUBLISH_SENSITIVE_HEADERS: "0"
+          # No hard channel-count target. Publish whatever valid Tamil/Tamil Local
+          # channels are discovered; never invent or require a 300+ minimum.
           MIN_CHANNEL_RETENTION_PERCENT: "0"
           MIN_REQUIRED_CHANNELS: "0"
-          PYTHONUNBUFFERED: "1"
         run: python -u -c "import asyncio, scraper; asyncio.run(scraper.main())"
 
       - name: Build IPTV-compatible M3U with primary and secondary streams
