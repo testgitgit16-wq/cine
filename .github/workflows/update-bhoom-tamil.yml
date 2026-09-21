@@ -82,6 +82,8 @@ jobs:
           BHOOM_COLLECT_URL: "https://bhoom-tamil-api.testtamil.workers.dev"
           BHOOM_INVENTORY_URL: "https://bhoom-tamil-api.testtamil.workers.dev"
           WORKER_MAX_PAGES: "200"
+          WORKER_COLLECT_ENABLED: "0"
+          WORKER_INVENTORY_ONLY: "1"
           CATEGORY_PAGE_LIMIT: ${{ github.event.inputs.category_page_limit || '0' }}
           MAX_CHANNELS: ${{ github.event.inputs.max_channels || '0' }}
           VALIDATE_STREAMS: ${{ github.event.inputs.validate_streams || '1' }}
