@@ -1165,22 +1165,27 @@ export default {
 
       let lines =
         scanned
-          .map(
-            (x) =>
-              (x.streams &&
-                x.streams.length
+          .map((x) => {
+            const status =
+              x.streams &&
+              x.streams.length
                 ? "USABLE"
-                : "FAILED") +
+                : "FAILED";
+
+            const scan = x.scan || {};
+            const details =
+              status +
               " | " +
               x.name +
+              " | CAPTURED=" +
+              Number(scan.captured || 0) +
+              " | PAGES=" +
+              Number(scan.pages_fetched || 0) +
               " | " +
-              (
-                x.scan &&
-                x.scan.reason
-                  ? x.scan.reason
-                  : "OK"
-              )
-          )
+              (scan.reason || "OK");
+
+            return details;
+          })
           .join("<br>");
 
       let html =
