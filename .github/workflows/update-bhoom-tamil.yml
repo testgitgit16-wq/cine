@@ -82,11 +82,14 @@ jobs:
           RECAPTURE_ROUNDS: ${{ github.event.inputs.recapture_rounds || '1' }}
           RECAPTURE_ON_FAILURES: "1"
           RETRY_COUNT: "3"
+          RECOVER_PREVIOUS_ON_CLOUDFLARE: "1"
           CLOUDFLARE_FAIL_FAST: "1"
           CLOUDFLARE_WAIT_SECONDS: "1"
           PAGE_NAV_TIMEOUT_SECONDS: "20"
           PUBLISH_SENSITIVE_HEADERS: "0"
-          MIN_CHANNEL_RETENTION_PERCENT: "50"
+          # Bounded manual tests validate only the requested sample size.
+          # Production (max_channels=0) keeps the 50% retention safety guard.
+          MIN_CHANNEL_RETENTION_PERCENT: ${{ github.event.inputs.max_channels != '0' && '0' || '50' }}
           MIN_REQUIRED_CHANNELS: ${{ github.event.inputs.max_channels != '0' && github.event.inputs.max_channels || '300' }}
         run: python -c "import asyncio, scraper; asyncio.run(scraper.main())"
 
