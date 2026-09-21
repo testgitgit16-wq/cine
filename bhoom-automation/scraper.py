@@ -8,13 +8,14 @@ import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urljoin, urlparse
+from urllib.parse import quote, urljoin, urlparse
 import xml.etree.ElementTree as ET
 
 import httpx
 from bs4 import BeautifulSoup
 
 BASE_URL = "https://bhoomtv.org"
+PROXY_BASE_URL = os.getenv("BHOOM_PROXY_BASE_URL", "").rstrip("/")
 SECTIONS = {
     "tamil": f"{BASE_URL}/channel/tamil/",
     "local": f"{BASE_URL}/channel/tamil-local-tv/",
@@ -94,6 +95,15 @@ def redact(url: str) -> str:
 def normalize_text(value: str | None) -> str:
     return " ".join((value or "").split()).strip()
 
+def request_url(url: str) -> str:
+    if not PROXY_BASE_URL:
+        return url
+    parsed = urlparse(url)
+    if parsed.hostname not in {"bhoomtv.org", "www.bhoomtv.org"}:
+        return url
+    return f"{PROXY_BASE_URL}/proxy?url={quote(url, safe='')}"
+
+
 def cloudflare(status: int, headers: dict[str, str], body: str) -> bool:
     lower = body[:50000].lower()
     if any(marker in lower for marker in CF_MARKERS):
@@ -104,7 +114,7 @@ async def fetch(client: httpx.AsyncClient, url: str, attempts: int = 2):
     last_error = None
     for attempt in range(1, attempts + 1):
         try:
-            response = await client.get(url)
+            response = await client.get(request_url(url))
             headers = {k.lower(): v for k, v in response.headers.items()}
             if cloudflare(response.status_code, headers, response.text):
                 return {"status": response.status_code, "headers": headers, "text": response.text, "blocked": "CLOUDFLARE_CHALLENGE"}
@@ -502,7 +512,7 @@ async def capture_with_browser(page, url: str):
 
     page.on("response", on_response)
     try:
-        response = await page.goto(url, wait_until="domcontentloaded", timeout=PAGE_TIMEOUT * 1000)
+        response = await page.goto(request_url(url), wait_until="domcontentloaded", timeout=PAGE_TIMEOUT * 1000)
         status = response.status if response else 0
         title = normalize_text(await page.title()).lower()
         if status in (403, 429, 503) or any(marker in title for marker in CF_MARKERS):
@@ -589,6 +599,10 @@ async def main():
     log(f"VALIDATE_STREAMS={int(VALIDATE_STREAMS)}")
     log(f"STABILITY_SECONDS={STABILITY_SECONDS}")
     log("Cloudflare policy: detect and stop; never bypass")
+    if PROXY_BASE_URL:
+        log(f"Bhoom proxy: {PROXY_BASE_URL}")
+    else:
+        log("Bhoom proxy: DISABLED (direct access)")
 
     inventory = load_inventory()
     timeout = httpx.Timeout(REQUEST_TIMEOUT)
