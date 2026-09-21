@@ -298,6 +298,32 @@ async function collectPage(env, request, section, pageNumber) {
   };
 }
 
+
+async function collectBatch(env, request, section, startPage, maxPages) {
+  const results = [];
+  let totalPages = 0;
+
+  for (let page = startPage; page < startPage + maxPages; page++) {
+    const result = await collectPage(env, request, section, page);
+    results.push(result);
+    totalPages++;
+
+    if (!result.ok || result.channels_on_page === 0 || !result.next_page) {
+      break;
+    }
+  }
+
+  return {
+    ok: true,
+    section,
+    start_page: startPage,
+    pages_attempted: totalPages,
+    results,
+    inventory_count: (await getInventory(env, section)).length,
+    generated_at: new Date().toISOString(),
+  };
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") {
@@ -331,11 +357,130 @@ export default {
           "/proxy?url=...",
           "/collect?section=tamil&page=1",
           "/collect?section=local&page=1",
+          "/collect-batch?section=tamil&pages=10",
+          "/collect-all?pages=10",
           "/inventory",
           "/inventory?tamil",
           "/inventory?local",
         ],
       });
+    }
+
+
+    if (url.pathname === "/collect-batch") {
+      const section = String(
+        url.searchParams.get("section") || ""
+      ).toLowerCase();
+
+      const startPage = Math.max(
+        1,
+        Number(
+          url.searchParams.get("start") || "1"
+        )
+      );
+
+      const maxPages = Math.min(
+        20,
+        Math.max(
+          1,
+          Number(
+            url.searchParams.get("pages") || "10"
+          )
+        )
+      );
+
+      if (!["tamil", "local"].includes(section)) {
+        return json(
+          {
+            ok: false,
+            error: "section must be tamil or local",
+          },
+          400
+        );
+      }
+
+      try {
+        return json(
+          await collectBatch(
+            env,
+            request,
+            section,
+            startPage,
+            maxPages
+          )
+        );
+      } catch (error) {
+        return json(
+          {
+            ok: false,
+            error: String(error),
+            section,
+            start: startPage,
+          },
+          502
+        );
+      }
+    }
+
+    if (url.pathname === "/collect-all") {
+      const maxPages = Math.min(
+        20,
+        Math.max(
+          1,
+          Number(
+            url.searchParams.get("pages") || "10"
+          )
+        )
+      );
+
+      try {
+        const tamil = await collectBatch(
+          env,
+          request,
+          "tamil",
+          1,
+          maxPages
+        );
+
+        const local = await collectBatch(
+          env,
+          request,
+          "local",
+          1,
+          maxPages
+        );
+
+        const all = Array.from(
+          new Map(
+            [
+              ...(await getInventory(env, "tamil")),
+              ...(await getInventory(env, "local")),
+            ].map((item) => [item.url, item])
+          ).values()
+        );
+
+        await env.BHOOM_CHANNELS.put(
+          INVENTORY_KEYS.all,
+          JSON.stringify(all)
+        );
+
+        return json({
+          ok: true,
+          max_pages_per_section: maxPages,
+          tamil,
+          local,
+          total_channels: all.length,
+          generated_at: new Date().toISOString(),
+        });
+      } catch (error) {
+        return json(
+          {
+            ok: false,
+            error: String(error),
+          },
+          502
+        );
+      }
     }
 
     if (url.pathname === "/inventory") {
