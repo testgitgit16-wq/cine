@@ -353,20 +353,20 @@ function extractStreamCandidates(html, pageUrl) {
       return;
     }
 
-    if (seen.has(url)) {
-      return;
-    }
+    if (seen.has(url)) return;
 
     seen.add(url);
 
     found.push({
       url,
-      type: low.includes(".mpd") ? "DASH" : "HLS"
+      type: low.includes(".mpd")
+        ? "DASH"
+        : "HLS",
     });
   };
 
   const urlRe =
-    /https?:\\/\\/[^\\s'"<>\\\\]+(?:\\.m3u8|\\.mpd)(?:\\?[^\\s'"<>\\\\]*)?/gi;
+    /https?:\/\/[^\s'"<>\\]+(?:\.m3u8|\.mpd)(?:\?[^\s'"<>\\]*)?/gi;
 
   let match;
 
