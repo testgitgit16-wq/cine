@@ -50,6 +50,9 @@ BHOOM_INVENTORY_URL = os.getenv("BHOOM_INVENTORY_URL", "").rstrip("/")
 WORKER_MAX_PAGES = max(1, int(os.getenv("WORKER_MAX_PAGES", "200")))
 WORKER_COLLECT_ENABLED = os.getenv("WORKER_COLLECT_ENABLED", "0") == "1"
 WORKER_INVENTORY_ONLY = os.getenv("WORKER_INVENTORY_ONLY", "1") == "1"
+WORKER_AUTO_SCAN_ENABLED = os.getenv("WORKER_AUTO_SCAN_ENABLED", "1") == "1"
+WORKER_SCAN_BATCH = max(1, int(os.getenv("WORKER_SCAN_BATCH", "4") or "4"))
+WORKER_SCAN_MAX_ROUNDS = max(1, int(os.getenv("WORKER_SCAN_MAX_ROUNDS", "200") or "200"))
 
 CF_MARKERS = (
     "just a moment",
@@ -412,6 +415,66 @@ async def refresh_worker_inventory(client):
                     break
     else:
         log("Worker collector: disabled; using stored KV inventory")
+
+    if BHOOM_INVENTORY_URL and WORKER_AUTO_SCAN_ENABLED:
+        log(
+            f"Worker auto-scan enabled: batch={WORKER_SCAN_BATCH} "
+            f"max_rounds={WORKER_SCAN_MAX_ROUNDS}"
+        )
+        for round_no in range(1, WORKER_SCAN_MAX_ROUNDS + 1):
+            try:
+                status_response = await client.get(
+                    f"{BHOOM_INVENTORY_URL}/scan-status"
+                )
+                log(
+                    f"  [WORKER SCAN STATUS] round={round_no} "
+                    f"HTTP={status_response.status_code}"
+                )
+                if status_response.status_code != 200:
+                    break
+                status = status_response.json()
+                remaining = int(status.get("remaining", 0) or 0)
+                log(
+                    f"    total={status.get('total', 0)} "
+                    f"scanned={status.get('scanned', 0)} "
+                    f"usable={status.get('usable', 0)} "
+                    f"remaining={remaining}"
+                )
+                if remaining <= 0:
+                    break
+
+                scan_response = await client.get(
+                    f"{BHOOM_INVENTORY_URL}/auto-scan"
+                    f"?batch={WORKER_SCAN_BATCH}&format=json"
+                )
+                log(
+                    f"  [WORKER AUTO-SCAN] round={round_no} "
+                    f"HTTP={scan_response.status_code}"
+                )
+                if scan_response.status_code != 200:
+                    break
+
+                scan_data = scan_response.json()
+                log(
+                    f"    batch_checked={scan_data.get('batch_checked', 0)} "
+                    f"usable={scan_data.get('usable', 0)} "
+                    f"remaining={scan_data.get('remaining', 0)}"
+                )
+
+                for row in scan_data.get("channels", []):
+                    log(
+                        f"    [WORKER STREAM] {row.get('name', '?')} "
+                        f"CAPTURED={row.get('captured', 0)} "
+                        f"USABLE={row.get('usable', 0)} "
+                        f"REASON={row.get('reason') or 'NONE'}"
+                    )
+
+                if not scan_data.get("next"):
+                    break
+                await asyncio.sleep(0.25)
+            except Exception as exc:
+                log(f"  [WORKER AUTO-SCAN ERROR] {exc}")
+                break
 
     for section in ("tamil", "local"):
         try:

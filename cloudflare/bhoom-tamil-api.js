@@ -64,6 +64,14 @@ function targetFromRequest(request) {
     return new URL(ROUTES[url.pathname], BASE).toString();
   }
 
+  const pageMatch = url.pathname.match(/^\/(tamil|local)\/page\/(\d+)\/?$/i);
+  if (pageMatch) {
+    const section = pageMatch[1].toLowerCase();
+    const page = Math.max(1, Number(pageMatch[2]));
+    const base = new URL(ROUTES["/" + section], BASE).toString().replace(/\/$/, "");
+    return base + "/page/" + page + "/";
+  }
+
   if (url.pathname !== "/proxy") {
     return null;
   }
@@ -407,7 +415,7 @@ function extractStreamCandidates(html, pageUrl) {
     add(match[1]);
   }
 
-  return found.slice(0, 6);
+  return found;
 }
 
 function extractEmbeddedTargets(html, pageUrl) {
@@ -442,7 +450,7 @@ function extractEmbeddedTargets(html, pageUrl) {
 
   while ((match = iframeRe.exec(html))) {
     add(match[1]);
-    if (found.length >= 4) break;
+    if (found.length >= 12) break;
   }
 
   if (found.length < 4) {
@@ -454,7 +462,7 @@ function extractEmbeddedTargets(html, pageUrl) {
       if (/^(?:https?:)?\/\/.+(?:player|embed|stream|watch)/i.test(value)) {
         add(value);
       }
-      if (found.length >= 4) break;
+      if (found.length >= 12) break;
     }
   }
 
@@ -638,7 +646,7 @@ async function scanOneChannel(channel, referenceIndex = null) {
         ? row.urls
         : [];
 
-      for (const url of urls.slice(0, 6)) {
+      for (const url of urls.slice(0, 24)) {
         if (!url) continue;
 
         referenceRows.push({
@@ -798,11 +806,11 @@ async function scanOneChannel(channel, referenceIndex = null) {
           })
         );
 
-        if (candidates.length >= 6) break;
+        if (candidates.length >= 24) break;
       }
     };
 
-    while (queue.length && pagesFetched < 6 && candidates.length < 6) {
+    while (queue.length && pagesFetched < 8 && candidates.length < 24) {
       const current = queue.shift();
 
       if (!current || visited.has(current.url) || current.depth > 2) {
@@ -847,7 +855,7 @@ async function scanOneChannel(channel, referenceIndex = null) {
         current.kind
       );
 
-      if (candidates.length >= 6) {
+      if (candidates.length >= 24) {
         break;
       }
 
@@ -857,7 +865,7 @@ async function scanOneChannel(channel, referenceIndex = null) {
       );
 
       for (const embed of embeds) {
-        if (!visited.has(embed) && queue.length < 6) {
+        if (!visited.has(embed) && queue.length < 12) {
           queue.push({
             url: embed,
             depth: current.depth + 1,
@@ -881,7 +889,7 @@ async function scanOneChannel(channel, referenceIndex = null) {
       // Inspect a small number of scripts only when no stream has been found yet.
       if (!candidates.length && current.depth === 0) {
         for (const script of extractScriptTargets(html, current.url)) {
-          if (!visited.has(script) && queue.length < 6) {
+          if (!visited.has(script) && queue.length < 12) {
             queue.push({
               url: script,
               depth: current.depth + 1,
@@ -906,7 +914,7 @@ async function scanOneChannel(channel, referenceIndex = null) {
     const validations = [];
     const streams = [];
 
-    for (let index = 0; index < Math.min(candidates.length, 6); index++) {
+    for (let index = 0; index < Math.min(candidates.length, 24); index++) {
       const candidate = candidates[index];
 
       console.log(
@@ -914,7 +922,7 @@ async function scanOneChannel(channel, referenceIndex = null) {
           channel: channel.name,
           stage: "VALIDATE",
           number: index + 1,
-          total: Math.min(candidates.length, 6),
+          total: Math.min(candidates.length, 24),
           type: candidate.type,
           url: candidate.url,
         })
@@ -956,8 +964,6 @@ async function scanOneChannel(channel, referenceIndex = null) {
           validation,
           captured_from: candidate.captured_from,
         });
-
-        break;
       }
     }
 
@@ -1085,6 +1091,8 @@ export default {
         endpoints: [
           "/tamil",
           "/local",
+          "/tamil?raw=1",
+          "/local?raw=1",
           "/proxy?url=...",
           "/collect?section=tamil&page=1",
           "/collect?section=local&page=1",
@@ -1413,6 +1421,28 @@ export default {
       const next =
         remainingPending > 0;
 
+      if (url.searchParams.get("format") === "json") {
+        return json({
+          ok: true,
+          mode: rescanFailed ? "recheck-failed" : "new-channels",
+          total: all.length,
+          batch_checked: selected.length,
+          scanned: scanned.length,
+          usable,
+          remaining: remainingPending,
+          next,
+          channels: scanned.map((x) => ({
+            name: x.name,
+            url: x.url,
+            captured: Number((x.scan || {}).captured || 0),
+            usable: Array.isArray(x.streams) ? x.streams.length : 0,
+            reason: (x.scan || {}).reason || null,
+            streams: Array.isArray(x.streams) ? x.streams : [],
+          })),
+          generated_at: new Date().toISOString(),
+        });
+      }
+
       let lines =
         scanned
           .map((x) => {
@@ -1441,7 +1471,7 @@ export default {
       let html =
         "<html><head>";
 
-      if (next >= 0) {
+      if (next) {
         html +=
           "<meta http-equiv='refresh' content='1;url=/auto-scan?batch=" +
           batchSize +
@@ -1490,6 +1520,33 @@ export default {
           }
         }
       );
+    }
+
+    if (url.pathname === "/tamil" || url.pathname === "/local") {
+      if (url.searchParams.get("raw") !== "1") {
+        const section = url.pathname === "/local" ? "local" : "tamil";
+        const channels = await getInventory(env, section);
+        let streamCount = 0;
+        let usableChannels = 0;
+
+        for (const channel of channels) {
+          const streams = Array.isArray(channel.streams) ? channel.streams : [];
+          streamCount += streams.length;
+          if (streams.length) usableChannels++;
+        }
+
+        return json({
+          ok: true,
+          worker: "bhoom-tamil-api",
+          mode: "stream-inventory",
+          section,
+          count: channels.length,
+          usable_channels: usableChannels,
+          stream_count: streamCount,
+          channels,
+          generated_at: new Date().toISOString(),
+        });
+      }
     }
 
     if (url.pathname === "/inventory") {
