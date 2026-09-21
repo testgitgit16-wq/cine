@@ -1711,11 +1711,10 @@ async def main():
                     reverse=True,
                 )
 
-            # Do not repeatedly validate the old stream inventory after a
-            # Cloudflare challenge. That validation is independent of the page,
-            # but it can consume most of the run when the same protected page
-            # blocks every channel. Only use the previous-stream validation path
-            # when the live page itself was actually reached.
+            # If the live page is unavailable, validate the previously
+            # published stream candidates directly. This does not bypass
+            # Cloudflare; it only tests already-published stream URLs and lets
+            # the playlist survive a temporary source-page challenge.
             if (
                 not item.get("streams")
                 and channel_url in previous_inventory
