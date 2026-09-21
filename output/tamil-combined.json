@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T13:20:23Z",
+  "generatedAt": "2026-09-21T05:53:27Z",
   "channels": [
     {
       "channel": "Sana TV",
@@ -9,7 +9,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sana Plus",
@@ -19,7 +20,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "NTC TV",
@@ -29,7 +31,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Ultimate TV HD",
@@ -39,7 +42,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Anandham TV",
@@ -49,7 +53,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Anandham TV [IPCloud]",
@@ -59,7 +64,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Suriya TV",
@@ -69,7 +75,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Subin TV",
@@ -79,7 +86,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Subin TV (Phoenix)",
@@ -89,7 +97,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Rock TV HD",
@@ -99,7 +108,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Rock TV",
@@ -109,7 +119,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Suriyan TV",
@@ -119,7 +130,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Suriyan TV [OliDigital]",
@@ -129,7 +141,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Aaryaa TV",
@@ -139,7 +152,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Aaryaa TV (Cloud7)",
@@ -149,7 +163,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Roja TV",
@@ -159,7 +174,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Roja Movies",
@@ -169,7 +185,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Bhagyam TV HD",
@@ -179,7 +196,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Bhagyam TV",
@@ -189,7 +207,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Nijam TV [IndiaMatrix]",
@@ -199,7 +218,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Nijam TV [GalaxyOTT]",
@@ -209,7 +229,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "KC TV",
@@ -219,7 +240,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "KC Music",
@@ -229,7 +251,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Raga TV",
@@ -239,7 +262,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Om Sakthi TV",
@@ -249,7 +273,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Om Sakthi TV [1Cloud]",
@@ -259,7 +284,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Oli TV",
@@ -269,7 +295,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Time TV",
@@ -279,7 +306,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Moon TV",
@@ -289,7 +317,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "NTN TV",
@@ -299,7 +328,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Kumari TV",
@@ -309,7 +339,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sakthi TV",
@@ -319,7 +350,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Prime TV",
@@ -329,7 +361,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Deiva Oli",
@@ -339,7 +372,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "7 Green",
@@ -349,7 +383,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Tharun Movies",
@@ -359,7 +394,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "MN TV",
@@ -369,7 +405,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "MN Music",
@@ -379,7 +416,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "GEM TV HD",
@@ -389,7 +427,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "GEM TV",
@@ -399,7 +438,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "YET TV",
@@ -409,7 +449,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "YET Max",
@@ -419,7 +460,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "ACP TV",
@@ -429,7 +471,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "ACP Classic",
@@ -439,7 +482,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "ACP Isai Oli",
@@ -449,7 +493,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Asoka TV",
@@ -459,7 +504,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "PR TV",
@@ -469,7 +515,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Riya TV",
@@ -479,7 +526,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Dark Television",
@@ -489,7 +537,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Harin TV",
@@ -499,7 +548,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Nila TV Pannur",
@@ -509,7 +559,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sky Plus TV",
@@ -519,7 +570,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Deavathai TV",
@@ -529,7 +581,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "SMCV TV",
@@ -539,7 +592,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "APS TV Gold",
+      "sources": [
+        {
+          "url": "https://apsgold-a1.tamilstream.in/apsgold/apsgold/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sasi TV",
@@ -549,7 +614,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jose TV",
@@ -559,7 +625,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Isai TV",
@@ -569,7 +636,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Tamil Oli TV",
@@ -579,7 +647,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Senthamil TV",
@@ -589,7 +658,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sailam TV",
@@ -599,7 +669,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sha TV",
@@ -609,7 +680,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Mullai TV",
@@ -619,7 +691,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Mullai TV [APCloud]",
@@ -629,7 +702,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sachin TV [RTMP]",
@@ -639,17 +713,8 @@
           "status": "UNVERIFIED_RTMP",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Sachin Music",
-      "sources": [
-        {
-          "url": "https://ipcloud.live/sachintv/musichd/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Dhoni TV [RTMP]",
@@ -659,7 +724,8 @@
           "status": "UNVERIFIED_RTMP",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Aadvik TV",
@@ -669,7 +735,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "JP Music TV",
@@ -679,7 +746,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Aaron TV",
+      "sources": [
+        {
+          "url": "http://stream.onecloudlive.in/sachintv/aarontvhd/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Devasena TV",
@@ -689,7 +768,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sakthi TV Nellai",
@@ -699,7 +779,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sarvik TV",
@@ -709,7 +790,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Akilam TV",
@@ -719,7 +801,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Queens 143",
@@ -729,7 +812,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Thendral TV Madurai",
@@ -739,7 +823,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Namma Gobi TV",
@@ -749,7 +834,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "RJ Tamil",
@@ -759,7 +845,30 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Aadhavan TV HD",
+      "sources": [
+        {
+          "url": "https://ipcloud.live/aadhavantv/aadhavanhd/index.m3u8?token=aadhavantv",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Aadhavan Colours [MKPCloud]",
+      "sources": [
+        {
+          "url": "http://mkpcloud.playit.plus:1024/AadhavanColours/AadhavanColours.stream/playlist.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Maruthi TV",
@@ -769,7 +878,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jayam TV Sivakasi [RTMP]",
@@ -779,7 +889,8 @@
           "status": "UNVERIFIED_RTMP",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jayam TV Sivakasi [TamilStream]",
@@ -789,7 +900,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jayam TV Sivakasi [Phoenix]",
@@ -799,7 +911,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "MTV Kodaikanal",
@@ -809,7 +922,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Ezra Bible Network",
+      "sources": [
+        {
+          "url": "https://stream.onecloudlive.in/riotv/riotvmax/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Veerali TV",
@@ -819,7 +944,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "King TV",
@@ -829,7 +955,30 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "3 Star TV",
+      "sources": [
+        {
+          "url": "https://stream.onecloudlive.in/threestartv/threestarhd/index.mpd",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Shalini TV Tiruvannamalai",
+      "sources": [
+        {
+          "url": "https://ipcloud.live/shalinitv/shalinitv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "JCV",
@@ -839,17 +988,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "JCV Musix",
-      "sources": [
-        {
-          "url": "https://play.applelive.in/jcvtv/jcvmusix.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Hai TV",
@@ -864,17 +1004,30 @@
           "status": "WORKING",
           "primary": false
         }
-      ]
+      ],
+      "sourceCount": 2
     },
     {
-      "channel": "Thendral TV",
+      "channel": "JJ News Tamil",
       "sources": [
         {
-          "url": "https://hls.thendraltv.in/thendraltv_1210b43d/index.m3u8",
+          "url": "https://hlsstream.olidigital.in/jjtvnewstamil/jjtvnewstamil/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Urchagam TV",
+      "sources": [
+        {
+          "url": "https://rtmp.bmlive.net/bms/urchagamtv/stream.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Ganesh TV",
@@ -884,7 +1037,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Eagle TV Namakkal",
@@ -894,7 +1048,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Mathi TV",
@@ -904,7 +1059,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Rainbow TV",
@@ -914,7 +1070,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Rainbow TV [CloudStream4K]",
@@ -924,7 +1081,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sai TV Madurai",
@@ -934,7 +1092,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sai TV Madurai [NOTV]",
@@ -944,7 +1103,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Nellai TV",
@@ -954,7 +1114,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "SJ Surya TV",
@@ -964,17 +1125,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Durai TV",
-      "sources": [
-        {
-          "url": "https://ipcloud.live/duraitv/live/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Durai Melodies",
@@ -984,7 +1136,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Apple TV Nagercoil",
@@ -993,8 +1146,25 @@
           "url": "https://live.applelive.in/appletv/appletv/index.m3u8",
           "status": "WORKING",
           "primary": true
+        },
+        {
+          "url": "https://play.applelive.in/appletv/appletv.m3u8",
+          "status": "WORKING",
+          "primary": false
         }
-      ]
+      ],
+      "sourceCount": 2
+    },
+    {
+      "channel": "Apple TV Marthandam",
+      "sources": [
+        {
+          "url": "https://web.applelive.in/stream/appletv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jeyson TV",
@@ -1004,7 +1174,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Kumari Kathir TV",
@@ -1014,7 +1185,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Selfie TV",
@@ -1024,7 +1196,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "JC TV",
@@ -1039,7 +1212,8 @@
           "status": "WORKING",
           "primary": false
         }
-      ]
+      ],
+      "sourceCount": 2
     },
     {
       "channel": "Digital TV",
@@ -1049,17 +1223,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Veera TV",
-      "sources": [
-        {
-          "url": "https://ipcloud.live/veeratv/veeratvhd/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Eagle TV Tenkasi",
@@ -1069,7 +1234,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "NTV Trichy",
@@ -1079,7 +1245,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "NTV Trichy [Cloud7]",
@@ -1089,7 +1256,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "UTV Mayuram",
@@ -1099,7 +1267,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Subi TV",
@@ -1109,7 +1278,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Subi TV [APCloud]",
@@ -1119,7 +1289,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Anandam TV",
@@ -1129,7 +1300,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Hitech TV",
+      "sources": [
+        {
+          "url": "https://notvstream.in/hitechtv/hitechtv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Orange TV",
@@ -1139,7 +1322,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Leo TV",
+      "sources": [
+        {
+          "url": "https://ipcloud.live/leotv/leotvhd/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Leo TV [IPLive]",
@@ -1149,7 +1344,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Boss Television",
@@ -1159,7 +1355,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Aasai TV",
@@ -1169,17 +1366,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Rainbow TV Gandarvakottai",
-      "sources": [
-        {
-          "url": "https://notvstream.in/rainbowtv/rainbowtv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Dheiveegam TV",
@@ -1189,7 +1377,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Nisha TV",
@@ -1199,7 +1388,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Amman TV",
@@ -1209,7 +1399,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Amman TV [RTMP]",
@@ -1219,7 +1410,8 @@
           "status": "UNVERIFIED_RTMP",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Amman Plus [RTMP]",
@@ -1229,7 +1421,8 @@
           "status": "UNVERIFIED_RTMP",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Oscar TV",
@@ -1239,7 +1432,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Bright Simrose TV",
@@ -1249,17 +1443,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
-      "channel": "Jeiyan TV",
+      "channel": "Vidiyal TV",
       "sources": [
         {
-          "url": "https://stream.onecloudlive.in/jeyantv/jeyantv/index.m3u8",
+          "url": "https://account11.livebox.co.in/vidyaltvhls/live.m3u8?psk=stream",
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "R TV Tirupattur",
@@ -1269,7 +1465,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Pothigai Thendral",
+      "sources": [
+        {
+          "url": "https://pothigai.stream.ipcloud.live/pothigai/thendral/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Velan TV",
@@ -1279,7 +1487,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "JRP TV",
@@ -1289,7 +1498,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Ezhil TV",
@@ -1304,7 +1514,8 @@
           "status": "WORKING",
           "primary": false
         }
-      ]
+      ],
+      "sourceCount": 2
     },
     {
       "channel": "Kavin TV",
@@ -1314,7 +1525,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jawahar Channel HD",
@@ -1324,7 +1536,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "7Star TV",
@@ -1334,7 +1547,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "7Star Music",
@@ -1344,7 +1558,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Tamil Star TV",
@@ -1354,7 +1569,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Santhiya TV",
+      "sources": [
+        {
+          "url": "https://stream.onecloudlive.in/santhiyatv/santhiyatvhd/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Anandam TV Madurai",
@@ -1364,7 +1591,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Anandam TV Madurai [TangoTV]",
@@ -1374,7 +1602,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Anandam Abi TV",
@@ -1384,7 +1613,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Anandam Abi TV [TangoTV]",
@@ -1394,7 +1624,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Anandam UTV",
@@ -1404,7 +1635,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Anandam UTV [TangoTV]",
@@ -1414,7 +1646,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Ragam TV",
@@ -1424,7 +1657,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sri Krishna TV",
@@ -1434,7 +1668,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sri Krishna TV Tiruchengode",
@@ -1444,7 +1679,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "CTN Kallakurichi",
@@ -1454,7 +1690,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Thirumagal TV",
@@ -1464,7 +1701,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Vanavil TV",
+      "sources": [
+        {
+          "url": "https://ktismaservers.in:3879/live/vanaviltvlive.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "KCN TV",
@@ -1474,7 +1723,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Tamil Magan TV",
@@ -1484,7 +1734,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Namathu Sangamam TV",
@@ -1494,7 +1745,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Yours TV",
@@ -1504,7 +1756,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Aadhavan Tamil TV",
@@ -1514,7 +1767,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Aadhavan Tamil TV [TamilStream]",
@@ -1524,7 +1778,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sky Media",
@@ -1534,7 +1789,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Thirumalai TV Vadipatti",
@@ -1544,7 +1800,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Maa TV",
@@ -1554,7 +1811,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Maa TV [Phoenix]",
@@ -1564,7 +1822,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "SS TV Nagercoil",
@@ -1574,7 +1833,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jith TV",
@@ -1584,7 +1844,30 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Sky TV",
+      "sources": [
+        {
+          "url": "https://sscloud7.com/live/skytv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Maniway TV",
+      "sources": [
+        {
+          "url": "https://live.singamcloud.in/bsctv/bsctv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "King TV Alangulam",
@@ -1594,7 +1877,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "KM Television",
@@ -1604,7 +1888,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sky TV Karur",
@@ -1614,7 +1899,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jayam TV Karur",
@@ -1624,7 +1910,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jeyasubbu TV",
@@ -1634,7 +1921,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Amma Vision",
@@ -1644,17 +1932,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Jayam TV",
-      "sources": [
-        {
-          "url": "https://view.rcserver.in/tmp_hls20/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Thirai TV",
@@ -1664,7 +1943,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Thirai TV [APServer]",
@@ -1674,7 +1954,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Thirai Music",
@@ -1684,7 +1965,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Thirai Music [APServer]",
@@ -1694,7 +1976,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Like TV",
@@ -1704,7 +1987,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Leaf TV",
@@ -1714,7 +1998,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "S Max TV",
@@ -1724,7 +2009,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Bharathi TV",
@@ -1734,7 +2020,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Bharathi Thirai Ulagam",
@@ -1744,17 +2031,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Ayya Vaikuntar TV [1Cloud]",
-      "sources": [
-        {
-          "url": "https://stream.onecloudlive.in/samuthirapandi/ayyavaikundartv/index.mpd",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Thendral TV Theni",
@@ -1764,7 +2042,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "CTN Conoor",
@@ -1774,7 +2053,30 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Sri Velavan TV",
+      "sources": [
+        {
+          "url": "https://rtmp.applelive.in/srivelavantv/srivelavantv4k/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Sri Velavan TV (Alt)",
+      "sources": [
+        {
+          "url": "https://rtmp.applelive.in/velavantv/srivelavantvultrahd/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Irattaipaathai TV",
@@ -1784,7 +2086,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "MS Mathan TV",
@@ -1794,17 +2097,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
-      "channel": "Emperor TV",
+      "channel": "Jayam TV Tenkasi",
       "sources": [
         {
-          "url": "https://rtmp.bmlive.net/bms/emperortv/stream.m3u8",
+          "url": "https://ipcloud.live/jayamtv/jayamtvhd/index.m3u8?token=jayamtv",
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jayam TV Namakkal",
@@ -1814,17 +2119,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "MCN Marthandam",
-      "sources": [
-        {
-          "url": "https://play.applelive.in/mcntv/mcntv.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "STN TV HD",
@@ -1834,7 +2130,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "STN TV",
@@ -1844,7 +2141,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Enthiran TV",
@@ -1854,7 +2152,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Malligai TV",
@@ -1864,7 +2163,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "BSC Old",
@@ -1874,7 +2174,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Shalini TV Kanchipuram",
@@ -1884,7 +2185,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "SSS TV",
@@ -1894,7 +2196,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Mei Alai TV",
@@ -1904,7 +2207,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jai TV",
@@ -1914,7 +2218,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "CTN Channel",
@@ -1924,17 +2229,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Yatra TV",
-      "sources": [
-        {
-          "url": "https://stream.onecloudlive.in/yatra/yatratv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Suriyan TV Karur",
@@ -1944,7 +2240,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sri Vasanth TV",
@@ -1954,7 +2251,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "MDN TV",
@@ -1964,7 +2262,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Garudan TV",
@@ -1974,7 +2273,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "GSJK TV",
@@ -1984,7 +2284,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Ramya TV",
@@ -1994,7 +2295,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Aarthi TV",
@@ -2004,7 +2306,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Kanchi TV",
@@ -2014,7 +2317,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jenifer TV",
@@ -2024,7 +2328,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Raghul TV",
@@ -2034,7 +2339,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Eesan TV",
@@ -2044,7 +2350,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Vajra TV",
@@ -2054,7 +2361,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Vajra TV (TACTV)",
@@ -2064,7 +2372,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Vajram TV",
@@ -2074,7 +2383,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Citi Channel",
@@ -2084,7 +2394,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Udhayam TV Karur",
@@ -2094,7 +2405,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Azhagi TV",
@@ -2104,7 +2416,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Polimer Channel",
@@ -2114,7 +2427,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Hansitha TV",
@@ -2124,7 +2438,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Rowthiram TV",
@@ -2134,7 +2449,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Manisha TV",
@@ -2144,7 +2460,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jeyam TV",
@@ -2154,7 +2471,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Ohm TV",
@@ -2164,17 +2482,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "ATN Media",
-      "sources": [
-        {
-          "url": "https://play.applelive.in/atn/atn.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Dolphin TV",
@@ -2184,27 +2493,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "SNR TV",
-      "sources": [
-        {
-          "url": "https://3.proxy.nellaiiptv.com/NOTV/ASOSACHENNAI/index.m3u8?token=GTR",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
-    },
-    {
-      "channel": "Appu TV",
-      "sources": [
-        {
-          "url": "https://3.proxy.nellaiiptv.com/NOTV/IWORLDHD/index.m3u8?token=GTR",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Smart Sri",
@@ -2214,7 +2504,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jeyam Plus",
@@ -2224,7 +2515,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Raagam Friend's TV",
@@ -2234,7 +2526,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Super TV",
@@ -2244,7 +2537,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "KRN TV",
@@ -2254,17 +2548,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Aramm TV",
-      "sources": [
-        {
-          "url": "https://singamcloud.in/arammtv/arammtv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Fort Channels",
@@ -2274,7 +2559,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jeyam Plus Coimbatore",
@@ -2284,7 +2570,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "MM TV",
@@ -2294,17 +2581,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Salaam TV",
-      "sources": [
-        {
-          "url": "https://stream.onecloudlive.in/salamtv/salamtvhd/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Mahimai TV HD",
@@ -2314,7 +2592,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Mahimai TV [IPTelevision]",
@@ -2324,7 +2603,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Blood Of Jesus TV",
@@ -2334,7 +2614,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Matha TV",
@@ -2344,7 +2625,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "CRS TV",
@@ -2354,7 +2636,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Joy Goodnews TV",
@@ -2364,7 +2647,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Joy Goodnews TV [IndiaMatrix]",
@@ -2374,7 +2658,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Nanjil Natham TV",
@@ -2384,7 +2669,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Shammah TV",
@@ -2394,7 +2680,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Mariya Matha TV",
@@ -2404,7 +2691,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Deva TV",
@@ -2414,7 +2702,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jesus TV",
@@ -2424,7 +2713,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Praise TV",
@@ -2434,7 +2724,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Vinmeen Music",
@@ -2444,7 +2735,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Nithya Velicham TV",
@@ -2454,17 +2746,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "King Of Glory TV",
-      "sources": [
-        {
-          "url": "https://ipcloud.live/novamani/kingofglorytv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Love Joy TV",
@@ -2474,7 +2757,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Divine Music",
@@ -2484,7 +2768,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "JTK TV",
@@ -2494,7 +2779,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Win Vision TV",
@@ -2504,7 +2790,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Shekinah TV",
+      "sources": [
+        {
+          "url": "https://iptvhls.inet.moe/hls/newchannel_src/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Cross TV",
@@ -2514,7 +2812,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "G Max",
@@ -2524,7 +2823,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Jeyam Television",
+      "sources": [
+        {
+          "url": "https://jeyamtv.livebox.co.in/JeyamTelevisionhls/JeyamTelevision.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "PCN Channel",
@@ -2534,7 +2845,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Thendral TV Alangulam",
@@ -2544,17 +2856,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Top TV Thuraiyur",
-      "sources": [
-        {
-          "url": "https://stream.onecloudlive.in/toptv/toptvhd/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jay TV",
@@ -2564,7 +2867,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Annai TV",
@@ -2574,7 +2878,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "7Star Television",
@@ -2584,7 +2889,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Amma TV",
@@ -2594,7 +2900,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sri Sai TV",
@@ -2604,7 +2911,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Isai Saral",
@@ -2614,7 +2922,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "SR Musix",
@@ -2624,7 +2933,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Arul TV",
@@ -2634,7 +2944,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Kanchi Media",
@@ -2644,7 +2955,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Bhagavath TV",
@@ -2654,7 +2966,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Global TV",
@@ -2664,7 +2977,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Punnagai Desam TV",
@@ -2674,7 +2988,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "MonTamil",
@@ -2684,7 +2999,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Analai Express",
+      "sources": [
+        {
+          "url": "https://3.proxy.nellaiiptv.com/ANALAI_MOVIE/index.m3u8?token=GTR",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Analai Express Cinema",
@@ -2694,7 +3021,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Analai Music",
@@ -2704,7 +3032,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Analai Express Replay",
@@ -2714,7 +3043,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Rudhram TV",
@@ -2724,7 +3054,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Makkalpani TV",
@@ -2734,7 +3065,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Mariya Annai TV",
@@ -2744,7 +3076,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Gospel TV",
@@ -2754,7 +3087,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jesus Alive Television",
@@ -2764,7 +3098,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Royal TV",
@@ -2774,7 +3109,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Holy Land TV",
@@ -2784,17 +3120,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Ayya TV",
-      "sources": [
-        {
-          "url": "https://play.applelive.in/ayyatv/ayyatv.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Naga TV",
@@ -2804,7 +3131,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Subash TV Tenkasi [Cloud7]",
@@ -2814,7 +3142,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Surya TV",
@@ -2824,7 +3153,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Kaka TV",
@@ -2834,7 +3164,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jos TV",
@@ -2844,7 +3175,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Joshua TV",
@@ -2854,7 +3186,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Joshua TV [TamilStream]",
@@ -2864,7 +3197,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Joshua Praise TV",
+      "sources": [
+        {
+          "url": "http://joshuatv-live.phoenixcreations.online/joshuatv/live/playlist.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Pasamalar TV",
@@ -2874,7 +3219,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Karthick TV",
+      "sources": [
+        {
+          "url": "https://ipcloud.live/karthick/karthicktvhd/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Deiveega Oli TV",
@@ -2884,7 +3241,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Selva Tamil TV",
+      "sources": [
+        {
+          "url": "https://stream.sscloud7.in/live/selvatamiltv/index.mpd",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Super TV Dindigul",
@@ -2894,7 +3263,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Super TV Dindigul [RojaTV]",
@@ -2904,7 +3274,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Ark TV",
@@ -2914,7 +3285,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Ark TV [Ktisma]",
@@ -2924,7 +3296,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "ACN TV",
@@ -2934,7 +3307,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Anjai TV",
@@ -2944,7 +3318,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Ruhasha TV",
@@ -2954,7 +3329,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Koodal TV",
@@ -2964,7 +3340,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Crayonz TV",
@@ -2974,7 +3351,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Islamic Channel",
@@ -2984,7 +3362,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sharon TV",
@@ -2994,7 +3373,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Arputhar Yesu TV [Livebox]",
@@ -3004,7 +3384,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Fox TV",
@@ -3014,7 +3395,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Om TV",
@@ -3024,7 +3406,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "CTN TV",
@@ -3034,7 +3417,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Arasu TV",
@@ -3044,17 +3428,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
-      "channel": "Magalir TV",
+      "channel": "Dina Tharani",
       "sources": [
         {
-          "url": "https://ipcloud.live/ctn/magalir/index.m3u8",
+          "url": "https://stream.sscloud7.in/live/ddtv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "TCBN",
@@ -3064,7 +3450,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Tamil TV",
@@ -3074,7 +3461,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Family Channel",
@@ -3084,7 +3472,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Life TV",
@@ -3094,7 +3483,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "News 80 Tamil",
@@ -3104,7 +3494,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "RK TV",
@@ -3114,7 +3505,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Mangalam TV",
@@ -3124,17 +3516,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
-      "channel": "SS TV",
+      "channel": "MM TV Valliyur",
       "sources": [
         {
-          "url": "https://sstv-ott.tamilstream.in/sstv/sstv/playlist.m3u8",
+          "url": "http://mmtv.phoenixcreations.online/mmtv/mm/index.mpd",
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "We Baduga TV",
@@ -3144,7 +3538,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Manasu TV",
@@ -3154,17 +3549,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
-      "channel": "Star Media",
+      "channel": "Madura TV",
       "sources": [
         {
-          "url": "https://rtmp.notvstream.in/starmedia/starmedia/index.m3u8",
+          "url": "https://stream.onecloudlive.in/mm/maduratv/index.m3u8",
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Blue Moon TV",
@@ -3174,7 +3571,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jayam TV Polur",
@@ -3184,7 +3582,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Ithazh TV",
@@ -3194,7 +3593,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Mathan TV",
@@ -3204,7 +3604,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "R Plus TV",
@@ -3214,17 +3615,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Shalwin TV",
-      "sources": [
-        {
-          "url": "https://live3.onecloudlive.in/shalwintv/shalwintv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Eagle TV Nagercoil",
@@ -3234,7 +3626,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "TTN TV",
@@ -3244,7 +3637,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Omm TV Nagercoil",
@@ -3254,7 +3648,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Amma TV Nagercoil",
@@ -3264,7 +3659,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "SR TV",
@@ -3274,7 +3670,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Kanna TV",
@@ -3284,7 +3681,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Malar TV Surandai",
@@ -3294,7 +3692,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Right TV",
@@ -3304,7 +3703,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Thendral TV Chennai",
@@ -3314,7 +3714,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Ratchagar TV",
@@ -3324,7 +3725,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "A1 TV Ariyalur",
+      "sources": [
+        {
+          "url": "https://app.ashokadigital.net/app/0fca457c/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "VDS TV",
@@ -3334,7 +3747,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "UTV Coimbatore",
+      "sources": [
+        {
+          "url": "http://cdn.utvtamil.in/utvkovai/utv/playlist.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "S TV",
@@ -3344,7 +3769,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Royal TV Guduvancheri",
@@ -3354,7 +3780,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Lion TV",
@@ -3364,7 +3791,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "ATN [RojaTV]",
@@ -3374,7 +3802,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Arram TV Komarapalayam",
@@ -3384,7 +3813,30 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Lucky TV",
+      "sources": [
+        {
+          "url": "https://live3.onecloudlive.in/luckytv/luckytvhd/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "V Tamil",
+      "sources": [
+        {
+          "url": "https://hlsstream.olidigital.in/vtv/vtv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "V Tamil [NOTV]",
@@ -3394,7 +3846,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "V Tamil [VK Digital]",
@@ -3404,17 +3857,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "KSR TV",
-      "sources": [
-        {
-          "url": "https://stream.onecloudlive.in/ksrtv/ksrtvhd/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Bhairava TV",
@@ -3424,7 +3868,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sabari TV Aruppukottai",
@@ -3434,7 +3879,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Joy TV HD",
@@ -3444,7 +3890,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Arighni TV",
@@ -3454,7 +3901,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "GTA Tamil",
@@ -3464,7 +3912,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Tamil Vision International",
@@ -3474,7 +3923,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sooriyan TV",
@@ -3484,7 +3934,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sooriyan TV Cinema",
@@ -3494,7 +3945,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Uthamiyae TV",
@@ -3504,17 +3956,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Samugam Media",
-      "sources": [
-        {
-          "url": "https://ca.streamjo.com/live/samugam.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Britain Tamil Bhakthi",
@@ -3524,7 +3967,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Britain Tamil Bhakthi [IPTelevision]",
@@ -3534,7 +3978,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "ME24 Tamil",
@@ -3544,7 +3989,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Meiveli TV",
@@ -3554,7 +4000,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "TWOC TV",
@@ -3564,7 +4011,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Imai TV",
+      "sources": [
+        {
+          "url": "https://live20.bozztv.com/akamaissh101/ssh101/imaitv/playlist.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Go Revival TV",
@@ -3574,7 +4033,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Salvation TV",
@@ -3584,7 +4044,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Faith TV",
@@ -3594,7 +4055,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Adhisayam TV",
@@ -3604,7 +4066,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Thuthi TV",
@@ -3614,7 +4077,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sirustigar TV",
@@ -3624,7 +4088,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Peniel Church TV",
@@ -3634,7 +4099,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Silver Sat Media",
+      "sources": [
+        {
+          "url": "https://sanplayout.xyz/live2/silversatmedia/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Thangam TV",
@@ -3644,7 +4121,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Good News Time",
@@ -3654,7 +4132,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Jayam TV Trichy",
@@ -3664,7 +4143,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Kathir TV",
@@ -3674,7 +4154,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "PG TV",
@@ -3684,7 +4165,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Prime Music",
@@ -3694,7 +4176,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Deepam TV",
@@ -3704,7 +4187,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Params TV",
@@ -3714,7 +4198,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Shakthi Channel",
@@ -3724,7 +4209,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sai TV Tenkasi",
@@ -3734,7 +4220,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Boobsh TV",
@@ -3744,7 +4231,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "MR TV",
+      "sources": [
+        {
+          "url": "https://live.apcloud.in/mrtv/mrtvhd/index.mpd",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Dolphin TV Sivakasi",
@@ -3754,7 +4253,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "D TV",
@@ -3764,7 +4264,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Pothigai Prime",
@@ -3774,7 +4275,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "A1 Media News",
+      "sources": [
+        {
+          "url": "https://sanplayout.xyz/live2/a1medianews/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "My Jesus TV",
@@ -3784,7 +4297,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Bible TV",
@@ -3794,7 +4308,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Heaven TV",
@@ -3804,7 +4319,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Chittoor TV",
@@ -3814,7 +4330,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Channel 316",
@@ -3824,7 +4341,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Grace TV",
@@ -3834,7 +4352,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Aathi TV",
@@ -3844,7 +4363,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "TNSE",
@@ -3854,7 +4374,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "S Media Puducherry",
@@ -3864,7 +4385,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Chola TV",
@@ -3874,7 +4396,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Madurai Arasi TV",
@@ -3884,7 +4407,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "NRJ TV",
@@ -3894,7 +4418,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "PJ TV",
@@ -3904,7 +4429,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Eye Tamil",
@@ -3914,7 +4440,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Eye Tamil Music",
@@ -3924,7 +4451,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Eye Tamil Comedy",
@@ -3934,7 +4462,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Prince TV",
@@ -3944,7 +4473,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sri TV",
@@ -3954,7 +4484,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Kings TV",
@@ -3964,17 +4495,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Sri Varahi TV",
-      "sources": [
-        {
-          "url": "https://real-vk.proxy.nellaiiptv.com/SRIVARAHITV/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Telemax Tamil",
@@ -3984,7 +4506,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Diamond TV",
@@ -3994,7 +4517,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Diamond Talkies",
@@ -4004,7 +4528,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sri Vinayaga TV",
@@ -4014,7 +4539,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sri Vinayaga Movies",
@@ -4024,7 +4550,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sri Vinayaga Music",
@@ -4034,7 +4561,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sri Vinayaga Hollywood",
@@ -4044,7 +4572,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "PN TV",
@@ -4054,17 +4583,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Sun Smart TV",
-      "sources": [
-        {
-          "url": "https://live3.onecloudlive.in/sunsmart/sunsmarttvhd/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sun Smart TV [VK Digital]",
@@ -4074,7 +4594,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Krish TV",
@@ -4084,7 +4605,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Thoma TV",
@@ -4094,7 +4616,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sakthi TV (VK Digital)",
@@ -4104,7 +4627,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "ANJ TV",
@@ -4114,7 +4638,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Vaagai TV",
@@ -4124,7 +4649,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Pugal TV",
@@ -4134,7 +4660,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Mayil TV",
@@ -4144,7 +4671,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "MTN TV",
+      "sources": [
+        {
+          "url": "https://rtmp.applelive.in/mtntv/mtntv/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Gurudevan TV",
@@ -4154,7 +4693,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Bala TV",
@@ -4164,7 +4704,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Kirubai TV",
@@ -4174,7 +4715,19 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
+    },
+    {
+      "channel": "Thogai TV",
+      "sources": [
+        {
+          "url": "https://thogaitv.stream.onecloudlive.in/thogaitv/12345678/index.m3u8",
+          "status": "WORKING",
+          "primary": true
+        }
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Sarah TV",
@@ -4184,7 +4737,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Himalaya TV",
@@ -4194,7 +4748,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Vaanam TV",
@@ -4204,7 +4759,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Abnaz TV",
@@ -4214,7 +4770,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "CTN Salem",
@@ -4224,7 +4781,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Yugam TV",
@@ -4234,17 +4792,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "TBC TV",
-      "sources": [
-        {
-          "url": "https://stream.iplive.xyz/smmedia/tbctv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "AP TV Tamil",
@@ -4254,7 +4803,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Power Of Prayer TV",
@@ -4264,7 +4814,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Victory TV [RTMP]",
@@ -4274,7 +4825,8 @@
           "status": "UNVERIFIED_RTMP",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Agasham TV",
@@ -4284,7 +4836,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Khila TV",
@@ -4294,7 +4847,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Eye TV Madurai",
@@ -4304,7 +4858,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Palaar TV",
@@ -4314,7 +4869,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Nila TV Ranipet",
@@ -4324,7 +4880,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "VTR Television",
@@ -4334,7 +4891,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Aalayam TV",
@@ -4344,7 +4902,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Alpha TV",
@@ -4354,7 +4913,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Gopuram TV",
@@ -4364,7 +4924,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
+      ],
+      "sourceCount": 1
     },
     {
       "channel": "Aalaya TV",
@@ -4374,17 +4935,8 @@
           "status": "WORKING",
           "primary": true
         }
-      ]
-    },
-    {
-      "channel": "Adhiralai TV",
-      "sources": [
-        {
-          "url": "https://hlsstream.olidigital.in/adhiralaitv/adhiralaitv/index.m3u8",
-          "status": "WORKING",
-          "primary": true
-        }
-      ]
+      ],
+      "sourceCount": 1
     }
   ]
 }
