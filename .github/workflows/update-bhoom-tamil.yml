@@ -70,59 +70,6 @@ jobs:
         run: python -m playwright install chromium
         shell: pwsh
 
-      - name: Probe alternate Bhoom domains
-        run: |
-          python - <<'PY'
-          import urllib.request
-          urls = [
-              "https://bhoomtv.org/channel/tamil/",
-              "https://bhoomtv.com/live/page/20/",
-              "https://bhoomtv.net/",
-          ]
-          for url in urls:
-              try:
-                  req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0"})
-                  with urllib.request.urlopen(req, timeout=20) as r:
-                      print(f"PROBE {url} -> HTTP {r.status} FINAL {r.geturl()}")
-              except Exception as e:
-                  print(f"PROBE {url} -> ERROR {e}")
-          PY
-
-      - name: Inspect reachable BhoomTV.net API candidates
-        run: |
-          python - <<'PY'
-          import urllib.request
-          from urllib.parse import urljoin
-          import re
-
-          base = "https://bhoomtv.net/"
-          req = urllib.request.Request(base, headers={"User-Agent":"Mozilla/5.0"})
-          with urllib.request.urlopen(req, timeout=20) as r:
-              html = r.read().decode("utf-8", "ignore")
-              print(f"NET ROOT HTTP {r.status} FINAL {r.geturl()} BYTES {len(html)}")
-
-          for src in re.findall(r'<script[^>]+src=["\']([^"\']+)', html, re.I):
-              print("NET SCRIPT", urljoin(base, src))
-
-          candidates = [
-              "https://bhoomtv.net/api",
-              "https://bhoomtv.net/api/channels",
-              "https://bhoomtv.net/api/tv",
-              "https://bhoomtv.net/channels",
-              "https://bhoomtv.net/tv",
-              "https://bhoomtv.net/channel/tamil/",
-              "https://bhoomtv.net/live/",
-          ]
-          for url in candidates:
-              try:
-                  q = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0","Accept":"application/json,text/html,*/*"})
-                  with urllib.request.urlopen(q, timeout=15) as r:
-                      body = r.read(800).decode("utf-8", "ignore").replace("\n"," ")
-                      print(f"NET CANDIDATE {url} -> HTTP {r.status} FINAL {r.geturl()} BODY {body[:220]}")
-              except Exception as e:
-                  print(f"NET CANDIDATE {url} -> ERROR {e}")
-          PY
-
       - name: Run unit tests
         working-directory: bhoom-automation
         run: python -m unittest discover -s tests -v
@@ -132,7 +79,9 @@ jobs:
         env:
           CATEGORY_SECTION: ${{ github.event.inputs.category_section || 'all' }}
           BHOOM_PROXY_BASE_URL: "https://bhoom-tamil-api.testtamil.workers.dev"
-          # Worker is the authorized BhoomTV source bridge
+          BHOOM_COLLECT_URL: "https://bhoom-tamil-api.testtamil.workers.dev"
+          BHOOM_INVENTORY_URL: "https://bhoom-tamil-api.testtamil.workers.dev"
+          WORKER_MAX_PAGES: "200"
           CATEGORY_PAGE_LIMIT: ${{ github.event.inputs.category_page_limit || '0' }}
           MAX_CHANNELS: ${{ github.event.inputs.max_channels || '0' }}
           VALIDATE_STREAMS: ${{ github.event.inputs.validate_streams || '1' }}
