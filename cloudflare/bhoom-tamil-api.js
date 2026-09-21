@@ -324,6 +324,282 @@ async function collectBatch(env, request, section, startPage, maxPages) {
   };
 }
 
+
+function extractStreamCandidates(html, pageUrl) {
+  const normalized = html
+    .replace(/\\\//g, "/")
+    .replace(/&amp;/g, "&");
+
+  const found = [];
+  const seen = new Set();
+
+  const add = (value) => {
+    if (!value) return;
+
+    let url;
+
+    try {
+      url = new URL(value, pageUrl).toString();
+    } catch {
+      return;
+    }
+
+    const low = url.toLowerCase();
+
+    if (
+      !low.includes(".m3u8") &&
+      !low.includes(".mpd")
+    ) {
+      return;
+    }
+
+    if (seen.has(url)) {
+      return;
+    }
+
+    seen.add(url);
+
+    found.push({
+      url,
+      type: low.includes(".mpd") ? "DASH" : "HLS"
+    });
+  };
+
+  const urlRe =
+    /https?:\\/\\/[^\\s'"<>\\\\]+(?:\\.m3u8|\\.mpd)(?:\\?[^\\s'"<>\\\\]*)?/gi;
+
+  let match;
+
+  while ((match = urlRe.exec(normalized))) {
+    add(match[0]);
+  }
+
+  const sourceRe =
+    /<(?:video|source)[^>]+(?:src|data-src)=["']([^"']+)["']/gi;
+
+  while ((match = sourceRe.exec(normalized))) {
+    add(match[1]);
+  }
+
+  return found.slice(0, 3);
+}
+
+async function validateStream(candidate) {
+  try {
+    const response = await fetch(candidate.url, {
+      redirect: "follow",
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153 Safari/537.36",
+        "Accept":
+          candidate.type === "DASH"
+            ? "application/dash+xml,application/xml,text/xml,*/*"
+            : "application/vnd.apple.mpegurl,application/x-mpegURL,text/plain,*/*"
+      }
+    });
+
+    const body = await response.text();
+
+    if (!response.ok) {
+      return {
+        usable: false,
+        status: response.status,
+        reason: "HTTP_" + response.status
+      };
+    }
+
+    if (candidate.type === "HLS") {
+      if (!body.trimStart().startsWith("#EXTM3U")) {
+        return {
+          usable: false,
+          status: response.status,
+          reason: "INVALID_HLS_MANIFEST"
+        };
+      }
+    } else if (!/<MPD\\b/i.test(body)) {
+      return {
+        usable: false,
+        status: response.status,
+        reason: "INVALID_MPD"
+      };
+    }
+
+    return {
+      usable: true,
+      status: response.status,
+      reason:
+        candidate.type === "HLS"
+          ? "VALID_HLS"
+          : "VALID_MPD"
+    };
+  } catch (error) {
+    return {
+      usable: false,
+      status: null,
+      reason:
+        "VALIDATION_ERROR:" +
+        String(error)
+    };
+  }
+}
+
+async function scanOneChannel(channel) {
+  const scannedAt =
+    new Date().toISOString();
+
+  try {
+    const response =
+      await fetchBhoom(channel.url);
+
+    const html =
+      await response.text();
+
+    if (!response.ok) {
+      return {
+        ...channel,
+        streams: [],
+        last_scan_at: scannedAt,
+        scan: {
+          captured: 0,
+          usable: 0,
+          reason:
+            "HTTP_" +
+            response.status,
+          scanned_at: scannedAt
+        }
+      };
+    }
+
+    const candidates =
+      extractStreamCandidates(
+        html,
+        channel.url
+      );
+
+    const validations = [];
+    const streams = [];
+
+    for (
+      const candidate of
+        candidates
+    ) {
+      const validation =
+        await validateStream(
+          candidate
+        );
+
+      validations.push({
+        ...validation,
+        url: candidate.url,
+        type: candidate.type
+      });
+
+      if (validation.usable) {
+        streams.push({
+          url: candidate.url,
+          type: candidate.type,
+          headers: {
+            referer: channel.url,
+            "user-agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153 Safari/537.36"
+          },
+          validation
+        });
+
+        break;
+      }
+    }
+
+    return {
+      ...channel,
+      streams,
+      last_scan_at: scannedAt,
+      scan: {
+        captured:
+          candidates.length,
+        usable:
+          streams.length,
+        reason:
+          streams.length
+            ? null
+            : candidates.length
+              ? validations
+                  .map(
+                    (x) => x.reason
+                  )
+                  .join("|")
+              : "NO_STREAM_FOUND",
+        validations,
+        scanned_at: scannedAt
+      }
+    };
+  } catch (error) {
+    return {
+      ...channel,
+      streams: [],
+      last_scan_at: scannedAt,
+      scan: {
+        captured: 0,
+        usable: 0,
+        reason:
+          "SCAN_ERROR:" +
+          String(error),
+        scanned_at: scannedAt
+      }
+    };
+  }
+}
+
+async function getAllInventory(env) {
+  const rows = [
+    ...(await getInventory(env, "tamil")),
+    ...(await getInventory(env, "local"))
+  ];
+
+  const map = new Map();
+
+  for (const row of rows) {
+    if (row && row.url) {
+      map.set(row.url, row);
+    }
+  }
+
+  return Array.from(map.values()).sort(
+    (a, b) =>
+      String(a.name || "").localeCompare(
+        String(b.name || "")
+      )
+  );
+}
+
+async function saveAllInventory(env, rows) {
+  await putInventory(
+    env,
+    "tamil",
+    rows.filter(
+      (x) => x.section !== "local"
+    )
+  );
+
+  await putInventory(
+    env,
+    "local",
+    rows.filter(
+      (x) => x.section === "local"
+    )
+  );
+
+  const all =
+    await getAllInventory(env);
+
+  await env.BHOOM_CHANNELS.put(
+    INVENTORY_KEYS.all,
+    JSON.stringify(all)
+  );
+
+  return all;
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") {
@@ -481,6 +757,229 @@ export default {
           502
         );
       }
+    }
+
+
+    if (url.pathname === "/scan-status") {
+      const inventory =
+        await getAllInventory(env);
+
+      let scanned = 0;
+      let usable = 0;
+      let failed = 0;
+
+      for (const channel of inventory) {
+        if (channel.last_scan_at) {
+          scanned++;
+        }
+
+        const streams =
+          Array.isArray(
+            channel.streams
+          )
+            ? channel.streams
+            : [];
+
+        if (streams.length) {
+          usable++;
+        } else if (
+          channel.last_scan_at
+        ) {
+          failed++;
+        }
+      }
+
+      return json({
+        ok: true,
+        total: inventory.length,
+        scanned,
+        usable,
+        failed,
+        remaining:
+          inventory.length -
+          scanned
+      });
+    }
+
+    if (url.pathname === "/auto-scan") {
+      const requestedBatch =
+        Number(
+          url.searchParams.get(
+            "batch"
+          ) || "4"
+        );
+
+      const batchSize =
+        Math.min(
+          6,
+          Math.max(
+            1,
+            Number.isFinite(
+              requestedBatch
+            )
+              ? requestedBatch
+              : 4
+          )
+        );
+
+      const inventory =
+        await getAllInventory(env);
+
+      const start =
+        inventory.findIndex(
+          (channel) =>
+            !channel.last_scan_at
+        );
+
+      if (start < 0) {
+        return new Response(
+          "<html><body><h2>Scan complete</h2><p>All " +
+            inventory.length +
+            " channels have been scanned.</p><p><a href='/scan-status'>View status JSON</a></p></body></html>",
+          {
+            headers: {
+              ...cors(),
+              "Content-Type":
+                "text/html; charset=utf-8"
+            }
+          }
+        );
+      }
+
+      const selected =
+        inventory.slice(
+          start,
+          start + batchSize
+        );
+
+      const scanned = [];
+
+      for (
+        const channel of selected
+      ) {
+        const result =
+          await scanOneChannel(
+            channel
+          );
+
+        scanned.push(result);
+
+        console.log(
+          JSON.stringify({
+            channel:
+              result.name,
+            captured:
+              result.scan.captured,
+            usable:
+              result.scan.usable,
+            reason:
+              result.scan.reason
+          })
+        );
+      }
+
+      const updated =
+        inventory.map(
+          (channel) => {
+            const replacement =
+              scanned.find(
+                (x) =>
+                  x.url ===
+                  channel.url
+              );
+
+            return replacement ||
+              channel;
+          }
+        );
+
+      const all =
+        await saveAllInventory(
+          env,
+          updated
+        );
+
+      const usable =
+        scanned.filter(
+          (x) =>
+            Array.isArray(
+              x.streams
+            ) &&
+            x.streams.length
+        ).length;
+
+      const next =
+        all.findIndex(
+          (channel) =>
+            !channel.last_scan_at
+        );
+
+      let lines =
+        scanned
+          .map(
+            (x) =>
+              (x.streams &&
+                x.streams.length
+                ? "USABLE"
+                : "FAILED") +
+              " | " +
+              x.name +
+              " | " +
+              (
+                x.scan &&
+                x.scan.reason
+                  ? x.scan.reason
+                  : "OK"
+              )
+          )
+          .join("<br>");
+
+      let html =
+        "<html><head>";
+
+      if (next >= 0) {
+        html +=
+          "<meta http-equiv='refresh' content='1;url=/auto-scan?batch=" +
+          batchSize +
+          "'>";
+      }
+
+      html +=
+        "</head><body>" +
+        "<h2>Bhoom stream scan</h2>" +
+        "<p>Scanned: " +
+        Math.min(
+          start + selected.length,
+          all.length
+        ) +
+        " / " +
+        all.length +
+        "</p>" +
+        "<p>Usable in this batch: " +
+        usable +
+        " / " +
+        scanned.length +
+        "</p>" +
+        "<hr>" +
+        lines +
+        "<hr>" +
+        (
+          next >= 0
+            ? "<p>Continuing automatically...</p>"
+            : "<p><b>SCAN COMPLETE</b></p>"
+        ) +
+        "</body></html>";
+
+      return new Response(
+        html,
+        {
+          headers: {
+            ...cors(),
+            "Content-Type":
+              "text/html; charset=utf-8"
+          }
+        }
+      );
     }
 
     if (url.pathname === "/inventory") {
