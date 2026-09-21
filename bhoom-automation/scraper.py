@@ -48,6 +48,8 @@ MAX_CANDIDATES = max(1, int(os.getenv("MAX_CAPTURE_CANDIDATES", "6")))
 BHOOM_COLLECT_URL = os.getenv("BHOOM_COLLECT_URL", "").rstrip("/")
 BHOOM_INVENTORY_URL = os.getenv("BHOOM_INVENTORY_URL", "").rstrip("/")
 WORKER_MAX_PAGES = max(1, int(os.getenv("WORKER_MAX_PAGES", "200")))
+WORKER_COLLECT_ENABLED = os.getenv("WORKER_COLLECT_ENABLED", "0") == "1"
+WORKER_INVENTORY_ONLY = os.getenv("WORKER_INVENTORY_ONLY", "1") == "1"
 
 CF_MARKERS = (
     "just a moment",
@@ -380,45 +382,42 @@ def save_inventory(inventory):
 
 
 async def refresh_worker_inventory(client):
-    if not BHOOM_COLLECT_URL or not BHOOM_INVENTORY_URL:
+    if not BHOOM_INVENTORY_URL:
         return {}
 
     inventory = {}
-    log(f"Worker collector: {BHOOM_COLLECT_URL}")
+
+    if BHOOM_COLLECT_URL and WORKER_COLLECT_ENABLED:
+        log(f"Worker collector enabled: {BHOOM_COLLECT_URL}")
+        for section in ("tamil", "local"):
+            for page_no in range(1, WORKER_MAX_PAGES + 1):
+                collect_url = f"{BHOOM_COLLECT_URL}/collect?section={section}&page={page_no}"
+                try:
+                    response = await client.get(collect_url)
+                    log(
+                        f"  [WORKER COLLECT] section={section} page={page_no} "
+                        f"HTTP={response.status_code}"
+                    )
+                    if response.status_code != 200:
+                        break
+                    data = response.json()
+                    if not data.get("ok"):
+                        log(f"    [WORKER ERROR] {data}")
+                        break
+                    if data.get("complete"):
+                        break
+                    await asyncio.sleep(1.0)
+                except Exception as exc:
+                    log(f"    [WORKER COLLECT ERROR] {exc}")
+                    break
+    else:
+        log("Worker collector: disabled; using stored KV inventory")
 
     for section in ("tamil", "local"):
-        for page_no in range(1, WORKER_MAX_PAGES + 1):
-            collect_url = f"{BHOOM_COLLECT_URL}/collect?section={section}&page={page_no}"
-            try:
-                response = await client.get(collect_url)
-                log(
-                    f"  [WORKER COLLECT] section={section} page={page_no} "
-                    f"HTTP={response.status_code}"
-                )
-                if response.status_code != 200:
-                    break
-
-                data = response.json()
-                if not data.get("ok"):
-                    log(f"    [WORKER ERROR] {data}")
-                    break
-
-                log(
-                    f"    channels_on_page={data.get('channels_on_page', 0)} "
-                    f"inventory_count={data.get('inventory_count', 0)} "
-                    f"complete={data.get('complete')}"
-                )
-
-                if data.get("complete"):
-                    break
-
-                await asyncio.sleep(1.1)
-            except Exception as exc:
-                log(f"    [WORKER COLLECT ERROR] {exc}")
-                break
-
         try:
-            response = await client.get(f"{BHOOM_INVENTORY_URL}/inventory?{section}")
+            response = await client.get(
+                f"{BHOOM_INVENTORY_URL}/inventory?{section}"
+            )
             log(
                 f"  [WORKER INVENTORY] section={section} "
                 f"HTTP={response.status_code}"
@@ -432,22 +431,34 @@ async def refresh_worker_inventory(client):
                         for row in rows
                         if isinstance(row, dict) and row.get("url")
                     })
-                    log(f"    inventory returned {len(rows)} channels for {section}")
+                    log(
+                        f"    inventory returned {len(rows)} channels "
+                        f"for {section}"
+                    )
         except Exception as exc:
             log(f"    [WORKER INVENTORY ERROR] {exc}")
 
-    if inventory:
-        try:
-            response = await client.get(f"{BHOOM_INVENTORY_URL}/inventory")
-            if response.status_code == 200:
-                data = response.json()
-                rows = data.get("channels", [])
-                for row in rows:
-                    if isinstance(row, dict) and row.get("url"):
-                        inventory[canonical(row["url"])] = row
-                log(f"  [WORKER INVENTORY] combined={len(inventory)}")
-        except Exception as exc:
-            log(f"  [WORKER INVENTORY COMBINED ERROR] {exc}")
+    try:
+        response = await client.get(
+            f"{BHOOM_INVENTORY_URL}/inventory"
+        )
+        log(
+            f"  [WORKER INVENTORY] combined "
+            f"HTTP={response.status_code}"
+        )
+        if response.status_code == 200:
+            data = response.json()
+            rows = data.get("channels", [])
+            for row in rows:
+                if isinstance(row, dict) and row.get("url"):
+                    inventory[canonical(row["url"])] = row
+            log(
+                f"    combined inventory={len(inventory)}"
+            )
+    except Exception as exc:
+        log(
+            f"  [WORKER INVENTORY COMBINED ERROR] {exc}"
+        )
 
     return inventory
 
@@ -746,6 +757,28 @@ async def main():
                 name = channel.get("name", channel.get("slug", "Unknown"))
                 url = channel["url"]
                 log(f"\n[{index}/{len(channels)}] [{url}]")
+                if WORKER_INVENTORY_ONLY and PROXY_BASE_URL and channel.get("streams"):
+                    streams = channel.get("streams") or []
+                    output_item = dict(channel)
+                    output_item["last_scan_at"] = channel.get("last_scan_at") or now()
+                    output_item["scan"] = channel.get("scan") or {
+                        "captured": len(streams),
+                        "usable": len(streams),
+                        "captured_via": "worker-kv",
+                        "blocked_reason": None,
+                        "validations": [
+                            s.get("validation")
+                            for s in streams
+                            if isinstance(s, dict) and s.get("validation")
+                        ],
+                    }
+                    output_channels.append(output_item)
+                    log(
+                        f"  [WORKER-KV RESULT] {name} -> "
+                        f"USABLE={len(streams)}"
+                    )
+                    continue
+
                 result = await fetch(client, url, attempts=2)
                 candidates = []
                 reason = None
