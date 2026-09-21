@@ -1,6 +1,9 @@
 name: Update Bhoom Tamil streams
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       category_page_limit:
