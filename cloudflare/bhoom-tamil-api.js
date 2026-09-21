@@ -1309,13 +1309,20 @@ export default {
         })
       );
 
-      const start =
-        inventory.findIndex(
-          (channel) =>
-            !channel.last_scan_at
+      const rescanFailed =
+        url.searchParams.get("rescan") === "failed";
+
+      const pending =
+        inventory.filter((channel) =>
+          rescanFailed
+            ? !(
+                Array.isArray(channel.streams) &&
+                channel.streams.length
+              )
+            : !channel.last_scan_at
         );
 
-      if (start < 0) {
+      if (pending.length === 0) {
         return new Response(
           "<html><body><h2>Scan complete</h2><p>All " +
             inventory.length +
@@ -1331,9 +1338,9 @@ export default {
       }
 
       const selected =
-        inventory.slice(
-          start,
-          start + batchSize
+        pending.slice(
+          0,
+          batchSize
         );
 
       const scanned = [];
@@ -1393,11 +1400,18 @@ export default {
             x.streams.length
         ).length;
 
+      const remainingPending =
+        all.filter((channel) =>
+          rescanFailed
+            ? !(
+                Array.isArray(channel.streams) &&
+                channel.streams.length
+              )
+            : !channel.last_scan_at
+        ).length;
+
       const next =
-        all.findIndex(
-          (channel) =>
-            !channel.last_scan_at
-        );
+        remainingPending > 0;
 
       let lines =
         scanned
@@ -1431,19 +1445,25 @@ export default {
         html +=
           "<meta http-equiv='refresh' content='1;url=/auto-scan?batch=" +
           batchSize +
+          (rescanFailed ? "&rescan=failed" : "") +
           "'>";
       }
 
       html +=
         "</head><body>" +
         "<h2>Bhoom stream scan</h2>" +
-        "<p>Scanned: " +
-        Math.min(
-          start + selected.length,
-          all.length
-        ) +
+        "<p>Pending: " +
+        remainingPending +
         " / " +
         all.length +
+        "</p>" +
+        "<p>Batch checked: " +
+        selected.length +
+        " | Usable: " +
+        usable +
+        "</p>" +
+        "<p>Mode: " +
+        (rescanFailed ? "recheck failed channels" : "new channels") +
         "</p>" +
         "<p>Usable in this batch: " +
         usable +
@@ -1454,7 +1474,7 @@ export default {
         lines +
         "<hr>" +
         (
-          next >= 0
+          next
             ? "<p>Continuing automatically...</p>"
             : "<p><b>SCAN COMPLETE</b></p>"
         ) +
