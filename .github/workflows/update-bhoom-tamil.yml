@@ -4,188 +4,96 @@ on:
   workflow_dispatch:
     inputs:
       category_page_limit:
-        description: "Category pages per section (0 = unlimited/all pages)"
+        description: "Category pages (0 = unlimited)"
         required: false
         default: "0"
       max_channels:
-        description: "Maximum channels to scan (0 = all discovered channels)"
+        description: "Maximum channels (0 = all)"
         required: false
         default: "0"
       category_section:
-        description: "Section to scan: tamil, local, or all"
+        description: "Section: all, tamil or local"
         required: false
         default: "all"
-      start_combined:
-        description: "Start Combined workflow after publish (1=yes, 0=no)"
-        required: false
-        default: "1"
       validate_streams:
-        description: "Validate HLS/DASH/HTTP streams (1=yes, 0=no)"
+        description: "Validate HLS/DASH streams"
         required: false
         default: "1"
       stability_seconds:
-        description: "Seconds between manifest checks (0=off)"
+        description: "Second HLS manifest check"
         required: false
         default: "3"
-      player_initial_wait_seconds:
-        description: "Seconds to wait for the player to expose the stream"
-        required: false
-        default: "10"
       player_capture_wait_seconds:
-        description: "Extra seconds to wait after playback is triggered"
+        description: "Browser capture wait"
         required: false
-        default: "5"
-      recapture_rounds:
-        description: "Fresh player/source recapture rounds after expired or invalid streams"
-        required: false
-        default: "1"
+        default: "8"
   schedule:
-    - cron: "15 0 * * *"
+    - cron: "15 */6 * * *"
 
 permissions:
   contents: write
-  actions: write
 
 concurrency:
-  group: tamil-chain
+  group: bhoom-tamil
   cancel-in-progress: false
 
 jobs:
   scrape:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Python
+      - name: Setup Python
         uses: actions/setup-python@v7
         with:
-          python-version: "3.12"
+          python-version: "3.13"
           cache: pip
+          cache-dependency-path: bhoom-automation/requirements.txt
 
-      - name: Install
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r bhoom-automation/requirements.txt
+          python -m pip install -r bhoom-automation/requirements.txt
           python -m playwright install --with-deps chromium
 
-      - name: Scrape and validate
+      - name: Run unit tests
+        working-directory: bhoom-automation
+        run: python -m unittest discover -s tests -v
+
+      - name: Scrape
         working-directory: bhoom-automation
         env:
-          CATEGORY_PAGE_LIMIT: ${{ github.event.inputs.category_page_limit || '0' }}
           CATEGORY_SECTION: ${{ github.event.inputs.category_section || 'all' }}
+          CATEGORY_PAGE_LIMIT: ${{ github.event.inputs.category_page_limit || '0' }}
           MAX_CHANNELS: ${{ github.event.inputs.max_channels || '0' }}
           VALIDATE_STREAMS: ${{ github.event.inputs.validate_streams || '1' }}
           STABILITY_SECONDS: ${{ github.event.inputs.stability_seconds || '3' }}
-          PLAYER_INITIAL_WAIT_SECONDS: ${{ github.event.inputs.player_initial_wait_seconds || '10' }}
-          PLAYER_CAPTURE_WAIT_SECONDS: ${{ github.event.inputs.player_capture_wait_seconds || '5' }}
-          RECAPTURE_ROUNDS: ${{ github.event.inputs.recapture_rounds || '1' }}
-          RECAPTURE_ON_FAILURES: "1"
-          RETRY_COUNT: "3"
-          RECOVER_PREVIOUS_ON_CLOUDFLARE: "1"
-          CLOUDFLARE_FAIL_FAST: "1"
-          CLOUDFLARE_WAIT_SECONDS: "1"
-          PAGE_NAV_TIMEOUT_SECONDS: "20"
-          PUBLISH_SENSITIVE_HEADERS: "0"
-          # No hard channel-count target. Publish whatever valid Tamil/Tamil Local
-          # channels are discovered; never invent or require a 300+ minimum.
-          MIN_CHANNEL_RETENTION_PERCENT: "0"
-          MIN_REQUIRED_CHANNELS: "0"
-        run: python -u -c "import asyncio, scraper; asyncio.run(scraper.main())"
+          PLAYER_CAPTURE_WAIT_SECONDS: ${{ github.event.inputs.player_capture_wait_seconds || '8' }}
+          SITEMAP_FALLBACK: "1"
+          SITEMAP_MAX_CHANNEL_PAGES: "200"
+          MAX_CAPTURE_CANDIDATES: "6"
+        run: python -u scraper.py
 
-      - name: Build IPTV-compatible M3U with primary and secondary streams
-        run: |
-          python - <<'PY'
-          import json
-          import re
-          from pathlib import Path
-
-          data = json.loads(Path("output/bhoom-tamil.json").read_text(encoding="utf-8"))
-          out = ["#EXTM3U"]
-
-          def safe_attr(value):
-              return str(value or "").replace('"', "'").strip()
-
-          written = 0
-          stream_written = 0
-
-          for channel in data.get("channels", []):
-              name = safe_attr(channel.get("name"))
-              streams = [s for s in channel.get("streams", []) if s.get("url")]
-              if not name or not streams:
-                  continue
-
-              tvg_id = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
-              logo = safe_attr(channel.get("logo"))
-
-              for stream_index, stream in enumerate(streams):
-                  url = str(stream.get("url") or "").strip()
-                  if not url:
-                      continue
-
-                  attrs = (
-                      f'tvg-id="{tvg_id}" '
-                      f'tvg-name="{name}" '
-                      f'group-title="BHOOM TV"'
-                  )
-                  if logo:
-                      attrs += f' tvg-logo="{logo}"'
-
-                  out.append(f"#EXTINF:-1 {attrs},{name}")
-
-                  headers = stream.get("headers") or {}
-                  if headers.get("referer"):
-                      out.append(f"#EXTVLCOPT:http-referrer={headers['referer']}")
-                  if headers.get("user-agent"):
-                      out.append(f"#EXTVLCOPT:http-user-agent={headers['user-agent']}")
-
-                  out.append(url)
-                  out.append("")
-                  stream_written += 1
-
-              written += 1
-
-          Path("output/bhoom-tamil.m3u").write_text(
-              "\n".join(out).rstrip() + "\n",
-              encoding="utf-8",
-          )
-          print(f"CHANNELS WRITTEN: {written}")
-          print(f"STREAM ENTRIES WRITTEN: {stream_written}")
-          print("FORMAT: standard #EXTINF + optional VLC headers + URL")
-          PY
-
-      - name: Upload debug files
+      - name: Upload diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: bhoom-debug-${{ github.run_id }}
+          name: bhoom-diagnostics-${{ github.run_id }}
           path: |
-            debug/
             output/bhoom-tamil-report.json
+            debug/
           if-no-files-found: ignore
           retention-days: 7
 
-      - name: Publish Bhoom playlist
+      - name: Publish
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add output/bhoom-tamil.json output/bhoom-tamil.m3u
-          if [ -f output/bhoom-tamil-report.json ]; then
-            git add output/bhoom-tamil-report.json
-          fi
-          sed -i '/^# BhoomTV scrape:/d' output/bhoom-tamil.m3u
-          sed -i "2i# BhoomTV scrape: $(date -u +'%Y-%m-%dT%H:%M:%SZ')" output/bhoom-tamil.m3u
-          git add output/bhoom-tamil.m3u output/bhoom-tamil.json
-          if [ -f output/bhoom-tamil-report.json ]; then
-            git add output/bhoom-tamil-report.json
+          git add -A output state
+          if git diff --cached --quiet; then
+            echo "No output/state changes to commit."
+            exit 0
           fi
           git commit -m "chore: refresh Bhoom Tamil streams"
-          git fetch origin main
-          git rebase origin/main
           git push
-
-      - name: Start Combined workflow
-        if: ${{ success() && github.event.inputs.start_combined != '0' }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh workflow run update-amaze-tamil-local.yml --ref main
