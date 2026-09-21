@@ -8,7 +8,7 @@ on:
         required: false
         default: "0"
       max_channels:
-        description: "Maximum channels to scan (0 = all channels)"
+        description: "Maximum channels to scan (20 for test, 0 = all)"
         required: false
         default: "0"
       category_section:
@@ -72,11 +72,9 @@ jobs:
       - name: Scrape and validate
         working-directory: bhoom-automation
         env:
-          # 0 = all category pages. For a quick test, use 1.
           CATEGORY_PAGE_LIMIT: ${{ github.event.inputs.category_page_limit || '0' }}
           CATEGORY_SECTION: ${{ github.event.inputs.category_section || 'all' }}
-          # Production mode: scan all discovered channels.
-          MAX_CHANNELS: "0"
+          MAX_CHANNELS: ${{ github.event.inputs.max_channels || '0' }}
           VALIDATE_STREAMS: ${{ github.event.inputs.validate_streams || '1' }}
           STABILITY_SECONDS: ${{ github.event.inputs.stability_seconds || '3' }}
           PLAYER_INITIAL_WAIT_SECONDS: ${{ github.event.inputs.player_initial_wait_seconds || '10' }}
@@ -84,18 +82,12 @@ jobs:
           RECAPTURE_ROUNDS: ${{ github.event.inputs.recapture_rounds || '1' }}
           RECAPTURE_ON_FAILURES: "1"
           RETRY_COUNT: "3"
-          # GitHub-hosted runners are currently receiving Cloudflare
-          # Turnstile/Managed Challenge pages from BhoomTV. Detect that
-          # deterministically and stop instead of spending the run probing
-          # the challenge page and validating stale fallbacks.
           CLOUDFLARE_FAIL_FAST: "1"
           CLOUDFLARE_WAIT_SECONDS: "1"
           PAGE_NAV_TIMEOUT_SECONDS: "20"
           PUBLISH_SENSITIVE_HEADERS: "0"
-          # Do not publish a dramatically reduced playlist after a partial
-          # discovery failure (for example, Cloudflare blocking BhoomTV).
           MIN_CHANNEL_RETENTION_PERCENT: "50"
-          MIN_REQUIRED_CHANNELS: "300"
+          MIN_REQUIRED_CHANNELS: ${{ github.event.inputs.max_channels != '0' && github.event.inputs.max_channels || '300' }}
         run: python -c "import asyncio, scraper; asyncio.run(scraper.main())"
 
       - name: Build IPTV-compatible M3U with primary and secondary streams
@@ -123,9 +115,6 @@ jobs:
               tvg_id = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
               logo = safe_attr(channel.get("logo"))
 
-              # Every working source is emitted as a real EXTINF entry.
-              # The first stream is primary; later entries are secondary
-              # fallbacks. This keeps them visible to standard IPTV players.
               for stream_index, stream in enumerate(streams):
                   url = str(stream.get("url") or "").strip()
                   if not url:
@@ -181,9 +170,6 @@ jobs:
           if [ -f output/bhoom-tamil-report.json ]; then
             git add output/bhoom-tamil-report.json
           fi
-          # BhoomTV stream URLs can rotate/expire. Always publish a fresh
-          # scrape snapshot and force a commit marker even when the textual
-          # channel list happens to be identical.
           sed -i '/^# BhoomTV scrape:/d' output/bhoom-tamil.m3u
           sed -i "2i# BhoomTV scrape: $(date -u +'%Y-%m-%dT%H:%M:%SZ')" output/bhoom-tamil.m3u
           git add output/bhoom-tamil.m3u output/bhoom-tamil.json
@@ -191,8 +177,6 @@ jobs:
             git add output/bhoom-tamil-report.json
           fi
           git commit -m "chore: refresh Bhoom Tamil streams"
-          # Rebase onto the newest main because other workflow/config commits
-          # can arrive after this job checks out the repository.
           git fetch origin main
           git rebase origin/main
           git push
