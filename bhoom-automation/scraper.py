@@ -45,6 +45,9 @@ VALIDATE_STREAMS = os.getenv("VALIDATE_STREAMS", "1") != "0"
 SITEMAP_FALLBACK = os.getenv("SITEMAP_FALLBACK", "1") != "0"
 SITEMAP_MAX_CHANNEL_PAGES = max(0, int(os.getenv("SITEMAP_MAX_CHANNEL_PAGES", "200")))
 MAX_CANDIDATES = max(1, int(os.getenv("MAX_CAPTURE_CANDIDATES", "6")))
+BHOOM_COLLECT_URL = os.getenv("BHOOM_COLLECT_URL", "").rstrip("/")
+BHOOM_INVENTORY_URL = os.getenv("BHOOM_INVENTORY_URL", "").rstrip("/")
+WORKER_MAX_PAGES = max(1, int(os.getenv("WORKER_MAX_PAGES", "200")))
 
 CF_MARKERS = (
     "just a moment",
@@ -375,6 +378,79 @@ def save_inventory(inventory):
     }
     INVENTORY_FILE.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
+
+async def refresh_worker_inventory(client):
+    if not BHOOM_COLLECT_URL or not BHOOM_INVENTORY_URL:
+        return {}
+
+    inventory = {}
+    log(f"Worker collector: {BHOOM_COLLECT_URL}")
+
+    for section in ("tamil", "local"):
+        for page_no in range(1, WORKER_MAX_PAGES + 1):
+            collect_url = f"{BHOOM_COLLECT_URL}/collect?section={section}&page={page_no}"
+            try:
+                response = await client.get(collect_url)
+                log(
+                    f"  [WORKER COLLECT] section={section} page={page_no} "
+                    f"HTTP={response.status_code}"
+                )
+                if response.status_code != 200:
+                    break
+
+                data = response.json()
+                if not data.get("ok"):
+                    log(f"    [WORKER ERROR] {data}")
+                    break
+
+                log(
+                    f"    channels_on_page={data.get('channels_on_page', 0)} "
+                    f"inventory_count={data.get('inventory_count', 0)} "
+                    f"complete={data.get('complete')}"
+                )
+
+                if data.get("complete"):
+                    break
+
+                await asyncio.sleep(1.1)
+            except Exception as exc:
+                log(f"    [WORKER COLLECT ERROR] {exc}")
+                break
+
+        try:
+            response = await client.get(f"{BHOOM_INVENTORY_URL}/inventory?{section}")
+            log(
+                f"  [WORKER INVENTORY] section={section} "
+                f"HTTP={response.status_code}"
+            )
+            if response.status_code == 200:
+                data = response.json()
+                rows = data.get("channels", [])
+                if isinstance(rows, list):
+                    inventory.update({
+                        canonical(row["url"]): row
+                        for row in rows
+                        if isinstance(row, dict) and row.get("url")
+                    })
+                    log(f"    inventory returned {len(rows)} channels for {section}")
+        except Exception as exc:
+            log(f"    [WORKER INVENTORY ERROR] {exc}")
+
+    if inventory:
+        try:
+            response = await client.get(f"{BHOOM_INVENTORY_URL}/inventory")
+            if response.status_code == 200:
+                data = response.json()
+                rows = data.get("channels", [])
+                for row in rows:
+                    if isinstance(row, dict) and row.get("url"):
+                        inventory[canonical(row["url"])] = row
+                log(f"  [WORKER INVENTORY] combined={len(inventory)}")
+        except Exception as exc:
+            log(f"  [WORKER INVENTORY COMBINED ERROR] {exc}")
+
+    return inventory
+
 async def discover_section(client, section: str):
     url = SECTIONS[section]
     page_no = 1
@@ -614,14 +690,24 @@ async def main():
 
     async with httpx.AsyncClient(headers=headers, timeout=timeout, follow_redirects=True) as client:
         blocked_sections = {}
-        for section in selected:
-            rows, blocked = await discover_section(client, section)
-            merge_inventory(inventory, rows)
-            blocked_sections[section] = blocked
-            log(f"Section {section}: {len(rows)} channels discovered this run")
-            await asyncio.sleep(0.5)
+        worker_inventory = await refresh_worker_inventory(client)
 
-        await sitemap_fallback(client, inventory)
+        if worker_inventory:
+            merge_inventory(inventory, list(worker_inventory.values()))
+            log(f"Worker inventory usable: {len(worker_inventory)} channels")
+            for section in selected:
+                blocked_sections[section] = False
+        else:
+            log("Worker inventory unavailable; falling back to direct category discovery")
+            for section in selected:
+                rows, blocked = await discover_section(client, section)
+                merge_inventory(inventory, rows)
+                blocked_sections[section] = blocked
+                log(f"Section {section}: {len(rows)} channels discovered this run")
+                await asyncio.sleep(0.5)
+
+            await sitemap_fallback(client, inventory)
+
         save_inventory(inventory)
 
         channels = [x for x in inventory.values() if x.get("section") in selected]
