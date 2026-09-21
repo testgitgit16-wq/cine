@@ -219,9 +219,9 @@ async function putInventory(env, section, rows) {
   return clean;
 }
 
-async function fetchBhoom(target, request) {
+async function fetchBhoom(target, request, referer) {
   return fetch(target, {
-    method: request.method === "HEAD" ? "HEAD" : "GET",
+    method: request?.method === "HEAD" ? "HEAD" : "GET",
     redirect: "follow",
     headers: {
       "User-Agent":
@@ -230,7 +230,7 @@ async function fetchBhoom(target, request) {
         "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
       "Accept-Language": "en-US,en;q=0.9",
       "Upgrade-Insecure-Requests": "1",
-      "Referer": "https://bhoomtv.org/",
+      "Referer": referer || "https://bhoomtv.org/",
     },
   });
 }
@@ -325,11 +325,26 @@ async function collectBatch(env, request, section, startPage, maxPages) {
 }
 
 
-function extractStreamCandidates(html, pageUrl) {
-  const normalized = html
-    .replace(/\\\//g, "/")
+function decodeEmbeddedText(value) {
+  let text = String(value || "")
+    .replace(/\\\\u002f/gi, "/")
+    .replace(/\\\\u0026/gi, "&")
+    .replace(/\\\\\//g, "/")
+    .replace(/&#x2f;/gi, "/")
+    .replace(/&#47;/g, "/")
     .replace(/&amp;/g, "&");
 
+  try {
+    text = decodeURIComponent(text);
+  } catch {
+    // Keep the original when it is not valid URI encoding.
+  }
+
+  return text;
+}
+
+function extractStreamCandidates(html, pageUrl) {
+  const normalized = decodeEmbeddedText(html);
   const found = [];
   const seen = new Set();
 
@@ -337,19 +352,15 @@ function extractStreamCandidates(html, pageUrl) {
     if (!value) return;
 
     let url;
-
     try {
-      url = new URL(value, pageUrl).toString();
+      url = new URL(String(value).trim(), pageUrl).toString();
     } catch {
       return;
     }
 
     const low = url.toLowerCase();
 
-    if (
-      !low.includes(".m3u8") &&
-      !low.includes(".mpd")
-    ) {
+    if (!low.includes(".m3u8") && !low.includes(".mpd")) {
       return;
     }
 
@@ -359,43 +370,141 @@ function extractStreamCandidates(html, pageUrl) {
 
     found.push({
       url,
-      type: low.includes(".mpd")
-        ? "DASH"
-        : "HLS",
+      type: low.includes(".mpd") ? "DASH" : "HLS",
     });
   };
 
-  const urlRe =
+  const absoluteRe =
     /https?:\/\/[^\s'"<>\\]+(?:\.m3u8|\.mpd)(?:\?[^\s'"<>\\]*)?/gi;
+
+  const protocolRelativeRe =
+    /\/\/[^\s'"<>\\]+(?:\.m3u8|\.mpd)(?:\?[^\s'"<>\\]*)?/gi;
 
   let match;
 
-  while ((match = urlRe.exec(normalized))) {
+  while ((match = absoluteRe.exec(normalized))) {
     add(match[0]);
   }
 
-  const sourceRe =
-    /<(?:video|source)[^>]+(?:src|data-src)=["']([^"']+)["']/gi;
+  while ((match = protocolRelativeRe.exec(normalized))) {
+    add(match[0]);
+  }
 
-  while ((match = sourceRe.exec(normalized))) {
+  const keyValueRe =
+    /(?:file|src|source|stream|url|hls|dash|playlist|manifest)\s*[:=]\s*["']((?:https?:)?\/\/[^"']+(?:\.m3u8|\.mpd)(?:\?[^"']*)?)["']/gi;
+
+  while ((match = keyValueRe.exec(normalized))) {
     add(match[1]);
   }
 
-  return found.slice(0, 3);
+  const dataAttrRe =
+    /<(?:video|source|iframe|object|embed)\b[^>]*(?:src|data-src|data-url|data-file|data-stream|data-source|data)=[\"']([^\"']+)[\"']/gi;
+
+  while ((match = dataAttrRe.exec(normalized))) {
+    add(match[1]);
+  }
+
+  return found.slice(0, 6);
 }
 
-async function validateStream(candidate) {
+function extractEmbeddedTargets(html, pageUrl) {
+  const found = [];
+  const seen = new Set();
+
+  const add = (value) => {
+    if (!value) return;
+
+    let target;
+    try {
+      target = new URL(decodeEmbeddedText(value), pageUrl).toString();
+    } catch {
+      return;
+    }
+
+    const parsed = new URL(target);
+
+    if (!["http:", "https:"].includes(parsed.protocol)) {
+      return;
+    }
+
+    if (seen.has(target)) return;
+    seen.add(target);
+    found.push(target);
+  };
+
+  let match;
+
+  const iframeRe =
+    /<(?:iframe|object|embed)\b[^>]*(?:src|data-src|data|data-url|data-file)=[\"']([^\"']+)[\"']/gi;
+
+  while ((match = iframeRe.exec(html))) {
+    add(match[1]);
+    if (found.length >= 4) break;
+  }
+
+  if (found.length < 4) {
+    const linkRe =
+      /<(?:a)\b[^>]*href=[\"']([^\"']+)[\"'][^>]*>/gi;
+
+    while ((match = linkRe.exec(html))) {
+      const value = decodeEmbeddedText(match[1]);
+      if (/^(?:https?:)?\/\/.+(?:player|embed|stream|watch)/i.test(value)) {
+        add(value);
+      }
+      if (found.length >= 4) break;
+    }
+  }
+
+  return found;
+}
+
+function extractScriptTargets(html, pageUrl) {
+  const found = [];
+  const seen = new Set();
+  const re = /<script\b[^>]*src=[\"']([^\"']+)[\"']/gi;
+  let match;
+
+  while ((match = re.exec(html))) {
+    let target;
+    try {
+      target = new URL(decodeEmbeddedText(match[1]), pageUrl).toString();
+    } catch {
+      continue;
+    }
+
+    if (!/^https?:/i.test(target) || seen.has(target)) {
+      continue;
+    }
+
+    seen.add(target);
+    found.push(target);
+
+    if (found.length >= 2) {
+      break;
+    }
+  }
+
+  return found;
+}
+
+async function validateStream(candidate, referer) {
   try {
+    const headers = {
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153 Safari/537.36",
+      "Accept":
+        candidate.type === "DASH"
+          ? "application/dash+xml,application/xml,text/xml,*/*"
+          : "application/vnd.apple.mpegurl,application/x-mpegURL,text/plain,*/*"
+    };
+
+    if (referer) {
+      headers["Referer"] = referer;
+    }
+
     const response = await fetch(candidate.url, {
       redirect: "follow",
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153 Safari/537.36",
-        "Accept":
-          candidate.type === "DASH"
-            ? "application/dash+xml,application/xml,text/xml,*/*"
-            : "application/vnd.apple.mpegurl,application/x-mpegURL,text/plain,*/*"
-      }
+      headers,
     });
 
     const body = await response.text();
@@ -404,7 +513,7 @@ async function validateStream(candidate) {
       return {
         usable: false,
         status: response.status,
-        reason: "HTTP_" + response.status
+        reason: "HTTP_" + response.status,
       };
     }
 
@@ -413,14 +522,14 @@ async function validateStream(candidate) {
         return {
           usable: false,
           status: response.status,
-          reason: "INVALID_HLS_MANIFEST"
+          reason: "INVALID_HLS_MANIFEST",
         };
       }
-    } else if (!/<MPD\\b/i.test(body)) {
+    } else if (!/<MPD\b/i.test(body)) {
       return {
         usable: false,
         status: response.status,
-        reason: "INVALID_MPD"
+        reason: "INVALID_MPD",
       };
     }
 
@@ -430,7 +539,7 @@ async function validateStream(candidate) {
       reason:
         candidate.type === "HLS"
           ? "VALID_HLS"
-          : "VALID_MPD"
+          : "VALID_MPD",
     };
   } catch (error) {
     return {
@@ -438,61 +547,196 @@ async function validateStream(candidate) {
       status: null,
       reason:
         "VALIDATION_ERROR:" +
-        String(error)
+        String(error),
     };
   }
 }
 
 async function scanOneChannel(channel) {
-  const scannedAt =
-    new Date().toISOString();
+  const scannedAt = new Date().toISOString();
 
   try {
-    const response =
-      await fetchBhoom(channel.url);
+    const queue = [
+      {
+        url: channel.url,
+        depth: 0,
+        kind: "channel",
+      },
+    ];
 
-    const html =
-      await response.text();
+    const visited = new Set();
+    const candidates = [];
+    const candidateSeen = new Set();
+    const pageReasons = [];
+    let pagesFetched = 0;
 
-    if (!response.ok) {
-      return {
-        ...channel,
-        streams: [],
-        last_scan_at: scannedAt,
-        scan: {
-          captured: 0,
-          usable: 0,
-          reason:
-            "HTTP_" +
-            response.status,
-          scanned_at: scannedAt
-        }
-      };
-    }
+    const addCandidates = (html, pageUrl, source) => {
+      const rows = extractStreamCandidates(html, pageUrl);
 
-    const candidates =
-      extractStreamCandidates(
-        html,
-        channel.url
+      for (const candidate of rows) {
+        if (candidateSeen.has(candidate.url)) continue;
+
+        candidateSeen.add(candidate.url);
+        candidates.push({
+          ...candidate,
+          captured_from: source,
+        });
+
+        console.log(
+          JSON.stringify({
+            channel: channel.name,
+            stage: "CAPTURE",
+            type: candidate.type,
+            url: candidate.url,
+            from: source,
+          })
+        );
+
+        if (candidates.length >= 6) break;
+      }
+    };
+
+    while (queue.length && pagesFetched < 6 && candidates.length < 6) {
+      const current = queue.shift();
+
+      if (!current || visited.has(current.url) || current.depth > 2) {
+        continue;
+      }
+
+      visited.add(current.url);
+      pagesFetched++;
+
+      const response = await fetchBhoom(
+        current.url,
+        undefined,
+        current.parent || channel.url
       );
+
+      const html = await response.text();
+
+      console.log(
+        JSON.stringify({
+          channel: channel.name,
+          stage: "PAGE",
+          depth: current.depth,
+          kind: current.kind,
+          url: current.url,
+          status: response.status,
+          bytes: html.length,
+        })
+      );
+
+      if (!response.ok) {
+        pageReasons.push(
+          current.kind.toUpperCase() +
+          "_HTTP_" +
+          response.status
+        );
+        continue;
+      }
+
+      addCandidates(
+        html,
+        current.url,
+        current.kind
+      );
+
+      if (candidates.length >= 6) {
+        break;
+      }
+
+      const embeds = extractEmbeddedTargets(
+        html,
+        current.url
+      );
+
+      for (const embed of embeds) {
+        if (!visited.has(embed) && queue.length < 6) {
+          queue.push({
+            url: embed,
+            depth: current.depth + 1,
+            kind: "iframe",
+            parent: current.url,
+          });
+
+          console.log(
+            JSON.stringify({
+              channel: channel.name,
+              stage: "PLAYER",
+              type: "iframe",
+              url: embed,
+              parent: current.url,
+            })
+          );
+        }
+      }
+
+      // Some pages put the player configuration only in an external JS file.
+      // Inspect a small number of scripts only when no stream has been found yet.
+      if (!candidates.length && current.depth === 0) {
+        for (const script of extractScriptTargets(html, current.url)) {
+          if (!visited.has(script) && queue.length < 6) {
+            queue.push({
+              url: script,
+              depth: current.depth + 1,
+              kind: "script",
+              parent: current.url,
+            });
+
+            console.log(
+              JSON.stringify({
+                channel: channel.name,
+                stage: "PLAYER",
+                type: "script",
+                url: script,
+                parent: current.url,
+              })
+            );
+          }
+        }
+      }
+    }
 
     const validations = [];
     const streams = [];
 
-    for (
-      const candidate of
-        candidates
-    ) {
-      const validation =
-        await validateStream(
-          candidate
-        );
+    for (let index = 0; index < Math.min(candidates.length, 6); index++) {
+      const candidate = candidates[index];
+
+      console.log(
+        JSON.stringify({
+          channel: channel.name,
+          stage: "VALIDATE",
+          number: index + 1,
+          total: Math.min(candidates.length, 6),
+          type: candidate.type,
+          url: candidate.url,
+        })
+      );
+
+      const validation = await validateStream(
+        candidate,
+        channel.url
+      );
 
       validations.push({
         ...validation,
         url: candidate.url,
-        type: candidate.type
+        type: candidate.type,
+        captured_from: candidate.captured_from,
       });
+
+      console.log(
+        JSON.stringify({
+          channel: channel.name,
+          stage: "VALIDATION",
+          type: candidate.type,
+          url: candidate.url,
+          usable: validation.usable,
+          status: validation.status,
+          reason: validation.reason,
+        })
+      );
 
       if (validation.usable) {
         streams.push({
@@ -501,13 +745,28 @@ async function scanOneChannel(channel) {
           headers: {
             referer: channel.url,
             "user-agent":
-              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153 Safari/537.36"
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153 Safari/537.36",
           },
-          validation
+          validation,
+          captured_from: candidate.captured_from,
         });
 
         break;
       }
+    }
+
+    let reason;
+
+    if (streams.length) {
+      reason = null;
+    } else if (candidates.length) {
+      reason = validations
+        .map((x) => x.reason)
+        .join("|");
+    } else if (pageReasons.length) {
+      reason = pageReasons.join("|");
+    } else {
+      reason = "NO_STREAM_FOUND";
     }
 
     return {
@@ -515,23 +774,13 @@ async function scanOneChannel(channel) {
       streams,
       last_scan_at: scannedAt,
       scan: {
-        captured:
-          candidates.length,
-        usable:
-          streams.length,
-        reason:
-          streams.length
-            ? null
-            : candidates.length
-              ? validations
-                  .map(
-                    (x) => x.reason
-                  )
-                  .join("|")
-              : "NO_STREAM_FOUND",
+        captured: candidates.length,
+        usable: streams.length,
+        pages_fetched: pagesFetched,
+        reason,
         validations,
-        scanned_at: scannedAt
-      }
+        scanned_at: scannedAt,
+      },
     };
   } catch (error) {
     return {
@@ -544,8 +793,8 @@ async function scanOneChannel(channel) {
         reason:
           "SCAN_ERROR:" +
           String(error),
-        scanned_at: scannedAt
-      }
+        scanned_at: scannedAt,
+      },
     };
   }
 }
