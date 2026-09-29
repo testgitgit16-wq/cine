@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T13:41:28.250045Z",
+  "generated_at": "2026-09-29T23:02:39.970370Z",
   "source": "https://bhoomtv.org",
   "sections": [
     "tamil",
@@ -12,8 +12,8 @@
     "streams_written": 0,
     "failed_channels": 308,
     "section_blocked": {
-      "tamil": false,
-      "local": false
+      "tamil": true,
+      "local": true
     }
   },
   "channels": []
