@@ -154,6 +154,11 @@ https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.or
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Fanalai-express-tv%2F
 
+#EXTINF:-1 tvg-id="anandam-abi-tv" tvg-name="Anandam Abi Tv" group-title="BHOOM TV | Tamil Local",Anandam Abi Tv
+#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/anandam-abi-tv/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
+https://bhoom-tamil-api.testtamil.workers.dev/proxy?url=https%3A%2F%2Fbhoomtv.org%2Flive%2Fanandam-abi-tv%2F
+
 #EXTINF:-1 tvg-id="anandam-tv-madurai" tvg-name="Anandam Tv Madurai" group-title="BHOOM TV | Tamil Local",Anandam Tv Madurai
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/anandam-tv-madurai/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36

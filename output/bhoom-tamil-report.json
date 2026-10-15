@@ -1,23 +1,16 @@
 {
-  "generated_at": "2026-10-15T18:02:58.703889Z",
+  "generated_at": "2026-10-15T22:24:42.413131Z",
   "source": "https://bhoomtv.org",
   "stats": {
     "inventory_total": 308,
     "scanned": 308,
-    "channels_written": 307,
-    "streams_written": 307,
-    "failed_channels": 1,
+    "channels_written": 308,
+    "streams_written": 308,
+    "failed_channels": 0,
     "section_blocked": {
       "tamil": false,
       "local": false
     }
   },
-  "failures": [
-    {
-      "name": "Anandam Abi Tv",
-      "url": "https://bhoomtv.org/live/anandam-abi-tv/",
-      "section": "local",
-      "reason": "STREAM_VALIDATION_FAILED"
-    }
-  ]
+  "failures": []
 }
