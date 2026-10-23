@@ -1,18 +1,324 @@
 {
-  "generated_at": "2026-10-23T11:39:00.668847Z",
+  "generated_at": "2026-10-23T17:05:27.027393Z",
   "source": "https://bhoomtv.org",
   "stats": {
     "inventory_total": 308,
     "scanned": 308,
-    "channels_written": 51,
-    "streams_written": 51,
-    "failed_channels": 257,
+    "channels_written": 0,
+    "streams_written": 0,
+    "failed_channels": 308,
     "section_blocked": {
       "tamil": false,
       "local": false
     }
   },
   "failures": [
+    {
+      "name": "7 Green 4k",
+      "url": "https://bhoomtv.org/live/7-green-4k/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "7s Music",
+      "url": "https://bhoomtv.org/live/7s-music/",
+      "section": "tamil",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "7star Television",
+      "url": "https://bhoomtv.org/live/7star-television/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "A1 Media News",
+      "url": "https://bhoomtv.org/live/a1-media-news/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "A1 Tv Ariyalur",
+      "url": "https://bhoomtv.org/live/a1-tv-ariyalur/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Aadhavan Colours",
+      "url": "https://bhoomtv.org/live/aadhavan-colours/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Aadhavan Tamil Tv",
+      "url": "https://bhoomtv.org/live/aadhavan-tamil-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Aadhavan Tv",
+      "url": "https://bhoomtv.org/live/aadhavan-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Aadvik Tv",
+      "url": "https://bhoomtv.org/live/aadvik-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Aalayam Tv",
+      "url": "https://bhoomtv.org/live/aalayam-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Aaron Tv",
+      "url": "https://bhoomtv.org/live/aaron-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Aarthi Tv",
+      "url": "https://bhoomtv.org/live/aarthi-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Aaryaa Tv",
+      "url": "https://bhoomtv.org/live/aaryaa-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Aastha Tamil",
+      "url": "https://bhoomtv.org/live/aastha-tamil/",
+      "section": "tamil",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Aathi Tv",
+      "url": "https://bhoomtv.org/live/aathi-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Abnaz Tv",
+      "url": "https://bhoomtv.org/live/abnaz-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Acp Isai Oli",
+      "url": "https://bhoomtv.org/live/acp-isai-oli/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Acp Tv Classic Madurai",
+      "url": "https://bhoomtv.org/live/acp-tv-classic-madurai/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Acp Tv Madurai",
+      "url": "https://bhoomtv.org/live/acp-tv-madurai/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Adhir Alai Tv",
+      "url": "https://bhoomtv.org/live/adhir-alai-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Adhiyaman Tv",
+      "url": "https://bhoomtv.org/live/adhiyaman-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Agam Tv",
+      "url": "https://bhoomtv.org/live/agam-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Agaram Tv",
+      "url": "https://bhoomtv.org/live/agaram-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Agasham Tv",
+      "url": "https://bhoomtv.org/live/agasham-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Akilam Tv",
+      "url": "https://bhoomtv.org/live/akilam-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Alpha Tv",
+      "url": "https://bhoomtv.org/live/alpha-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Amma Tv",
+      "url": "https://bhoomtv.org/live/amma-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Amma Vision",
+      "url": "https://bhoomtv.org/live/amma-vision/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Amman Tv",
+      "url": "https://bhoomtv.org/live/amman-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Analai Express Cinema",
+      "url": "https://bhoomtv.org/live/analai-express-cinema/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Analai Express Tv",
+      "url": "https://bhoomtv.org/live/analai-express-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Anandam Abi Tv",
+      "url": "https://bhoomtv.org/live/anandam-abi-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Anandam Tv Madurai",
+      "url": "https://bhoomtv.org/live/anandam-tv-madurai/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Anandam Utv",
+      "url": "https://bhoomtv.org/live/anandam-utv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Animal Planet Hd",
+      "url": "https://bhoomtv.org/live/animal-planet-hd/",
+      "section": "tamil",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Annai Tamil",
+      "url": "https://bhoomtv.org/live/annai-tamil/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Annai Tv",
+      "url": "https://bhoomtv.org/live/annai-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Annai Tv Thoothukudi",
+      "url": "https://bhoomtv.org/live/annai-tv-thoothukudi/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Anu Tv",
+      "url": "https://bhoomtv.org/live/anu-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Apple Tv Marthandam",
+      "url": "https://bhoomtv.org/live/apple-tv-marthandam/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Appu Tv",
+      "url": "https://bhoomtv.org/live/appu-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Aps Gold Tv",
+      "url": "https://bhoomtv.org/live/aps-gold-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Aps Tv",
+      "url": "https://bhoomtv.org/live/aps-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Arighni Tv",
+      "url": "https://bhoomtv.org/live/arighni-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Ashoka Tv",
+      "url": "https://bhoomtv.org/live/ashoka-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Asoka Tv",
+      "url": "https://bhoomtv.org/live/asoka-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Astro Vaanavil",
+      "url": "https://bhoomtv.org/live/astro-vaanavil/",
+      "section": "tamil",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Athavan Tv Hd",
+      "url": "https://bhoomtv.org/live/athavan-tv-hd/",
+      "section": "tamil",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Atn Media",
+      "url": "https://bhoomtv.org/live/atn-media/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Atn Tv",
+      "url": "https://bhoomtv.org/live/atn-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Avs Tv",
+      "url": "https://bhoomtv.org/live/avs-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
     {
       "name": "Bhagyam Tv",
       "url": "https://bhoomtv.org/live/bhagyam-tv/",
