@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-27T13:06:48.683580Z",
+  "generated_at": "2026-10-27T18:56:46.991608Z",
   "source": "https://bhoomtv.org",
   "stats": {
     "inventory_total": 308,
     "scanned": 308,
-    "channels_written": 296,
-    "streams_written": 296,
-    "failed_channels": 12,
+    "channels_written": 285,
+    "streams_written": 285,
+    "failed_channels": 23,
     "section_blocked": {
       "tamil": false,
       "local": false
@@ -14,14 +14,38 @@
   },
   "failures": [
     {
-      "name": "Adhiyaman Tv",
-      "url": "https://bhoomtv.org/live/adhiyaman-tv/",
+      "name": "Aaryaa Tv",
+      "url": "https://bhoomtv.org/live/aaryaa-tv/",
       "section": "local",
       "reason": "STREAM_VALIDATION_FAILED"
     },
     {
-      "name": "Analai Express Cinema",
-      "url": "https://bhoomtv.org/live/analai-express-cinema/",
+      "name": "Amman Tv",
+      "url": "https://bhoomtv.org/live/amman-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Anandam Abi Tv",
+      "url": "https://bhoomtv.org/live/anandam-abi-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Dark Tv",
+      "url": "https://bhoomtv.org/live/dark-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Diamond Music",
+      "url": "https://bhoomtv.org/live/diamond-music/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Diamond Tv",
+      "url": "https://bhoomtv.org/live/diamond-tv/",
       "section": "local",
       "reason": "STREAM_VALIDATION_FAILED"
     },
@@ -32,21 +56,51 @@
       "reason": "STREAM_VALIDATION_FAILED"
     },
     {
-      "name": "Jc Tv",
-      "url": "https://bhoomtv.org/live/jc-tv/",
+      "name": "Jos Tv Tirunelveli",
+      "url": "https://bhoomtv.org/live/jos-tv-tirunelveli/",
       "section": "local",
       "reason": "STREAM_VALIDATION_FAILED"
     },
     {
-      "name": "Loop Tamil",
-      "url": "https://bhoomtv.org/live/loop-tamil/",
+      "name": "Kalaignar Tv",
+      "url": "https://bhoomtv.org/live/kalaignar-tv/",
       "section": "tamil",
       "reason": "STREAM_VALIDATION_FAILED"
     },
     {
-      "name": "Selva Tamil Tv",
-      "url": "https://bhoomtv.org/live/selva-tamil-tv/",
+      "name": "Kumari Kathir",
+      "url": "https://bhoomtv.org/live/kumari-kathir/",
       "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Me 24 Tamil",
+      "url": "https://bhoomtv.org/live/me-24-tamil/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Movies Hd Tamil",
+      "url": "https://bhoomtv.org/live/movies-hd-tamil/",
+      "section": "tamil",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Raga Tv",
+      "url": "https://bhoomtv.org/live/raga-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Rk Tv",
+      "url": "https://bhoomtv.org/live/rk-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Sairam Tv",
+      "url": "https://bhoomtv.org/live/sairam-tv/",
+      "section": "tamil",
       "reason": "STREAM_VALIDATION_FAILED"
     },
     {
@@ -56,32 +110,44 @@
       "reason": "STREAM_VALIDATION_FAILED"
     },
     {
-      "name": "Siddhar Tv",
-      "url": "https://bhoomtv.org/live/siddhar-tv/",
+      "name": "Sooriyan Tv",
+      "url": "https://bhoomtv.org/live/sooriyan-tv/",
       "section": "local",
       "reason": "STREAM_VALIDATION_FAILED"
     },
     {
-      "name": "Sri Sankara Tamil",
-      "url": "https://bhoomtv.org/live/sri-sankara-tamil/",
+      "name": "Sr Musix Hd",
+      "url": "https://bhoomtv.org/live/sr-musix-hd/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Stn Tv",
+      "url": "https://bhoomtv.org/live/stn-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Thaai Tv",
+      "url": "https://bhoomtv.org/live/thaai-tv/",
+      "section": "local",
+      "reason": "STREAM_VALIDATION_FAILED"
+    },
+    {
+      "name": "Thamilaaram Tv",
+      "url": "https://bhoomtv.org/live/thamilaaram-tv/",
       "section": "tamil",
       "reason": "STREAM_VALIDATION_FAILED"
     },
     {
-      "name": "Sri Tv",
-      "url": "https://bhoomtv.org/live/sri-tv/",
+      "name": "V Tamil Hd",
+      "url": "https://bhoomtv.org/live/v-tamil-hd/",
       "section": "local",
       "reason": "STREAM_VALIDATION_FAILED"
     },
     {
-      "name": "Vaanam Tv Hd",
-      "url": "https://bhoomtv.org/live/vaanam-tv-hd/",
-      "section": "local",
-      "reason": "STREAM_VALIDATION_FAILED"
-    },
-    {
-      "name": "Vtv Entertainment",
-      "url": "https://bhoomtv.org/live/vtv-entertainment/",
+      "name": "Vetri Tv",
+      "url": "https://bhoomtv.org/live/vetri-tv/",
       "section": "local",
       "reason": "STREAM_VALIDATION_FAILED"
     }
