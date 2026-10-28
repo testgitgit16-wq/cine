@@ -1,107 +1,16 @@
 {
-  "generated_at": "2026-10-27T22:52:39.425957Z",
+  "generated_at": "2026-10-28T06:38:21.712246Z",
   "source": "https://bhoomtv.org",
   "stats": {
     "inventory_total": 308,
     "scanned": 308,
-    "channels_written": 293,
-    "streams_written": 293,
-    "failed_channels": 15,
+    "channels_written": 308,
+    "streams_written": 599,
+    "failed_channels": 0,
     "section_blocked": {
       "tamil": false,
       "local": false
     }
   },
-  "failures": [
-    {
-      "name": "A1 Media News",
-      "url": "https://bhoomtv.org/live/a1-media-news/",
-      "section": "local",
-      "reason": "STREAM_VALIDATION_FAILED"
-    },
-    {
-      "name": "Chithiram Tv",
-      "url": "https://bhoomtv.org/live/chithiram-tv/",
-      "section": "tamil",
-      "reason": "STREAM_VALIDATION_FAILED"
-    },
-    {
-      "name": "Citi Channel 2",
-      "url": "https://bhoomtv.org/live/citi-channel-2/",
-      "section": "local",
-      "reason": "STREAM_VALIDATION_FAILED"
-    },
-    {
-      "name": "Diamond Music",
-      "url": "https://bhoomtv.org/live/diamond-music/",
-      "section": "local",
-      "reason": "STREAM_VALIDATION_FAILED"
-    },
-    {
-      "name": "Hitech Tv",
-      "url": "https://bhoomtv.org/live/hitech-tv/",
-      "section": "local",
-      "reason": "STREAM_VALIDATION_FAILED"
-    },
-    {
-      "name": "Jayam Tv Trichy",
-      "url": "https://bhoomtv.org/live/jayam-tv-trichy/",
-      "section": "local",
-      "reason": "STREAM_VALIDATION_FAILED"
-    },
-    {
-      "name": "Km Music",
-      "url": "https://bhoomtv.org/live/km-music/",
-      "section": "local",
-      "reason": "STREAM_VALIDATION_FAILED"
-    },
-    {
-      "name": "Kollywood Plus",
-      "url": "https://bhoomtv.org/live/kollywood-plus/",
-      "section": "tamil",
-      "reason": "STREAM_VALIDATION_FAILED"
-    },
-    {
-      "name": "Mcn Hd",
-      "url": "https://bhoomtv.org/live/mcn-hd/",
-      "section": "local",
-      "reason": "STREAM_VALIDATION_FAILED"
-    },
-    {
-      "name": "Prince Tv",
-      "url": "https://bhoomtv.org/live/prince-tv/",
-      "section": "local",
-      "reason": "STREAM_VALIDATION_FAILED"
-    },
-    {
-      "name": "Roja Tv Coimbatore",
-      "url": "https://bhoomtv.org/live/roja-tv-coimbatore/",
-      "section": "local",
-      "reason": "STREAM_VALIDATION_FAILED"
-    },
-    {
-      "name": "Sai Tv Tamil",
-      "url": "https://bhoomtv.org/live/sai-tv-tamil/",
-      "section": "tamil",
-      "reason": "STREAM_VALIDATION_FAILED"
-    },
-    {
-      "name": "Shakthi Channel",
-      "url": "https://bhoomtv.org/live/shakthi-channel/",
-      "section": "local",
-      "reason": "STREAM_VALIDATION_FAILED"
-    },
-    {
-      "name": "Shalini Tv 2",
-      "url": "https://bhoomtv.org/live/shalini-tv-2/",
-      "section": "local",
-      "reason": "STREAM_VALIDATION_FAILED"
-    },
-    {
-      "name": "Sky Media Tenkasi",
-      "url": "https://bhoomtv.org/live/sky-media-tenkasi/",
-      "section": "local",
-      "reason": "STREAM_VALIDATION_FAILED"
-    }
-  ]
+  "failures": []
 }
