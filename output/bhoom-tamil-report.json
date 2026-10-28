@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-28T06:38:21.712246Z",
+  "generated_at": "2026-10-28T14:12:49.527523Z",
   "source": "https://bhoomtv.org",
   "stats": {
     "inventory_total": 308,
     "scanned": 308,
     "channels_written": 308,
-    "streams_written": 599,
+    "streams_written": 592,
     "failed_channels": 0,
     "section_blocked": {
       "tamil": false,
