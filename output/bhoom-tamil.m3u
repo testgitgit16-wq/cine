@@ -2,11 +2,6 @@
 #EXTINF:-1 tvg-id="7-green-4k" tvg-name="7 Green 4k" group-title="BHOOM TV | Tamil Local",7 Green 4k
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/7-green-4k/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
-
-#EXTINF:-1 tvg-id="7-green-4k" tvg-name="7 Green 4k" group-title="BHOOM TV | Tamil Local",7 Green 4k
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/7-green-4k/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 
 #EXTINF:-1 tvg-id="7s-music" tvg-name="7s Music" group-title="BHOOM TV | Tamil",7s Music
@@ -82,12 +77,12 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 #EXTINF:-1 tvg-id="aadvik-tv" tvg-name="Aadvik Tv" group-title="BHOOM TV | Tamil Local",Aadvik Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/aadvik-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
-
-#EXTINF:-1 tvg-id="aalayam-tv" tvg-name="Aalayam Tv" group-title="BHOOM TV | Tamil Local",Aalayam Tv
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/aalayam-tv/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
+
+#EXTINF:-1 tvg-id="aadvik-tv" tvg-name="Aadvik Tv" group-title="BHOOM TV | Tamil Local",Aadvik Tv
+#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/aadvik-tv/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
+https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 
 #EXTINF:-1 tvg-id="aalayam-tv" tvg-name="Aalayam Tv" group-title="BHOOM TV | Tamil Local",Aalayam Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/aalayam-tv/
@@ -147,6 +142,11 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 #EXTINF:-1 tvg-id="abnaz-tv" tvg-name="Abnaz Tv" group-title="BHOOM TV | Tamil Local",Abnaz Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/abnaz-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
+https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
+
+#EXTINF:-1 tvg-id="abnaz-tv" tvg-name="Abnaz Tv" group-title="BHOOM TV | Tamil Local",Abnaz Tv
+#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/abnaz-tv/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 
 #EXTINF:-1 tvg-id="acp-isai-oli" tvg-name="Acp Isai Oli" group-title="BHOOM TV | Tamil Local",Acp Isai Oli
@@ -158,11 +158,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/acp-isai-oli/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
-
-#EXTINF:-1 tvg-id="acp-tv-classic-madurai" tvg-name="Acp Tv Classic Madurai" group-title="BHOOM TV | Tamil Local",Acp Tv Classic Madurai
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/acp-tv-classic-madurai/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 
 #EXTINF:-1 tvg-id="acp-tv-classic-madurai" tvg-name="Acp Tv Classic Madurai" group-title="BHOOM TV | Tamil Local",Acp Tv Classic Madurai
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/acp-tv-classic-madurai/
@@ -182,12 +177,12 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 #EXTINF:-1 tvg-id="adhir-alai-tv" tvg-name="Adhir Alai Tv" group-title="BHOOM TV | Tamil Local",Adhir Alai Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/adhir-alai-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
-
-#EXTINF:-1 tvg-id="adhiyaman-tv" tvg-name="Adhiyaman Tv" group-title="BHOOM TV | Tamil Local",Adhiyaman Tv
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/adhiyaman-tv/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
+
+#EXTINF:-1 tvg-id="adhir-alai-tv" tvg-name="Adhir Alai Tv" group-title="BHOOM TV | Tamil Local",Adhir Alai Tv
+#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/adhir-alai-tv/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
+https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 
 #EXTINF:-1 tvg-id="adhiyaman-tv" tvg-name="Adhiyaman Tv" group-title="BHOOM TV | Tamil Local",Adhiyaman Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/adhiyaman-tv/
@@ -247,6 +242,11 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 #EXTINF:-1 tvg-id="amma-tv" tvg-name="Amma Tv" group-title="BHOOM TV | Tamil Local",Amma Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/amma-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
+https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
+
+#EXTINF:-1 tvg-id="amma-tv" tvg-name="Amma Tv" group-title="BHOOM TV | Tamil Local",Amma Tv
+#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/amma-tv/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 
 #EXTINF:-1 tvg-id="amma-vision" tvg-name="Amma Vision" group-title="BHOOM TV | Tamil Local",Amma Vision
@@ -298,11 +298,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/anandam-abi-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
-
-#EXTINF:-1 tvg-id="anandam-tv-madurai" tvg-name="Anandam Tv Madurai" group-title="BHOOM TV | Tamil Local",Anandam Tv Madurai
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/anandam-tv-madurai/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 
 #EXTINF:-1 tvg-id="anandam-tv-madurai" tvg-name="Anandam Tv Madurai" group-title="BHOOM TV | Tamil Local",Anandam Tv Madurai
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/anandam-tv-madurai/
@@ -532,6 +527,11 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 #EXTINF:-1 tvg-id="brio-tv" tvg-name="Brio Tv" group-title="BHOOM TV | Tamil",Brio Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/brio-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
+https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
+
+#EXTINF:-1 tvg-id="brio-tv" tvg-name="Brio Tv" group-title="BHOOM TV | Tamil",Brio Tv
+#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/brio-tv/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 
 #EXTINF:-1 tvg-id="btv-hd" tvg-name="Btv Hd" group-title="BHOOM TV | Tamil Local",Btv Hd
@@ -657,11 +657,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 #EXTINF:-1 tvg-id="devi-tv" tvg-name="Devi Tv" group-title="BHOOM TV | Tamil Local",Devi Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/devi-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
-
-#EXTINF:-1 tvg-id="devi-tv" tvg-name="Devi Tv" group-title="BHOOM TV | Tamil Local",Devi Tv
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/devi-tv/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 
 #EXTINF:-1 tvg-id="dharani-tv" tvg-name="Dharani Tv" group-title="BHOOM TV | Tamil Local",Dharani Tv
@@ -673,11 +668,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/dharani-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
-
-#EXTINF:-1 tvg-id="dheeran-tv" tvg-name="Dheeran Tv" group-title="BHOOM TV | Tamil",Dheeran Tv
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/dheeran-tv/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 
 #EXTINF:-1 tvg-id="dheeran-tv" tvg-name="Dheeran Tv" group-title="BHOOM TV | Tamil",Dheeran Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/dheeran-tv/
@@ -708,11 +698,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/diamond-talkies-hd/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
-
-#EXTINF:-1 tvg-id="diamond-talkies-hd" tvg-name="Diamond Talkies Hd" group-title="BHOOM TV | Tamil Local",Diamond Talkies Hd
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/diamond-talkies-hd/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 
 #EXTINF:-1 tvg-id="diamond-tv" tvg-name="Diamond Tv" group-title="BHOOM TV | Tamil Local",Diamond Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/diamond-tv/
@@ -753,11 +738,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/discovery-tamil-2/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
-
-#EXTINF:-1 tvg-id="durai-melodies" tvg-name="Durai Melodies" group-title="BHOOM TV | Tamil Local",Durai Melodies
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/durai-melodies/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 
 #EXTINF:-1 tvg-id="durai-melodies" tvg-name="Durai Melodies" group-title="BHOOM TV | Tamil Local",Durai Melodies
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/durai-melodies/
@@ -887,11 +867,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 #EXTINF:-1 tvg-id="gem-tv" tvg-name="Gem Tv" group-title="BHOOM TV | Tamil Local",Gem Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/gem-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
-
-#EXTINF:-1 tvg-id="gem-tv" tvg-name="Gem Tv" group-title="BHOOM TV | Tamil Local",Gem Tv
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/gem-tv/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 
 #EXTINF:-1 tvg-id="global-tv" tvg-name="Global Tv" group-title="BHOOM TV | Tamil Local",Global Tv
@@ -923,11 +898,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/hai-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
-
-#EXTINF:-1 tvg-id="harin-tv" tvg-name="Harin Tv" group-title="BHOOM TV | Tamil Local",Harin Tv
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/harin-tv/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 
 #EXTINF:-1 tvg-id="harin-tv" tvg-name="Harin Tv" group-title="BHOOM TV | Tamil Local",Harin Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/harin-tv/
@@ -1187,6 +1157,11 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 #EXTINF:-1 tvg-id="kalaignar-tv" tvg-name="Kalaignar Tv" group-title="BHOOM TV | Tamil",Kalaignar Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/kalaignar-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
+https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
+
+#EXTINF:-1 tvg-id="kalaignar-tv" tvg-name="Kalaignar Tv" group-title="BHOOM TV | Tamil",Kalaignar Tv
+#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/kalaignar-tv/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 
 #EXTINF:-1 tvg-id="kanna-tv" tvg-name="Kanna Tv" group-title="BHOOM TV | Tamil Local",Kanna Tv
@@ -1288,11 +1263,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/kollywood-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
-
-#EXTINF:-1 tvg-id="kumari-kathir" tvg-name="Kumari Kathir" group-title="BHOOM TV | Tamil Local",Kumari Kathir
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/kumari-kathir/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 
 #EXTINF:-1 tvg-id="kumari-kathir" tvg-name="Kumari Kathir" group-title="BHOOM TV | Tamil Local",Kumari Kathir
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/kumari-kathir/
@@ -1408,6 +1378,11 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/manasu-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
+
+#EXTINF:-1 tvg-id="mangalam-tv" tvg-name="Mangalam Tv" group-title="BHOOM TV | Tamil Local",Mangalam Tv
+#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/mangalam-tv/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
+https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 
 #EXTINF:-1 tvg-id="mangalam-tv" tvg-name="Mangalam Tv" group-title="BHOOM TV | Tamil Local",Mangalam Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/mangalam-tv/
@@ -1537,11 +1512,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 #EXTINF:-1 tvg-id="mm-tv-valliyur" tvg-name="Mm Tv Valliyur" group-title="BHOOM TV | Tamil Local",Mm Tv Valliyur
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/mm-tv-valliyur/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
-
-#EXTINF:-1 tvg-id="mm-tv-valliyur" tvg-name="Mm Tv Valliyur" group-title="BHOOM TV | Tamil Local",Mm Tv Valliyur
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/mm-tv-valliyur/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 
 #EXTINF:-1 tvg-id="mn-music" tvg-name="Mn Music" group-title="BHOOM TV | Tamil Local",Mn Music
@@ -1603,6 +1573,11 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/ms-mathan-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
+
+#EXTINF:-1 tvg-id="mtv-chennai" tvg-name="Mtv Chennai" group-title="BHOOM TV | Tamil Local",Mtv Chennai
+#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/mtv-chennai/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
+https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 
 #EXTINF:-1 tvg-id="mtv-chennai" tvg-name="Mtv Chennai" group-title="BHOOM TV | Tamil Local",Mtv Chennai
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/mtv-chennai/
@@ -1762,11 +1737,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 #EXTINF:-1 tvg-id="phoenix-tv" tvg-name="Phoenix Tv" group-title="BHOOM TV | Tamil Local",Phoenix Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/phoenix-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
-
-#EXTINF:-1 tvg-id="phoenix-tv" tvg-name="Phoenix Tv" group-title="BHOOM TV | Tamil Local",Phoenix Tv
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/phoenix-tv/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 
 #EXTINF:-1 tvg-id="pj-tv" tvg-name="Pj Tv" group-title="BHOOM TV | Tamil Local",Pj Tv
@@ -1952,11 +1922,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 #EXTINF:-1 tvg-id="right-tv" tvg-name="Right Tv" group-title="BHOOM TV | Tamil Local",Right Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/right-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
-
-#EXTINF:-1 tvg-id="right-tv" tvg-name="Right Tv" group-title="BHOOM TV | Tamil Local",Right Tv
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/right-tv/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 
 #EXTINF:-1 tvg-id="riya-tv" tvg-name="Riya Tv" group-title="BHOOM TV | Tamil Local",Riya Tv
@@ -2042,11 +2007,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 #EXTINF:-1 tvg-id="ruhasha-tv" tvg-name="Ruhasha Tv" group-title="BHOOM TV | Tamil Local",Ruhasha Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/ruhasha-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
-
-#EXTINF:-1 tvg-id="ruhasha-tv" tvg-name="Ruhasha Tv" group-title="BHOOM TV | Tamil Local",Ruhasha Tv
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/ruhasha-tv/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 
 #EXTINF:-1 tvg-id="s-max-tamil" tvg-name="S Max Tamil" group-title="BHOOM TV | Tamil Local",S Max Tamil
@@ -2068,11 +2028,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/s-media-puducherry/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
-
-#EXTINF:-1 tvg-id="sachin-tv" tvg-name="Sachin Tv" group-title="BHOOM TV | Tamil Local",Sachin Tv
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/sachin-tv/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 
 #EXTINF:-1 tvg-id="sachin-tv" tvg-name="Sachin Tv" group-title="BHOOM TV | Tamil Local",Sachin Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/sachin-tv/
@@ -2128,11 +2083,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/sakthi-tv-hd/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
-
-#EXTINF:-1 tvg-id="salvation-tv" tvg-name="Salvation Tv" group-title="BHOOM TV | Tamil",Salvation Tv
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/salvation-tv/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 
 #EXTINF:-1 tvg-id="salvation-tv" tvg-name="Salvation Tv" group-title="BHOOM TV | Tamil",Salvation Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/salvation-tv/
@@ -2208,11 +2158,6 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/sgb-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
-
-#EXTINF:-1 tvg-id="sha-tv" tvg-name="Sha Tv" group-title="BHOOM TV | Tamil Local",Sha Tv
-#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/sha-tv/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
-https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 
 #EXTINF:-1 tvg-id="sha-tv" tvg-name="Sha Tv" group-title="BHOOM TV | Tamil Local",Sha Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/sha-tv/
@@ -2328,6 +2273,11 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/sky-plus-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
+
+#EXTINF:-1 tvg-id="smart-sri-tv" tvg-name="Smart Sri Tv" group-title="BHOOM TV | Tamil Local",Smart Sri Tv
+#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/smart-sri-tv/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
+https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 
 #EXTINF:-1 tvg-id="smart-sri-tv" tvg-name="Smart Sri Tv" group-title="BHOOM TV | Tamil Local",Smart Sri Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/smart-sri-tv/
@@ -2498,6 +2448,11 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/subash-tv-tenkasi/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
+
+#EXTINF:-1 tvg-id="subin-tv" tvg-name="Subin Tv" group-title="BHOOM TV | Tamil Local",Subin Tv
+#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/subin-tv/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
+https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 
 #EXTINF:-1 tvg-id="subin-tv" tvg-name="Subin Tv" group-title="BHOOM TV | Tamil Local",Subin Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/subin-tv/
@@ -2717,6 +2672,11 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 #EXTINF:-1 tvg-id="thirai-tv" tvg-name="Thirai Tv" group-title="BHOOM TV | Tamil Local",Thirai Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/thirai-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
+https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
+
+#EXTINF:-1 tvg-id="thirai-tv" tvg-name="Thirai Tv" group-title="BHOOM TV | Tamil Local",Thirai Tv
+#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/thirai-tv/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
 
 #EXTINF:-1 tvg-id="time-tv" tvg-name="Time Tv" group-title="BHOOM TV | Tamil Local",Time Tv
@@ -2738,6 +2698,11 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/tnse-tamil/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
+
+#EXTINF:-1 tvg-id="top-tv" tvg-name="Top Tv" group-title="BHOOM TV | Tamil Local",Top Tv
+#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/top-tv/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
+https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 
 #EXTINF:-1 tvg-id="top-tv" tvg-name="Top Tv" group-title="BHOOM TV | Tamil Local",Top Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/top-tv/
@@ -2893,6 +2858,11 @@ https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/veerali-tv/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
 https://bhoom-tamil-api.testtamil.workers.dev/s/26001.m3u8
+
+#EXTINF:-1 tvg-id="vel-tv" tvg-name="Vel Tv" group-title="BHOOM TV | Tamil Local",Vel Tv
+#EXTVLCOPT:http-referrer=https://bhoomtv.org/live/vel-tv/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
+https://bhoom-tamil-api.testtamil.workers.dev/s/28016.m3u8
 
 #EXTINF:-1 tvg-id="vel-tv" tvg-name="Vel Tv" group-title="BHOOM TV | Tamil Local",Vel Tv
 #EXTVLCOPT:http-referrer=https://bhoomtv.org/live/vel-tv/
